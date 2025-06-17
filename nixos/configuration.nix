@@ -1,11 +1,11 @@
 { inputs, config, pkgs, ... }:
 
 {
-  imports =
-    [
-      ./hardware-configuration.nix
-      inputs.home-manager.nixosModules.home-manager
-    ];
+  imports = [
+    ./hardware-configuration.nix
+    inputs.home-manager.nixosModules.home-manager
+    ./packages.nix
+  ];
 
   home-manager = {
     extraSpecialArgs = { inherit inputs; };
@@ -79,10 +79,10 @@
   nixpkgs.config.allowUnfree = true;
 
   # List packages installed in system profile.
-  environment.systemPackages = with pkgs; [
-    home-manager
-    git
-  ];
+  # environment.systemPackages = with pkgs; [
+  #   home-manager
+  #   git
+  # ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
