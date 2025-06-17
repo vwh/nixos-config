@@ -7,5 +7,7 @@
     ./xserver.nix
     ./nm.nix
     ./bluetooth.nix
+    ./gnome.nix
+    ./firefox.nix
   ];
 }

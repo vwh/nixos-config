@@ -1,5 +1,5 @@
 {
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
 
   # rtkit is optional but recommended
   security.rtkit.enable = true;

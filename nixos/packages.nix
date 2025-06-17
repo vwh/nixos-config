@@ -17,6 +17,7 @@
     discord
     gparted
     obsidian
+    vscode
 
     # Coding stuff
     gcc
