@@ -1,7 +1,7 @@
 { pkgs, ... }: {
   nixpkgs.config = {
     allowUnfree = true;
-    permittedInsecurePackages = ["python-2.7.18.8" "electron-25.9.0"];
+    permittedInsecurePackages = [ "python-2.7.18.8" "electron-25.9.0" ];
   };
 
   environment.systemPackages = with pkgs; [
@@ -27,6 +27,7 @@
     gcc
     nodejs
     python
+    openjdk17
     (python3.withPackages (ps: with ps; [ requests ]))
 
     # CLI utils
@@ -108,6 +109,7 @@
     # libsForQt5.qt5ct
     # papirus-nord
     gnomeExtensions.clipboard-history
+    direnv
   ];
 
   fonts.packages = with pkgs; [
