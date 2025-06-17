@@ -5,6 +5,11 @@
     ./hardware-configuration.nix
     inputs.home-manager.nixosModules.home-manager
     ./packages.nix
+    ./modules/bundle.nix
+  ];
+
+  disabledModules = [
+    ./modules/bluetooth.nix
   ];
 
   home-manager = {
@@ -14,12 +19,7 @@
     };
   };
 
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-
   networking.hostName = "nixos";
-  # networking.wireless.enable = true;
-  networking.networkmanager.enable = true;
 
   time.timeZone = "Asia/Amman";
 
@@ -36,53 +36,18 @@
     LC_TIME = "en_AG";
   };
 
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-
   # Enable the GNOME Desktop Environment.
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
 
-  # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "";
-  };
-
   # Enable CUPS to print documents.
   services.printing.enable = true;
-
-  # Enable sound with pipewire.
-  services.pulseaudio.enable = false;
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-  };
 
   # Enable touchpad support.
   # services.xserver.libinput.enable = true;
 
-  # Define a user account.
-  users.users.yazan = {
-    isNormalUser = true;
-    description = "yazan";
-    extraGroups = [ "networkmanager" "wheel" ];
-  };
-
   # Install firefox.
   programs.firefox.enable = true;
-
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
-
-  # List packages installed in system profile.
-  # environment.systemPackages = with pkgs; [
-  #   home-manager
-  #   git
-  # ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
