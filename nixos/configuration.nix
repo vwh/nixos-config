@@ -3,7 +3,7 @@
 {
   imports = [
     ./hardware-configuration.nix
-    inputs.home-manager.nixosModules.home-manager
+    # inputs.home-manager.nixosModules.home-manager
     ./packages.nix
     ./modules/bundle.nix
   ];
@@ -12,12 +12,12 @@
     ./modules/bluetooth.nix
   ];
 
-  home-manager = {
-    extraSpecialArgs = { inherit inputs; };
-    users = {
-      yazan = import ../home-manager/home.nix;
-    };
-  };
+# home-manager = {
+#     extraSpecialArgs = { inherit inputs pkgs; };
+#     users = {
+#       yazan = import ../home-manager/home.nix;
+#     };
+#   };
 
   networking.hostName = "nixos";
 
