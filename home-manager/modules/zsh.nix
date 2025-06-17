@@ -8,7 +8,8 @@
 
     shellAliases =
       let
-        flakeDir = "~/nix";
+        flakeDir = "~/System";
+        editor = "code";
       in {
       rb = "sudo nixos-rebuild switch --flake ${flakeDir}";
       upd = "nix flake update ${flakeDir}";
@@ -16,11 +17,11 @@
 
       hms = "home-manager switch --flake ${flakeDir}";
 
-      conf = "nvim ${flakeDir}/nixos/configuration.nix";
-      pkgs = "nvim ${flakeDir}/nixos/packages.nix";
+      conf = "${editor} ${flakeDir}/nixos/configuration.nix";
+      pkgs = "${editor} ${flakeDir}/nixos/packages.nix";
 
       ll = "ls -l";
-      v = "nvim";
+      v = "${editor}";
       se = "sudoedit";
       ff = "fastfetch";
     };
@@ -31,7 +32,7 @@
     oh-my-zsh = {
       enable = true;
       plugins = [ "git" "sudo" ];
-      theme = "agnoster"; # blinks is also really nice
+      theme = "agnoster";
     };
   };
 }
