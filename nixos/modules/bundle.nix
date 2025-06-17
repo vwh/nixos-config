@@ -9,5 +9,6 @@
     ./bluetooth.nix
     ./gnome.nix
     ./firefox.nix
+    ./graphics.nix
   ];
 }
