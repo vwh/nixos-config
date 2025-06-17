@@ -9,8 +9,8 @@
     #   lightdm.enable = true;
     # };
 
-    layout = "us";
-    xkbVariant = "";
+    xkb.layout = "us";
+    xkb.variant = "";
 
     # libinput = {
     #   enable = true;
