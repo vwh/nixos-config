@@ -18,6 +18,10 @@
     gparted
     obsidian
     vscode
+    gnome-tweaks
+    sqlitebrowser
+    libreoffice-qt6-fresh
+    tor-browser
 
     # Coding stuff
     gcc
@@ -53,6 +57,7 @@
     lazygit
     bluez
     bluez-tools
+    curl
 
     # GUI utils
     feh
@@ -102,6 +107,7 @@
     # libsForQt5.qtstyleplugin-kvantum
     # libsForQt5.qt5ct
     # papirus-nord
+    gnomeExtensions.clipboard-history
   ];
 
   fonts.packages = with pkgs; [
