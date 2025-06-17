@@ -10,5 +10,6 @@
     ./gnome.nix
     ./firefox.nix
     ./graphics.nix
+    ./gaming.nix
   ];
 }
