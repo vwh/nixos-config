@@ -29,7 +29,7 @@
       user = "yazan";
       hosts = [
         { hostname = "pc"; stateVersion = "25.05"; }
-        # { hostname = "thinkpad"; stateVersion = "25.05"; }
+        { hostname = "thinkpad"; stateVersion = "25.05"; }
       ];
 
       # pkgs (unstable)
