@@ -1,7 +1,6 @@
 { pkgs, pkgsStable, ... }: {
   nixpkgs.config = {
     allowUnfree = true;
-    permittedInsecurePackages = [ "python-2.7.18.8" "electron-25.9.0" ];
   };
   
   home.packages = with pkgs; [
@@ -80,9 +79,7 @@
     # Coding stuff
     openjdk23
     nodejs
-    # python2Full  # full 2.7 env
-    # python3      # plain Python 3
-    # (python3.withPackages (ps: with ps; [ requests ]))
+    python3
 
     # Other
     bemoji
