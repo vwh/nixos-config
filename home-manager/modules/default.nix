@@ -3,7 +3,7 @@
     ./git.nix
     ./htop.nix
     # ./alacritty.nix
-    ./zsh.nix
+    ./zsh
     ./stylix.nix
     ./chromium.nix
     ./obsidian.nix

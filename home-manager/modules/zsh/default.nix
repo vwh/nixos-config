@@ -37,7 +37,8 @@
     oh-my-zsh = {
       enable = true;
       plugins = [ "git" "sudo" ];
-      theme = "agnoster";
+      custom = builtins.toString ./custom_omz_dir;
+      theme = "oxide";
     };
   };
 }
