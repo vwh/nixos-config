@@ -1,4 +1,6 @@
 { pkgs, config, ... }: {
+  nixpkgs.config.allowUnfree = true;
+  
   hardware.graphics = {
     enable = true;
     package = pkgs.mesa;

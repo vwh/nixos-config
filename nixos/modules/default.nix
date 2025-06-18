@@ -5,11 +5,15 @@
     ./env.nix
     ./user.nix
     ./xserver.nix
-    ./nm.nix
+    ./net.nix
     ./bluetooth.nix
     ./gnome.nix
     ./firefox.nix
     ./graphics.nix
     ./gaming.nix
+    ./timezone.nix
+    ./i18n.nix
+    ./nix.nix
+    ./printing.nix
   ];
 }

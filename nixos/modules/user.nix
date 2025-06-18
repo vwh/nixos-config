@@ -1,17 +1,13 @@
-{ pkgs, ... }: {
+{ pkgs, user, ... }: {
   programs.zsh.enable = true;
 
   users = {
     defaultUserShell = pkgs.zsh;
-
-    users.yazan = {
+    users.${user} = {
       isNormalUser = true;
-      description = "yazan";
       extraGroups = [ "networkmanager" "wheel" "input" "libvirtd" ];
-      packages = with pkgs; [ ];
     };
   };
 
-  # Enable automatic login for the user.
-  services.getty.autologinUser = "yazan";
+  services.getty.autologinUser = user;
 }

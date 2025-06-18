@@ -4,8 +4,14 @@
   inputs = {
     nixpkgs = { url = "github:nixos/nixpkgs/nixos-unstable"; };
     nixpkgs-stable = { url = "github:nixos/nixpkgs/nixos-25.05"; };
+
     home-manager = {
       url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    stylix = {
+      url = "github:danth/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -19,6 +25,12 @@
     }@inputs:
     let
       system = "x86_64-linux";
+      homeStateVersion = "25.05";
+      user = "yazan";
+      hosts = [
+        { hostname = "pc"; stateVersion = "25.05"; }
+        # { hostname = "thinkpad"; stateVersion = "25.05"; }
+      ];
 
       # pkgs (unstable)
       pkgs = import nixpkgs {
@@ -31,24 +43,31 @@
         inherit system;
         config.allowUnfree = true;
       };
-    in
-    {
-      # 1) NixOS system
-      nixosConfigurations.pc =
-        nixpkgs.lib.nixosSystem {
-          inherit system;
-          specialArgs = { inherit pkgsStable; };
 
-          modules = [ ./nixos/configuration.nix ];
+      makeSystem = { hostname, stateVersion }: nixpkgs.lib.nixosSystem {
+        inherit system;
+        
+        specialArgs = { inherit inputs stateVersion hostname user pkgsStable; };
+        modules     = [ ./hosts/${hostname}/configuration.nix ];
+      };
+    in {
+
+    nixosConfigurations = nixpkgs.lib.foldl' (configs: host:
+      configs // {
+        "${host.hostname}" = makeSystem {
+          inherit (host) hostname stateVersion;
         };
+      }) {} hosts;
 
-      # 2) Home-Manager user
-      homeConfigurations.yazan =
-        home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
-          extraSpecialArgs = { inherit pkgsStable; };
+    homeConfigurations.${user} = home-manager.lib.homeManagerConfiguration {
+      inherit pkgs;
+      extraSpecialArgs = {
+        inherit inputs homeStateVersion user pkgsStable;
+      };
 
-          modules = [ ./home-manager/home.nix ];
-        };
+      modules = [
+        ./home-manager/home.nix
+      ];
+    };
     };
 }
