@@ -63,6 +63,7 @@
     yt-dlp
     zip
     flameshot
+    direnv
 
     # GUI utils
     feh
@@ -83,16 +84,11 @@
     # python3      # plain Python 3
     # (python3.withPackages (ps: with ps; [ requests ]))
 
-    # WM stuff
-    # libsForQt5.xwaylandvideobridge
-    # libnotify
-    # xdg-desktop-portal-gtk
-    # xdg-desktop-portal-hyprland
-
     # Other
     bemoji
     nix-prefetch-scripts
+
+    # Gnome extensions
     gnomeExtensions.clipboard-history
-    direnv
   ];
 }
