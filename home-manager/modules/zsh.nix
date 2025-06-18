@@ -10,6 +10,7 @@
       let
         flakeDir = "~/System";
         editor = "code";
+        devShellPath = "github:vwh/.dotfiles?ref=main&dir=dev-environment";
       in
       {
         rb = "sudo nixos-rebuild switch --flake ${flakeDir}";
@@ -25,6 +26,9 @@
         v = "${editor}";
         se = "sudoedit";
         ff = "fastfetch";
+
+        "bune" = "nix develop '${devShellPath}/bun' --command zsh";
+        "nodejse" = "nix develop '${devShellPath}/nodejs' --command zsh";
       };
 
     history.size = 10000;
