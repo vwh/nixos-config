@@ -117,6 +117,10 @@
     # GNOME Extensions
     # ──────────────────────────────────────────────────────────────────────────
     gnomeExtensions.clipboard-history
-    gnomeExtensions.dash-to-dock
+    gnomeExtensions.dash-to-panel
+    gnomeExtensions.desktop-icons-ng-ding
+    gnomeExtensions.blur-my-shell
+    gnomeExtensions.arcmenu
+    gnomeExtensions.vitals
   ];
 }
