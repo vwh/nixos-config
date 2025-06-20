@@ -53,6 +53,8 @@
     # ──────────────────────────────────────────────────────────────────────────
     audacity
     brave
+    firefox
+    chromium
     anki
     alacritty
     vscode
