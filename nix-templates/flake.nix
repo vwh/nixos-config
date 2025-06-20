@@ -53,6 +53,16 @@
           the template.
         '';
       };
+
+      bun = {
+        path = ./bun;
+        description = "Bun Javascript App";
+        welcomeText = ''
+          You have created a Bun template that will help you manage
+          your Bun project. See the README for instructions on how to
+          use the template.
+        '';
+      };
     };
   };
 }

@@ -1,15 +1,18 @@
-# bun
+# Bun
 
-To install dependencies:
+This is a minimal template for JavasScript development with Bun.
 
-```bash
-bun install
-```
-
-To run:
+## Initialization
 
 ```bash
-bun run index.ts
+nix flake init -t "github:vwh/nixos-config/main?dir=nix-templates#bun"
 ```
 
-This project was created using `bun init` in bun v1.2.16. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
+## Usage
+
+- `nix develop`: opens up a `bash` shell with the required packages
+
+## Reference
+
+1. [wiki/Flakes](https://nixos.wiki/wiki/Flakes)
+2. [Bun](https://bun.sh/) - used as JS and TS runtime
