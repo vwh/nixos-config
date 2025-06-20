@@ -14,5 +14,6 @@
     ./i18n.nix
     ./nix.nix
     ./printing.nix
+    ./virtualisation.nix
   ];
 }
