@@ -23,8 +23,8 @@
       "nfin" = "nix flake init -t '${nixTemplates}nodejs'";
 
       "nfip" = "nix flake init -t '${nixTemplates}python-venv'";
-      
+
       "nfirs" = "nix flake init -t '${nixTemplates}rust-stable'";
       "nfirn" = "nix flake init -t '${nixTemplates}rust-nightly'";
-  };
+    };
 }

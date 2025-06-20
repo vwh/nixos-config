@@ -9,40 +9,41 @@
     utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = {
-    nixpkgs,
-    utils,
-    fenix,
-    ...
-  }:
-    utils.lib.eachDefaultSystem
-    (
-      system: let
+  outputs =
+    {
+      nixpkgs,
+      utils,
+      fenix,
+      ...
+    }:
+    utils.lib.eachDefaultSystem (
+      system:
+      let
         pkgs = import nixpkgs {
           inherit system;
-          overlays = [fenix.overlays.default];
+          overlays = [ fenix.overlays.default ];
         };
         toolchain = pkgs.fenix.complete;
-      in rec
-      {
+      in
+      rec {
         # Executed by `nix build`
         packages.default =
           (pkgs.makeRustPlatform {
             # Use nightly rustc and cargo provided by fenix for building
             inherit (toolchain) cargo rustc;
-          })
-          .buildRustPackage {
-            pname = "template";
-            version = "0.1.0";
-            src = ./.;
-            cargoLock.lockFile = ./Cargo.lock;
+          }).buildRustPackage
+            {
+              pname = "template";
+              version = "0.1.0";
+              src = ./.;
+              cargoLock.lockFile = ./Cargo.lock;
 
-            # For other makeRustPlatform features see:
-            # https://github.com/NixOS/nixpkgs/blob/master/doc/languages-frameworks/rust.section.md#cargo-features-cargo-features
-          };
+              # For other makeRustPlatform features see:
+              # https://github.com/NixOS/nixpkgs/blob/master/doc/languages-frameworks/rust.section.md#cargo-features-cargo-features
+            };
 
         # Executed by `nix run`
-        apps.default = utils.lib.mkApp {drv = packages.default;};
+        apps.default = utils.lib.mkApp { drv = packages.default; };
 
         # Used by `nix develop`
         devShells.default = pkgs.mkShell {

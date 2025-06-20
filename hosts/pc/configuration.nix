@@ -17,7 +17,7 @@
   networking.hostName = hostname;
 
   system = {
-    stateVersion = stateVersion;
+    inherit stateVersion;
     autoUpgrade.enable = true;
     autoUpgrade.dates = "weekly";
   };
