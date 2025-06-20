@@ -1,9 +1,8 @@
-{ homeStateVersion, user, ... }:
+{ homeStateVersion, user, pkgs, pkgsStable, ... }:
 
 {
   imports = [
     ./modules
-    ./home-packages.nix
   ];
 
   home = {
@@ -15,6 +14,19 @@
   home.sessionVariables = {
     STEAM_EXTRA_COMPAT_TOOLS_PATHS = "\\\${HOME}/.steam/root/compatibilitytools.d";
   };
+
+  nixpkgs.config.allowUnfree = true;
+
+  home.packages =
+    let
+      extraPkgs = import ./packages { inherit pkgs pkgsStable; };
+    in
+    (with pkgs; [
+      nix-prefetch-scripts
+      nixfmt-rfc-style
+      nixd
+    ])
+    ++ extraPkgs;
 
   programs.home-manager.enable = true;
 }

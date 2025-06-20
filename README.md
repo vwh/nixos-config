@@ -88,6 +88,6 @@ System
 
 ### Flake & Nix Structure
 
-- [ ] Split large `home-packages.nix` into per-category files
+- [x] Split large `home-packages.nix` into per-category files
 - [ ] Abstract common overlays
 - [ ] Document each module’s purpose
