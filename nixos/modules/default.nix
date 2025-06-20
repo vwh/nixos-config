@@ -15,5 +15,6 @@
     ./nix.nix
     ./printing.nix
     ./virtualisation.nix
+    ./tor.nix
   ];
 }

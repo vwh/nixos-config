@@ -78,7 +78,7 @@ System
 ### Infrastructure
 
 - [x] Hosts management
-- [ ] `tor` integration (system+browser)
+- [x] `tor` integration (system+browser)
 - [ ] Secrets management
 
 ### Utilities & Tools
