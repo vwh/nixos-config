@@ -1,11 +1,13 @@
-# Python flake
+# Python
+
+This is a minimal template for Python development with venv.
 
 ---
 
 ## Initialization
 
 ```bash
-nix flake init -t github:MordragT/nix-templates#python-venv
+nix flake init -t github:vwh/nix-templates#python-venv
 ```
 
 ## Usage
