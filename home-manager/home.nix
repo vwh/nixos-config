@@ -19,6 +19,7 @@
 
   home.sessionVariables = {
     STEAM_EXTRA_COMPAT_TOOLS_PATHS = "\\\${HOME}/.steam/root/compatibilitytools.d";
+    NIXOS_OZONE_WL = "1";
   };
 
   nixpkgs.config.allowUnfree = true;
@@ -30,6 +31,7 @@
     (with pkgs; [
       nix-prefetch-scripts
       nixfmt-rfc-style
+      nixpkgs-fmt
       nixd
     ])
     ++ extraPkgs;
