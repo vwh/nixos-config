@@ -47,7 +47,6 @@ System
 │   │   └── local-packages.nix         # PC-specific packages
 │   │
 │
-│
 └── nixos                              # Shared NixOS modules (cross-host defaults)
     └── modules                        # e.g. networking.nix, bootloader.nix, users.nix, etc.
         └── …
@@ -57,33 +56,15 @@ System
 
 ## TODO
 
-### Containers & Databases
-
-- [ ] Docker
-- [ ] Redis
-- [ ] MongoDB
-- [ ] PostgreSQL
-
 ### Window Manager & UI
 
 - [ ] Hyperland (Wayland compositor)
-- [ ] Screenshot & clipboard integration
+- [ ] Notification daemon (mako/dunst)
 - [ ] Rofi (application launcher) + theming / rice
 
 ### Shell & Prompt
 
 - [ ] Better Z shell (plugins, themes, autosuggestions)
-- [ ] Notification daemon (e.g. `dunst` or `mako`)
-
-### Languages & Runtimes
-
-- [ ] Python
-- [ ] Bun
-- [ ] Go
-- [ ] Deno
-- [ ] Cloudflare CLI (`wrangler`)
-- [ ] npm / Node.js
-- [ ] Zig
 
 ### Browsers & Extensions
 
@@ -102,13 +83,11 @@ System
 
 ### Utilities & Tools
 
-- [ ] Modern CLI tools (e.g. `exa`, `fd`, `bat`)
-- [ ] Notification daemon (mako/dunst)
+- [x] Modern CLI tools (e.g. `exa`, `fd`, `bat`)
 - [ ] Clipboard tool (wl-clipboard/xclip)
-- [ ] Rice support (dotfile theming)
 
 ### Flake & Nix Structure
 
-- [ ] Split large `packages.nix` into per-category files
+- [ ] Split large `home-packages.nix` into per-category files
 - [ ] Abstract common overlays
 - [ ] Document each module’s purpose
