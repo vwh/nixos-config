@@ -13,6 +13,7 @@
         "wheel"
         "input"
         "libvirtd"
+        "docker"
       ];
     };
   };
