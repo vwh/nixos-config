@@ -2,8 +2,8 @@
   description = "NixOS + Home-Manager flake";
 
   inputs = {
-    nixpkgs = { url = "github:nixos/nixpkgs/nixos-unstable"; };
-    nixpkgs-stable = { url = "github:nixos/nixpkgs/nixos-25.05"; };
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.05";
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -17,19 +17,26 @@
   };
 
   outputs =
-    { self
-    , nixpkgs
-    , nixpkgs-stable
-    , home-manager
-    , ...
+    {
+      self,
+      nixpkgs,
+      nixpkgs-stable,
+      home-manager,
+      ...
     }@inputs:
     let
       system = "x86_64-linux";
       homeStateVersion = "25.05";
       user = "yazan";
       hosts = [
-        { hostname = "pc"; stateVersion = "25.05"; }
-        { hostname = "thinkpad"; stateVersion = "25.05"; }
+        {
+          hostname = "pc";
+          stateVersion = "25.05";
+        }
+        {
+          hostname = "thinkpad";
+          stateVersion = "25.05";
+        }
       ];
 
       # pkgs (unstable)
@@ -44,30 +51,49 @@
         config.allowUnfree = true;
       };
 
-      makeSystem = { hostname, stateVersion }: nixpkgs.lib.nixosSystem {
-        inherit system;
-        
-        specialArgs = { inherit inputs stateVersion hostname user pkgsStable; };
-        modules     = [ ./hosts/${hostname}/configuration.nix ];
-      };
-    in {
+      makeSystem =
+        { hostname, stateVersion }:
+        nixpkgs.lib.nixosSystem {
+          inherit system;
 
-    nixosConfigurations = nixpkgs.lib.foldl' (configs: host:
-      configs // {
-        "${host.hostname}" = makeSystem {
-          inherit (host) hostname stateVersion;
+          specialArgs = {
+            inherit
+              inputs
+              stateVersion
+              hostname
+              user
+              pkgsStable
+              ;
+          };
+          modules = [ ./hosts/${hostname}/configuration.nix ];
         };
-      }) {} hosts;
+    in
+    {
 
-    homeConfigurations.${user} = home-manager.lib.homeManagerConfiguration {
-      inherit pkgs;
-      extraSpecialArgs = {
-        inherit inputs homeStateVersion user pkgsStable;
+      nixosConfigurations = nixpkgs.lib.foldl' (
+        configs: host:
+        configs
+        // {
+          "${host.hostname}" = makeSystem {
+            inherit (host) hostname stateVersion;
+          };
+        }
+      ) { } hosts;
+
+      homeConfigurations.${user} = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        extraSpecialArgs = {
+          inherit
+            inputs
+            homeStateVersion
+            user
+            pkgsStable
+            ;
+        };
+
+        modules = [
+          ./home-manager/home.nix
+        ];
       };
-
-      modules = [
-        ./home-manager/home.nix
-      ];
-    };
     };
 }

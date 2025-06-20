@@ -1,4 +1,5 @@
-{ config, ... }: {
+{ config, ... }:
+{
   programs.zsh = {
     enable = true;
     enableCompletion = true;
@@ -36,7 +37,10 @@
 
     oh-my-zsh = {
       enable = true;
-      plugins = [ "git" "sudo" ];
+      plugins = [
+        "git"
+        "sudo"
+      ];
       custom = builtins.toString ./custom_omz_dir;
       theme = "oxide";
     };

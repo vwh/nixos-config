@@ -8,7 +8,6 @@
     ./net.nix
     ./bluetooth.nix
     ./gnome.nix
-    ./firefox.nix
     ./graphics.nix
     ./gaming.nix
     ./timezone.nix

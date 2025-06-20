@@ -1,5 +1,6 @@
-{ pkgs, pkgsStable, ... }: {
+{ pkgs, pkgsStable, ... }:
+{
   environment.systemPackages = with pkgs; [
-    fwupd           # BIOS/EC firmware updates
+    fwupd # BIOS/EC firmware updates
   ];
 }

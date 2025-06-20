@@ -1,4 +1,9 @@
-{ pkgs, stateVersion, hostname, ... }:
+{
+  pkgs,
+  stateVersion,
+  hostname,
+  ...
+}:
 
 {
   imports = [
@@ -9,8 +14,18 @@
 
   environment.systemPackages = [ pkgs.home-manager ];
 
-  services.power-profiles-daemon.enable = true;
-  services.fwupd.enable               = true;
+  services = {
+    power-profiles-daemon.enable = true;
+    fwupd.enable = true;
+  };
+
+  networking.hostName = hostname;
+
+  system = {
+    stateVersion = stateVersion;
+    autoUpgrade.enable = true;
+    autoUpgrade.dates = "weekly";
+  };
 
   hardware.nvidia.prime = {
     offload = {
@@ -23,13 +38,5 @@
 
     # dedicated
     nvidiaBusId = "PCI:2@0:0:0";
-  };
-
-  networking.hostName = hostname;
-
-  system = {
-    stateVersion = stateVersion;
-    autoUpgrade.enable = true;
-    autoUpgrade.dates = "weekly";
   };
 }
