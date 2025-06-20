@@ -21,20 +21,26 @@
     "acpi_backlight=native"
   ];
 
+  powerManagement.enable = true;
+
   services = {
     power-profiles-daemon.enable = false;
     throttled.enable = lib.mkDefault true;
     
     tlp = {
     enable = true;
-      # settings = {
-      #   RESTORE_DEVICE_STATE_ON_STARTUP = "1";
-      #   SCHED_POWERSAVE_ON_AC           = "0";
-      #   SCHED_POWERSAVE_ON_BAT          = "1";
-      #   USB_AUTOSUSPEND                 = "1";
-      #   NVM_EXP_POWER_SMART             = "1";
-      #   BLUETOOTH_AUTO_ENABLE           = "1";
-      # };
+      settings = {
+        CPU_SCALING_GOVERNOR_ON_AC = "performance";
+        CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
+
+        CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
+        CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
+
+        CPU_MIN_PERF_ON_AC = 0;
+        CPU_MAX_PERF_ON_AC = 100;
+        CPU_MIN_PERF_ON_BAT = 0;
+        CPU_MAX_PERF_ON_BAT = 20;
+      };
     };
   };
 
