@@ -23,9 +23,12 @@
 
   powerManagement.enable = true;
 
+  networking.hostName = hostname;
+
   services = {
     power-profiles-daemon.enable = false;
     throttled.enable = lib.mkDefault true;
+    libinput.enable = true;
 
     tlp = {
       enable = true;
@@ -44,24 +47,32 @@
     };
   };
 
-  networking.hostName = hostname;
-
   system = {
     inherit stateVersion;
     autoUpgrade.enable = true;
     autoUpgrade.dates = "weekly";
-  };
+  }; 
 
-  hardware.nvidia.prime = {
-    offload = {
-      enable = true;
-      enableOffloadCmd = true;
+
+
+  hardware.nvidia = {
+    prime = {
+      powerManagement = {
+        finegrained = true; # More precise power consumption control
+      };
+      
+      offload = {
+        enable = true;
+        enableOffloadCmd = true;
+      };
+
+      sync.enable = false;
+
+      # Integrated
+      intelBusId = "PCI:0@2:0:0";
+
+      # Dedicated
+      nvidiaBusId = "PCI:2@0:0:0";
     };
-
-    # Integrated
-    intelBusId = "PCI:0@2:0:0";
-
-    # Dedicated
-    nvidiaBusId = "PCI:2@0:0:0";
   };
 }

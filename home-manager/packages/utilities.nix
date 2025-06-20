@@ -6,4 +6,7 @@ with pkgsStable;
   diffutils
   gzip
   unzip
+  xdg-utils
+  bc
+  fd
 ]

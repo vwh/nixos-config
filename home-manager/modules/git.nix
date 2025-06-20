@@ -5,8 +5,16 @@
     userEmail = "vwhe@proton.me";
 
     ignores = [
-      "TODO"
-      ".vscode"
+      ".cache/"
+      ".DS_Store"
+      ".idea/"
+      "*.swp"
+      "*.elc"
+      "auto-save-list"
+      ".direnv/"
+      "node_modules"
+      "result"
+      "result-*"
     ];
   };
 }
