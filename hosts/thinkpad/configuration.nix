@@ -15,8 +15,19 @@
   environment.systemPackages = [ pkgs.home-manager ];
 
   services = {
-    power-profiles-daemon.enable = true;
-    fwupd.enable = true;
+    power-profiles-daemon.enable = false;
+  };
+
+  services.tlp = {
+    enable = true;
+    settings = {
+      RESTORE_DEVICE_STATE_ON_STARTUP = "1";
+      SCHED_POWERSAVE_ON_AC           = "0";
+      SCHED_POWERSAVE_ON_BAT          = "1";
+      USB_AUTOSUSPEND                 = "1";
+      NVM_EXP_POWER_SMART             = "1";
+      BLUETOOTH_AUTO_ENABLE           = "1";
+    };
   };
 
   networking.hostName = hostname;
