@@ -14,16 +14,6 @@
     };
 
     templates = {
-      deno = {
-        path = ./deno;
-        description = "Deno runtime development template using deno2nix";
-        welcomeText = ''
-          You have created a Javascript template that will help you manage
-          your Deno project. See the README for instructions on how to
-          use the template.
-        '';
-      };
-
       python-venv = {
         path = ./python-venv;
         description = "Python development template using venv";
@@ -54,12 +44,32 @@
         '';
       };
 
+      deno = {
+        path = ./deno;
+        description = "Deno runtime development template using deno2nix";
+        welcomeText = ''
+          You have created a Javascript template that will help you manage
+          your Deno project. See the README for instructions on how to
+          use the template.
+        '';
+      };
+
       bun = {
         path = ./bun;
         description = "Bun Javascript App";
         welcomeText = ''
           You have created a Bun template that will help you manage
           your Bun project. See the README for instructions on how to
+          use the template.
+        '';
+      };
+
+      nodejs = {
+        path = ./nodejs;
+        description = "NodeJS Javascript App";
+        welcomeText = ''
+          You have created a NodeJS template that will help you manage
+          your NodeJS project. See the README for instructions on how to
           use the template.
         '';
       };
