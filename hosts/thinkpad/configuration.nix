@@ -53,14 +53,12 @@
     autoUpgrade.dates = "weekly";
   }; 
 
-
-
   hardware.nvidia = {
+    powerManagement = {
+      finegrained = true; # More precise power consumption control
+    };
+
     prime = {
-      powerManagement = {
-        finegrained = true; # More precise power consumption control
-      };
-      
       offload = {
         enable = true;
         enableOffloadCmd = true;
