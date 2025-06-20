@@ -11,5 +11,9 @@
 
   networking.hostName = hostname;
 
-  system.stateVersion = stateVersion;
+  system = {
+    stateVersion = stateVersion;
+    autoUpgrade.enable = true;
+    autoUpgrade.dates = "weekly";
+  };
 }
