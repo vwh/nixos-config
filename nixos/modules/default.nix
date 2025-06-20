@@ -16,5 +16,6 @@
     ./printing.nix
     ./virtualisation.nix
     ./tor.nix
+    ./hyprland.nix
   ];
 }
