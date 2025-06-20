@@ -2,6 +2,7 @@
   pkgs,
   stateVersion,
   hostname,
+  lib,
   ...
 }:
 
@@ -14,19 +15,26 @@
 
   environment.systemPackages = [ pkgs.home-manager ];
 
+  boot.kernelParams = [
+    # Force use of the thinkpad_acpi driver for backlight control.
+    # This allows the backlight save/load systemd service to work.
+    "acpi_backlight=native"
+  ];
+
   services = {
     power-profiles-daemon.enable = false;
-  };
-
-  services.tlp = {
+    throttled.enable = lib.mkDefault true;
+    
+    tlp = {
     enable = true;
-    settings = {
-      RESTORE_DEVICE_STATE_ON_STARTUP = "1";
-      SCHED_POWERSAVE_ON_AC           = "0";
-      SCHED_POWERSAVE_ON_BAT          = "1";
-      USB_AUTOSUSPEND                 = "1";
-      NVM_EXP_POWER_SMART             = "1";
-      BLUETOOTH_AUTO_ENABLE           = "1";
+      # settings = {
+      #   RESTORE_DEVICE_STATE_ON_STARTUP = "1";
+      #   SCHED_POWERSAVE_ON_AC           = "0";
+      #   SCHED_POWERSAVE_ON_BAT          = "1";
+      #   USB_AUTOSUSPEND                 = "1";
+      #   NVM_EXP_POWER_SMART             = "1";
+      #   BLUETOOTH_AUTO_ENABLE           = "1";
+      # };
     };
   };
 
