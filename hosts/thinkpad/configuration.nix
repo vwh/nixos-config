@@ -58,10 +58,10 @@
       enableOffloadCmd = true;
     };
 
-    # integrated
+    # Integrated
     intelBusId = "PCI:0@2:0:0";
 
-    # dedicated
+    # Dedicated
     nvidiaBusId = "PCI:2@0:0:0";
   };
 }

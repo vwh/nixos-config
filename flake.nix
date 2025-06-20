@@ -28,6 +28,7 @@
       system = "x86_64-linux";
       homeStateVersion = "25.05";
       user = "yazan";
+
       hosts = [
         {
           hostname = "pc";
@@ -39,13 +40,11 @@
         }
       ];
 
-      # pkgs (unstable)
       pkgs = import nixpkgs {
         inherit system;
         config.allowUnfree = true;
       };
 
-      # pkgs (stable)
       pkgsStable = import nixpkgs-stable {
         inherit system;
         config.allowUnfree = true;
@@ -65,6 +64,7 @@
               pkgsStable
               ;
           };
+
           modules = [ ./hosts/${hostname}/configuration.nix ];
         };
     in
@@ -82,6 +82,7 @@
 
       homeConfigurations.${user} = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
+
         extraSpecialArgs = {
           inherit
             inputs

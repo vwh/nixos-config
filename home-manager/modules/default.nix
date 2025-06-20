@@ -2,7 +2,6 @@
   imports = [
     ./git.nix
     ./htop.nix
-    # ./alacritty.nix
     ./zsh
     ./stylix.nix
     ./chromium.nix
@@ -11,6 +10,7 @@
     ./eza.nix
     ./lazygit.nix
     ./qt.nix
+    # ./alacritty.nix
     # ./firefox.nix
   ];
 }

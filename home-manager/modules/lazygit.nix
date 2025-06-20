@@ -7,10 +7,12 @@
 
       gui.theme = {
         lightTheme = false;
+
         activeBorderColor = [
           "green"
           "bold"
         ];
+
         inactiveBorderColor = [ "grey" ];
         selectedLineBgColor = [ "blue" ];
       };
