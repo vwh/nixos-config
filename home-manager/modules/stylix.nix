@@ -12,6 +12,8 @@
     font-awesome
     powerline-fonts
     powerline-symbols
+    font-awesome
+    nerd-fonts.jetbrains-mono
   ];
 
   stylix = {
