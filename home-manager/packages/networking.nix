@@ -4,6 +4,4 @@ with pkgsStable;
   openssl
   openssl.dev
   openssh
-  curl
-  wget
 ]

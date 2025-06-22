@@ -10,4 +10,6 @@ with pkgs;
   fzf
   direnv
   yt-dlp
+  curl
+  wget
 ]

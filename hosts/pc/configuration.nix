@@ -12,8 +12,6 @@
     ../../nixos/modules
   ];
 
-  environment.systemPackages = [ pkgs.home-manager ];
-
   networking.hostName = hostname;
 
   system = {
@@ -21,4 +19,6 @@
     autoUpgrade.enable = true;
     autoUpgrade.dates = "weekly";
   };
+
+  environment.systemPackages = [ pkgs.home-manager ];
 }

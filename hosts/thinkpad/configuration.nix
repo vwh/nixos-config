@@ -13,17 +13,14 @@
     ../../nixos/modules
   ];
 
-  environment.systemPackages = [ pkgs.home-manager ];
-
   boot.kernelParams = [
     # Force use of the thinkpad_acpi driver for backlight control.
     # This allows the backlight save/load systemd service to work.
     "acpi_backlight=native"
   ];
 
-  powerManagement.enable = true;
-
   networking.hostName = hostname;
+  powerManagement.enable = true;
 
   services = {
     power-profiles-daemon.enable = false;
@@ -51,7 +48,7 @@
     inherit stateVersion;
     autoUpgrade.enable = true;
     autoUpgrade.dates = "weekly";
-  }; 
+  };
 
   hardware.nvidia = {
     powerManagement = {
@@ -73,4 +70,6 @@
       nvidiaBusId = "PCI:2@0:0:0";
     };
   };
+
+  environment.systemPackages = [ pkgs.home-manager ];
 }

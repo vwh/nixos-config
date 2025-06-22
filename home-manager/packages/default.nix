@@ -2,13 +2,13 @@
 
 let
   chunks = [
-    ./utilities.nix
-    ./gnome.nix
-    ./dev.nix
-    ./networking.nix
-    ./cli.nix
     ./applications.nix
+    ./cli.nix
+    ./development.nix
+    ./gnome.nix
     ./multimedia.nix
+    ./networking.nix
+    ./utilities.nix
   ];
 in
 

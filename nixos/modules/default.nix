@@ -1,21 +1,21 @@
 {
   imports = [
-    ./bootloader.nix
-    ./sound.nix
-    ./env.nix
-    ./user.nix
-    ./xserver.nix
-    ./net.nix
+    ./audio.nix
     ./bluetooth.nix
+    ./bootloader.nix
+    ./environment.nix
+    ./gaming.nix
     ./gnome.nix
     ./graphics.nix
-    ./gaming.nix
-    ./timezone.nix
+    ./hyprland.nix
     ./i18n.nix
+    ./networking.nix
     ./nix.nix
     ./printing.nix
-    ./virtualisation.nix
+    ./timezone.nix
     ./tor.nix
-    ./hyprland.nix
+    ./users.nix
+    ./virtualisation.nix
+    ./xserver.nix
   ];
 }

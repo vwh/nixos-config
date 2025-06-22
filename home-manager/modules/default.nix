@@ -1,15 +1,15 @@
 {
   imports = [
+    ./bat.nix
+    ./chromium.nix
+    ./eza.nix
     ./git.nix
     ./htop.nix
-    ./zsh
-    ./stylix.nix
-    ./chromium.nix
-    ./obsidian.nix
-    ./bat.nix
-    ./eza.nix
     ./lazygit.nix
+    ./obsidian.nix
     ./qt.nix
+    ./stylix.nix
+    ./zsh
     # ./alacritty.nix
     # ./firefox.nix
   ];
