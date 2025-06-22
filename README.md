@@ -93,9 +93,9 @@ This repository contains my NixOS system configurations.
 
 ### Window Manager & UI
 
-- [ ] Hyprland (Wayland compositor)
-- [ ] Notification daemon (mako/dunst)
-- [ ] Rofi + theming
+- [x] Hyprland (Wayland compositor)
+- [x] Notification daemon (mako/dunst)
+- [x] Rofi + theming
 
 ### Shell & Prompt
 
@@ -115,7 +115,7 @@ This repository contains my NixOS system configurations.
 ### Utilities & Tools
 
 - [x] Modern CLI (`exa`, `fd`, `bat`)
-- [ ] Clipboard tools (`wl-clipboard` / `xclip`)
+- [x] Clipboard tools (`wl-clipboard` / `xclip`)
 
 ### Flake & Nix Improvements
 

@@ -6,6 +6,7 @@ let
     ./cli.nix
     ./development.nix
     ./gnome.nix
+    ./hyprland.nix
     ./multimedia.nix
     ./networking.nix
     ./utilities.nix

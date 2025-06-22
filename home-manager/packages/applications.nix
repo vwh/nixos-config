@@ -18,4 +18,5 @@
   sqlitebrowser
   teams-for-linux
   telegram-desktop
+  vesktop
 ])

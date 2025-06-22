@@ -5,10 +5,15 @@
     ./eza.nix
     ./git.nix
     ./htop.nix
+    ./hyprland
     ./lazygit.nix
     ./obsidian.nix
     ./qt.nix
+    ./ranger.nix
     ./stylix.nix
+    ./swaync
+    ./waybar
+    ./wofi
     ./zsh
     # ./alacritty.nix
     # ./firefox.nix
