@@ -60,6 +60,7 @@
 
       makeSystem =
         { hostname, stateVersion }:
+
         nixpkgs.lib.nixosSystem {
           inherit system;
 

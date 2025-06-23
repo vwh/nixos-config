@@ -1,4 +1,5 @@
 { pkgs, ... }:
+
 let
   booksDir = "$HOME/Downloads/books";
   booksScript = pkgs.writeScriptBin "open_books" ''

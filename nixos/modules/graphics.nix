@@ -1,4 +1,5 @@
 { pkgs, config, ... }:
+
 let
   # Using beta driver for recent GPUs like RTX 4070
   nvidiaDriverChannel = config.boot.kernelPackages.nvidiaPackages.beta;
@@ -57,6 +58,7 @@ in
       enable = true;
       package = nvidiaDriverChannel;
       enable32Bit = true;
+
       extraPackages = with pkgs; [
         nvidia-vaapi-driver
         vaapiVdpau
@@ -73,6 +75,7 @@ in
   # Nix cache for CUDA
   nix.settings = {
     substituters = [ "https://cuda-maintainers.cachix.org" ];
+
     trusted-public-keys = [
       "cuda-maintainers.cachix.org-1:0dq3bujKpuEPMCX6U4WylrUDZ9JyUG0VpVZa7CNfq5E="
     ];

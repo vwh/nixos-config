@@ -1,4 +1,5 @@
 { user, ... }:
+
 {
   virtualisation = {
     docker = {

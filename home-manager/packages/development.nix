@@ -5,6 +5,7 @@
   gnumake
   cmake
 ])
+
 ++ (with pkgs; [
   openjdk23
   rustc

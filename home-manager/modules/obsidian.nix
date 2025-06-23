@@ -1,4 +1,5 @@
 { pkgs, ... }:
+
 let
   gitSyncObsidian = pkgs.writeScriptBin "git-sync-obsidian" ''
     #!/bin/sh

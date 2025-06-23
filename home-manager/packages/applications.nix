@@ -7,6 +7,7 @@
   gnome-calendar
   gnome-clocks
 ])
+
 ++ (with pkgs; [
   anki
   alacritty

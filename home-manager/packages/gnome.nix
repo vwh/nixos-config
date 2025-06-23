@@ -1,4 +1,5 @@
 { pkgsStable, ... }:
+
 with pkgsStable.gnomeExtensions;
 [
   clipboard-history

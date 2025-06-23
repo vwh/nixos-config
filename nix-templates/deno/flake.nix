@@ -16,6 +16,7 @@
       utils,
       deno2nix,
     }:
+
     utils.lib.eachDefaultSystem (
       system:
       let
@@ -32,7 +33,6 @@
         packages.default = pkgs.deno2nix.mkExecutable {
           pname = "template";
           version = "0.1.0";
-
           src = ./.;
           lockfile = "./lock.json";
           config = "./deno.jsonc";
