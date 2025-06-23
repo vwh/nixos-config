@@ -1,7 +1,9 @@
 {
   programs.hyprlock = {
     enable = true;
+
     settings = {
+
       general = {
         disable_loading_bar = true;
         grace = 10;
@@ -17,7 +19,6 @@
         position = "0, 600";
         halign = "center";
         walign = "center";
-
         shadow_passes = 1;
       };
 
@@ -39,7 +40,7 @@
           inner_color = "rgb(40, 40, 40)";
           outer_color = "rgb(60, 56, 54)";
           outline_thickness = 5;
-          placeholder_text = "sussy baka";
+          placeholder_text = "Enter password";
           shadow_passes = 1;
         }
       ];

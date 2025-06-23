@@ -2,13 +2,17 @@
   programs.waybar = {
     enable = true;
     style = ./style.css;
+
     settings = {
       mainBar = {
         layer = "top";
         position = "top";
         height = 30;
+
         modules-left = [ "hyprland/workspaces" ];
+
         modules-center = [ "hyprland/window" ];
+
         modules-right = [
           "hyprland/language"
           "custom/weather"
@@ -17,6 +21,7 @@
           "clock"
           "tray"
         ];
+
         "hyprland/workspaces" = {
           disable-scroll = true;
           show-special = true;
@@ -42,8 +47,8 @@
         };
 
         "hyprland/language" = {
-          format-en = "🇺🇸";
-          format-ara = "🇵🇸";
+          format-en = "EN";
+          format-ara = "AR";
           min-length = 5;
           tooltip = false;
         };
@@ -51,7 +56,7 @@
         "custom/weather" = {
           format = " {} ";
           exec = "curl -s 'wttr.in/Amman?format=%c%t'";
-          interval = 300;
+          interval = 500;
           class = "weather";
         };
 
@@ -59,6 +64,7 @@
           format = "{icon} {volume}%";
           format-bluetooth = "{icon} {volume}% ";
           format-muted = "";
+
           format-icons = {
             "headphones" = "";
             "handsfree" = "";
@@ -71,6 +77,7 @@
               ""
             ];
           };
+
           on-click = "pavucontrol";
         };
 
@@ -79,9 +86,11 @@
             warning = 30;
             critical = 1;
           };
+
           format = "{icon} {capacity}%";
           format-charging = " {capacity}%";
           format-alt = "{time} {icon}";
+
           format-icons = [
             ""
             ""

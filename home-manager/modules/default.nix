@@ -15,6 +15,7 @@
     ./waybar
     ./wofi
     ./zsh
+    ./zathura.nix
     # ./alacritty.nix
     # ./firefox.nix
   ];

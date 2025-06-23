@@ -2,6 +2,7 @@
   wayland.windowManager.hyprland = {
     enable = true;
     systemd.enable = true;
+
     settings = {
       env = [
         # Hint Electron apps to use Wayland
@@ -28,21 +29,18 @@
       general = {
         gaps_in = 0;
         gaps_out = 0;
-
         border_size = 5;
 
         "col.active_border" = "rgba(d65d0eff) rgba(98971aff) 45deg";
         "col.inactive_border" = "rgba(3c3836ff)";
 
         resize_on_border = true;
-
         allow_tearing = false;
         layout = "master";
       };
 
       decoration = {
         rounding = 0;
-
         active_opacity = 1.0;
         inactive_opacity = 1.0;
 
@@ -93,12 +91,8 @@
         "move 990 60,size 900 170,pin,noinitialfocus,class:(showmethekey-gtk)"
         "noborder,nofocus,class:(showmethekey-gtk)"
 
-        "workspace 3,class:(obsidian)"
-        "workspace 3,class:(zathura)"
-        "workspace 4,class:(com.obsproject.Studio)"
-        "workspace 5,class:(telegram)"
-        "workspace 5,class:(vesktop)"
-        "workspace 6,class:(teams-for-linux)"
+        "workspace 9,class:(telegram)"
+        "workspace 9,class:(vesktop)"
 
         "suppressevent maximize, class:.*"
         "nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0"
