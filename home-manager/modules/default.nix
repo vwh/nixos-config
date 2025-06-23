@@ -12,6 +12,7 @@
     ./ranger.nix
     ./stylix.nix
     ./swaync
+    ./spicetify.nix
     ./waybar
     ./wofi
     ./zsh
