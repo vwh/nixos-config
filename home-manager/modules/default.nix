@@ -17,6 +17,7 @@
     ./wofi
     ./zsh
     ./zathura.nix
+    ./zoxide.nix
     # ./alacritty.nix
     # ./firefox.nix
   ];
