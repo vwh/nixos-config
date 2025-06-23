@@ -10,6 +10,9 @@
       ll = "eza -l";
 
       cd = "z";
+      ci = "zi";
+
+      etree = "eza --tree --level=1 --icons";
 
       cat = "bat";
 
@@ -18,8 +21,10 @@
 
       ff = "fastfetch";
       mf = "microfetch";
+      of = "onefetch";
 
       lg = "lazygit";
+      ld = "lazydocker";
 
       ns = "nix-shell";
 

@@ -12,4 +12,6 @@ with pkgs;
   wget
   bc
   fd
+  lazydocker
+  onefetch
 ]
