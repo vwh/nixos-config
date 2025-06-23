@@ -91,8 +91,10 @@
         "move 990 60,size 900 170,pin,noinitialfocus,class:(showmethekey-gtk)"
         "noborder,nofocus,class:(showmethekey-gtk)"
 
-        "workspace 9,class:(telegram)"
-        "workspace 9,class:(vesktop)"
+        "workspace 3,class:(telegram)"
+        "workspace 3,class:(vesktop)"
+
+        "workspace 4,class:(spotify)"
 
         "suppressevent maximize, class:.*"
         "nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0"

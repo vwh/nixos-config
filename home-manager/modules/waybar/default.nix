@@ -29,15 +29,15 @@
           all-outputs = false;
           format = "{icon}";
           format-icons = {
-            "1" = "1";
-            "2" = "2";
-            "3" = "3";
-            "4" = "4";
-            "5" = "5";
-            "6" = "6";
-            "7" = "7";
-            "8" = "8";
-            "9" = "9";
+            "1" = "";
+            "2" = "";
+            "3" = "";
+            "4" = "";
+            "5" = "";
+            "6" = "";
+            "7" = "";
+            "8" = "";
+            "9" = "";
             "magic" = "10";
           };
 
@@ -55,7 +55,7 @@
 
         "custom/weather" = {
           format = " {} ";
-          exec = "curl -s 'wttr.in/Amman?format=%c%t'";
+          exec = "curl -s 'wttr.in/amman?format=%c%t'";
           interval = 500;
           class = "weather";
         };
