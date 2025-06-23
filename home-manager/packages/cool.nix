@@ -5,4 +5,5 @@ with pkgs;
   cbonsai
   pipes
   cmatrix
+  cava
 ]
