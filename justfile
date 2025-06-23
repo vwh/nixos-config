@@ -7,13 +7,17 @@ header := "Available tasks:\n"
 _default:
     @{{JUST_EXECUTABLE}} --list-heading "{{header}}" --list
 
-# Switch to a new home-manager generation
-home:
-    home-manager switch --flake '.?submodules=1'
-
 # Format all .nix files
 format:
     find . -type f -name '*.nix' -exec nixfmt {} +
+
+# Lint all .nix files
+lint:
+    nix run nixpkgs#statix check
+    
+# Switch to a new home-manager generation
+home:
+    home-manager switch --flake '.?submodules=1'
 
 # Switch to a new nixos generation
 nixos:
@@ -21,4 +25,4 @@ nixos:
 
 # Switch both, home and nixos
 both:
-    just format && just nixos && just home
+    just lint && just format && just nixos && just home
