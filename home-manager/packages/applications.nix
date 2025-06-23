@@ -17,7 +17,6 @@
   audacity
   brave
   firefox
-  chromium
   sqlitebrowser
   teams-for-linux
   telegram-desktop

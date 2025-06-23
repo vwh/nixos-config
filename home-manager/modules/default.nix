@@ -1,7 +1,6 @@
 {
   imports = [
     ./bat.nix
-    ./chromium.nix
     ./eza.nix
     ./git.nix
     ./htop.nix
@@ -18,7 +17,5 @@
     ./zsh
     ./zathura.nix
     ./zoxide.nix
-    # ./alacritty.nix
-    # ./firefox.nix
   ];
 }
