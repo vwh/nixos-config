@@ -11,9 +11,14 @@ _default:
 home:
     home-manager switch --flake '.?submodules=1'
 
+# Format all .nix files
+format:
+    find . -type f -name '*.nix' -exec nixfmt {} +
+
 # Switch to a new nixos generation
 nixos:
     sudo nixos-rebuild switch --flake .
 
 # Switch both, home and nixos
-both: nixos && home
+both:
+    just format && just nixos && just home
