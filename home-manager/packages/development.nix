@@ -11,4 +11,9 @@
   cargo
   go
   sqlite
+  just
+  bun
+  nodejs
+  python3
+  pnpm
 ])

@@ -4,6 +4,8 @@
   tor-browser
   libreoffice-qt6-fresh
   gnome-tweaks
+  gnome-calendar
+  gnome-clocks
 ])
 ++ (with pkgs; [
   anki

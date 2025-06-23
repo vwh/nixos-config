@@ -4,6 +4,7 @@ let
   chunks = [
     ./applications.nix
     ./cli.nix
+    ./cool.nix
     ./development.nix
     ./gnome.nix
     ./hyprland.nix

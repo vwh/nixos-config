@@ -7,6 +7,8 @@ with pkgsStable;
   gzip
   unzip
   xdg-utils
-  bc
-  fd
+  optipng
+  jpegoptim
+  fastfetch
+  microfetch
 ]
