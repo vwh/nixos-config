@@ -1,11 +1,13 @@
 { pkgs, pkgsStable }:
 
 (with pkgsStable; [
-  tor-browser
-  libreoffice-qt6-fresh
+  flatpak
+  gnome-software
   gnome-tweaks
   gnome-calendar
   gnome-clocks
+  tor-browser
+  libreoffice-qt6-fresh
 ])
 
 ++ (with pkgs; [
