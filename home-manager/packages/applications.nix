@@ -12,6 +12,7 @@
   anki
   alacritty
   vscode
+  code-cursor
   obs-studio
   obsidian
   audacity
