@@ -7,7 +7,6 @@ with pkgs;
   ffmpeg
   ffmpegthumbnailer
   playerctl
-  ripgrep
   grimblast
   udisks
   ueberzugpp

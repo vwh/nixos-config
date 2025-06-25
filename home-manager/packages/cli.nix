@@ -14,4 +14,7 @@ with pkgs;
   fd
   lazydocker
   onefetch
+  ripgrep  
+  fselect
+  tokei
 ]

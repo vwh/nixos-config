@@ -12,9 +12,17 @@
       cd = "z";
       ci = "zi";
 
+      find  = "fd";
+      grep  = "rg";
+
       etree = "eza --tree --level=1 --icons";
 
       cat = "bat";
+
+      tk = "tokei";
+      tf = "tokei --files";
+
+      fs =  "fselect";
 
       v = "${editor}";
       se = "sudoedit";
@@ -39,5 +47,10 @@
       nfip = "nix flake init -t '${nixTemplates}python-venv'";
       nfirs = "nix flake init -t '${nixTemplates}rust-stable'";
       nfirn = "nix flake init -t '${nixTemplates}rust-nightly'";
+
+      docker = "sudo docker";
+
+      reboot = "sudo reboot";
+      shutdown = "sudo shutdown now";
     };
 }
