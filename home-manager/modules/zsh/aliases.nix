@@ -12,8 +12,8 @@
       cd = "z";
       ci = "zi";
 
-      find  = "fd";
-      grep  = "rg";
+      find = "fd";
+      grep = "rg";
 
       etree = "eza --tree --level=1 --icons";
 
@@ -22,7 +22,7 @@
       tk = "tokei";
       tf = "tokei --files";
 
-      fs =  "fselect";
+      fs = "fselect";
 
       v = "${editor}";
       se = "sudoedit";

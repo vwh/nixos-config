@@ -14,7 +14,8 @@ with pkgs;
   fd
   lazydocker
   onefetch
-  ripgrep  
+  ripgrep
   fselect
   tokei
+  yazi
 ]

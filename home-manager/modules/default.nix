@@ -8,7 +8,6 @@
     ./lazygit.nix
     ./obsidian.nix
     ./qt.nix
-    ./ranger.nix
     ./stylix.nix
     ./swaync
     ./spicetify.nix
