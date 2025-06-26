@@ -21,6 +21,7 @@
 
   networking.hostName = hostname;
   powerManagement.enable = true;
+  programs.gamemode.enable = false;
 
   services = {
     power-profiles-daemon.enable = false;
@@ -40,6 +41,13 @@
         CPU_MAX_PERF_ON_AC = 100;
         CPU_MIN_PERF_ON_BAT = 0;
         CPU_MAX_PERF_ON_BAT = 20;
+
+        USB_AUTOSUSPEND = 1;
+        PCIE_ASPM_ON_BAT = "powersupersave";
+        WIFI_PWR_ON_BAT = 5;
+        RUNTIME_PM_ON_BAT = "auto";
+        SOUND_POWER_SAVE_ON_BAT = 1;
+        DEVICES_TO_DISABLE_ON_BAT_NOT_IN_USE = "bluetooth";
       };
     };
   };

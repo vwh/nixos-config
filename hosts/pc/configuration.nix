@@ -13,6 +13,7 @@
   ];
 
   networking.hostName = hostname;
+  programs.gamemode.enable = true;
 
   system = {
     inherit stateVersion;

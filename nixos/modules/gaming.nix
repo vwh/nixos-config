@@ -2,7 +2,8 @@
 
 {
   programs = {
-    gamemode.enable = true;
+    # Moved to be enabled/disabled in the host configuration
+    # gamemode.enable = true;
 
     steam = {
       enable = true;
