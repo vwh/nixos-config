@@ -14,6 +14,7 @@
   sqlite
   just
   bun
+  deno
   nodejs
   python3
   pnpm
