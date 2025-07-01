@@ -7,6 +7,7 @@
     ./htop.nix
     ./hyprland
     ./lazygit.nix
+    ./mime.nix
     ./obsidian.nix
     ./qt.nix
     ./stylix.nix

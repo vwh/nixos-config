@@ -8,6 +8,7 @@ with pkgsStable;
   gzip
   unzip
   xdg-utils
+  desktop-file-utils
   optipng
   jpegoptim
   libsecret

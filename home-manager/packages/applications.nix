@@ -8,6 +8,7 @@
   gnome-clocks
   tor-browser
   libreoffice-qt6-fresh
+  xarchiver
 ])
 
 ++ (with pkgs; [

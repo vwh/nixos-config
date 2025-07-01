@@ -37,20 +37,15 @@ in
   systemd.services.udisks2.enable = true;
 
   # Custom “Open Terminal Here” action
-  environment.etc."xdg/xfce4/xfconf/xfce-perchannel-xml/thunar-actions.xml".text = ''
-    <?xml version="1.0" encoding="UTF-8"?>
-    <channel name="thunar-actions" version="1.0">
-      <actions>
-        <action name="Open Terminal Here">
-          <description>Open a foot terminal in this folder</description>
-          <icon>utilities-terminal</icon>
-          <!-- %f expands to the directory path -->
-          <command>foot --working-directory %f</command>
-          <patterns>*;</patterns>
-          <directories/>
-          <startup-notify/>
-        </action>
-      </actions>
-    </channel>
+  environment.etc."xdg/applications/alacritty.desktop".text = ''
+    [Desktop Entry]
+    Name=Alacritty
+    Comment=A fast, cross-platform, GPU-accelerated terminal emulator
+    Exec=alacritty
+    Icon=alacritty
+    Terminal=false
+    Type=Application
+    Categories=Utility;System;TerminalEmulator;
+    Keywords=shell;prompt;terminal;console;x-terminal-emulator;
   '';
 }
