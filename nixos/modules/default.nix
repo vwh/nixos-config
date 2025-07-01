@@ -11,6 +11,7 @@
     ./i18n.nix
     ./networking.nix
     ./nix.nix
+    ./nix-ld.nix
     ./printing.nix
     ./timezone.nix
     ./thunar.nix
