@@ -69,56 +69,23 @@ This repository contains my NixOS system configurations.
 ## Layout
 
 ```text
-├── flake.nix                      ← root flake (all inputs & outputs)
-├── flake.lock                     ← locked inputs for the root flake
-│
+.
 ├── home-manager/                  ← Home-Manager configuration
-│   ├── home.nix                   ← entrypoint for user modules
-│   ├── modules/                   ← reusable modules (e.g. zsh, git)
-│   └── packages/                  ← grouped package lists
-│
+│   ├── modules/                   ← reusable home-manager modules (e.g. zsh, git)
+│   ├── packages/                  ← grouped package lists for Home-Manager
+│   └── home.nix                   ← entrypoint loading your user modules
 ├── hosts/                         ← per-host NixOS configurations
-│   ├── pc/                        ← “pc” host
-│   │   ├── configuration.nix      ← main NixOS config
-│   │   ├── hardware-configuration.nix
-│   │   └── local-packages.nix     ← host-specific package overrides
-│
+│   ├── pc/                        ← “pc” host (configuration.nix, hardware config, etc.)
+│   └── thinkpad/                  ← “thinkpad” host
+├── nix-templates/                 ← project-flake templates for various runtimes
+│   ├── .../                       ← project templates
+│   ├── flake.lock                 ← locked inputs for all templates
+│   └── flake.nix                  ← root flake defining the templates
 ├── nixos/                         ← shared NixOS modules
-│   └── modules/...
+│   └── modules/                   ← reusable NixOS modules (networking, users, etc.)
+├── secrets/                       ← sensitive files (e.g. SSL certs, API keys)
+├── flake.lock                     ← locked inputs for the root flake
+├── flake.nix                      ← root flake (all inputs & outputs for your config)
+├── justfile                       ← project tasks & shortcuts (build, deploy, fmt…)
+└── modules-check.sh               ← script to validate your Nix modules
 ```
-
----
-
-## TODO
-
-### Window Manager & UI
-
-- [x] Hyprland (Wayland compositor)
-- [x] Notification daemon (mako/dunst)
-- [x] Rofi + theming
-
-### Shell & Prompt
-
-- [x] Z-Shell with plugins & themes
-
-### Editors & IDEs
-
-- [ ] Nix-powered Neovim (`nixvim`)
-- [ ] VSCode + extensions
-
-### Infrastructure
-
-- [x] Multi-host management
-- [x] Tor integration (system + browser)
-- [ ] Secrets management
-
-### Utilities & Tools
-
-- [x] Modern CLI (`exa`, `fd`, `bat`)
-- [x] Clipboard tools (`wl-clipboard` / `xclip`)
-
-### Flake & Nix Improvements
-
-- [x] Split large `home-packages.nix` into categories
-- [ ] Abstract common overlays
-- [ ] Document each module
