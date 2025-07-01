@@ -1,28 +1,47 @@
 set shell := ["/usr/bin/env", "bash", "-c"]
 set quiet
 
-JUST_EXECUTABLE := "just -u -f " + justfile()
+# a little helper so we always call the same Justfile
+JUST := "just -u -f " + justfile()
+
 header := "Available tasks:\n"
 
 _default:
-    @{{JUST_EXECUTABLE}} --list-heading "{{header}}" --list
+    @{{JUST}} --list-heading "{{header}}" --list
 
+# ────────────────────────────────────────────────────────────────────────────────
 # Format all .nix files
 format:
+    @echo -e "\n➤ Formatting Nix files…"
     find . -type f -name '*.nix' -exec nixfmt {} +
 
 # Lint all .nix files
 lint:
+    @echo -e "\n➤ Linting Nix files…"
     nix run nixpkgs#statix check
-    
-# Switch to a new home-manager generation
+    @echo "✔ Linting passed!"
+
+# Check all missing imports
+modules:
+    @echo -e "\n➤ Checking modules…"
+    bash modules-check.sh
+
+# Switch Home-Manager generation
 home:
+    @echo -e "\n➤ Switching Home-Manager…"
     home-manager switch --flake '.?submodules=1'
 
-# Switch to a new nixos generation
+# Switch NixOS generation
 nixos:
+    @echo -e "\n➤ Rebuilding NixOS…"
     sudo nixos-rebuild switch --flake .
 
-# Switch both, home and nixos
-both:
-    just lint && just format && just nixos && just home
+# All of the above, in order
+all:
+    @echo -e "\n➤ Running full pipeline…"
+    {{JUST}} modules
+    {{JUST}} lint
+    {{JUST}} format
+    {{JUST}} nixos
+    {{JUST}} home
+    @echo -e "✅ All done!"
