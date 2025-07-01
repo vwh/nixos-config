@@ -10,6 +10,6 @@ with pkgsStable;
   xdg-utils
   optipng
   jpegoptim
-  fastfetch
-  microfetch
+  libsecret
+  polkit_gnome
 ]

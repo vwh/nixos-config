@@ -18,4 +18,6 @@ with pkgs;
   fselect
   tokei
   yazi
+  fastfetch
+  microfetch
 ]
