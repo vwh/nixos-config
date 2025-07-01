@@ -17,7 +17,6 @@ with pkgs;
   ripgrep
   fselect
   tokei
-  yazi
   fastfetch
   microfetch
 ]

@@ -13,6 +13,7 @@
     ./nix.nix
     ./printing.nix
     ./timezone.nix
+    ./thunar.nix
     ./tor.nix
     ./users.nix
     ./virtualisation.nix

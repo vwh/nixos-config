@@ -17,7 +17,7 @@
       monitor = ",1920x1080@120,auto,1";
       "$mainMod" = "SUPER";
       "$terminal" = "alacritty";
-      "$fileManager" = "$terminal -e sh -c 'yazi'";
+      "$fileManager" = "$terminal -e sh -c 'thunar'";
       "$menu" = "wofi";
 
       exec-once = [

@@ -11,5 +11,4 @@ with pkgsStable;
   optipng
   jpegoptim
   libsecret
-  polkit_gnome
 ]
