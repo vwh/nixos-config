@@ -36,6 +36,9 @@ nixos:
     @echo -e "\n➤ Rebuilding NixOS…"
     sudo nixos-rebuild switch --flake .
 
+update:
+    nix flake update
+
 # All of the above, in order
 all:
     @echo -e "\n➤ Running full pipeline…"
