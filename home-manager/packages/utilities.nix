@@ -12,4 +12,5 @@ with pkgsStable;
   optipng
   jpegoptim
   libsecret
+  imv
 ]
