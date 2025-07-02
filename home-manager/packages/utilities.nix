@@ -13,4 +13,5 @@ with pkgsStable;
   jpegoptim
   libsecret
   imv
+  sops
 ]
