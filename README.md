@@ -1,68 +1,62 @@
 # NixOS System Configurations
 
-This repository contains my NixOS system configurations.
+This repository contains my personal NixOS system configurations, managed with Nix Flakes.
 
 ---
 
-## Quickstart
+## Daily Workflow
 
-1. Clone the repo:
+This repository uses `just` as a command runner to simplify common tasks.
 
-   ```bash
-   git clone https://github.com/vwh/nixos-config.git ~/System
-   cd ~/System
-   ```
+*   **`just`**: List all available commands.
+*   **`just all`**: Run the full pipeline: check, lint, format, and deploy both NixOS and Home-Manager.
+*   **`just nixos`**: Rebuild and switch to the new NixOS generation for the current host.
+*   **`just home`**: Apply the latest Home-Manager generation for the user `yazan`.
+*   **`just format`**: Format all `.nix` files with `nixfmt`.
+*   **`just lint`**: Lint all `.nix` files with `statix`.
+*   **`just modules`**: Check for missing module imports.
+*   **`just update`**: Update all flake inputs.
 
-2. Create your host stub:
+---
 
-   ```bash
-   cd hosts
-   cp -r pc <your-hostname>
-   ```
+## Secrets Management
 
-3. Copy in your hardware configuration:
+This configuration uses `sops-nix` for managing secrets.
 
-   ```bash
-   cp /etc/nixos/hardware-configuration.nix hosts/<your-hostname>/
-   ```
+*   To edit a secret file, run: `sops secrets/<file_name>.yaml`
 
-4. Tweak host-specific and shared settings:
+---
 
-   • `hosts/<your-hostname>/local-packages.nix`  
-   • `nixos/modules/.../*.nix`  
-   • `home-manager/home.nix` & `home-manager/packages/*.nix`
+## Onboarding a New Machine
 
-5. Edit `flake.nix`:
+1.  **Clone the repo:**
+    ```bash
+    git clone https://github.com/vwh/nixos-config.git ~/System
+    cd ~/System
+    ```
 
-   ```diff
-   ...
-       outputs = { self, nixpkgs, home-manager, ... }@inputs: let
-       system = "x86_64-linux";
-   --  homeStateVersion = "25.05";
-   ++  homeStateVersion = "<your_home_manager_state_version>";
-   --  user = "yazan";
-   ++  user = "<your_username>";
-       hosts = [
-   --    { hostname = "pc"; stateVersion = "25.05"; }
-   --    { hostname = "thinkpad"; stateVersion = "25.05"; }
-   ++    { hostname = "<your_hostname>"; stateVersion = "<your_state_version>"; }
-       ];
-   ...
-   ```
+2.  **Create the host configuration:**
+    ```bash
+    cd hosts
+    cp -r pc <new-hostname>
+    ```
 
-6. Deploy your NixOS host:
+3.  **Copy the hardware configuration:**
+    ```bash
+    cp /etc/nixos/hardware-configuration.nix hosts/<new-hostname>/
+    ```
 
-   ```bash
-   sudo nixos-rebuild switch --flake ~/System#<your-hostname>
-   #sudo nixos-rebuild switch --flake ~/System/#pc
-   ```
+4.  **Add the new host to `flake.nix`:**
+    Open `flake.nix` and add your new host to the `hosts` list.
 
-7. Apply Home-Manager for your user:
+5.  **Deploy the system:**
+    ```bash
+    # For the new host
+    sudo nixos-rebuild switch --flake ~/System#<new-hostname>
 
-   ```bash
-   home-manager switch --flake ~/System#<your_username>
-   #home-manager switch --flake ~/System/#yazan
-   ```
+    # For home-manager
+    home-manager switch --flake ~/System#yazan
+    ```
 
 ---
 
