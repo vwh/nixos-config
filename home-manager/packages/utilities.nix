@@ -14,4 +14,5 @@ with pkgsStable;
   libsecret
   imv
   sops
+  pavucontrol
 ]
