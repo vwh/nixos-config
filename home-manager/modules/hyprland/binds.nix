@@ -36,7 +36,7 @@ in
       "$mainMod,       L, exec, loginctl lock-session"
       "$mainMod,       P, exec, hyprpicker -an"
       "$mainMod,       N, exec, swaync-client -t"
-      ", Print, exec, grimblast --notify --freeze copysave area"
+      ", Print, exec, grimblast --notify copysave area"
       "$mainMod,       W, exec, ${booksScript}/bin/open_books"
 
       # Moving focus

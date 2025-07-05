@@ -14,4 +14,5 @@ with pkgs;
   cliphist
   wl-clipboard
   wtype
+  hyprpicker
 ]
