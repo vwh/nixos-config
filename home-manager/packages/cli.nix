@@ -19,4 +19,8 @@ with pkgs;
   tokei
   fastfetch
   microfetch
+  ncdu
+  nmap
+  rsync
+  imagemagick
 ]

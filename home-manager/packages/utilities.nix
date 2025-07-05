@@ -12,7 +12,6 @@ with pkgsStable;
   optipng
   jpegoptim
   libsecret
-  imv
   sops
   pavucontrol
   ueberzugpp
