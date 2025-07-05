@@ -15,4 +15,7 @@ with pkgsStable;
   imv
   sops
   pavucontrol
+  ueberzugpp
+  udisks
+  xarchiver
 ]

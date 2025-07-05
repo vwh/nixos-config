@@ -6,9 +6,5 @@ with pkgs;
   feh
   ffmpeg
   ffmpegthumbnailer
-  playerctl
-  grimblast
-  udisks
-  ueberzugpp
   mediainfo
 ]
