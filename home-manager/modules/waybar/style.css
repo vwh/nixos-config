@@ -1,3 +1,11 @@
+/* Remove the default gap between all modules */
+.modules-right .module,
+.modules-left .module,
+.modules-center .module {
+  margin: 0;
+}
+
+/* Global reset */
 * {
   border: none;
   border-radius: 0px;
@@ -13,7 +21,7 @@ window#waybar {
 }
 
 /* Workspace Buttons */
-#workspaces button label{
+#workspaces button label {
   color: #ebdbb2;
   padding: 0 10px;
 }
@@ -24,49 +32,68 @@ window#waybar {
   background: #d65d0e;
 }
 
-#clock, #battery, #pulseaudio, #tray, #language, #weather {
+/* Shared padding for primary modules */
+#clock,
+#battery,
+#pulseaudio,
+#tray,
+#language,
+#weather {
   padding: 0 10px;
-  margin: 0 10px;
 }
 
+/* Language */
 #language {
-  margin: 0;
   color: #d79921;
   border-bottom: 5px solid #d79921;
 }
 
+/* Weather */
 #custom-weather {
-  margin: 0;
   color: #98971a;
-  border-bottom: 5px solid #98971a
+  border-bottom: 5px solid #98971a;
 }
 
+/* PulseAudio */
 #pulseaudio {
-  margin: 0;
   color: #689d6a;
   border-bottom: 5px solid #689d6a;
 }
-
 #pulseaudio.muted {
   padding: 0 20px;
   color: #cc241d;
   border-bottom: 5px solid #cc241d;
 }
 
+/* Network */
+#custom-network {
+  padding: 0 10px;
+  color: #83a598;
+  border-bottom: 5px solid #83a598;
+}
+#custom-network:hover {
+  background: rgba(131, 165, 152, 0.2);
+}
+
+/* Battery */
 #battery {
-  margin: 0;
   color: #458588;
   border-bottom: 5px solid #458588;
 }
 
+/* Clock */
 #clock {
-  margin: 0;
   color: #b16286;
   border-bottom: 5px solid #b16286;
 }
 
+/* Tray */
 #tray {
-  margin: 0;
   color: #d65d0e;
   border-bottom: 5px solid #d65d0e;
+}
+
+/* Add a little space after every icon */
+.module .icon {
+  margin-right: 0.3em;
 }

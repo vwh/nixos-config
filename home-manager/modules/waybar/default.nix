@@ -14,9 +14,10 @@
         modules-center = [ "hyprland/window" ];
 
         modules-right = [
-          "hyprland/language"
+          # "hyprland/language"
           "custom/weather"
           "pulseaudio"
+          "custom/network"
           "battery"
           "clock"
           "tray"
@@ -34,8 +35,8 @@
             "3" = "";
             "4" = "";
             "5" = "";
-            "6" = "";
-            "7" = "";
+            "6" = "";
+            "7" = "";
             "8" = "";
             "9" = "";
             "magic" = "10";
@@ -46,12 +47,12 @@
           };
         };
 
-        "hyprland/language" = {
-          format-en = "EN";
-          format-ara = "AR";
-          min-length = 5;
-          tooltip = false;
-        };
+        # "hyprland/language" = {
+        #   format-en = "en";
+        #   format-ar = "ar";
+        #   min-length = 5;
+        #   tooltip = false;
+        # };
 
         "custom/weather" = {
           format = " {} ";
@@ -61,8 +62,8 @@
         };
 
         "pulseaudio" = {
-          format = "{icon} {volume}%";
-          format-bluetooth = "{icon} {volume}% ";
+          format = "{icon}  {volume}%";
+          format-bluetooth = "{icon}  {volume}% ";
           format-muted = "";
 
           format-icons = {
@@ -81,15 +82,22 @@
           on-click = "pavucontrol";
         };
 
+        "custom/network" = {
+          interval = 1;
+          exec = "/home/yazan/System/home-manager/modules/waybar/network.sh";
+          format = "  {}";
+          on-click = "nm-connection-editor";
+        };
+
         "battery" = {
           states = {
             warning = 30;
             critical = 1;
           };
 
-          format = "{icon} {capacity}%";
-          format-charging = " {capacity}%";
-          format-alt = "{time} {icon}";
+          format = "{icon}  {capacity}%";
+          format-charging = "  {capacity}%";
+          format-alt = "{time}  {icon}";
 
           format-icons = [
             ""
@@ -101,7 +109,7 @@
         };
 
         "clock" = {
-          format = "{:%d.%m.%Y - %H:%M}";
+          format = "{:%d.%m - %H:%M}";
           format-alt = "{:%A, %B %d at %R}";
         };
 
