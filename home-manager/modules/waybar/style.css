@@ -1,13 +1,19 @@
-/* Waybar style */
+/* ==========================================
+ * WAYBAR STYLE - GRUVBOX THEME
+ * ==========================================*/
 
-/* Remove the default gap between all modules */
+/* ==========================================
+ * GLOBAL SETTINGS
+ * ==========================================*/
+
+/* Remove default gaps between modules */
 .modules-right .module,
 .modules-left .module,
 .modules-center .module {
   margin: 0;
 }
 
-/* Global reset */
+/* Global reset and typography */
 * {
   border: none;
   border-radius: 0px;
@@ -16,86 +22,223 @@
   font-size: 16px;
   min-height: 0;
   color: #ebdbb2;
+  transition: all 0.2s ease-in-out;
 }
 
+/* Main waybar window */
 window#waybar {
   background: #1d2021;
+  border-bottom: 2px solid #3c3836;
 }
 
-/* Workspace Buttons */
+/* ==========================================
+ * LEFT MODULES
+ * ==========================================*/
+
+/* Workspace buttons */
+#workspaces {
+  margin-right: 5px;
+}
+
+#workspaces button {
+  transition: all 0.2s ease-in-out;
+  border-radius: 0;
+  margin: 0;  /* Remove spacing between buttons */
+  min-width: 30px;  /* Ensure consistent button width */
+}
+
 #workspaces button label {
   color: #ebdbb2;
   padding: 0 10px;
 }
+
 #workspaces button.active label {
   color: #1d2021;
 }
+
 #workspaces button.active {
   background: #d65d0e;
+  box-shadow: 0 2px 4px rgba(214, 93, 14, 0.3);
 }
 
-/* Shared padding for primary modules */
+#workspaces button:hover {
+  background: rgba(214, 93, 14, 0.2);
+}
+
+/* Window title */
+
+#window {
+  padding: 0 15px;
+  margin-left: 10px;
+  color: #a89984;
+  border-bottom: 5px solid #a89984;
+  background: rgba(168, 153, 132, 0.1);
+  border-radius: 0;
+  transition: all 0.3s ease;
+  box-shadow: inset 0 -2px 0 rgba(168, 153, 132, 0.2);
+}
+
+/* Window title hover effect */
+#window:hover {
+  background: rgba(168, 153, 132, 0.2);
+  color: #ebdbb2;
+  box-shadow: inset 0 -2px 0 rgba(168, 153, 132, 0.4);
+}
+
+/* Window title when empty */
+#window.empty {
+  background: transparent;
+  border-bottom: none;
+  color: transparent;
+  box-shadow: none;
+  padding: 0;
+  margin: 0;
+  min-width: 0;
+  opacity: 0;
+}
+
+/* ==========================================
+ * RIGHT MODULES - SHARED STYLES
+ * ==========================================*/
+
+/* Shared padding and hover effects for primary modules */
 #clock,
 #battery,
 #pulseaudio,
 #tray,
 #language,
-#weather {
+#weather,
+#cpu,
+#memory,
+#disk,
+#custom-network,
+#custom-weather {
   padding: 0 10px;
+  transition: all 0.2s ease-in-out;
 }
 
-/* Language */
+/* Universal hover effect for right modules */
+#clock:hover,
+#battery:hover,
+#pulseaudio:hover,
+#language:hover,
+#cpu:hover,
+#memory:hover,
+#disk:hover,
+#custom-weather:hover {
+  background: rgba(235, 219, 178, 0.1);
+  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* ==========================================
+ * INDIVIDUAL MODULE STYLES
+ * ==========================================*/
+
+/* CPU module */
+#cpu {
+  color: #fabd2f;
+  border-bottom: 5px solid #fabd2f;
+  box-shadow: inset 0 -2px 0 rgba(250, 189, 47, 0.3);
+}
+
+/* Memory module */
+#memory {
+  color: #fe8019;
+  border-bottom: 5px solid #fe8019;
+  box-shadow: inset 0 -2px 0 rgba(254, 128, 25, 0.3);
+}
+
+/* Disk module */
+#disk {
+  color: #d3869b;
+  border-bottom: 5px solid #d3869b;
+  box-shadow: inset 0 -2px 0 rgba(211, 134, 155, 0.3);
+}
+
+/* Language module */
 #language {
   color: #d79921;
   border-bottom: 5px solid #d79921;
+  box-shadow: inset 0 -2px 0 rgba(215, 153, 33, 0.3);
 }
 
-/* Weather */
+/* Weather module */
 #custom-weather {
   color: #98971a;
   border-bottom: 5px solid #98971a;
+  box-shadow: inset 0 -2px 0 rgba(152, 151, 26, 0.3);
 }
 
-/* PulseAudio */
+/* Audio module */
 #pulseaudio {
   color: #689d6a;
   border-bottom: 5px solid #689d6a;
+  box-shadow: inset 0 -2px 0 rgba(104, 157, 106, 0.3);
 }
+
 #pulseaudio.muted {
   padding: 0 20px;
   color: #cc241d;
   border-bottom: 5px solid #cc241d;
+  box-shadow: inset 0 -2px 0 rgba(204, 36, 29, 0.3);
+  animation: pulse 2s ease-in-out infinite;
 }
 
-/* Network */
+/* Network module */
 #custom-network {
-  padding: 0 10px;
   color: #83a598;
   border-bottom: 5px solid #83a598;
+  box-shadow: inset 0 -2px 0 rgba(131, 165, 152, 0.3);
 }
+
 #custom-network:hover {
   background: rgba(131, 165, 152, 0.2);
 }
 
-/* Battery */
+/* Battery module */
 #battery {
   color: #458588;
   border-bottom: 5px solid #458588;
+  box-shadow: inset 0 -2px 0 rgba(69, 133, 136, 0.3);
 }
 
-/* Clock */
+/* Battery warning states */
+#battery.warning {
+  color: #fabd2f;
+  border-bottom: 5px solid #fabd2f;
+  animation: blink 1s ease-in-out infinite;
+}
+
+#battery.critical {
+  color: #cc241d;
+  border-bottom: 5px solid #cc241d;
+  animation: blink 0.5s ease-in-out infinite;
+}
+
+/* Clock module */
 #clock {
   color: #b16286;
   border-bottom: 5px solid #b16286;
+  box-shadow: inset 0 -2px 0 rgba(177, 98, 134, 0.3);
 }
 
-/* Tray */
+/* Tray module */
 #tray {
   color: #d65d0e;
   border-bottom: 5px solid #d65d0e;
+  box-shadow: inset 0 -2px 0 rgba(214, 93, 14, 0.3);
 }
 
-/* Add a little space after every icon */
+/* ==========================================
+ * ANIMATIONS AND EFFECTS
+ * ==========================================*/
+
+/* Icon spacing */
 .module .icon {
   margin-right: 0.3em;
+}
+
+/* Smooth transitions for all interactive elements */
+button, .module {
+  transition: all 0.2s ease-in-out;
 }

@@ -11,11 +11,17 @@
         position = "top";
         height = 30;
 
-        modules-left = [ "hyprland/workspaces" ];
+        modules-left = [
+          "hyprland/workspaces"
+          "hyprland/window"
+        ];
 
-        modules-center = [ "hyprland/window" ];
+        # modules-center = [  ];
 
         modules-right = [
+          "cpu"
+          "memory"
+          "disk"
           # "hyprland/language"
           "custom/weather"
           "pulseaudio"
@@ -24,6 +30,26 @@
           "clock"
           "tray"
         ];
+
+        "cpu" = {
+          format = "  {usage}%";
+          tooltip = false;
+        };
+
+        "memory" = {
+          format = " {percentage}%";
+          tooltip = false;
+        };
+
+        "disk" = {
+          path = "/";
+          format = "  {percentage_used}%";
+          tooltip = false;
+        };
+
+        "hyprland/window" = {
+          max-length = 50;
+        };
 
         "hyprland/workspaces" = {
           disable-scroll = true;
@@ -37,15 +63,11 @@
             "3" = "";
             "4" = "";
             "5" = "";
-            "6" = "";
-            "7" = "";
-            "8" = "";
-            "9" = "";
             "magic" = "10";
           };
 
           persistent-workspaces = {
-            "*" = 9;
+            "*" = 5;
           };
         };
 

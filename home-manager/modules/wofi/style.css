@@ -1,4 +1,10 @@
-/* Wofi style */
+/* ==========================================
+ * WOFI STYLE - GRUVBOX THEME
+ * ==========================================*/
+
+/* ==========================================
+ * MAIN WINDOW
+ * ==========================================*/
 
 window {
   margin: 0px;
@@ -8,39 +14,142 @@ window {
   font-family: "JetBrains Mono";
   font-weight: bold;
   font-size: 16px;
+  border-radius: 6px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+  animation: slideIn 0.2s ease-out;
 }
 
+/* ==========================================
+ * INPUT AND SEARCH
+ * ==========================================*/
+
+/* Search input field */
 #input {
   margin: 5px;
-  border: none;
+  padding: 6px 10px;
+  border: 2px solid #3c3836;
+  border-radius: 3px;
   color: #ebdbb2;
   background-color: #1d2021;
+  transition: all 0.2s ease-in-out;
 }
 
+/* Input focus state */
+#input:focus {
+  border-color: #d65d0e;
+  background-color: #282828;
+  box-shadow: 0 0 0 2px rgba(214, 93, 14, 0.2);
+}
+
+/* ==========================================
+ * CONTAINER LAYOUT
+ * ==========================================*/
+
+/* Main container */
 #inner-box {
   margin: 5px;
   border: none;
   background-color: #282828;
 }
 
+/* Outer container */
 #outer-box {
   margin: 5px;
   border: none;
   background-color: #282828;
 }
 
+/* Scroll container */
 #scroll {
   margin: 0px;
   border: none;
+  padding: 2px;
 }
 
+/* ==========================================
+ * ENTRIES AND TEXT
+ * ==========================================*/
+
+/* Entry text */
 #text {
   margin: 5px;
   border: none;
   color: #ebdbb2;
+  transition: all 0.2s ease-in-out;
 }
 
+/* Entry items */
+#entry {
+  padding: 6px 10px;
+  margin: 1px 2px;
+  border-radius: 3px;
+  transition: all 0.2s ease-in-out;
+  border: 1px solid transparent;
+}
+
+/* Selected/hovered entry */
 #entry:selected {
   background-color: #d65d0e;
   color: #ffffff;
+  border-color: #fe8019;
+  box-shadow: 0 2px 6px rgba(214, 93, 14, 0.3);
+  transform: translateX(2px);
+}
+
+/* Entry hover effect */
+#entry:hover {
+  background-color: rgba(214, 93, 14, 0.2);
+  border-color: #d65d0e;
+}
+
+/* ==========================================
+ * ANIMATIONS
+ * ==========================================*/
+
+/* Window slide-in animation */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Smooth entry transitions */
+#entry {
+  animation: fadeIn 0.1s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==========================================
+ * SCROLLBAR STYLING
+ * ==========================================*/
+
+scrollbar {
+  background: #3c3836;
+  border-radius: 3px;
+  width: 6px;
+}
+
+scrollbar slider {
+  background: #665c54;
+  border-radius: 3px;
+  transition: all 0.2s ease-in-out;
+}
+
+scrollbar slider:hover {
+  background: #7c6f64;
 }
