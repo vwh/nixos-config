@@ -25,6 +25,10 @@
         "waybar"
         "wl-paste --type text --watch cliphist store"
         "wl-paste --type image --watch cliphist store"
+        "brave"
+        "telegram-desktop"
+        "code"
+        "spotify"
       ];
 
       general = {
@@ -91,6 +95,10 @@
         "float,class:(mpv)|(imv)|(showmethekey-gtk)"
         "move 990 60,size 900 170,pin,noinitialfocus,class:(showmethekey-gtk)"
         "noborder,nofocus,class:(showmethekey-gtk)"
+        
+        "workspace 1,class:(brave)"
+
+        "workspace 2,class:(code)"
 
         "workspace 3,class:(telegram)"
         "workspace 3,class:(vesktop)"
