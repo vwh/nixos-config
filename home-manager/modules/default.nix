@@ -1,23 +1,23 @@
 {
   imports = [
     ./alacritty.nix
-    ./bat.nix
-    ./cava.nix
-    ./eza.nix
+    ./cli/bat.nix
+    ./cli/cava.nix
+    ./cli/eza.nix
     ./git.nix
-    ./htop.nix
+    ./cli/htop.nix
     ./hyprland
-    ./lazygit.nix
+    ./cli/lazygit.nix
     ./mime.nix
     ./obsidian.nix
     ./qt.nix
     ./stylix.nix
     ./swaync
-    ./spicetify.nix
+    ./music/spicetify.nix
     ./waybar
     ./wofi
     ./zsh
-    ./zathura.nix
-    ./zoxide.nix
+    ./cli/zathura.nix
+    ./cli/zoxide.nix
   ];
 }
