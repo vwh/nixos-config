@@ -2,6 +2,8 @@
 
 This repository contains my personal NixOS system configurations, managed with Nix Flakes.
 
+![image](https://github.com/user-attachments/assets/07ba2010-ce96-486b-ad55-521b58691c91)
+
 ---
 
 ## Daily Workflow
