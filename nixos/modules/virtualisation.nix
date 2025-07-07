@@ -1,3 +1,5 @@
+# Virtualization (Docker) configuration.
+
 { user, ... }:
 
 {

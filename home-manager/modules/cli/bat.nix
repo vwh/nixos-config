@@ -1,3 +1,5 @@
+# Bat (cat clone) configuration.
+
 { pkgs, ... }:
 
 {

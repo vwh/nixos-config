@@ -1,3 +1,5 @@
+# Nix flake containing various project templates.
+
 {
   description = "A collection of flake templates";
 

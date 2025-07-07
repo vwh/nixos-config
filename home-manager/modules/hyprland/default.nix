@@ -1,3 +1,5 @@
+# Imports all Hyprland modules.
+
 {
   imports = [
     ./binds.nix

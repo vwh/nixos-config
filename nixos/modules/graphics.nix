@@ -1,3 +1,5 @@
+# Graphics and NVIDIA driver configuration.
+
 { pkgs, config, ... }:
 
 let
@@ -42,7 +44,7 @@ in
   # Nvidia configuration
   hardware = {
     nvidia = {
-      open = false; # Proprietary driver for better performance
+      open = false;
       nvidiaSettings = true; # Nvidia settings utility
       modesetting.enable = true; # Required for Wayland
       package = nvidiaDriverChannel;
@@ -60,14 +62,14 @@ in
       enable32Bit = true;
 
       extraPackages = with pkgs; [
-        nvidia-vaapi-driver
-        vaapiVdpau
-        libvdpau-va-gl
-        mesa
-        egl-wayland
-        vulkan-loader
-        vulkan-validation-layers
-        libva
+        nvidia-vaapi-driver # VA-API support
+        vaapiVdpau # VDPAU for VA-API
+        libvdpau-va-gl # VDPAU for VA-API
+        mesa # Vulkan driver
+        egl-wayland # EGL for Wayland
+        vulkan-loader # Vulkan loader
+        vulkan-validation-layers # Vulkan validation layers
+        libva # Video Acceleration
       ];
     };
   };
@@ -83,8 +85,8 @@ in
 
   # Additional useful packages
   environment.systemPackages = with pkgs; [
-    vulkan-tools
-    glxinfo
+    vulkan-tools # Vulkan debugging tools
+    glxinfo # GLX information
     libva-utils # VA-API debugging tools
   ];
 }

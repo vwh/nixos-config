@@ -1,3 +1,4 @@
+# Nix flake for a Node.js application.
 {
   description = "NodeJS Javascript App";
 

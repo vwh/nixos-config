@@ -1,3 +1,4 @@
+# Nix flake for a Bun JavaScript application.
 {
   description = "Bun Javascript App";
 

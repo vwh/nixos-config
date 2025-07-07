@@ -1,3 +1,5 @@
+# Obsidian configuration and Git sync setup.
+
 { pkgs, ... }:
 
 let

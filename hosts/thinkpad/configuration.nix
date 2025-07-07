@@ -1,3 +1,5 @@
+# Main NixOS configuration for the 'thinkpad' host.
+
 {
   pkgs,
   stateVersion,

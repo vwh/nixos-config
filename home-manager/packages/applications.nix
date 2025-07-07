@@ -1,22 +1,23 @@
+# List of applications to install.
+
 { pkgs, pkgsStable }:
 
 (with pkgsStable; [
-  tor-browser
-  libreoffice-qt6-fresh
+  tor-browser # Tor browser
+  libreoffice-qt6-fresh # LibreOffice suite
 ])
 
 ++ (with pkgs; [
-  anki
-  alacritty
-  vscode
-  code-cursor
-  obs-studio
-  obsidian
-  audacity
-  brave
-  firefox
-  sqlitebrowser
-  teams-for-linux
-  telegram-desktop
-  vesktop
+  anki # Anki flashcards
+  alacritty # Terminal emulator
+  vscode # Visual Studio Code
+  obs-studio # OBS Studio
+  obsidian # Obsidian note-taking app
+  audacity # Audio editor
+  brave # Brave browser
+  firefox # Firefox browser
+  sqlitebrowser # SQLite browser
+  teams-for-linux # Microsoft Teams
+  telegram-desktop # Telegram messenger
+  vesktop # Discord client
 ])

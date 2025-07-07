@@ -1,3 +1,5 @@
+# Main Home Manager configuration file.
+
 {
   homeStateVersion,
   user,

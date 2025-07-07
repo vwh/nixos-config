@@ -1,3 +1,5 @@
+# Zsh shell aliases.
+
 {
   programs.zsh.shellAliases =
     let

@@ -1,3 +1,5 @@
+# Cava audio visualizer configuration.
+
 {
   programs.cava = {
     enable = true;

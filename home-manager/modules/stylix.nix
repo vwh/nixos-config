@@ -1,3 +1,5 @@
+# Stylix theme and font configuration.
+
 { pkgs, inputs, ... }:
 
 {

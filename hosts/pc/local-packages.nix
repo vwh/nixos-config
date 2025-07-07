@@ -1,3 +1,5 @@
+# Local system packages for the 'pc' host.
+
 { pkgs, pkgsStable, ... }:
 
 {

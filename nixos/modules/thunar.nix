@@ -1,3 +1,5 @@
+# Thunar file manager configuration.
+
 { pkgs, ... }:
 
 let
@@ -24,7 +26,7 @@ in
     udisks2
 
     # Archive CLI tools (zip, 7z, tar, rar…)
-    file-roller # GUI frontend used by thunar-archive-plugin
+    file-roller
     p7zip
     unrar
     xz

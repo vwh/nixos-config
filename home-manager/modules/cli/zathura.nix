@@ -1,3 +1,5 @@
+# Zathura PDF viewer configuration.
+
 {
   programs.zathura = {
     enable = true;

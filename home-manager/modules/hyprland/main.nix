@@ -1,3 +1,5 @@
+# Main Hyprland compositor settings.
+
 {
   wayland.windowManager.hyprland = {
     enable = true;
@@ -95,7 +97,7 @@
         "float,class:(mpv)|(imv)|(showmethekey-gtk)"
         "move 990 60,size 900 170,pin,noinitialfocus,class:(showmethekey-gtk)"
         "noborder,nofocus,class:(showmethekey-gtk)"
-        
+
         "workspace 1,class:(brave)"
 
         "workspace 2,class:(code)"

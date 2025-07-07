@@ -1,3 +1,4 @@
+# Nix flake for a Rust development template using nightly toolchain (Fenix).
 {
   description = "Rust development template using fenix";
 

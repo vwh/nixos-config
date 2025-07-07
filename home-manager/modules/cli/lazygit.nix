@@ -1,3 +1,5 @@
+# Lazygit (Git TUI) configuration.
+
 {
   programs.lazygit = {
     enable = true;

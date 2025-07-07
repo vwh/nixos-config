@@ -1,3 +1,5 @@
+# Imports all Home Manager modules.
+
 {
   imports = [
     ./alacritty.nix

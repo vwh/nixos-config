@@ -1,3 +1,5 @@
+# Zoxide (fast directory changer) configuration.
+
 { pkgs, ... }:
 
 {

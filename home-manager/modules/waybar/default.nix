@@ -1,3 +1,5 @@
+# Waybar (status bar) configuration.
+
 {
   programs.waybar = {
     enable = true;

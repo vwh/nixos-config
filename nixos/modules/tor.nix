@@ -1,3 +1,5 @@
+# Tor service configuration.
+
 {
   services.tor = {
     enable = true;

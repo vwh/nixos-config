@@ -1,3 +1,5 @@
+# Sway Notification Center (swaync) configuration.
+
 {
   services.swaync = {
     enable = true;

@@ -1,3 +1,4 @@
+# Main NixOS configuration for the 'pc' host.
 {
   pkgs,
   stateVersion,

@@ -1,4 +1,5 @@
-# Spicetify is a spotify client customizer
+# Spicetify (Spotify client customizer) configuration.
+
 {
   pkgs,
   config,

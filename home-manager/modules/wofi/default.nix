@@ -1,3 +1,5 @@
+# Wofi (application launcher) configuration.
+
 {
   programs.wofi = {
     enable = true;

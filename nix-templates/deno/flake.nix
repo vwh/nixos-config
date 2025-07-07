@@ -1,3 +1,4 @@
+# Nix flake for a Deno JavaScript application.
 {
   description = "Deno Javascript App";
 

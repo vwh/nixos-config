@@ -1,3 +1,5 @@
+# Hypridle (idle management) configuration.
+
 {
   services.hypridle = {
     enable = true;

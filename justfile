@@ -1,15 +1,12 @@
 set shell := ["/usr/bin/env", "bash", "-c"]
 set quiet
 
-# a little helper so we always call the same Justfile
 JUST := "just -u -f " + justfile()
-
 header := "Available tasks:\n"
 
 _default:
     @{{JUST}} --list-heading "{{header}}" --list
 
-# ────────────────────────────────────────────────────────────────────────────────
 # Format all .nix files
 format:
     @echo -e "\n➤ Formatting Nix files…"
@@ -36,6 +33,7 @@ nixos:
     @echo -e "\n➤ Rebuilding NixOS…"
     sudo nixos-rebuild switch --flake .
 
+# Update all flake inputs
 update:
     nix flake update
 

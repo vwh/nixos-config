@@ -1,3 +1,5 @@
+# Hyprland keybinds and custom scripts.
+
 { pkgs, ... }:
 
 let

@@ -1,3 +1,5 @@
+# Audio configuration (PipeWire).
+
 {
   security.rtkit.enable = true;
 

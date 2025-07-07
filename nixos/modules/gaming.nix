@@ -1,10 +1,9 @@
+# Gaming-related configurations (Steam, MangoHud, etc.).
+
 { pkgs, ... }:
 
 {
   programs = {
-    # Moved to be enabled/disabled in the host configuration
-    # gamemode.enable = true;
-
     steam = {
       enable = true;
       gamescopeSession.enable = true;
@@ -16,7 +15,7 @@
   };
 
   environment.systemPackages = with pkgs; [
-    mangohud
-    protonup
+    mangohud # Vulkan overlay
+    protonup # Proton compatibility tool
   ];
 }

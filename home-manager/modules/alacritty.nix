@@ -1,3 +1,5 @@
+# Alacritty terminal emulator configuration.
+
 { lib, ... }:
 
 {

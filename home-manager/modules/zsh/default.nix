@@ -1,3 +1,5 @@
+# Z-shell (Oh My Zsh) configuration.
+
 { config, ... }:
 
 {

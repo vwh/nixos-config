@@ -3,7 +3,7 @@ set -euo pipefail
 
 error_count=0
 
-# 1) find all default.nix files
+# find all default.nix files
 mapfile -t defaults < <(find . -type f -name default.nix)
 
 for default in "${defaults[@]}"; do
@@ -12,7 +12,7 @@ for default in "${defaults[@]}"; do
 
   pushd "$dir" >/dev/null
 
-  # 2) grab every "./*.nix" in the file and strip the "./"
+  # grab every "./*.nix" in the file and strip the "./"
   mapfile -t imported < <(
     grep -oE '\./[^ ]+\.nix' default.nix | sed 's#\./##'
   )
@@ -23,13 +23,13 @@ for default in "${defaults[@]}"; do
     imp["$m"]=1
   done
 
-  # 3) list all .nix files here except default.nix
+  # list all .nix files here except default.nix
   mapfile -t locals < <(
     find . -maxdepth 1 -type f -name '*.nix' \
       ! -name default.nix -printf '%f\n'
   )
 
-  # 4a) any .nix on disk missing from imports?
+  # any .nix on disk missing from imports?
   for f in "${locals[@]}"; do
     if [[ -z "${imp[$f]:-}" ]]; then
       echo "✗  Missing import: $dir/$f" >&2
@@ -37,7 +37,7 @@ for default in "${defaults[@]}"; do
     fi
   done
 
-  # 4b) any import pointing to a non-existent file?
+  # any import pointing to a non-existent file?
   for m in "${imported[@]}"; do
     if [[ ! -f $m ]]; then
       echo "✗  Bad import (no such file): $dir/$m" >&2

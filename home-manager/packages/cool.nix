@@ -1,7 +1,9 @@
+# List of 'cool' or fun packages to install.
+
 { pkgs, ... }:
 
 with pkgs;
 [
-  peaclock
-  cmatrix
+  peaclock # Clock in terminal
+  cmatrix # Matrix terminal
 ]

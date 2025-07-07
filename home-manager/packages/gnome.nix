@@ -1,16 +1,18 @@
+# List of GNOME-related packages and extensions to install.
+
 { pkgsStable, ... }:
 
 (with pkgsStable; [
-  gnome-software
-  gnome-tweaks
-  gnome-calendar
-  gnome-clocks
+  gnome-software # Software manager
+  gnome-tweaks # Tweaks
+  gnome-calendar # Calendar
+  gnome-clocks # Clocks
 ])
 
 ++ (with pkgsStable.gnomeExtensions; [
-  clipboard-history
-  dash-to-panel
-  desktop-icons-ng-ding
-  blur-my-shell
-  vitals
+  clipboard-history # Clipboard history
+  dash-to-panel # Dash to panel
+  desktop-icons-ng-ding # Desktop icons
+  blur-my-shell # Blur my shell
+  vitals # Vitals
 ])

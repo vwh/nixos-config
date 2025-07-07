@@ -1,3 +1,5 @@
+# Htop (interactive process viewer) configuration.
+
 {
   programs.htop = {
     enable = true;

@@ -1,3 +1,5 @@
+# Aggregates all Home Manager package lists.
+
 { pkgs, pkgsStable }:
 
 let

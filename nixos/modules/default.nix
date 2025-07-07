@@ -1,3 +1,5 @@
+# Imports all NixOS modules.
+
 {
   imports = [
     ./audio.nix

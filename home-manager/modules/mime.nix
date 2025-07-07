@@ -1,3 +1,5 @@
+# MIME type associations for default applications.
+
 { lib, ... }:
 
 with lib;
@@ -18,6 +20,7 @@ let
 
   mimeMap = {
     text = [ "text/plain" ];
+
     image = [
       "image/bmp"
       "image/gif"
@@ -29,6 +32,7 @@ let
       "image/vnd.microsoft.icon"
       "image/webp"
     ];
+
     audio = [
       "audio/aac"
       "audio/mpeg"
@@ -38,6 +42,7 @@ let
       "audio/webm"
       "audio/x-matroska"
     ];
+
     video = [
       "video/mp2t"
       "video/mp4"
@@ -48,7 +53,9 @@ let
       "video/x-matroska"
       "video/x-msvideo"
     ];
+
     directory = [ "inode/directory" ];
+
     browser = [
       "text/html"
       "x-scheme-handler/about"
@@ -56,6 +63,7 @@ let
       "x-scheme-handler/https"
       "x-scheme-handler/unknown"
     ];
+
     office = [
       "application/vnd.oasis.opendocument.text"
       "application/vnd.oasis.opendocument.spreadsheet"
@@ -68,14 +76,18 @@ let
       "application/vnd.ms-powerpoint"
       "application/rtf"
     ];
+
     pdf = [ "application/pdf" ];
+
     terminal = [ "terminal" ];
+
     archive = [
       "application/zip"
       "application/rar"
       "application/7z"
       "application/*tar"
     ];
+
     discord = [ "x-scheme-handler/discord" ];
   };
 
@@ -88,6 +100,7 @@ in
 {
   xdg = {
     configFile."mimeapps.list".force = true;
+
     mimeApps = {
       enable = true;
       associations.added = associations;

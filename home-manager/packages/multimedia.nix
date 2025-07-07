@@ -1,11 +1,13 @@
+# List of multimedia packages to install.
+
 { pkgs, ... }:
 
 with pkgs;
 [
-  mpv
-  imv
-  feh
-  ffmpeg
-  ffmpegthumbnailer
-  mediainfo
+  mpv # Video player
+  imv # Image viewer
+  feh # Image viewer
+  ffmpeg # Media player
+  ffmpegthumbnailer # Generate thumbnails
+  mediainfo # Media information
 ]

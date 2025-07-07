@@ -1,3 +1,5 @@
+# Main Nix flake for system and home configurations.
+
 {
   description = "NixOS + Home-Manager flake";
 
@@ -42,6 +44,7 @@
           hostname = "pc";
           stateVersion = "25.05";
         }
+
         {
           hostname = "thinkpad";
           stateVersion = "25.05";
