@@ -23,25 +23,37 @@ in
 
   wayland.windowManager.hyprland.settings = {
     bind = [
+      # Exit, lock
       "$mainMod SHIFT, Escape, exit,"
       "$mainMod,       Home, exec, loginctl lock-session"
 
+      # Terminal
       "$mainMod,       Return, exec, $terminal"
+      "$mainMod,       T, exec, $terminal --class=scratchpad"
+
+      # Window management
       "$mainMod,       Q, killactive,"
       "$mainMod,       R, exec, $fileManager"
       "$mainMod,       F, togglefloating,"
       "$mainMod,       D, exec, $menu --show drun"
       "$mainMod,       J, togglesplit,"
       "$mainMod,       V, exec, cliphist list | $menu --dmenu | cliphist decode | wl-copy"
+      "$mainMod,       M, fullscreen,"
 
+      # Apps
+      "$mainMod,       B, exec, brave"
+
+      # Utilities
       "$mainMod,       E, exec, bemoji -cn"
       "$mainMod,       P, exec, hyprpicker -an"
       "$mainMod,       N, exec, swaync-client -t"
 
+      # Waybar
       "$mainMod,       W, exec, pkill -SIGUSR2 waybar"
       "$mainMod SHIFT, W, exec, pkill -SIGUSR1 waybar"
-       # "$mainMod,       W, exec, ${booksScript}/bin/open_books"
-       
+      # "$mainMod,       W, exec, ${booksScript}/bin/open_books"
+
+      # Screenshot
       ", Print, exec, WLR_RENDERER=egl grimblast --freeze --notify copysave area & pid=$!; ( sleep 15 && kill $pid ) &"
 
       # Volume control
