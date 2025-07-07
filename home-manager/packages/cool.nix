@@ -4,5 +4,4 @@ with pkgs;
 [
   peaclock
   cmatrix
-  cava
 ]
