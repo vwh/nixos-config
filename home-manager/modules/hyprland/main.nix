@@ -19,6 +19,7 @@
       monitor = ",1920x1080@120,auto,1";
       "$mainMod" = "SUPER";
       "$terminal" = "alacritty";
+      "$browser" = "brave";
       # "$fileManager" = "$terminal -e sh -c 'thunar'";
       "$fileManager" = "thunar";
       "$menu" = "wofi";
@@ -28,9 +29,6 @@
         "wl-paste --type text --watch cliphist store"
         "wl-paste --type image --watch cliphist store"
         "brave"
-        "telegram-desktop"
-        "code"
-        "spotify"
       ];
 
       general = {
@@ -107,9 +105,7 @@
         "move 990 60,size 900 170,pin,noinitialfocus,class:(showmethekey-gtk)"
         "noborder,nofocus,class:(showmethekey-gtk)"
 
-        "workspace 1,class:(brave)"
-
-        "workspace 2,class:(code)"
+        "workspace 1,class:($browser)"
 
         "workspace 3,class:(telegram)"
         "workspace 3,class:(vesktop)"
