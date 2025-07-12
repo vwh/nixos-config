@@ -27,7 +27,7 @@
       ];
     };
 
-    initExtra = ''
+    initContent = ''
       # Start Tmux automatically if not already running. No Tmux in TTY
       if [ -z "$TMUX" ] && [ -n "$DISPLAY" ]; then
         tmux attach-session -t default || tmux new-session -s default
