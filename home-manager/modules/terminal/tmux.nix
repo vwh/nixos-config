@@ -11,16 +11,16 @@
 
     extraConfig = ''
       set -as terminal-features ",alacritty*:RGB"
-      
+
       # Make status bar stick to bottom and handle resizing properly
       set -g status-position bottom
       set -g aggressive-resize on
       set -g automatic-rename on
       set -g renumber-windows on
-      
+
       # Better window resizing handling
       setw -g aggressive-resize on
-      
+
       bind -n M-r source-file ~/.config/tmux/tmux.conf \; display "Reloaded!"
       bind C-p previous-window
       bind C-n next-window
@@ -60,26 +60,26 @@
       set -g status-style "bg=#282828,fg=#ebdbb2"
       set -g status-left-length 40
       set -g status-right-length 60
-      
+
       # Left side: Clean session name
       set -g status-left "#[bg=#fe8019,fg=#1d2021,bold] #S "
-      
+
       # Right side: Git branch and current directory
       set -g status-right "#[bg=#458588,fg=#1d2021,bold] ⎇  #(cd #{pane_current_path}; git branch --show-current 2>/dev/null || echo 'no-git') │ 📁 #{b:pane_current_path} "
-      
+
       # Window styling
       set -g window-status-format "#[bg=#3c3836,fg=#a89984] #I │ #W "
       set -g window-status-current-format "#[bg=#b8bb26,fg=#1d2021,bold] #I │ #W "
       set -g window-status-separator ""
-      
+
       # Pane borders
       set -g pane-border-style "fg=#504945"
       set -g pane-active-border-style "fg=#fe8019,bold"
-      
+
       # Message colors
       set -g message-style "bg=#fe8019,fg=#1d2021,bold"
       set -g message-command-style "bg=#b8bb26,fg=#1d2021,bold"
-      
+
       # Clock color
       set -g clock-mode-colour "#b8bb26"
     '';

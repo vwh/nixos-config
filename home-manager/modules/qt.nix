@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
 {
   home.packages = with pkgs; [
@@ -10,10 +10,18 @@
   qt = {
     enable = true;
     platformTheme.name = "gtk";
-    
+
     style = {
       package = pkgs.gruvbox-gtk-theme;
       name = "gruvbox-dark";
+    };
+  };
+
+  gtk = {
+    enable = true;
+    theme = {
+      package = lib.mkDefault pkgs.gruvbox-gtk-theme;
+      name = lib.mkDefault "gruvbox-dark";
     };
   };
 }
