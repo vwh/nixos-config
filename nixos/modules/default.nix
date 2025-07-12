@@ -14,7 +14,6 @@
     ./nix-ld.nix
     ./nix.nix
     ./printing.nix
-    ./sddm.nix
     ./thunar.nix
     ./timezone.nix
     ./tor.nix
