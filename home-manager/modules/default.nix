@@ -2,7 +2,7 @@
 
 {
   imports = [
-    ./alacritty.nix
+    ./terminal/alacritty.nix
     ./cli/bat.nix
     ./cli/cava.nix
     ./cli/eza.nix
@@ -11,11 +11,11 @@
     ./hyprland
     ./cli/lazygit.nix
     ./mime.nix
-    ./obsidian.nix
+    ./apps/obsidian.nix
     ./qt.nix
     ./stylix.nix
     ./swaync
-    ./tmux.nix
+    ./terminal/tmux.nix
     ./music/spicetify.nix
     ./waybar
     ./wofi
