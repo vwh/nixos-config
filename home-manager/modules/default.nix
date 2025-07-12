@@ -15,6 +15,7 @@
     ./qt.nix
     ./stylix.nix
     ./swaync
+    ./tmux.nix
     ./music/spicetify.nix
     ./waybar
     ./wofi
