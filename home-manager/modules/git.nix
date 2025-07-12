@@ -1,10 +1,15 @@
-# Git configuration.
+{ gitConfig, ... }:
 
 {
   programs.git = {
     enable = true;
-    userName = "vwh";
-    userEmail = "vwhe@proton.me";
+    
+    userName = gitConfig.name;
+    userEmail = gitConfig.email;
+    # signing = {
+    #   key = gitConfig.gitKey;
+    #   signByDefault = true;
+    # };
 
     ignores = [
       ".cache/"

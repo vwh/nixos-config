@@ -7,6 +7,7 @@
     ./cli/cava.nix
     ./cli/eza.nix
     ./git.nix
+    ./gpg.nix
     ./cli/htop.nix
     ./hyprland
     ./cli/lazygit.nix
