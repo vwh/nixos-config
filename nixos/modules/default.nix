@@ -7,16 +7,16 @@
     ./bootloader.nix
     ./environment.nix
     ./gaming.nix
-    ./gnome.nix
     ./graphics.nix
     ./hyprland.nix
     ./i18n.nix
     ./networking.nix
-    ./nix.nix
     ./nix-ld.nix
+    ./nix.nix
     ./printing.nix
-    ./timezone.nix
+    ./sddm.nix
     ./thunar.nix
+    ./timezone.nix
     ./tor.nix
     ./users.nix
     ./virtualisation.nix

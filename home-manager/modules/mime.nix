@@ -6,15 +6,14 @@ with lib;
 let
   defaultApps = {
     browser = [ "brave.desktop" ];
-    text = [ "org.gnome.TextEditor.desktop" ];
-    image = [ "imv-dir.desktop" ];
+    text = [ "code.desktop" ];
+    image = [ "imv.desktop" ];
     audio = [ "mpv.desktop" ];
     video = [ "mpv.desktop" ];
     directory = [ "thunar.desktop" ];
     office = [ "libreoffice.desktop" ];
     pdf = [ "zathura.desktop" ];
     terminal = [ "alacritty.desktop" ];
-    discord = [ "vesktop.desktop" ];
     archive = [ "xarchiver.desktop" ];
   };
 
@@ -87,8 +86,6 @@ let
       "application/7z"
       "application/*tar"
     ];
-
-    discord = [ "x-scheme-handler/discord" ];
   };
 
   associations =
