@@ -42,7 +42,7 @@
       gitConfig = {
         name = "Yazan Alqasem";
         email = "vwhe@proton.me";
-        gitKey = "";
+        gitKey = "0x5478BB36AC504E64";
       };
 
       hosts = [
@@ -94,7 +94,7 @@
         configs
         // {
           "${host.hostname}" = makeSystem {
-            inherit (host) hostname stateVersion gitConfig;
+            inherit (host) hostname stateVersion;
           };
         }
       ) { } hosts;
@@ -107,6 +107,7 @@
             inputs
             homeStateVersion
             user
+            gitConfig
             pkgsStable
             ;
         };

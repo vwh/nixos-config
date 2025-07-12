@@ -3,13 +3,13 @@
 {
   programs.git = {
     enable = true;
-    
+
     userName = gitConfig.name;
     userEmail = gitConfig.email;
-    # signing = {
-    #   key = gitConfig.gitKey;
-    #   signByDefault = true;
-    # };
+    signing = {
+      key = gitConfig.gitKey;
+      signByDefault = true;
+    };
 
     ignores = [
       ".cache/"

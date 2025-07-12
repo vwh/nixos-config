@@ -2,12 +2,12 @@
   pkgs,
   lib,
   ...
-}: 
+}:
 
 {
   programs.gpg = {
     enable = true;
-    
+
     settings = {
       personal-cipher-preferences = "AES256";
       personal-digest-preferences = "SHA512";
