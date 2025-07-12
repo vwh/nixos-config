@@ -9,6 +9,7 @@
 
 ++ (with pkgs; [
   anki # Anki flashcards
+  gnome-text-editor # Text editor
   alacritty # Terminal emulator
   vscode # Visual Studio Code
   obs-studio # OBS Studio
