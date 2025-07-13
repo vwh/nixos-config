@@ -21,6 +21,7 @@
     ./waybar
     ./wofi
     ./zsh
+    ./terminal/yazi.nix
     ./cli/zathura.nix
     ./cli/zoxide.nix
   ];

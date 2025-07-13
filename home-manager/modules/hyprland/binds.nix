@@ -33,7 +33,8 @@ in
 
       # Window management
       "$mainMod,       Q, killactive,"
-      "$mainMod,       R, exec, $fileManager"
+      "$mainMod SHIFT, R, exec, $fileManager"
+      "$mainMod,       R, exec, env -u TMUX alacritty -e yazi"
       "$mainMod,       F, togglefloating,"
       "$mainMod,       D, exec, $menu --show drun"
       "$mainMod,       J, togglesplit,"
