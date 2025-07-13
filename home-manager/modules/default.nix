@@ -2,27 +2,12 @@
 
 {
   imports = [
-    ./terminal/alacritty.nix
-    ./cli/bat.nix
-    ./cli/cava.nix
-    ./cli/eza.nix
-    ./git.nix
-    ./gpg.nix
-    ./cli/htop.nix
+    ./apps
     ./hyprland
-    ./cli/lazygit.nix
+    ./terminal
+    ./gpg.nix
     ./mime.nix
-    ./apps/obsidian.nix
     ./qt.nix
     ./stylix.nix
-    ./swaync
-    ./terminal/tmux.nix
-    ./music/spicetify.nix
-    ./waybar
-    ./wofi
-    ./zsh
-    ./terminal/yazi.nix
-    ./cli/zathura.nix
-    ./cli/zoxide.nix
   ];
 }

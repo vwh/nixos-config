@@ -2,6 +2,9 @@
 
 {
   imports = [
+    ./swaync
+    ./waybar
+    ./wofi
     ./binds.nix
     ./hypridle.nix
     ./hyprlock.nix
