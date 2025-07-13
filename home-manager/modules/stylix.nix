@@ -30,6 +30,10 @@
       wofi.enable = false;
       hyprland.enable = false;
       hyprlock.enable = false;
+
+      # Enable stylix to manage GTK and Qt themes
+      gtk.enable = true;
+      qt.enable = true;
     };
 
     cursor = {
