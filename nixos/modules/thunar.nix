@@ -10,7 +10,6 @@ in
 
   programs.thunar = {
     enable = true;
-
     plugins = with xfce; [
       thunar-archive-plugin # create/extract .zip/.tar.gz/.7z/etc
       thunar-volman # automount USB, SD cards, pmount, …
@@ -18,36 +17,34 @@ in
     ];
   };
 
+  # PolicyKit rule to allow mounting drives without a password for users in the 'wheel' group.
+  security.polkit.extraConfig = ''
+    polkit.addRule(function(action, subject) {
+      if (action.id == "org.freedesktop.udisks2.filesystem-mount-system" &&
+          subject.isInGroup("wheel")) {
+        return polkit.Result.YES;
+      }
+    });
+  '';
+
   environment.systemPackages = with pkgs; [
-    # Network & removable-media support
-    gvfs
-
-    # Automount daemon
-    udisks2
-
-    # Archive CLI tools (zip, 7z, tar, rar…)
-    file-roller
+    # Thunar dependencies
+    xfce.exo # Required for "Open Terminal Here" and other integrations.
+    xfce.tumbler # Thumbnail daemon package.
+    gvfs # Network & removable-media support.
+    udisks2 # Automount daemon.
+    file-roller # Archive CLI tools (zip, 7z, tar, rar…).
     p7zip
     unrar
     xz
     bzip2
+    polkit_gnome # PolicyKit agent so Thunar-Volman prompts you for passwords.
 
-    # PolicyKit agent so Thunar-Volman prompts you for passwords
-    polkit_gnome
+    # Thumbnailers for Tumbler
+    ffmpegthumbnailer # Video thumbnails.
+    poppler_utils # PDF thumbnails.
   ];
 
+  # Ensure the udisks2 service is enabled for drive management.
   systemd.services.udisks2.enable = true;
-
-  # Custom “Open Terminal Here” action
-  environment.etc."xdg/applications/alacritty.desktop".text = ''
-    [Desktop Entry]
-    Name=Alacritty
-    Comment=A fast, cross-platform, GPU-accelerated terminal emulator
-    Exec=alacritty
-    Icon=alacritty
-    Terminal=false
-    Type=Application
-    Categories=Utility;System;TerminalEmulator;
-    Keywords=shell;prompt;terminal;console;x-terminal-emulator;
-  '';
 }
