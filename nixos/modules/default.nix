@@ -7,6 +7,7 @@
     ./bootloader.nix
     ./environment.nix
     ./gaming.nix
+    ./gnome.nix
     ./graphics.nix
     ./hyprland.nix
     ./i18n.nix

@@ -12,12 +12,6 @@
       inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
   };
 
-  # Enable GDM display manager
-  services = {
-    displayManager.gdm.enable = true;
-    gnome.gnome-keyring.enable = true;
-  };
-
   # Enable security services
   security = {
     polkit.enable = true;

@@ -8,6 +8,7 @@ let
     ./cli.nix
     ./cool.nix
     ./development.nix
+    ./gnome.nix
     ./hyprland.nix
     ./multimedia.nix
     ./networking.nix
