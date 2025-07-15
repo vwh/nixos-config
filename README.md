@@ -73,7 +73,7 @@ This configuration uses `sops-nix` for managing secrets.
 ├── hosts/                         ← per-host NixOS configurations
 │   ├── pc/                        ← “pc” host (configuration.nix, hardware config, etc.)
 │   └── thinkpad/                  ← “thinkpad” host
-├── nix-templates/                 ← project-flake templates for various runtimes
+├── devShell/                 ← project-flake templates for various runtimes
 │   ├── .../                       ← project templates
 │   ├── flake.lock                 ← locked inputs for all templates
 │   └── flake.nix                  ← root flake defining the templates
