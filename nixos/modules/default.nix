@@ -18,6 +18,7 @@
     ./thunar.nix
     ./timezone.nix
     ./tor.nix
+    ./upower.nix
     ./users.nix
     ./virtualisation.nix
     ./xserver.nix
