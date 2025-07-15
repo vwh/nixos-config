@@ -58,8 +58,6 @@
 
   system = {
     inherit stateVersion;
-    autoUpgrade.enable = true;
-    autoUpgrade.dates = "weekly";
   };
 
   hardware.nvidia = {

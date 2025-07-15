@@ -18,8 +18,6 @@
 
   system = {
     inherit stateVersion;
-    autoUpgrade.enable = true;
-    autoUpgrade.dates = "weekly";
   };
 
   environment.systemPackages = [ pkgs.home-manager ];
