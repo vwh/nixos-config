@@ -11,6 +11,7 @@
     ./graphics.nix
     ./hyprland.nix
     ./i18n.nix
+    ./libinput.nix
     ./networking.nix
     ./nix-ld.nix
     ./nix.nix

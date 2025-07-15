@@ -1,4 +1,5 @@
 # Main NixOS configuration for the 'pc' host.
+
 {
   pkgs,
   stateVersion,
@@ -11,10 +12,10 @@
     ./hardware-configuration.nix
     ./local-packages.nix
     ../../nixos/modules
+    ./modules
   ];
 
   networking.hostName = hostname;
-  programs.gamemode.enable = true;
 
   system = {
     inherit stateVersion;

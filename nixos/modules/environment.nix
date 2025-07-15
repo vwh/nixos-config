@@ -1,11 +1,6 @@
 # Environment variables and session settings.
 
 {
-  pkgs,
-  ...
-}:
-
-{
   environment.sessionVariables = rec {
     TERMINAL = "alacritty";
     EDITOR = "code";
