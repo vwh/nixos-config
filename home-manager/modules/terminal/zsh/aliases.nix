@@ -5,7 +5,7 @@
     let
       flakeDir = "~/System";
       editor = "code";
-      nixTemplates = "github:vwh/nixos-config/main?dir=devShell#";
+      nixTemplates = "github:vwh/nixos-config/main?dir=devShells#";
     in
     {
       ls = "eza";
