@@ -5,7 +5,7 @@ This is a minimal template for JavasScript development with Deno.
 ## Initialization
 
 ```bash
-nix flake init -t "github:vwh/nixos-config/main?dir=nix-templates#deno"
+nix flake init -t "github:vwh/nixos-config/main?dir=devShells#deno"
 ```
 
 ## Usage

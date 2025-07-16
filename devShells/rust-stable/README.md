@@ -7,7 +7,7 @@ This is a minimal template for Rust development on the stable channel.
 ## Initialization
 
 ```bash
-nix flake init -t "github:vwh/nixos-config/main?dir=nix-templates#rust-stable"
+nix flake init -t "github:vwh/nixos-config/main?dir=devShells#rust-stable"
 ```
 
 ## Usage

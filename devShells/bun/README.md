@@ -5,7 +5,7 @@ This is a minimal template for JavasScript development with Bun.
 ## Initialization
 
 ```bash
-nix flake init -t "github:vwh/nixos-config/main?dir=nix-templates#bun"
+nix flake init -t "github:vwh/nixos-config/main?dir=devShells#bun"
 ```
 
 ## Usage

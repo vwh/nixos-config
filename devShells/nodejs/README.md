@@ -5,7 +5,7 @@ This is a minimal template for JavasScript development with NodeJS.
 ## Initialization
 
 ```bash
-nix flake init -t "github:vwh/nixos-config/main?dir=nix-templates#nodejs"
+nix flake init -t "github:vwh/nixos-config/main?dir=devShells#nodejs"
 ```
 
 ## Usage
