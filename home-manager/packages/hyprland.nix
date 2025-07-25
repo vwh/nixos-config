@@ -11,7 +11,7 @@ with pkgs;
   libnotify # notification daemon
   bemoji # emoji picker
   playerctl # player control
-  grimblast # screenshot tool
+  hyprshot # screenshot tool
   brightnessctl # brightness control
   cliphist # clipboard history
   wl-clipboard # Wayland clipboard
