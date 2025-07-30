@@ -55,7 +55,7 @@ in
       # "$mainMod,       W, exec, ${booksScript}/bin/open_books"
 
       # Screenshot
-      ", Print, exec, hyprshot -m region --clipboard-only"
+      ", Print, exec, hyprshot -zm region --clipboard-only"
 
       # Volume control
       "$mainMod, equal,  exec, wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"
