@@ -7,6 +7,7 @@ with pkgs;
   tree # Directory tree
   file # File information
   jq # JSON processor
+  htmlq # Like jq, but for HTML
   fzf # Command-line fuzzy finder
   direnv # Directory environment
   yt-dlp # YouTube downloader

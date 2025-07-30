@@ -10,15 +10,14 @@
     {
       ls = "eza";
       ll = "eza -l";
+      etree = "eza --tree --level=1 --icons";
 
       cd = "z";
       ci = "zi";
 
       find = "fd";
       grep = "rg";
-
-      etree = "eza --tree --level=1 --icons";
-
+      hq = "htmlq";
       cat = "bat";
 
       tk = "tokei";
@@ -37,7 +36,6 @@
       ld = "lazydocker";
 
       ns = "nix-shell";
-
       nd = "nix develop --command zsh";
       nfu = "nix flake update";
       nfs = "nix flake show";
@@ -51,7 +49,6 @@
       nfirn = "nix flake init -t '${nixTemplates}rust-nightly'";
 
       docker = "sudo docker";
-
       reboot = "sudo reboot";
       shutdown = "sudo shutdown now";
     };
