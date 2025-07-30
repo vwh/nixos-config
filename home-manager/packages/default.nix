@@ -12,6 +12,7 @@ let
     ./hyprland.nix
     ./multimedia.nix
     ./networking.nix
+    ./prayer.nix
     ./utilities.nix
   ];
 in

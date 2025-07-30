@@ -23,8 +23,9 @@
           "memory"
           "disk"
           # "hyprland/language"
-          "custom/weather"
           "pulseaudio"
+          "custom/weather"
+          "custom/prayerbar"
           "custom/network"
           "battery"
           "clock"
@@ -108,9 +109,17 @@
 
         "custom/network" = {
           interval = 1;
-          exec = "/home/yazan/System/home-manager/modules/waybar/network.sh";
+          exec = "~/System/home-manager/modules/hyprland/waybar/network.sh";
           format = "  {}";
           on-click = "nm-connection-editor";
+        };
+
+        "custom/prayerbar" = {
+          format = "{}";
+          tooltip = true;
+          interval = 60;
+          exec = "~/System/home-manager/modules/hyprland/waybar/prayerbar-wrapper.sh";
+          "return-type" = "json";
         };
 
         "battery" = {
@@ -133,8 +142,8 @@
         };
 
         "clock" = {
-          format = "{:%d.%m - %H:%M}";
-          format-alt = "{:%A, %B %d at %R}";
+          format = "{:%d.%m - %I:%M %p}";
+          format-alt = "{:%A, %B %d at %I:%M %p}";
         };
 
         "tray" = {
