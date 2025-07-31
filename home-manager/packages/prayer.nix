@@ -11,8 +11,8 @@
     src = pkgs.fetchFromGitHub {
       owner = "Onizuka893";
       repo = "prayerbar";
-      rev = "5a0ae8f36e3f04ba207bddc648ea4079ff4ae410";
-      sha256 = "sha256-ChW/O7rLU4lZT0Yt6a2JHCpxzQ12/0MyGd0OK291L/E=";
+      rev = "337a83ac9c0e10360928c2e7859811e7bc1e3bfd";
+      sha256 = "sha256-edDyN+shEkgc87yLH2sfpL8TjLn1+mwFCM0RlbQVzsg=";
     };
 
     cargoHash = "sha256-3DWCeQnLNINq6dsD0C5xRAZOnkAGRlxOfXwIOwCxy3c=";

@@ -118,7 +118,7 @@
           format = "{}";
           tooltip = true;
           interval = 60;
-          exec = "~/System/scripts/waybar/prayerbar-wrapper.sh";
+          exec = "prayerbar --city Amman --country JO --method 4 --ampm";
           "return-type" = "json";
         };
 
