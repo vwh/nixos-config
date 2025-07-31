@@ -46,3 +46,22 @@ all:
     {{JUST}} nixos
     {{JUST}} home
     @echo -e "✅ All done!"
+
+# Initialize global packages
+init-npm:
+    @echo -e "\n➤ Initializing global packages..."
+    ./scripts/npm/mkdir-npm-global.sh
+    ./scripts/npm/install-global-packages.sh
+    @echo -e "✅ Global packages initialized!"
+
+# Install global packages
+install-npm:
+    @echo -e "\n➤ Installing global packages..."
+    ./scripts/npm/install-global-packages.sh
+    @echo -e "✅ Global packages installed!"
+
+# Update global packages
+update-npm:
+    @echo -e "\n➤ Updating global packages..."
+    bun update -g
+    @echo -e "✅ Global packages updated!"
