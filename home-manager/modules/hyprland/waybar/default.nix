@@ -109,7 +109,7 @@
 
         "custom/network" = {
           interval = 1;
-          exec = "~/System/home-manager/modules/hyprland/waybar/network.sh";
+          exec = "~/System/scripts/waybar/network.sh";
           format = "  {}";
           on-click = "nm-connection-editor";
         };
@@ -118,7 +118,7 @@
           format = "{}";
           tooltip = true;
           interval = 60;
-          exec = "~/System/home-manager/modules/hyprland/waybar/prayerbar-wrapper.sh";
+          exec = "~/System/scripts/waybar/prayerbar-wrapper.sh";
           "return-type" = "json";
         };
 

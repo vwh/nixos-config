@@ -1,3 +1,4 @@
+# OBS Studio configuration.
 
 { pkgs, ... }:
 

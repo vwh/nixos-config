@@ -21,7 +21,7 @@ lint:
 # Check all missing imports
 modules:
     @echo -e "\n➤ Checking modules…"
-    bash modules-check.sh
+    bash ./scripts/build/modules-check.sh
 
 # Switch Home-Manager generation
 home:
