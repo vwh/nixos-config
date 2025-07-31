@@ -3,7 +3,6 @@
 {
   imports = [
     ./obs.nix
-    ./obsidian.nix
     ./spicetify.nix
   ];
 }
