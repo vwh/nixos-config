@@ -13,7 +13,7 @@
   alacritty # Terminal emulator
   vscode # Visual Studio Code
   obsidian # Obsidian note-taking app
-  audacity # Audio editor
+  # audacity # Audio editor
   brave # Brave browser
   firefox # Firefox browser
   sqlitebrowser # SQLite browser
