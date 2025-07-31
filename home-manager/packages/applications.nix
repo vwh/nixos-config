@@ -12,7 +12,6 @@
   gnome-text-editor # Text editor
   alacritty # Terminal emulator
   vscode # Visual Studio Code
-  obs-studio # OBS Studio
   obsidian # Obsidian note-taking app
   audacity # Audio editor
   brave # Brave browser
