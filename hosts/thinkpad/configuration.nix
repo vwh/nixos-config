@@ -23,9 +23,5 @@
 
   environment.systemPackages = with pkgs; [
     home-manager
-    gnome.gnome-power-statistics
-    pulseaudio
   ];
-
-  services.pulseaudio.enable = true;
 }

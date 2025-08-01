@@ -209,7 +209,6 @@ Load: {load}";
           ];
 
           tooltip-format = "Battery: {capacity}%\nTime: {time}\nPower: {power}W";
-          on-click = "gnome-power-statistics";
         };
 
         "clock" = {
