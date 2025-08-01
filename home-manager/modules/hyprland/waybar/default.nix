@@ -19,8 +19,11 @@
         # modules-center = [  ];
 
         modules-right = [
+          # "custom/uptime"
+          # "custom/media"
           "cpu"
           "custom/cpu-temp"
+          "custom/gpu-usage"
           "custom/gpu-temp"
           "memory"
           "disk"
@@ -54,9 +57,18 @@ Load: {load}";
           tooltip-format = "GPU Temperature: {}°C";
         };
 
+        "custom/gpu-usage" = {
+          format = "󰍹 {}%";
+          exec = "nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader,nounits || echo 'N/A'";
+          interval = 30;
+          class = "gpu-usage";
+          tooltip = true;
+          tooltip-format = "GPU Usage: {}%";
+        };
+
         "custom/cpu-temp" = {
           format = " {}°C";
-          exec = "sensors | grep 'Package id 0:' | awk '{print $4}' | sed 's/+//;s/°C.*//' || sensors | grep 'Tctl:' | awk '{print $2}' | sed 's/+//;s/°C.*//' || echo 'N/A'";
+          exec = "sensors | grep 'Package id 0:' | awk '{printf \"%.0f\\n\", $4}' | sed 's/+//;s/°C.*//' || sensors | grep 'Tctl:' | awk '{printf \"%.0f\\n\", $2}' | sed 's/+//;s/°C.*//' || echo 'N/A'";
           interval = 5;
           tooltip = true;
           tooltip-format = "CPU Temperature: {}°C";
@@ -212,6 +224,25 @@ Load: {load}";
           spacing = 6;
           show-passive-items = true;
         };
+
+        # "custom/uptime" = {
+        #   format = " {}";
+        #   exec = "uptime -p | sed 's/up //'";
+        #   interval = 60;
+        # };
+
+        # "custom/media" = {
+        #   format = "{icon} {}";
+        #   format-icons = {
+        #     "Playing" = "";
+        #     "Paused" = "";
+        #   };
+        #   exec = "playerctl metadata --format '{{ status }}: {{ artist }} - {{ title }}'";
+        #   interval = 1;
+        #   on-click = "playerctl play-pause";
+        #   on-scroll-up = "playerctl next";
+        #   on-scroll-down = "playerctl previous";
+        # };
       };
     };
   };

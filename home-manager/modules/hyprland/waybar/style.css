@@ -99,6 +99,7 @@ window#waybar {
 #custom-network,
 #custom-prayerbar,
 #custom-weather,
+#custom-gpu-usage,
 #custom-gpu-temp,
 #custom-cpu-temp {
   padding: 0 12px;
@@ -114,6 +115,7 @@ window#waybar {
 #memory:hover,
 #disk:hover,
 #custom-weather:hover,
+#custom-gpu-usage:hover,
 #custom-gpu-temp:hover,
 #custom-cpu-temp:hover {
   background: rgba(235, 219, 178, 0.1);
@@ -123,7 +125,9 @@ window#waybar {
  * INDIVIDUAL MODULE STYLES
  * ==========================================*/
 
-#cpu {
+/* CPU and CPU Temperature - Same Color */
+#cpu,
+#custom-cpu-temp {
   color: #fabd2f;
   border-bottom: 3px solid #fabd2f;
 }
@@ -140,9 +144,11 @@ window#waybar {
   animation: critical-blink 1s infinite;
 }
 
-#custom-cpu-temp {
-  color: #d79921;
-  border-bottom: 3px solid #d79921;
+/* GPU Usage and GPU Temperature - Same Color */
+#custom-gpu-usage,
+#custom-gpu-temp {
+  color: #8ec07c;
+  border-bottom: 3px solid #8ec07c;
 }
 
 #memory {
@@ -187,11 +193,6 @@ window#waybar {
 #custom-weather {
   color: #98971a;
   border-bottom: 3px solid #98971a;
-}
-
-#custom-gpu-temp {
-  color: #8ec07c;
-  border-bottom: 3px solid #8ec07c;
 }
 
 #pulseaudio {
