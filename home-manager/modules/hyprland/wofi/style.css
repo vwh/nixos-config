@@ -1,5 +1,5 @@
 /* ==========================================
- * WOFI STYLE - GRUVBOX THEME
+ * WOFI STYLE - ENHANCED GRUVBOX THEME
  * ==========================================*/
 
 /* ==========================================
@@ -8,130 +8,125 @@
 
 window {
   margin: 0px;
-  border: 5px solid;
-  border-image: linear-gradient(135deg, #d65d0e 0%, #98971a 100%) 1;
-  background-color: #282828;
-  font-family: "JetBrains Mono";
-  font-weight: bold;
-  font-size: 16px;
-  border-radius: 6px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-  animation: slideIn 0.2s ease-out;
+  border: 3px solid #d65d0e;
+  background: #282828;
+  font-family: "JetBrains Mono", "Font Awesome 6 Free", monospace;
+  font-weight: 600;
+  font-size: 15px;
+  border-radius: 0px;
+  animation: windowSlideIn 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 /* ==========================================
  * INPUT AND SEARCH
  * ==========================================*/
 
-/* Search input field */
 #input {
-  margin: 5px;
-  padding: 6px 10px;
+  all: unset;
+  margin: 4px;
+  padding: 4px 8px;
   border: 2px solid #3c3836;
-  border-radius: 3px;
+  border-radius: 0px;
   color: #ebdbb2;
-  background-color: #1d2021;
-  transition: all 0.2s ease-in-out;
+  background: #1d2021;
+  font-size: 16px;
+  font-weight: 500;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-/* Input focus state */
 #input:focus {
   border-color: #d65d0e;
-  background-color: #282828;
-  box-shadow: 0 0 0 2px rgba(214, 93, 14, 0.2);
+  background: #282828;
+  color: #fbf1c7;
+}
+
+#input::placeholder {
+  color: #928374;
+  font-style: italic;
 }
 
 /* ==========================================
  * CONTAINER LAYOUT
  * ==========================================*/
 
-/* Main container */
 #inner-box {
-  margin: 5px;
-  border: none;
-  background-color: #282828;
-}
-
-/* Outer container */
-#outer-box {
-  margin: 5px;
-  border: none;
-  background-color: #282828;
-}
-
-/* Scroll container */
-#scroll {
   margin: 0px;
   border: none;
-  padding: 2px;
+  background: transparent;
+  border-radius: 8px;
+}
+
+#outer-box {
+  margin: 0px;
+  border: none;
+  background: transparent;
+}
+
+#scroll {
+  margin: 0px 4px 4px 4px;
+  border: none;
+  padding: 0px;
+  background: transparent;
 }
 
 /* ==========================================
  * ENTRIES AND TEXT
  * ==========================================*/
 
-/* Entry text */
+#entry {
+  all: unset;
+  padding: 4px 8px;
+  margin: 0px;
+  border-radius: 0px;
+  border: 1px solid transparent;
+  background: transparent;
+  transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  cursor: pointer;
+  min-height: 28px;
+  display: flex;
+  align-items: center;
+}
+
+#entry:nth-child(even) {
+  background: rgba(60, 56, 54, 0.1);
+}
+
+#entry:hover {
+  background: rgba(214, 93, 14, 0.2);
+  border-color: rgba(214, 93, 14, 0.3);
+  transform: translateX(4px);
+}
+
+#entry:selected {
+  background: #d65d0e;
+  color: #1d2021;
+  border-color: #fabd2f;
+  transform: translateX(6px) scale(1.02);
+  font-weight: 700;
+}
+
+#entry:selected #text {
+  color: #1d2021;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
 #text {
-  margin: 5px;
+  margin: 0px;
   border: none;
   color: #ebdbb2;
-  transition: all 0.2s ease-in-out;
+  font-size: 15px;
+  font-weight: 500;
+  transition: all 0.2s ease;
 }
 
-/* Entry items */
-#entry {
-  padding: 6px 10px;
-  margin: 1px 2px;
-  border-radius: 3px;
-  transition: all 0.2s ease-in-out;
-  border: 1px solid transparent;
+/* Application icons */
+#entry image {
+  margin-right: 6px;
+  transition: all 0.2s ease;
 }
 
-/* Selected/hovered entry */
-#entry:selected {
-  background-color: #d65d0e;
-  color: #ffffff;
-  border-color: #fe8019;
-  box-shadow: 0 2px 6px rgba(214, 93, 14, 0.3);
-  transform: translateX(2px);
-}
-
-/* Entry hover effect */
-#entry:hover {
-  background-color: rgba(214, 93, 14, 0.2);
-  border-color: #d65d0e;
-}
-
-/* ==========================================
- * ANIMATIONS
- * ==========================================*/
-
-/* Window slide-in animation */
-@keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateY(-15px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Smooth entry transitions */
-#entry {
-  animation: fadeIn 0.1s ease-out;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(2px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+#entry:selected image {
+  transform: scale(1.05);
 }
 
 /* ==========================================
@@ -139,17 +134,135 @@ window {
  * ==========================================*/
 
 scrollbar {
-  background: #3c3836;
-  border-radius: 3px;
+  background: rgba(60, 56, 54, 0.3);
+  border-radius: 0px;
   width: 6px;
+  margin: 2px;
 }
 
 scrollbar slider {
   background: #665c54;
-  border-radius: 3px;
-  transition: all 0.2s ease-in-out;
+  border-radius: 0px;
+  transition: all 0.3s ease;
+  min-height: 20px;
 }
 
 scrollbar slider:hover {
   background: #7c6f64;
+}
+
+scrollbar slider:active {
+  background: #d65d0e;
+}
+
+/* ==========================================
+ * ANIMATIONS
+ * ==========================================*/
+
+@keyframes windowSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes entryFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+#entry {
+  animation: entryFadeIn 0.15s ease-out;
+}
+
+/* ==========================================
+ * SPECIAL STATES
+ * ==========================================*/
+
+/* No results state */
+#entry:only-child {
+  color: #928374;
+  font-style: italic;
+  text-align: center;
+  padding: 20px;
+  border: 2px dashed #504945;
+}
+
+/* Loading state animation */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+/* Empty state */
+#entry[data-empty="true"] {
+  animation: pulse 2s infinite;
+}
+
+/* ==========================================
+ * RESPONSIVE IMPROVEMENTS
+ * ==========================================*/
+
+/* Better spacing for different content types */
+#entry[data-category="System"] {
+  border-left: 3px solid #cc241d;
+}
+
+#entry[data-category="Development"] {
+  border-left: 3px solid #458588;
+}
+
+#entry[data-category="Graphics"] {
+  border-left: 3px solid #b16286;
+}
+
+#entry[data-category="Internet"] {
+  border-left: 3px solid #689d6a;
+}
+
+#entry[data-category="Office"] {
+  border-left: 3px solid #d79921;
+}
+
+/* ==========================================
+ * ACCESSIBILITY
+ * ==========================================*/
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  window {
+    border-width: 4px;
+  }
+  
+  #entry:selected {
+    background: #fabd2f;
+    color: #1d2021;
+    border: 2px solid #1d2021;
+  }
+  
+  #input:focus {
+    outline: 3px solid #d65d0e;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01s !important;
+    transition-duration: 0.01s !important;
+  }
 }
