@@ -17,12 +17,66 @@ let
         echo "No book selected."
     fi
   '';
+
+  windowSwitcher = pkgs.writeScriptBin "window-switcher" ''
+    #!/bin/sh
+    windows=$(hyprctl clients -j | jq -r '.[] | "\(.workspace.id):\(.workspace.name) - \(.class) - \(.title)"')
+    selected=$(echo "$windows" | wofi --dmenu --prompt "Switch to window" --width 800)
+
+    if [[ -n "$selected" ]]; then
+      address=$(hyprctl clients -j | jq -r --arg sel "$selected" '.[] | select("\(.workspace.id):\(.workspace.name) - \(.class) - \(.title)" == $sel) | .address')
+      hyprctl dispatch focuswindow "address:$address"
+    fi
+  '';
 in
 {
-  home.packages = [ booksScript ];
+  home.packages = [
+    booksScript
+    windowSwitcher
+  ];
 
   wayland.windowManager.hyprland.settings = {
     bind = [
+      "$mainMod, W, exec, ${windowSwitcher}/bin/window-switcher"
+      # Window focus cycling with Tab
+      "$mainMod, Tab, cyclenext,"
+      "$mainMod SHIFT, Tab, cyclenext, prev"
+
+      # Better window resizing with submap
+      # "$mainMod, R, submap, resize"
+
+      # Center floating window
+      "$mainMod, C, centerwindow,"
+
+      # Toggle window opacity
+      "$mainMod, O, exec, hyprctl keyword decoration:active_opacity 0.8"
+      "$mainMod SHIFT, O, exec, hyprctl keyword decoration:active_opacity 1.0"
+
+      # Quick window swap
+      "$mainMod, S, swapnext,"
+      "$mainMod SHIFT, S, swapnext, prev"
+
+      # Master layout specific
+      "$mainMod, comma, layoutmsg, swapwithmaster"
+      "$mainMod, period, layoutmsg, focusmaster"
+      "$mainMod SHIFT, comma, layoutmsg, addmaster"
+      "$mainMod SHIFT, period, layoutmsg, removemaster"
+
+      # Quick actions
+      "$mainMod, U, exec, hyprctl dispatch workspace previous" # Quick workspace switch
+      "$mainMod, Z, exec, pypr zoom" # Zoom current window (needs pyprland)
+
+      # Window groups
+      "$mainMod, G, togglegroup,"
+      "$mainMod SHIFT, G, moveoutofgroup,"
+
+      # Special workspace for quick notes
+      # "$mainMod, N, togglespecialworkspace, notes"
+      # "$mainMod SHIFT, N, movetoworkspace, special:notes"
+
+      # Color picker with notification
+      "$mainMod, P, exec, hyprpicker -a && notify-send 'Color copied'"
+
       # Exit, lock
       "$mainMod SHIFT, Escape, exit,"
       "$mainMod,       Home, exec, loginctl lock-session"
@@ -46,12 +100,11 @@ in
 
       # Utilities
       "$mainMod,       E, exec, bemoji -cn"
-      "$mainMod,       P, exec, hyprpicker -an"
       "$mainMod,       N, exec, swaync-client -t"
 
       # Waybar
-      "$mainMod,       W, exec, pkill -SIGUSR2 waybar"
-      "$mainMod SHIFT, W, exec, pkill -SIGUSR1 waybar"
+      "$mainMod,       K, exec, pkill -SIGUSR2 waybar"
+      "$mainMod SHIFT, K, exec, pkill -SIGUSR1 waybar"
       # "$mainMod,       W, exec, ${booksScript}/bin/open_books"
 
       # Screenshot
@@ -92,8 +145,8 @@ in
       "$mainMod SHIFT, 4, movetoworkspacesilent, 4"
 
       # Scratchpad
-      "$mainMod,       S, togglespecialworkspace,  magic"
-      "$mainMod SHIFT, S, movetoworkspace, special:magic"
+      "$mainMod,       X, togglespecialworkspace,  magic"
+      "$mainMod SHIFT, X, movetoworkspace, special:magic"
     ];
 
     # Move/resize windows with mainMod + LMB/RMB and dragging

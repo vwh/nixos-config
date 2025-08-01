@@ -29,6 +29,13 @@
         "wl-paste --type text --watch cliphist store"
         "wl-paste --type image --watch cliphist store"
         "brave"
+        # Auto-start apps in specific workspaces
+        "[workspace 1 silent] $browser"
+        "[workspace 2 silent] $terminal"
+        "sleep 1 && pyprland" # Start pyprland daemon
+        # Better notifications
+        "wl-paste -t text --watch clipman store"
+        "wl-paste -p -t text --watch clipman store -P --histpath=\"~/.local/share/clipman-primary.json\""
       ];
 
       general = {
@@ -45,35 +52,65 @@
       };
 
       decoration = {
-        rounding = 0;
-        active_opacity = 1.0;
-        inactive_opacity = 1.0;
 
+        # Subtle shadows for depth
         shadow = {
-          enabled = false;
+          enabled = true;
+          range = 8;
+          render_power = 2;
+          color = "rgba(0, 0, 0, 0.3)";
+          color_inactive = "rgba(0, 0, 0, 0.2)";
         };
 
+        # Performance-friendly blur
         blur = {
-          enabled = false;
+          enabled = true;
+          size = 3;
+          passes = 2;
+          ignore_opacity = true;
+          new_optimizations = true;
+          xray = true;
         };
       };
 
-      animations = {
-        enabled = true;
-        bezier = "myBezier, 0.05, 0.9, 0.1, 1.05";
-        animation = [
-          "windows, 1, 4, myBezier"
-          "windowsOut, 1, 4, default, popin 80%"
-          "border, 1, 6, default"
-          "borderangle, 1, 5, default"
-          "fade, 1, 4, default"
-          "workspaces, 0, 6, default"
-        ];
-      };
-
+      # Better mouse behavior
       input = {
         kb_layout = "us,ara";
         kb_options = "grp:caps_toggle";
+        # ... existing settings ...
+        follow_mouse = 2; # Focus on mouse enter
+        float_switch_override_focus = 0;
+        mouse_refocus = false;
+
+        touchpad = {
+          natural_scroll = true;
+          disable_while_typing = true;
+          clickfinger_behavior = true;
+          tap-to-click = true;
+        };
+      };
+
+      # Smooth animations
+      animations = {
+        enabled = true;
+        bezier = [
+          "fluent_decel, 0, 0.2, 0.4, 1"
+          "easeOutCirc, 0, 0.55, 0.45, 1"
+          "easeOutExpo, 0.16, 1, 0.3, 1"
+          "softAcDecel, 0.26, 0.26, 0.15, 1"
+        ];
+        animation = [
+          "windows, 1, 3, fluent_decel, slide"
+          "windowsOut, 1, 3, fluent_decel, slide"
+          "windowsMove, 1, 2, softAcDecel"
+          "workspaces, 1, 2, fluent_decel, slide"
+          "specialWorkspace, 1, 3, fluent_decel, slidevert"
+          "layers, 1, 3, easeOutCirc"
+          "layersIn, 1, 3, easeOutCirc, left"
+          "layersOut, 1, 3, fluent_decel, right"
+          "fade, 1, 3, fluent_decel"
+          "border, 1, 2.5, easeOutCirc"
+        ];
       };
 
       gestures = {
@@ -126,11 +163,43 @@
         "pin,class:^(scratchpad)$"
         "size 80% 60%,class:^(scratchpad)$"
         "center,class:^(scratchpad)$"
+
+        # Workspace rules for better organization
+        # Development workspace
+        "workspace 2, class:(code|Code|VSCodium|sublime_text|jetbrains-*)"
+        "workspace 2, class:(Alacritty), title:^(nvim|vim|hx)"
+
+        # Media workspace
+        "workspace 4, class:(mpv|vlc|spotify|rhythmbox)"
+
+        # Documents workspace
+        "workspace special:docs, class:(libreoffice|soffice|zathura|evince|okular)"
+
+        # Picture-in-Picture
+        "float, title:^(Picture-in-Picture)$"
+        "pin, title:^(Picture-in-Picture)$"
+        "size 30% 30%, title:^(Picture-in-Picture)$"
+        "move 69% 69%, title:^(Picture-in-Picture)$"
+
+        # Better popup handling
+        "float, class:^(pavucontrol|nm-connection-editor|blueman-manager)$"
+        "center, class:^(pavucontrol|nm-connection-editor|blueman-manager)$"
+        "size 60% 70%, class:^(pavucontrol|nm-connection-editor|blueman-manager)$"
+
+        # Transparency for terminals
+        "opacity 0.95 0.85, class:^(Alacritty|kitty|foot)$"
+
+        # No animations for tooltips
+        "noanim, class:^(tooltip)$"
       ];
 
+      # Special workspaces for organization
       workspace = [
         "w[tv1], gapsout:0, gapsin:0"
         "f[1], gapsout:0, gapsin:0"
+        "special:terminal, on-created-empty:$terminal"
+        "special:files, on-created-empty:$fileManager"
+        "special:music, on-created-empty:spotify"
       ];
     };
   };
