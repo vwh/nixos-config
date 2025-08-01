@@ -20,7 +20,7 @@
       "$mainMod" = "SUPER";
       "$terminal" = "alacritty";
       "$browser" = "brave";
-      # "$fileManager" = "$terminal -e sh -c 'thunar'";
+      "$editor" = "code";
       "$fileManager" = "thunar";
       "$menu" = "wofi";
 
@@ -28,10 +28,13 @@
         "waybar"
         "wl-paste --type text --watch cliphist store"
         "wl-paste --type image --watch cliphist store"
-        "brave"
         # Auto-start apps in specific workspaces
         "[workspace 1 silent] $browser"
         "[workspace 2 silent] $terminal"
+        "[workspace 2 silent] $editor"
+        "[workspace 3 silent] telegram"
+        "[workspace 4 silent] spotify"
+
         "sleep 1 && pyprland" # Start pyprland daemon
         # Better notifications
         "wl-paste -t text --watch clipman store"
