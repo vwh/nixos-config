@@ -1,23 +1,15 @@
 /* ==========================================
- * WAYBAR STYLE - GRUVBOX THEME
+ * WAYBAR STYLE - GRUVBOX THEME (CLEAN)
  * ==========================================*/
 
 /* ==========================================
  * GLOBAL SETTINGS
  * ==========================================*/
 
-/* Remove default gaps between modules */
-.modules-right .module,
-.modules-left .module,
-.modules-center .module {
-  margin: 0;
-}
-
-/* Global reset and typography */
 * {
   border: none;
   border-radius: 0px;
-  font-family: "JetBrains Mono";
+  font-family: "JetBrains Mono", monospace;
   font-weight: bold;
   font-size: 16px;
   min-height: 0;
@@ -25,7 +17,6 @@
   transition: all 0.2s ease-in-out;
 }
 
-/* Main waybar window */
 window#waybar {
   background: #1d2021;
   border-bottom: 2px solid #3c3836;
@@ -35,62 +26,58 @@ window#waybar {
  * LEFT MODULES
  * ==========================================*/
 
-/* Workspace buttons */
 #workspaces {
-  margin-right: 5px;
+  margin-right: 0px;
 }
 
 #workspaces button {
   transition: all 0.2s ease-in-out;
   border-radius: 0;
-  margin: 0;  /* Remove spacing between buttons */
-  min-width: 30px;  /* Ensure consistent button width */
+  margin: 0;
+  min-width: 32px;
+  padding: 0 8px;
 }
 
 #workspaces button label {
   color: #ebdbb2;
-  padding: 0 10px;
+  padding: 0 5px;
+}
+
+#workspaces button.active {
+  background: #d65d0e;
+  color: #1d2021;
 }
 
 #workspaces button.active label {
   color: #1d2021;
 }
 
-#workspaces button.active {
-  background: #d65d0e;
-  box-shadow: 0 2px 4px rgba(214, 93, 14, 0.3);
-}
-
 #workspaces button:hover {
-  background: rgba(214, 93, 14, 0.2);
+  background: rgba(214, 93, 14, 0.3);
 }
 
-/* Window title */
+#workspaces button.urgent {
+  background: #cc241d;
+  animation: urgent-blink 1s infinite;
+}
 
 #window {
   padding: 0 15px;
-  margin-left: 10px;
+  margin-left: 0px;
   color: #a89984;
-  border-bottom: 5px solid #a89984;
+  border-bottom: 3px solid #a89984;
   background: rgba(168, 153, 132, 0.1);
-  border-radius: 0;
-  transition: all 0.3s ease;
-  box-shadow: inset 0 -2px 0 rgba(168, 153, 132, 0.2);
 }
 
-/* Window title hover effect */
 #window:hover {
   background: rgba(168, 153, 132, 0.2);
   color: #ebdbb2;
-  box-shadow: inset 0 -2px 0 rgba(168, 153, 132, 0.4);
 }
 
-/* Window title when empty */
 #window.empty {
   background: transparent;
   border-bottom: none;
   color: transparent;
-  box-shadow: none;
   padding: 0;
   margin: 0;
   min-width: 0;
@@ -101,24 +88,24 @@ window#waybar {
  * RIGHT MODULES - SHARED STYLES
  * ==========================================*/
 
-/* Shared padding and hover effects for primary modules */
 #clock,
 #battery,
 #pulseaudio,
 #tray,
 #language,
-#weather,
 #cpu,
 #memory,
 #disk,
 #custom-network,
 #custom-prayerbar,
-#custom-weather {
-  padding: 0 10px;
+#custom-weather,
+#custom-gpu-temp,
+#custom-cpu-temp {
+  padding: 0 12px;
   transition: all 0.2s ease-in-out;
+  margin: 0;
 }
 
-/* Universal hover effect for right modules */
 #clock:hover,
 #battery:hover,
 #pulseaudio:hover,
@@ -126,139 +113,210 @@ window#waybar {
 #cpu:hover,
 #memory:hover,
 #disk:hover,
-#custom-weather:hover {
+#custom-weather:hover,
+#custom-gpu-temp:hover,
+#custom-cpu-temp:hover {
   background: rgba(235, 219, 178, 0.1);
-  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.2);
 }
 
 /* ==========================================
  * INDIVIDUAL MODULE STYLES
  * ==========================================*/
 
-/* CPU module */
 #cpu {
   color: #fabd2f;
-  border-bottom: 5px solid #fabd2f;
-  box-shadow: inset 0 -2px 0 rgba(250, 189, 47, 0.3);
+  border-bottom: 3px solid #fabd2f;
 }
 
-/* Memory module */
-#memory {
+#cpu.warning {
   color: #fe8019;
-  border-bottom: 5px solid #fe8019;
-  box-shadow: inset 0 -2px 0 rgba(254, 128, 25, 0.3);
+  border-bottom: 3px solid #fe8019;
+  animation: warning-pulse 2s infinite;
 }
 
-/* Disk module */
+#cpu.critical {
+  color: #cc241d;
+  border-bottom: 3px solid #cc241d;
+  animation: critical-blink 1s infinite;
+}
+
+#custom-cpu-temp {
+  color: #d79921;
+  border-bottom: 3px solid #d79921;
+}
+
+#memory {
+  color: #b16286;
+  border-bottom: 3px solid #b16286;
+}
+
+#memory.warning {
+  color: #fabd2f;
+  border-bottom: 3px solid #fabd2f;
+  animation: warning-pulse 2s infinite;
+}
+
+#memory.critical {
+  color: #cc241d;
+  border-bottom: 3px solid #cc241d;
+  animation: critical-blink 1s infinite;
+}
+
 #disk {
   color: #d3869b;
-  border-bottom: 5px solid #d3869b;
-  box-shadow: inset 0 -2px 0 rgba(211, 134, 155, 0.3);
+  border-bottom: 3px solid #d3869b;
 }
 
-/* Language module */
+#disk.warning {
+  color: #fabd2f;
+  border-bottom: 3px solid #fabd2f;
+  animation: warning-pulse 2s infinite;
+}
+
+#disk.critical {
+  color: #cc241d;
+  border-bottom: 3px solid #cc241d;
+  animation: critical-blink 1s infinite;
+}
+
 #language {
-  color: #d79921;
-  border-bottom: 5px solid #d79921;
-  box-shadow: inset 0 -2px 0 rgba(215, 153, 33, 0.3);
+  color: #a89984;
+  border-bottom: 3px solid #a89984;
 }
 
-/* Weather module */
 #custom-weather {
   color: #98971a;
-  border-bottom: 5px solid #98971a;
-  box-shadow: inset 0 -2px 0 rgba(152, 151, 26, 0.3);
+  border-bottom: 3px solid #98971a;
 }
 
-/* Audio module */
+#custom-gpu-temp {
+  color: #8ec07c;
+  border-bottom: 3px solid #8ec07c;
+}
+
 #pulseaudio {
-  color: #689d6a;
-  border-bottom: 5px solid #689d6a;
-  box-shadow: inset 0 -2px 0 rgba(104, 157, 106, 0.3);
+  color: #83a598;
+  border-bottom: 3px solid #83a598;
 }
 
 #pulseaudio.muted {
-  padding: 0 20px;
   color: #cc241d;
-  border-bottom: 5px solid #cc241d;
-  box-shadow: inset 0 -2px 0 rgba(204, 36, 29, 0.3);
-  animation: pulse 2s ease-in-out infinite;
+  border-bottom: 3px solid #cc241d;
+  animation: mute-pulse 2s infinite;
 }
 
+#pulseaudio#microphone {
+  color: #689d6a;
+  border-bottom: 3px solid #689d6a;
+}
 
-/* Prayer bar module */
+#pulseaudio#microphone.source-muted {
+  color: #cc241d;
+  border-bottom: 3px solid #cc241d;
+  animation: mute-pulse 2s infinite;
+}
+
 #custom-prayerbar {
-  color: #d79921;
-  border-bottom: 5px solid #d79921;
-  box-shadow: inset 0 -2px 0 rgba(215, 153, 33, 0.3);
-}
-
-/* Network module */
-#custom-network {
-  color: #83a598;
-  border-bottom: 5px solid #83a598;
-  box-shadow: inset 0 -2px 0 rgba(131, 165, 152, 0.3);
-}
-
-#custom-network:hover {
-  background: rgba(131, 165, 152, 0.2);
-}
-
-/* Battery module */
-#battery {
   color: #458588;
-  border-bottom: 5px solid #458588;
-  box-shadow: inset 0 -2px 0 rgba(69, 133, 136, 0.3);
+  border-bottom: 3px solid #458588;
 }
 
-/* Battery warning states */
+#custom-network {
+  color: #928374;
+  border-bottom: 3px solid #928374;
+}
+
+#battery {
+  color: #98971a;
+  border-bottom: 3px solid #98971a;
+}
+
+#battery.good {
+  color: #98971a;
+  border-bottom: 3px solid #98971a;
+}
+
 #battery.warning {
   color: #fabd2f;
-  border-bottom: 5px solid #fabd2f;
-  animation: blink 1s ease-in-out infinite;
+  border-bottom: 3px solid #fabd2f;
+  animation: warning-blink 2s infinite;
 }
 
 #battery.critical {
   color: #cc241d;
-  border-bottom: 5px solid #cc241d;
-  animation: blink 0.5s ease-in-out infinite;
+  border-bottom: 3px solid #cc241d;
+  animation: critical-blink 1s infinite;
 }
 
-/* Clock module */
+#battery.charging {
+  color: #8ec07c;
+  border-bottom: 3px solid #8ec07c;
+  animation: charging-pulse 2s infinite;
+}
+
+#battery.plugged {
+  color: #d79921;
+  border-bottom: 3px solid #d79921;
+}
+
 #clock {
-  color: #b16286;
-  border-bottom: 5px solid #b16286;
-  box-shadow: inset 0 -2px 0 rgba(177, 98, 134, 0.3);
+  color: #fb4934;
+  border-bottom: 3px solid #fb4934;
+  font-weight: 900;
 }
 
-/* Tray module */
 #tray {
   color: #d65d0e;
-  border-bottom: 5px solid #d65d0e;
-  box-shadow: inset 0 -2px 0 rgba(214, 93, 14, 0.3);
+  border-bottom: 3px solid #d65d0e;
 }
 
 /* ==========================================
- * ANIMATIONS AND EFFECTS
+ * ANIMATIONS
  * ==========================================*/
 
-/* Icon spacing */
-.module .icon {
-  margin-right: 0.3em;
+@keyframes urgent-blink {
+  50% { 
+    opacity: 0.5; 
+  }
 }
 
-/* Smooth transitions for all interactive elements */
-button, .module {
-  transition: all 0.2s ease-in-out;
+@keyframes warning-pulse {
+  50% { 
+    opacity: 0.8; 
+  }
 }
 
-/* Tooltip style */
+@keyframes critical-blink {
+  50% { 
+    opacity: 0.3; 
+  }
+}
+
+@keyframes mute-pulse {
+  50% { 
+    opacity: 0.6; 
+  }
+}
+
+@keyframes warning-blink {
+  50% { 
+    opacity: 0.7; 
+  }
+}
+
+@keyframes charging-pulse {
+  50% { 
+    opacity: 0.9; 
+  }
+}
+
+/* ==========================================
+ * TOOLTIP
+ * ==========================================*/
+
 tooltip {
   background: #1d2021;
   border: 2px solid #3c3836;
   border-radius: 8px;
-}
-
-tooltip label {
   color: #ebdbb2;
 }

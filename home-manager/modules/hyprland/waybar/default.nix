@@ -9,7 +9,7 @@
       mainBar = {
         layer = "top";
         position = "top";
-        height = 30;
+        height = 27;
 
         modules-left = [
           "hyprland/workspaces"
@@ -20,11 +20,14 @@
 
         modules-right = [
           "cpu"
+          "custom/cpu-temp"
+          "custom/gpu-temp"
           "memory"
           "disk"
           # "hyprland/language"
           "pulseaudio"
-          "custom/weather"
+          "pulseaudio#microphone"
+          # "custom/weather"
           "custom/prayerbar"
           "custom/network"
           "battery"
@@ -34,22 +37,55 @@
 
         "cpu" = {
           format = "  {usage}%";
-          tooltip = false;
+          tooltip-format = "CPU Usage: {usage}%
+Load: {load}";
+          interval = 2;
+          states = {
+            warning = 70;
+            critical = 90;
+          };
+        };
+
+        "custom/gpu-temp" = {
+          format = " {}°C";
+          exec = "~/System/scripts/waybar/gpu-temp.sh";
+          interval = 5;
+          tooltip = true;
+          tooltip-format = "GPU Temperature: {}°C";
+        };
+
+        "custom/cpu-temp" = {
+          format = " {}°C";
+          exec = "sensors | grep 'Package id 0:' | awk '{print $4}' | sed 's/+//;s/°C.*//' || sensors | grep 'Tctl:' | awk '{print $2}' | sed 's/+//;s/°C.*//' || echo 'N/A'";
+          interval = 5;
+          tooltip = true;
+          tooltip-format = "CPU Temperature: {}°C";
         };
 
         "memory" = {
           format = " {percentage}%";
-          tooltip = false;
+          tooltip-format = "Memory: {used:0.1f}G/{total:0.1f}G ({percentage}%)\nAvailable: {avail:0.1f}G";
+          interval = 2;
+          states = {
+            warning = 80;
+            critical = 95;
+          };
         };
 
         "disk" = {
           path = "/";
-          format = "  {percentage_used}%";
-          tooltip = false;
+          format = " {percentage_used}%";
+          tooltip-format = "Disk Usage: {used}/{total} ({percentage_used}%)";
+          interval = 30;
+          states = {
+            warning = 80;
+            critical = 95;
+          };
         };
 
         "hyprland/window" = {
-          max-length = 50;
+          max-length = 35;
+          separate-outputs = true;
         };
 
         "hyprland/workspaces" = {
@@ -63,28 +99,28 @@
             "2" = "";
             "3" = "";
             "4" = "";
-            "5" = "";
-            "magic" = "10";
+            "magic" = "";
           };
 
           persistent-workspaces = {
-            "*" = 5;
+            "*" = 4;
           };
         };
 
         # "hyprland/language" = {
-        #   format-en = "en";
-        #   format-ar = "ar";
+        #   format-en = " EN";
+        #   format-ar = " AR";
         #   min-length = 5;
         #   tooltip = false;
         # };
 
-        "custom/weather" = {
-          format = " {} ";
-          exec = "curl -s 'wttr.in/amman?format=%c%t'";
-          interval = 500;
-          class = "weather";
-        };
+        # "custom/weather" = {
+        #   format = "{} ";
+        #   exec = "curl -s 'wttr.in/amman?format=1' | sed 's/^[[:space:]]*//'";
+        #   interval = 600;
+        #   class = "weather";
+        #   tooltip-format = "Weather in Amman";
+        # };
 
         "pulseaudio" = {
           format = "{icon}  {volume}%";
@@ -104,33 +140,53 @@
             ];
           };
 
+          scroll-step = 5;
           on-click = "pavucontrol";
+          on-click-right = "pactl set-sink-mute @DEFAULT_SINK@ toggle";
+          on-scroll-up = "pactl set-sink-volume @DEFAULT_SINK@ +5%";
+          on-scroll-down = "pactl set-sink-volume @DEFAULT_SINK@ -5%";
+          tooltip-format = "Volume: {volume}%\nDevice: {desc}";
         };
 
-        "custom/network" = {
-          interval = 1;
-          exec = "~/System/scripts/waybar/network.sh";
-          format = "  {}";
-          on-click = "nm-connection-editor";
+        "pulseaudio#microphone" = {
+          format = "{format_source}";
+          format-source = " {volume}%";
+          format-source-muted = "";
+          on-click = "pavucontrol -t 4";
+          on-click-right = "pactl set-source-mute @DEFAULT_SOURCE@ toggle";
+          on-scroll-up = "pactl set-source-volume @DEFAULT_SOURCE@ +5%";
+          on-scroll-down = "pactl set-source-volume @DEFAULT_SOURCE@ -5%";
+          tooltip-format = "Mic: {volume}%\nDevice: {desc}";
         };
 
         "custom/prayerbar" = {
           format = "{}";
           tooltip = true;
-          interval = 60;
+          interval = 600;
           exec = "prayerbar --city Amman --country JO --method 4 --ampm";
           "return-type" = "json";
         };
 
+        "custom/network" = {
+          interval = 30;
+          exec = "~/System/scripts/waybar/network.sh";
+          format = "  {}";
+          on-click = "nm-connection-editor";
+          tooltip = true;
+        };
+
         "battery" = {
           states = {
+            good = 80;
             warning = 30;
-            critical = 1;
+            critical = 15;
           };
 
           format = "{icon}  {capacity}%";
           format-charging = "  {capacity}%";
+          format-plugged = "  {capacity}%";
           format-alt = "{time}  {icon}";
+          format-full = "  {capacity}%";
 
           format-icons = [
             ""
@@ -139,16 +195,22 @@
             ""
             ""
           ];
+
+          tooltip-format = "Battery: {capacity}%\nTime: {time}\nPower: {power}W";
+          on-click = "gnome-power-statistics";
         };
 
         "clock" = {
-          format = "{:%d.%m - %I:%M %p}";
-          format-alt = "{:%A, %B %d at %I:%M %p}";
+          format = "{:%H:%M}";
+          format-alt = " {:%A, %B %d at %I:%M %p}";
+          tooltip-format = "<big>{:%A, %B %d, %Y}</big>\n<small>{:%I:%M %p}</small>";
+          on-click = "gnome-calendar";
         };
 
         "tray" = {
-          icon-size = 14;
-          spacing = 1;
+          icon-size = 15;
+          spacing = 6;
+          show-passive-items = true;
         };
       };
     };

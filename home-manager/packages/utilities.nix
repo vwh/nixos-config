@@ -19,4 +19,5 @@ with pkgsStable;
   ueberzugpp # terminal image viewer
   udisks # automount USB, SD cards, pmount, …
   xarchiver # archive manager
+  lm_sensors # hardware monitoringc
 ]
