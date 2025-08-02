@@ -2,7 +2,7 @@
 
 This repository contains my personal NixOS system configurations, managed with Nix Flakes.
 
-![image](https://github.com/user-attachments/assets/07ba2010-ce96-486b-ad55-521b58691c91)
+![photo_2025-08-02_23-49-42](https://github.com/user-attachments/assets/a1facebb-61a9-4978-9405-9614af918a2b)
 
 ---
 
