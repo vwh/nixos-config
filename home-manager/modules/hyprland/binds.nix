@@ -1,10 +1,10 @@
 # Hyprland keybinds and custom scripts.
 
-{ pkgs, ... }:
+{ pkgsStable, ... }:
 
 let
   booksDir = "$HOME/Downloads/books";
-  booksScript = pkgs.writeScriptBin "open_books" ''
+  booksScript = pkgsStable.writeScriptBin "open_books" ''
     #!/bin/sh
 
     BOOKS_DIR="${booksDir}"
@@ -18,7 +18,7 @@ let
     fi
   '';
 
-  windowSwitcher = pkgs.writeScriptBin "window-switcher" ''
+  windowSwitcher = pkgsStable.writeScriptBin "window-switcher" ''
     #!/bin/sh
     windows=$(hyprctl clients -j | jq -r '.[] | "\(.workspace.id):\(.workspace.name) - \(.class) - \(.title)"')
     selected=$(echo "$windows" | wofi --dmenu --prompt "Switch to window" --width 800)

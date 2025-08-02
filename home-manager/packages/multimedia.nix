@@ -1,8 +1,8 @@
 # List of multimedia packages to install.
 
-{ pkgs, ... }:
+{ pkgsStable, ... }:
 
-with pkgs;
+with pkgsStable;
 [
   mpv # Video player
   imv # Image viewer

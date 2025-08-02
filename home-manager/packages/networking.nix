@@ -1,8 +1,8 @@
 # List of networking tools to install.
 
-{ pkgs, ... }:
+{ pkgsStable, ... }:
 
-with pkgs;
+with pkgsStable;
 [
   openssl
   openssl.dev

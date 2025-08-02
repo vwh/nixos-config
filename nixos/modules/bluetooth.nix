@@ -1,6 +1,6 @@
 # Bluetooth configuration.
 
-{ pkgs, ... }:
+{ pkgsStable, ... }:
 
 {
   hardware.bluetooth = {
@@ -10,5 +10,5 @@
 
   services.blueman.enable = true;
 
-  environment.systemPackages = with pkgs; [ blueman ];
+  environment.systemPackages = with pkgsStable; [ blueman ];
 }

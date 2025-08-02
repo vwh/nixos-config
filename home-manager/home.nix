@@ -25,7 +25,7 @@
     let
       extraPkgs = import ./packages { inherit pkgs pkgsStable; };
     in
-    (with pkgs; [
+    (with pkgsStable; [
       nixfmt-rfc-style
       nixd
       pyprland

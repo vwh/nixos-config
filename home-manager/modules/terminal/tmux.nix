@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgsStable, ... }:
 
 {
   programs.tmux = {
@@ -84,7 +84,7 @@
       set -g clock-mode-colour "#b8bb26"
     '';
 
-    plugins = with pkgs; [
+    plugins = with pkgsStable; [
       # No plugins needed
     ];
   };

@@ -1,12 +1,12 @@
 # Nix-ld configuration for running non-Nix binaries.
 
-{ pkgs, ... }:
+{ pkgsStable, ... }:
 
 {
   programs.nix-ld = {
     enable = true;
 
-    libraries = with pkgs; [
+    libraries = with pkgsStable; [
       stdenv.cc.cc # glibc + compiler runtime
       libgcc
       zlib
