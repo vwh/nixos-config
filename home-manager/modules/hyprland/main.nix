@@ -1,5 +1,7 @@
 # Main Hyprland compositor settings.
 
+{ pkgsStable, ... }:
+
 {
   wayland.windowManager.hyprland = {
     enable = true;
@@ -37,7 +39,6 @@
         "[workspace 3 silent] Telegram"
         "[workspace 4 silent] spotify"
 
-        "sleep 1 && pyprland" # Start pyprland daemon
         # Better notifications
         "wl-paste -t text --watch clipman store"
         "wl-paste -p -t text --watch clipman store -P --histpath=\"~/.local/share/clipman-primary.json\""

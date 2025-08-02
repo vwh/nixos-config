@@ -28,7 +28,6 @@
     (with pkgsStable; [
       nixfmt-rfc-style
       nixd
-      pyprland
     ])
     ++ extraPkgs;
 
@@ -44,22 +43,4 @@
   };
 
   programs.home-manager.enable = true;
-
-  home.file.".config/hypr/pyprland.toml".text = ''
-    [pyprland]
-    plugins = ["scratchpads", "magnify", "expose"]
-
-    [scratchpads.term]
-    command = "alacritty --class scratchpad"
-    size = "80% 80%"
-
-    [scratchpads.volume]
-    command = "pavucontrol"
-    size = "40% 60%"
-    position = "30% 20%"
-
-    [scratchpads.music]
-    command = "spotify"
-    size = "70% 80%"
-  '';
 }

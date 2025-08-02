@@ -64,7 +64,6 @@ in
 
       # Quick actions
       "$mainMod, U, exec, hyprctl dispatch workspace previous" # Quick workspace switch
-      "$mainMod, Z, exec, pypr zoom" # Zoom current window (needs pyprland)
 
       # Window groups
       "$mainMod, G, togglegroup,"
