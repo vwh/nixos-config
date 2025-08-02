@@ -32,7 +32,7 @@
         "[workspace 1 silent] $browser"
         "[workspace 2 silent] $terminal"
         "[workspace 2 silent] $editor"
-        "[workspace 3 silent] telegram"
+        "[workspace 3 silent] Telegram"
         "[workspace 4 silent] spotify"
 
         "sleep 1 && pyprland" # Start pyprland daemon
@@ -147,7 +147,7 @@
 
         "workspace 1,class:($browser)"
 
-        "workspace 3,class:(telegram)"
+        "workspace 3,class:(Telegram)"
         "workspace 3,class:(vesktop)"
 
         "workspace 4,class:(spotify)"
