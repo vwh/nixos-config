@@ -106,7 +106,7 @@
           "windows, 1, 3, fluent_decel, slide"
           "windowsOut, 1, 3, fluent_decel, slide"
           "windowsMove, 1, 2, softAcDecel"
-          "workspaces, 1, 2, fluent_decel"
+          "workspaces, 0, 0, fluent_decel"
           "specialWorkspace, 1, 3, fluent_decel, slidevert"
           "layers, 1, 3, easeOutCirc"
           "layersIn, 1, 3, easeOutCirc, left"
