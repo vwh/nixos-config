@@ -76,9 +76,14 @@
       light = "Papirus-Light";
     };
 
+    # image = pkgs.fetchurl {
+    #   url = "https://codeberg.org/lunik1/nixos-logo-gruvbox-wallpaper/raw/branch/master/png/gruvbox-dark-rainbow.png";
+    #   sha256 = "036gqhbf6s5ddgvfbgn6iqbzgizssyf7820m5815b2gd748jw8zc";
+    # };
+
     image = pkgs.fetchurl {
-      url = "https://codeberg.org/lunik1/nixos-logo-gruvbox-wallpaper/raw/branch/master/png/gruvbox-dark-rainbow.png";
-      sha256 = "036gqhbf6s5ddgvfbgn6iqbzgizssyf7820m5815b2gd748jw8zc";
+      url = "https://raw.githubusercontent.com/ChapST1/gruvbox-wallpapers-web/master/wallpapers/pixelart/16.png";
+      sha256 = "sha256-OjH9L9olr2x0zp0EY+BFe6r/C5T98fovdVAkPEBAmq4=";
     };
   };
 }
