@@ -20,4 +20,11 @@
   teams-for-linux # Microsoft Teams
   telegram-desktop # Telegram messenger
   vesktop # Discord client
+  gnome-themes-extra # Base for many GTK themes
+  libsForQt5.qtstyleplugin-kvantum # For advanced Qt styling
+])
+
+++ (with pkgsStable; [
+  gruvbox-gtk-theme # Gruvbox GTK theme
+  gruvbox-kvantum # Gruvbox Qt theme
 ])

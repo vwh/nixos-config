@@ -13,6 +13,8 @@
         "XDG_SESSION_TYPE,wayland"
         "XDG_SESSION_DESKTOP,Hyprland"
         "QT_QPA_PLATFORM,wayland"
+        "GTK_THEME=Gruvbox-Dark" # Adjust to the exact theme name
+        "QT_STYLE_OVERRIDE=kvantum"
         "XDG_SCREENSHOTS_DIR,$HOME/screens"
       ];
 
@@ -70,17 +72,18 @@
           enabled = true;
           size = 3;
           passes = 2;
-          ignore_opacity = true;
+          ignore_opacity = false;
           new_optimizations = true;
-          xray = true;
+          xray = false;
+          special = false;
         };
       };
 
-      # Better mouse behavior
       input = {
         kb_layout = "us,ara";
         kb_options = "grp:caps_toggle";
-        # ... existing settings ...
+
+        # Better mouse behavior
         follow_mouse = 2; # Focus on mouse enter
         float_switch_override_focus = 0;
         mouse_refocus = false;
@@ -191,6 +194,8 @@
 
         # Transparency for terminals
         "opacity 0.95 0.85, class:^(Alacritty|kitty|foot)$"
+
+        "opacity 0.95, class:(brave-browser)" # Slight transparency for modern feel
 
         # No animations for tooltips
         "noanim, class:^(tooltip)$"
