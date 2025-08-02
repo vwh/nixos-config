@@ -7,6 +7,7 @@
   gnome-tweaks # Tweaks
   gnome-calendar # Calendar
   gnome-clocks # Clocks
+  gnome-disk-utility # Disk management (formats, partitions)
 ])
 
 ++ (with pkgsStable.gnomeExtensions; [

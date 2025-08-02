@@ -23,7 +23,7 @@
       "$terminal" = "alacritty";
       "$browser" = "brave";
       "$editor" = "code";
-      "$fileManager" = "thunar";
+      "$fileManager" = "nautilus";
       "$menu" = "wofi";
 
       exec-once = [

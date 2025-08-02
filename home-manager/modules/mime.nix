@@ -10,7 +10,7 @@ let
     image = [ "imv.desktop" ];
     audio = [ "mpv.desktop" ];
     video = [ "mpv.desktop" ];
-    directory = [ "thunar.desktop" ];
+    directory = [ "nautilus.desktop" ];
     office = [ "libreoffice.desktop" ];
     pdf = [ "zathura.desktop" ];
     terminal = [ "alacritty.desktop" ];

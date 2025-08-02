@@ -9,6 +9,11 @@ with pkgsStable;
   diffutils # GNU diff
   gzip # GNU gzip
   unzip # GNU zip
+  file-roller # archive manager
+  p7zip # 7-zip
+  unrar # RAR decompression
+  xz # xz compression
+  bzip2 # bzip2 compression
   xdg-utils # xdg utilities
   desktop-file-utils # desktop file utilities
   optipng # optimize PNG files
