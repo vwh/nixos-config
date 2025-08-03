@@ -1,37 +1,28 @@
-/* ==========================================
- * WOFI STYLE - ENHANCED GRUVBOX THEME
- * ==========================================*/
-
-/* ==========================================
- * MAIN WINDOW
- * ==========================================*/
+/* WOFI — Gruvbox */
 
 window {
-  margin: 0px;
+  margin: 0;
+  padding: 0;
   border: 3px solid #d65d0e;
+  border-radius: 0;
   background: #282828;
-  font-family: "JetBrains Mono", "Font Awesome 6 Free", monospace;
+  font-family: "JetBrains Mono", monospace;
   font-weight: 600;
-  font-size: 15px;
-  border-radius: 0px;
-  animation: windowSlideIn 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  font-size: 14px;
+  color: #ebdbb2;
 }
 
-/* ==========================================
- * INPUT AND SEARCH
- * ==========================================*/
-
+/* Search input */
 #input {
   all: unset;
   margin: 4px;
   padding: 4px 8px;
   border: 2px solid #3c3836;
-  border-radius: 0px;
-  color: #ebdbb2;
+  border-radius: 0;
   background: #1d2021;
-  font-size: 16px;
+  color: #ebdbb2;
+  font-size: 15px;
   font-weight: 500;
-  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 #input:focus {
@@ -45,105 +36,83 @@ window {
   font-style: italic;
 }
 
-/* ==========================================
- * CONTAINER LAYOUT
- * ==========================================*/
-
-#inner-box {
-  margin: 0px;
+/* Containers */
+#outer-box {
+  margin: 0;
+  padding: 0;
   border: none;
   background: transparent;
-  border-radius: 8px;
 }
 
-#outer-box {
-  margin: 0px;
+#inner-box {
+  margin: 0;
+  padding: 0;
   border: none;
   background: transparent;
 }
 
 #scroll {
-  margin: 0px 4px 4px 4px;
+  margin: 0 4px 4px 4px;
+  padding: 0;
   border: none;
-  padding: 0px;
   background: transparent;
 }
 
-/* ==========================================
- * ENTRIES AND TEXT
- * ==========================================*/
-
+/* Entries */
 #entry {
   all: unset;
   padding: 4px 8px;
-  margin: 0px;
-  border-radius: 0px;
+  margin: 0;
+  min-height: 28px;
+  border-radius: 0;
   border: 1px solid transparent;
   background: transparent;
-  transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  cursor: pointer;
-  min-height: 28px;
+  color: #ebdbb2;
   display: flex;
   align-items: center;
 }
 
 #entry:nth-child(even) {
-  background: rgba(60, 56, 54, 0.1);
+  background: rgba(60, 56, 54, 0.10);
 }
 
 #entry:hover {
-  background: rgba(214, 93, 14, 0.2);
-  border-color: rgba(214, 93, 14, 0.3);
-  transform: translateX(4px);
+  background: rgba(40, 40, 40, 0.50);
+  border-color: rgba(60, 56, 54, 0.60);
 }
 
 #entry:selected {
   background: #d65d0e;
-  color: #1d2021;
   border-color: #fabd2f;
-  transform: translateX(6px) scale(1.02);
+  color: #1d2021;
   font-weight: 700;
 }
 
-#entry:selected #text {
-  color: #1d2021;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-}
-
+/* Entry text and icon */
 #text {
-  margin: 0px;
+  margin: 0;
+  padding: 0;
   border: none;
-  color: #ebdbb2;
+  color: inherit;
   font-size: 15px;
   font-weight: 500;
-  transition: all 0.2s ease;
 }
 
-/* Application icons */
 #entry image {
   margin-right: 6px;
-  transition: all 0.2s ease;
 }
 
-#entry:selected image {
-  transform: scale(1.05);
-}
-
-/* ==========================================
- * SCROLLBAR STYLING
- * ==========================================*/
-
+/* Scrollbar */
 scrollbar {
-  background: rgba(60, 56, 54, 0.3);
-  border-radius: 0px;
-  width: 6px;
+  background: rgba(60, 56, 54, 0.30);
+  border-radius: 0;
   margin: 2px;
+  width: 6px;
 }
 
 scrollbar slider {
   background: #665c54;
-  border-radius: 0px;
-  transition: all 0.3s ease;
+  border-radius: 0;
   min-height: 20px;
 }
 
@@ -155,114 +124,41 @@ scrollbar slider:active {
   background: #d65d0e;
 }
 
-/* ==========================================
- * ANIMATIONS
- * ==========================================*/
-
-@keyframes windowSlideIn {
-  0% {
-    opacity: 0;
-    transform: translateY(-20px) scale(0.95);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-@keyframes entryFadeIn {
-  0% {
-    opacity: 0;
-    transform: translateY(4px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-#entry {
-  animation: entryFadeIn 0.15s ease-out;
-}
-
-/* ==========================================
- * SPECIAL STATES
- * ==========================================*/
-
-/* No results state */
-#entry:only-child {
-  color: #928374;
-  font-style: italic;
-  text-align: center;
-  padding: 20px;
-  border: 2px dashed #504945;
-}
-
-/* Loading state animation */
-@keyframes pulse {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.6;
-  }
-}
-
-/* Empty state */
-#entry[data-empty="true"] {
-  animation: pulse 2s infinite;
-}
-
-/* ==========================================
- * RESPONSIVE IMPROVEMENTS
- * ==========================================*/
-
-/* Better spacing for different content types */
+/* Category color accents via data attributes (optional) */
 #entry[data-category="System"] {
   border-left: 3px solid #cc241d;
 }
-
 #entry[data-category="Development"] {
   border-left: 3px solid #458588;
 }
-
 #entry[data-category="Graphics"] {
   border-left: 3px solid #b16286;
 }
-
 #entry[data-category="Internet"] {
   border-left: 3px solid #689d6a;
 }
-
 #entry[data-category="Office"] {
   border-left: 3px solid #d79921;
 }
 
-/* ==========================================
- * ACCESSIBILITY
- * ==========================================*/
-
-/* High contrast mode support */
+/* High contrast and reduced motion */
 @media (prefers-contrast: high) {
   window {
     border-width: 4px;
   }
-  
   #entry:selected {
     background: #fabd2f;
     color: #1d2021;
     border: 2px solid #1d2021;
   }
-  
   #input:focus {
     outline: 3px solid #d65d0e;
   }
 }
 
-/* Reduced motion support */
 @media (prefers-reduced-motion: reduce) {
   * {
-    animation-duration: 0.01s !important;
     transition-duration: 0.01s !important;
+    animation-duration: 0.01s !important;
   }
 }
