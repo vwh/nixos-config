@@ -211,8 +211,8 @@ Load: {load}";
           tooltip-format = "Battery: {capacity}%\nTime: {time}\nPower: {power}W";
         };
 
-        "clock" = {
-          format = "{:%H:%M}";
+        clock = {
+          format = "{:%I:%M %p}";
           format-alt = " {:%A, %B %d at %I:%M %p}";
           tooltip-format = "<big>{:%A, %B %d, %Y}</big>\n<small>{:%I:%M %p}</small>";
           on-click = "gnome-calendar";
