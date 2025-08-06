@@ -149,6 +149,11 @@
         "move 990 60,size 900 170,pin,noinitialfocus,class:(showmethekey-gtk)"
         "noborder,nofocus,class:(showmethekey-gtk)"
 
+        # To get more information about a window’s class, title, XWayland status or its size, you can use `hyprctl clients`. (From Hyprland Wiki)
+        "float,class:^(one.alynx.showmethekey)$"
+        "float,class:^(showmethekey-gtk)$" # make window floating
+        "pin,class:^(showmethekey-gtk)$" # pin window
+
         "workspace 1,class:($browser)"
 
         "workspace 3,class:(Telegram)"
