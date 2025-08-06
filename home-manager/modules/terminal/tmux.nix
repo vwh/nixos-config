@@ -8,6 +8,7 @@
     escapeTime = 0;
     keyMode = "vi";
     terminal = "tmux-256color";
+    historyLimit = 50000;
 
     extraConfig = ''
       set -as terminal-features ",alacritty*:RGB"
@@ -56,36 +57,118 @@
       bind -n M-q kill-window
       bind -n M-Q kill-session
 
-      # Cool Gruvbox theme 
-      set -g status-style "bg=#282828,fg=#ebdbb2"
+      bind -n M-z resize-pane -Z  # Toggle pane zoom
+      bind -n M-x confirm-before -p "kill-session #S? (y/n)" kill-session
+      bind -n M-R command-prompt -I "#W" "rename-window '%%'"
+      bind -n M-S command-prompt -I "#S" "rename-session '%%'"
+
+      # Better copy mode
+      bind -n M-[ copy-mode
+      bind -T copy-mode-vi v send-keys -X begin-selection
+      bind -T copy-mode-vi C-v send-keys -X rectangle-toggle
+      bind -T copy-mode-vi y send-keys -X copy-selection-and-cancel
+      bind -T copy-mode-vi Escape send-keys -X cancel
+
+      # Smart pane switching with awareness of Vim splits
+      is_vim="ps -o state= -o comm= -t '#{pane_tty}' | grep -iqE '^[^TXZ ]+ +(\\S+\\/)?g?(view|n?vim?x?)(diff)?$'"
+      bind-key -n 'C-h' if-shell "$is_vim" 'send-keys C-h'  'select-pane -L'
+      bind-key -n 'C-j' if-shell "$is_vim" 'send-keys C-j'  'select-pane -D'
+      bind-key -n 'C-k' if-shell "$is_vim" 'send-keys C-k'  'select-pane -U'
+      bind-key -n 'C-l' if-shell "$is_vim" 'send-keys C-l'  'select-pane -R'
+
+      set -g status-style "bg=default,fg=#ebdbb2"
       set -g status-left-length 40
-      set -g status-right-length 60
+      set -g status-right-length 70
 
-      # Left side: Clean session name
-      set -g status-left "#[bg=#fe8019,fg=#1d2021,bold] #S "
+      # Status bar positioning and updates
+      set -g status-interval 5
+      set -g status-justify left
 
-      # Right side: Git branch and current directory
-      set -g status-right "#[bg=#458588,fg=#1d2021,bold] ⎇  #(cd #{pane_current_path}; git branch --show-current 2>/dev/null || echo 'no-git') │ 📁 #{b:pane_current_path} "
+      # Left side: Minimal session name with no background
+      set -g status-left "#[fg=#d65d0e,bold] #S "
 
-      # Window styling
-      set -g window-status-format "#[bg=#3c3836,fg=#a89984] #I │ #W "
-      set -g window-status-current-format "#[bg=#b8bb26,fg=#1d2021,bold] #I │ #W "
+      set -g status-right ""
+
+      set -g window-status-format "#[fg=#a89984] #I │ #W "
+      set -g window-status-current-format "#[fg=#d65d0e,bold] #I │ #W "
       set -g window-status-separator ""
 
-      # Pane borders
-      set -g pane-border-style "fg=#504945"
-      set -g pane-active-border-style "fg=#fe8019,bold"
+      set -g pane-border-style "fg=#3c3836"
+      set -g pane-active-border-style "fg=#d65d0e,bold"
 
-      # Message colors
-      set -g message-style "bg=#fe8019,fg=#1d2021,bold"
-      set -g message-command-style "bg=#b8bb26,fg=#1d2021,bold"
+      set -g message-style "bg=#d65d0e,fg=#1d2021,bold"
+      set -g message-command-style "bg=#fb4934,fg=#1d2021,bold"
 
-      # Clock color
-      set -g clock-mode-colour "#b8bb26"
+      set -g clock-mode-colour "#fb4934"
+
+      set -g mode-style "bg=#d65d0e,fg=#1d2021"
+
+      set -g display-panes-active-colour "#d65d0e"
+      set -g display-panes-colour "#3c3836"
+      set -g display-panes-time 2000
+
+      # Status messages
+      set -g display-time 2000
+      set -g status-keys vi
+
+      # Window activity
+      setw -g monitor-activity on
+      set -g visual-activity off
+      set -g activity-action other
     '';
 
-    plugins = with pkgsStable; [
-      # No plugins needed
+    plugins = with pkgsStable.tmuxPlugins; [
+      # Session management and persistence
+      {
+        plugin = resurrect;
+        extraConfig = ''
+          set -g @resurrect-strategy-nvim 'session'
+          set -g @resurrect-strategy-vim 'session'
+          set -g @resurrect-capture-pane-contents 'on'
+          set -g @resurrect-processes 'ssh psql mysql sqlite3'
+        '';
+      }
+
+      {
+        plugin = continuum;
+        extraConfig = ''
+          set -g @continuum-restore 'on'
+          set -g @continuum-save-interval '15'
+          set -g @continuum-boot 'on'
+        '';
+      }
+
+      # Enhanced navigation
+      {
+        plugin = vim-tmux-navigator;
+        extraConfig = ''
+          # Smart pane switching with awareness of Vim splits
+          set -g @vim_navigator_mapping_left "C-h"
+          set -g @vim_navigator_mapping_down "C-j"
+          set -g @vim_navigator_mapping_up "C-k"
+          set -g @vim_navigator_mapping_right "C-l"
+        '';
+      }
+
+      # Copy to system clipboard
+      {
+        plugin = yank;
+        extraConfig = ''
+          set -g @yank_selection_mouse 'clipboard'
+          set -g @yank_action 'copy-pipe-no-clear'
+        '';
+      }
+
+      # Better search
+      {
+        plugin = copycat;
+        extraConfig = ''
+          set -g @copycat_search_C-f 'C-f'
+        '';
+      }
+
+      # Sensible defaults
+      sensible
     ];
   };
 }
