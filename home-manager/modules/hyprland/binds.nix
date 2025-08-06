@@ -37,22 +37,21 @@ in
 
   wayland.windowManager.hyprland.settings = {
     bind = [
+      # Window switcher menu
       "$mainMod, W, exec, ${windowSwitcher}/bin/window-switcher"
+
       # Window focus cycling with Tab
       "$mainMod, Tab, cyclenext,"
       "$mainMod SHIFT, Tab, cyclenext, prev"
 
-      # Better window resizing with submap
-      # "$mainMod, R, submap, resize"
-
       # Center floating window
       "$mainMod, C, centerwindow,"
 
-      # Toggle window opacity
+      # Opacity toggle
       "$mainMod, O, exec, hyprctl keyword decoration:active_opacity 0.8"
       "$mainMod SHIFT, O, exec, hyprctl keyword decoration:active_opacity 1.0"
 
-      # Quick window swap
+      # Swap windows
       "$mainMod, S, swapnext,"
       "$mainMod SHIFT, S, swapnext, prev"
 
@@ -62,16 +61,21 @@ in
       "$mainMod SHIFT, comma, layoutmsg, addmaster"
       "$mainMod SHIFT, period, layoutmsg, removemaster"
 
+      # Layout orientation toggle (vertical/horizontal)
+      "$mainMod, I, layoutmsg, orientationtop" # Top orientation (horizontal)
+      "$mainMod SHIFT, I, layoutmsg, orientationleft" # Left orientation (vertical)
+      "$mainMod CTRL, I, layoutmsg, orientationcenter" # Center orientation
+
+      # Layout switching
+      "$mainMod, L, exec, hyprctl keyword general:layout dwindle" # Switch to dwindle
+      "$mainMod SHIFT, L, exec, hyprctl keyword general:layout master" # Switch to master
+
       # Quick actions
       "$mainMod, U, exec, hyprctl dispatch workspace previous" # Quick workspace switch
 
       # Window groups
       "$mainMod, G, togglegroup,"
       "$mainMod SHIFT, G, moveoutofgroup,"
-
-      # Special workspace for quick notes
-      # "$mainMod, N, togglespecialworkspace, notes"
-      # "$mainMod SHIFT, N, movetoworkspace, special:notes"
 
       # Color picker with notification
       "$mainMod, P, exec, hyprpicker -a && notify-send 'Color copied'"
@@ -90,10 +94,11 @@ in
       "$mainMod,       R, exec, env -u TMUX alacritty -e yazi"
       "$mainMod,       F, togglefloating,"
       "$mainMod,       D, exec, $menu --show drun"
-      "$mainMod,       J, togglesplit,"
       "$mainMod,       V, exec, cliphist list | $menu --dmenu | cliphist decode | wl-copy"
       "$mainMod,       M, fullscreen,"
 
+      # Advanced window management
+      "$mainMod,       A, pin," # Pin window (always on top)
       # Apps
       "$mainMod,       B, exec, brave"
 
@@ -137,6 +142,9 @@ in
       "$mainMod, 3, workspace, 3"
       "$mainMod, 4, workspace, 4"
 
+      # Quick workspace navigation
+      "$mainMod, grave, workspace, previous" # Last workspace
+
       # Moving windows to workspaces
       "$mainMod SHIFT, 1, movetoworkspacesilent, 1"
       "$mainMod SHIFT, 2, movetoworkspacesilent, 2"
@@ -146,6 +154,9 @@ in
       # Scratchpad
       "$mainMod,       X, togglespecialworkspace,  magic"
       "$mainMod SHIFT, X, movetoworkspace, special:magic"
+
+      # "$mainMod, bracketleft, workspace, m-1" # Previous workspace
+      # "$mainMod, bracketright, workspace, m+1" # Next workspace
     ];
 
     # Move/resize windows with mainMod + LMB/RMB and dragging

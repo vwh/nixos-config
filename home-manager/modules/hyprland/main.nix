@@ -129,12 +129,22 @@
       dwindle = {
         pseudotile = true;
         preserve_split = true;
+        smart_split = false;
+        smart_resizing = true;
+        force_split = 0; # 0 = split follows mouse, 1 = always split to the right/bottom, 2 = always split to the left/top
+        default_split_ratio = 1.0;
+        use_active_for_splits = true;
+        split_width_multiplier = 1.0;
       };
 
       master = {
         new_status = "slave";
         new_on_top = true;
-        mfact = 0.5;
+        mfact = 0.55; # Master window takes 55% of screen
+        orientation = "left"; # Default to vertical split (master on left)
+        inherit_fullscreen = true;
+        smart_resizing = true;
+        drop_at_cursor = true;
       };
 
       misc = {
