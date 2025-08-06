@@ -8,6 +8,7 @@
   gnome-calendar # Calendar
   gnome-clocks # Clocks
   gnome-disk-utility # Disk management (formats, partitions)
+  gnome-text-editor # Text editor
 ])
 
 ++ (with pkgsStable.gnomeExtensions; [

@@ -13,6 +13,7 @@ let
     ./multimedia.nix
     ./networking.nix
     ./prayer.nix
+    ./system-monitoring.nix
     ./utilities.nix
   ];
 in

@@ -3,28 +3,29 @@
 { pkgs, pkgsStable }:
 
 (with pkgsStable; [
+  # Applications
   tor-browser # Tor browser
   libreoffice-qt6-fresh # LibreOffice suite
+
+  # Themes
+  gruvbox-gtk-theme # Gruvbox GTK theme
+  gruvbox-kvantum # Gruvbox Qt theme
+  gnome-themes-extra # Base for many GTK themes
 ])
 
 ++ (with pkgs; [
-  anki # Anki flashcards
-  gnome-text-editor # Text editor
-  alacritty # Terminal emulator
-  vscode # Visual Studio Code
-  obsidian # Obsidian note-taking app
-  # audacity # Audio editor
+  # Browsers
   brave # Brave browser
   firefox # Firefox browser
-  sqlitebrowser # SQLite browser
-  teams-for-linux # Microsoft Teams
-  telegram-desktop # Telegram messenger
-  vesktop # Discord client
-  gnome-themes-extra # Base for many GTK themes
-  libsForQt5.qtstyleplugin-kvantum # For advanced Qt styling
-])
 
-++ (with pkgsStable; [
-  gruvbox-gtk-theme # Gruvbox GTK theme
-  gruvbox-kvantum # Gruvbox Qt theme
+  # Communication
+  element-desktop # Matrix client
+  vesktop # Discord client
+  telegram-desktop # Telegram messenger
+  slack # Slack client
+  teams-for-linux # Microsoft Teams
+
+  # Tools
+  anki # Anki flashcards
+  obsidian # Obsidian note-taking app
 ])
