@@ -1,23 +1,38 @@
 # NixOS System Configurations
 
-This repository contains my personal NixOS system configurations, managed with Nix Flakes.
+This repository contains my personal NixOS system configurations, managed with Nix Flakes. It features a complete desktop environment with Hyprland compositor, beautiful Gruvbox theming, and extensive development tooling.
 
-![photo_2025-08-02_23-49-42](https://github.com/user-attachments/assets/a1facebb-61a9-4978-9405-9614af918a2b)
+![Desktop Screenshot](https://github.com/user-attachments/assets/a1facebb-61a9-4978-9405-9614af918a2b)
 
 ---
 
+##  Quick Start
+
+### Installation
+```bash
+# Clone the repository
+git clone https://github.com/vwh/nixos-config.git ~/System
+cd ~/System
+
+# Apply the configuration
+just all  # or follow the step-by-step process below
+```
+
 ## Daily Workflow
 
-This repository uses `just` as a command runner to simplify common tasks.
+This repository uses [`just`](https://github.com/casey/just) as a command runner to simplify common tasks.
 
-*   **`just`**: List all available commands.
-*   **`just all`**: Run the full pipeline: check, lint, format, and deploy both NixOS and Home-Manager.
-*   **`just nixos`**: Rebuild and switch to the new NixOS generation for the current host.
-*   **`just home`**: Apply the latest Home-Manager generation for the user `yazan`.
-*   **`just format`**: Format all `.nix` files with `nixfmt`.
-*   **`just lint`**: Lint all `.nix` files with `statix`.
-*   **`just modules`**: Check for missing module imports.
-*   **`just update`**: Update all flake inputs.
+### Essential Commands
+| Command | Description |
+|---------|-------------|
+| `just` | List all available commands |
+| `just all` | Run the full pipeline: check, lint, format, and deploy |
+| `just nixos` | Rebuild and switch NixOS configuration |
+| `just home` | Apply Home-Manager configuration |
+| `just format` | Format all `.nix` files with `nixfmt` |
+| `just lint` | Lint all `.nix` files with `statix` |
+| `just modules` | Check for missing module imports |
+| `just update` | Update all flake inputs |
 
 ---
 
@@ -69,7 +84,7 @@ This configuration uses `sops-nix` for managing secrets.
 ├── home-manager/                  ← Home-Manager configuration
 │   ├── modules/                   ← reusable home-manager modules (e.g. zsh, git)
 │   ├── packages/                  ← grouped package lists for Home-Manager
-│   └── home.nix                   ← entrypoint loading your user modules
+│   └── home.nix                   ← entrypoint loading the user modules
 ├── hosts/                         ← per-host NixOS configurations
 │   ├── pc/                        ← “pc” host (configuration.nix, hardware config, etc.)
 │   └── thinkpad/                  ← “thinkpad” host
@@ -81,7 +96,23 @@ This configuration uses `sops-nix` for managing secrets.
 │   └── modules/                   ← reusable NixOS modules (networking, users, etc.)
 ├── secrets/                       ← sensitive files (e.g. SSL certs, API keys)
 ├── flake.lock                     ← locked inputs for the root flake
-├── flake.nix                      ← root flake (all inputs & outputs for your config)
+├── flake.nix                      ← root flake (all inputs & outputs for the config)
 ├── justfile                       ← project tasks & shortcuts (build, deploy, fmt…)
-└── modules-check.sh               ← script to validate your Nix modules
+├── scripts/                       ← Utility scripts
+│   ├── build/                     ← Build-related scripts
+│   ├── npm/                       ← NPM setup scripts
+│   └── waybar/                    ← Waybar helper scripts
+├── secrets/                       ← Encrypted secrets (sops-nix)
+├── flake.nix                      ← Main flake configuration
+├── flake.lock                     ← Locked dependency versions
+├── justfile                       ← Task runner commands
 ```
+
+### Key Directories Explained
+
+- **`home-manager/`** - User-space configuration managed by Home-Manager
+- **`hosts/`** - Machine-specific system configurations
+- **`devShells/`** - Isolated development environments for different languages
+- **`nixos/modules/`** - Reusable system-level modules
+- **`secrets/`** - Encrypted configuration files using sops-nix
+- **`themes/`** - Custom application themes matching the Gruvbox aesthetic
