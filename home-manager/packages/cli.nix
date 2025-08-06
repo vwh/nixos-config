@@ -44,4 +44,7 @@ with pkgs;
 
   # JSON/YAML/TOML utilities
   fx # JSON viewer
+
+  # Color utilities
+  vivid # LS_COLORS generator
 ]
