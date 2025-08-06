@@ -21,5 +21,12 @@
     inherit stateVersion;
   };
 
-  environment.systemPackages = [ pkgs.home-manager ];
+  mySystem.gaming = {
+    enable = true;
+    enableGamescope = true;
+  };
+
+  environment.systemPackages = with pkgs; [
+    home-manager
+  ];
 }
