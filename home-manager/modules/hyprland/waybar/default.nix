@@ -96,7 +96,7 @@ Load: {load}";
         };
 
         "hyprland/window" = {
-          max-length = 35;
+          max-length = 50;
           separate-outputs = true;
         };
 
@@ -219,7 +219,7 @@ Load: {load}";
         };
 
         "tray" = {
-          icon-size = 15;
+          icon-size = 12;
           spacing = 6;
           show-passive-items = true;
         };

@@ -1,22 +1,22 @@
-/* WAYBAR — GRUVBOX */
+/* WAYBAR — GRUVBOX MINIMAL (dense, no gaps) */
 
 * {
-  border: none;
+  border: 0;
   border-radius: 0;
   font-family: "JetBrains Mono", monospace;
   font-weight: 600;
-  font-size: 14px;
+  font-size: 13px; /* set 14px if you want default size back */
   min-height: 0;
   color: #ebdbb2;
-  transition: background 120ms ease, color 120ms ease, opacity 120ms ease,
-    border-color 120ms ease;
+  transition: color 120ms ease, background 120ms ease;
 }
 
 window#waybar {
-  background: rgba(29, 32, 33, 0.65);
-  border-bottom: 1px solid rgba(60, 56, 54, 0.8);
+  background: rgba(29, 32, 33, 0.82);
+  border-bottom: 1px solid #3c3836;
 }
 
+/* Dense, flat modules — no margins, no backgrounds, no shadows */
 #clock,
 #battery,
 #pulseaudio,
@@ -32,13 +32,13 @@ window#waybar {
 #custom-gpu-temp,
 #custom-cpu-temp,
 #window {
-  padding: 6px 10px;
+  padding: 2px 6px;
   margin: 0;
-  border-radius: 0;
-  background: rgba(40, 40, 40, 0.35);
-  box-shadow: inset 0 -2px 0 rgba(60, 56, 54, 0.6);
+  background: transparent;
+  box-shadow: none;
 }
 
+/* Subtle hover: brighten text only */
 #clock:hover,
 #battery:hover,
 #pulseaudio:hover,
@@ -54,13 +54,12 @@ window#waybar {
 #custom-prayerbar:hover,
 #tray:hover,
 #window:hover {
-  background: rgba(40, 40, 40, 0.5);
+  color: #fbf1c7;
 }
 
+/* Window title minimal */
 #window {
   color: #a89984;
-  border: 1px solid rgba(60, 56, 54, 0.7);
-  box-shadow: inset 0 -2px 0 rgba(168, 153, 132, 0.25);
 }
 #window.empty {
   padding: 0;
@@ -68,84 +67,50 @@ window#waybar {
   min-width: 0;
   background: transparent;
   border: none;
-  box-shadow: none;
   color: transparent;
   opacity: 0;
 }
 
-/* IMPROVED WORKSPACES */
+/* WORKSPACES — text only, underline for active, no gaps */
 #workspaces {
   padding: 0;
   margin: 0;
-  background: rgba(40, 40, 40, 0.35);
-  border: 1px solid rgba(60, 56, 54, 0.5);
+  background: transparent;
+  border: 0;
 }
 
 #workspaces button {
   margin: 0;
-  padding: 4px 8px;
-  min-width: 24px;
-  border-radius: 0;
+  padding: 2px 6px;
+  min-width: 20px;
   background: transparent;
   color: #a89984;
   font-size: 12px;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 0.1px;
-  border-right: 1px solid rgba(60, 56, 54, 0.3);
-  transition: all 120ms ease;
-}
-
-#workspaces button:last-child {
-  border-right: none;
-}
-
-#workspaces button label {
-  padding: 0;
-  margin: 0;
+  border: 0;
+  box-shadow: none;
 }
 
 #workspaces button:hover {
-  background: rgba(235, 219, 178, 0.08);
   color: #ebdbb2;
-  box-shadow: inset 0 -2px 0 rgba(235, 219, 178, 0.2);
 }
 
 #workspaces button.active {
-  background: linear-gradient(
-    180deg,
-    rgba(214, 93, 14, 0.15),
-    rgba(214, 93, 14, 0.25)
-  );
   color: #d65d0e;
-  font-weight: 700;
-  box-shadow: inset 0 -2px 0 rgba(214, 93, 14, 0.6);
-}
-
-#workspaces button.active label {
-  color: #d65d0e;
+  border-bottom: 2px solid #d65d0e;
 }
 
 #workspaces button.urgent {
-  background: linear-gradient(
-    180deg,
-    rgba(204, 36, 29, 0.2),
-    rgba(204, 36, 29, 0.35)
-  );
   color: #cc241d;
-  animation: urgent-pulse 1500ms ease-in-out infinite;
-  box-shadow: inset 0 -2px 0 rgba(204, 36, 29, 0.7);
+  border-bottom: 2px solid #cc241d;
 }
 
-#workspaces button.urgent label {
-  color: #cc241d;
-}
-
-/* Optional: Add workspace numbers/icons styling */
 #workspaces button.occupied {
-  color: #ebdbb2;
-  background: rgba(235, 219, 178, 0.05);
+  color: #bdae93;
 }
 
+/* Module coloring (Gruvbox) */
 #cpu,
 #custom-cpu-temp {
   color: #fabd2f;
@@ -171,7 +136,8 @@ window#waybar {
 #disk {
   color: #d3869b;
 }
-#language {
+#language,
+#custom-network {
   color: #a89984;
 }
 #custom-weather {
@@ -194,9 +160,6 @@ window#waybar {
 #custom-prayerbar {
   color: #458588;
 }
-#custom-network {
-  color: #a89984;
-}
 
 #battery {
   color: #98971a;
@@ -211,8 +174,7 @@ window#waybar {
   color: #cc241d;
 }
 #battery.charging {
-  color: #8ec07c;
-  animation: charge-glow 2000ms ease-in-out infinite;
+  color: #8ec07c; /* no glow animation for minimal vibe */
 }
 #battery.plugged {
   color: #d79921;
@@ -221,47 +183,20 @@ window#waybar {
 #clock {
   font-weight: 800;
   color: #fb4934;
-  background: linear-gradient(
-    180deg,
-    rgba(251, 73, 52, 0.18),
-    rgba(40, 40, 40, 0.35)
-  );
-  border: 1px solid rgba(251, 73, 52, 0.4);
-  box-shadow: inset 0 -2px 0 rgba(251, 73, 52, 0.4);
+  background: transparent;
+  border: 0;
+  box-shadow: none;
 }
 
 #tray {
   color: #d65d0e;
 }
 
-@keyframes charge-glow {
-  0% {
-    box-shadow: inset 0 -2px 0 rgba(142, 192, 124, 0);
-  }
-  50% {
-    box-shadow: inset 0 -2px 0 rgba(142, 192, 124, 0.6);
-  }
-  100% {
-    box-shadow: inset 0 -2px 0 rgba(142, 192, 124, 0);
-  }
-}
-
-@keyframes urgent-pulse {
-  0% {
-    box-shadow: inset 0 -2px 0 rgba(204, 36, 29, 0.7);
-  }
-  50% {
-    box-shadow: inset 0 -2px 0 rgba(204, 36, 29, 1);
-  }
-  100% {
-    box-shadow: inset 0 -2px 0 rgba(204, 36, 29, 0.7);
-  }
-}
-
+/* Tooltips, minimal */
 tooltip {
-  background: rgba(29, 32, 33, 0.85);
-  border: 1px solid rgba(60, 56, 54, 0.9);
+  background: rgba(29, 32, 33, 0.92);
+  border: 1px solid #3c3836;
   border-radius: 0;
   color: #ebdbb2;
-  padding: 6px 8px;
+  padding: 4px 6px;
 }
