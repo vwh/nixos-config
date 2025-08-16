@@ -2,7 +2,7 @@
 
 This repository contains my personal NixOS system configurations, managed with Nix Flakes. It features a complete desktop environment with Hyprland compositor, beautiful Gruvbox theming, and extensive development tooling.
 
-![Desktop Screenshot](https://github.com/user-attachments/assets/a1facebb-61a9-4978-9405-9614af918a2b)
+<img width="1034" height="1280" alt="image" src="https://github.com/user-attachments/assets/e819499b-5dde-4ca7-a4dc-75b3e790e5d3" />
 
 ---
 
