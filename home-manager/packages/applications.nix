@@ -6,6 +6,7 @@
   # Applications
   tor-browser # Tor browser
   libreoffice-qt6-fresh # LibreOffice suite
+  protonvpn-gui
 
   # Themes
   gruvbox-gtk-theme # Gruvbox GTK theme
@@ -17,6 +18,7 @@
   # Browsers
   brave # Brave browser
   firefox # Firefox browser
+  chromium # Chromium browser
 
   # Communication
   element-desktop # Matrix client
