@@ -46,4 +46,7 @@ with pkgsStable;
   hexdump # Hex dump utility
   xxd # Hex dump utility
   tree # Directory tree viewer
+
+  # AppImage support
+  appimage-run # Run AppImage applications with proper libraries
 ]

@@ -5,6 +5,7 @@
     ./apps
     ./hyprland
     ./terminal
+    ./overlays.nix
     ./gpg.nix
     ./mime.nix
     ./qt.nix

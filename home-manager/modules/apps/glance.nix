@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 with lib;
 
@@ -7,29 +12,29 @@ with lib;
   services.glance = {
     enable = true;
     package = pkgs.glance;
-    
+
     # Use the settings as a YAML value (compatible with existing service)
     settings = {
       server = {
         host = mkDefault "127.0.0.1";
         port = mkDefault 8080;
       };
-      
+
       # Gruvbox Dark theme - use mkForce to override any conflicting values
       theme = {
-        background-color = mkForce "40 40 40";      # Dark background
-        primary-color = mkForce "39 100 60";        # Gruvbox yellow/orange (HSL: 39° 100% 60%)
-        positive-color = mkForce "79 74 55";        # Gruvbox green (HSL: 79° 74% 55%)
-        negative-color = mkForce "4 89 58";         # Gruvbox red (HSL: 4° 89% 58%)
+        background-color = mkForce "40 40 40"; # Dark background
+        primary-color = mkForce "39 100 60"; # Gruvbox yellow/orange (HSL: 39° 100% 60%)
+        positive-color = mkForce "79 74 55"; # Gruvbox green (HSL: 79° 74% 55%)
+        negative-color = mkForce "4 89 58"; # Gruvbox red (HSL: 4° 89% 58%)
         contrast-multiplier = mkForce 1.2;
         text-saturation-multiplier = mkForce 1.3;
       };
-      
+
       branding = mkForce {
         app-name = "Dashboard";
         logo-text = "D";
       };
-      
+
       pages = mkForce [
         {
           name = "Home";
