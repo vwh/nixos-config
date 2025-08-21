@@ -43,6 +43,7 @@ This repository uses [`just`](https://github.com/casey/just) as a command runner
 | `just secrets-encrypt <file>` | Encrypt a file with SOPS |
 | `just sops-setup` | Setup SOPS age key |
 | `just sops-key` | Show SOPS public key |
+| `just setup-keys` | Setup SSH and GPG keys from SOPS |
 
 
 ---

@@ -92,6 +92,11 @@ sops-setup:
 	@echo -e "\n➤ Setting up SOPS age key…"
 	./scripts/sops-setup.sh
 
+# Setup SSH and GPG keys from SOPS
+setup-keys:
+	@echo -e "\n➤ Setting up SSH and GPG keys from SOPS…"
+	./scripts/setup-keys.sh
+
 # Show SOPS public key
 sops-key:
 	@echo -e "\n➤ SOPS public key:"
