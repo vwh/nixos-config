@@ -5,6 +5,7 @@
     ./audio.nix
     ./bluetooth.nix
     ./bootloader.nix
+    ./monitoring.nix
     ./nautilus.nix
     ./environment.nix
     ./gaming.nix
@@ -17,6 +18,7 @@
     ./nix-ld.nix
     ./nix.nix
     ./printing.nix
+    ./stability.nix
     ./timezone.nix
     ./tor.nix
     ./upower.nix

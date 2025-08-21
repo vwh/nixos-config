@@ -21,7 +21,5 @@
     inherit stateVersion;
   };
 
-  environment.systemPackages = with pkgs; [
-    home-manager
-  ];
+  environment.systemPackages = [ ];
 }

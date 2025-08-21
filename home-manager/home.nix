@@ -19,8 +19,6 @@
     stateVersion = homeStateVersion;
   };
 
-  nixpkgs.config.allowUnfree = true;
-
   home.packages =
     let
       extraPkgs = import ./packages { inherit pkgs pkgsStable; };

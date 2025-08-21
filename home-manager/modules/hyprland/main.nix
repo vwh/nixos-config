@@ -20,7 +20,8 @@
         "XDG_SCREENSHOTS_DIR,$HOME/screens"
       ];
 
-      monitor = ",1920x1080@120,auto,1";
+      # Dynamic monitor detection - will auto-detect connected monitors
+      monitor = ",highres,auto,1";
       "$mainMod" = "SUPER";
       "$terminal" = "alacritty";
       "$browser" = "brave";

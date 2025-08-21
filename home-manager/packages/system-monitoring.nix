@@ -5,7 +5,6 @@
 with pkgs;
 [
   # Process monitoring
-  btop # Modern htop alternative
   atop # Advanced system monitor
 
   # System information
@@ -14,9 +13,6 @@ with pkgs;
   lshw # Hardware lister
   hwinfo # Hardware information
   dmidecode # DMI table decoder
-
-  # Performance monitoring
-  iotop # I/O monitoring
 
   # Disk monitoring
   smartmontools # Disk health monitoring
@@ -35,9 +31,6 @@ with pkgs;
 
   # File system monitoring
   inotify-tools # File system event monitoring
-
-  # Temperature monitoring
-  lm_sensors # Hardware sensors
 
   # Benchmarking
   sysbench # System benchmark

@@ -35,7 +35,21 @@ nixos:
 
 # Update all flake inputs
 update:
-    nix flake update
+	nix flake update
+
+# Optimize Nix store
+optimize-store:
+	nix store optimise
+
+# Check system health
+health:
+	@echo -e "\n➤ Checking system health…"
+	@echo "Disk usage:"
+	@df -h
+	@echo -e "\nNix store info:"
+	@timeout 10s du -sh /nix/store 2>/dev/null || echo "Nix store size: $(df -h /nix | tail -1 | awk '{print $3 "/" $2 " (" $5 " used)"}')"
+	@echo -e "\nMemory usage:"
+	@free -h
 
 # All of the above, in order
 all:

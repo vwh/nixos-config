@@ -20,7 +20,7 @@
     meta = with pkgs.lib; {
       description = "A simple prayer time indicator for Waybar";
       homepage = "https://github.com/Onizuka893/prayerbar";
-      license = licenses.unfree;
+      license = licenses.mit;
     };
   })
 ]

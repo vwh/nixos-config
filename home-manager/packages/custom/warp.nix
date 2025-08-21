@@ -46,13 +46,24 @@ stdenv.mkDerivation {
     # Download AppImage if it doesn't exist or if it's older than 1 day
     if [ ! -f "$APPIMAGE_PATH" ] || [ $(find "$APPIMAGE_PATH" -mtime +1 2>/dev/null | wc -l) -gt 0 ]; then
       echo "Downloading latest Warp AppImage..."
-      ${pkgs.curl}/bin/curl -L -o "$APPIMAGE_PATH.tmp" "${appImageUrl}" && \
-        mv "$APPIMAGE_PATH.tmp" "$APPIMAGE_PATH" || {
-        echo "Failed to download Warp AppImage"
-        rm -f "$APPIMAGE_PATH.tmp"
-        exit 1
-      }
-      chmod +x "$APPIMAGE_PATH"
+
+      # Retry logic for network failures
+      for i in {1..3}; do
+        if ${pkgs.curl}/bin/curl -L --fail --max-time 30 -o "$APPIMAGE_PATH.tmp" "${appImageUrl}"; then
+          mv "$APPIMAGE_PATH.tmp" "$APPIMAGE_PATH"
+          chmod +x "$APPIMAGE_PATH"
+          echo "Successfully downloaded Warp AppImage"
+          break
+        else
+          echo "Download attempt $i failed, retrying..."
+          rm -f "$APPIMAGE_PATH.tmp"
+          if [ $i -eq 3 ]; then
+            echo "Error: Failed to download Warp AppImage after 3 attempts"
+            exit 1
+          fi
+          sleep 2
+        fi
+      done
     fi
 
     # Run the AppImage with appimage-run which provides all necessary libraries

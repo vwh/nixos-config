@@ -33,6 +33,29 @@ This repository uses [`just`](https://github.com/casey/just) as a command runner
 | `just lint` | Lint all `.nix` files with `statix` |
 | `just modules` | Check for missing module imports |
 | `just update` | Update all flake inputs |
+| `just optimize-store` | Optimize Nix store to save disk space |
+| `just health` | Check system health and resource usage |
+
+---
+
+## System Stability Improvements
+
+This configuration includes specific fixes for system stability issues:
+
+### Application Stability
+- **Spotify Configuration**: Added environment variables to prevent GPU-related crashes and improve stability
+- **Nix Language Server**: Enhanced Nix configuration with memory limits and performance optimizations
+- **D-Bus Service Management**: Improved service startup order to reduce conflicts
+
+### Memory Management
+- **Early OOM Killer**: Prevents system lockups due to memory exhaustion
+- **Systemd Timeouts**: Configured reasonable timeouts for service start/stop operations
+- **Resource Limits**: Added memory and CPU limits for critical services
+
+### Debugging Tools
+- **System Monitoring**: Built-in tools for real-time system monitoring
+- **Debugging Utilities**: strace, ltrace, and gdb for troubleshooting
+- **Performance Analysis**: iotop, sysstat for resource usage analysis
 
 ---
 
