@@ -1,6 +1,6 @@
 # Virtualisation ( docker, virtualbox, libvirt ) configuration.
 
-{ pkgs, user, ... }:
+{ pkgsStable, user, ... }:
 
 {
   boot.kernelModules = [
@@ -15,10 +15,10 @@
 
     libvirtd.enable = true;
     libvirtd.qemu = {
-      package = pkgs.qemu_kvm;
+      package = pkgsStable.qemu_kvm;
       swtpm.enable = true;
       ovmf.enable = true;
-      ovmf.packages = [ pkgs.OVMFFull.fd ];
+      ovmf.packages = [ pkgsStable.OVMFFull.fd ];
     };
   };
 
@@ -32,7 +32,7 @@
     ];
   };
 
-  environment.systemPackages = with pkgs; [
+  environment.systemPackages = with pkgsStable; [
     virtualbox # VBoxManage, VBoxHeadless, etc.
     virt-manager # GUI for libvirt + QEMU/KVM
   ];

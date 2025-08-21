@@ -61,7 +61,6 @@ with pkgsStable;
   # Text processing
   sd # Modern sed alternative
   choose # Modern cut/awk alternative
-  xan # CSV processing
 
   # Performance analysis
   flamegraph # Performance visualization

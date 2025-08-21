@@ -1,11 +1,11 @@
 # OBS Studio configuration.
 
-{ pkgs, ... }:
+{ pkgsStable, ... }:
 
 {
   programs.obs-studio = {
     enable = true;
-    plugins = with pkgs.obs-studio-plugins; [
+    plugins = with pkgsStable.obs-studio-plugins; [
       input-overlay
       wlrobs
       obs-backgroundremoval

@@ -1,6 +1,6 @@
 # System stability and service conflict resolution
 
-{ pkgs, ... }:
+{ pkgsStable, ... }:
 
 {
   services = {
@@ -13,7 +13,7 @@
 
     # Reduce D-Bus service conflicts by managing service startup order
     dbus = {
-      packages = with pkgs; [
+      packages = with pkgsStable; [
         gnome-keyring
         gcr
       ];

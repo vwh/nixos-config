@@ -1,14 +1,14 @@
 # Nix package definition for prayerbar
 # Maintainer: Onizuka893 <https://github.com/Onizuka893>
 
-{ pkgs, ... }:
+{ pkgsStable, ... }:
 
 [
-  (pkgs.rustPlatform.buildRustPackage rec {
+  (pkgsStable.rustPlatform.buildRustPackage rec {
     pname = "prayerbar";
     version = "unstable";
 
-    src = pkgs.fetchFromGitHub {
+    src = pkgsStable.fetchFromGitHub {
       owner = "Onizuka893";
       repo = "prayerbar";
       rev = "337a83ac9c0e10360928c2e7859811e7bc1e3bfd";
@@ -17,7 +17,7 @@
 
     cargoHash = "sha256-3DWCeQnLNINq6dsD0C5xRAZOnkAGRlxOfXwIOwCxy3c=";
 
-    meta = with pkgs.lib; {
+    meta = with pkgsStable.lib; {
       description = "A simple prayer time indicator for Waybar";
       homepage = "https://github.com/Onizuka893/prayerbar";
       license = licenses.mit;

@@ -1,8 +1,8 @@
 # System monitoring and analysis tools for AI agents and power users.
 
-{ pkgs, ... }:
+{ pkgsStable, ... }:
 
-with pkgs;
+with pkgsStable;
 [
   # Process monitoring
   atop # Advanced system monitor

@@ -1,11 +1,11 @@
 # Stylix theme and font configuration.
 
-{ pkgs, inputs, ... }:
+{ pkgsStable, inputs, ... }:
 
 {
   imports = [ inputs.stylix.homeModules.stylix ];
 
-  home.packages = with pkgs; [
+  home.packages = with pkgsStable; [
     dejavu_fonts
     jetbrains-mono
     noto-fonts
@@ -22,7 +22,7 @@
   stylix = {
     enable = true;
     polarity = "dark";
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-soft.yaml";
+    base16Scheme = "${pkgsStable.base16-schemes}/share/themes/gruvbox-dark-soft.yaml";
 
     targets = {
       neovim.enable = false;
@@ -39,28 +39,28 @@
     cursor = {
       name = "DMZ-Black";
       size = 24;
-      package = pkgs.vanilla-dmz;
+      package = pkgsStable.vanilla-dmz;
     };
 
     fonts = {
       emoji = {
         name = "Noto Color Emoji";
-        package = pkgs.noto-fonts-color-emoji;
+        package = pkgsStable.noto-fonts-color-emoji;
       };
 
       monospace = {
         name = "JetBrains Mono";
-        package = pkgs.jetbrains-mono;
+        package = pkgsStable.jetbrains-mono;
       };
 
       sansSerif = {
         name = "Noto Sans";
-        package = pkgs.noto-fonts;
+        package = pkgsStable.noto-fonts;
       };
 
       serif = {
         name = "Noto Serif";
-        package = pkgs.noto-fonts;
+        package = pkgsStable.noto-fonts;
       };
 
       sizes = {
@@ -71,7 +71,7 @@
 
     iconTheme = {
       enable = true;
-      package = pkgs.papirus-icon-theme;
+      package = pkgsStable.papirus-icon-theme;
       dark = "Papirus-Dark";
       light = "Papirus-Light";
     };
@@ -81,7 +81,7 @@
     #   sha256 = "036gqhbf6s5ddgvfbgn6iqbzgizssyf7820m5815b2gd748jw8zc";
     # };
 
-    image = pkgs.fetchurl {
+    image = pkgsStable.fetchurl {
       url = "https://raw.githubusercontent.com/ChapST1/gruvbox-wallpapers-web/master/wallpapers/pixelart/16.png";
       sha256 = "sha256-OjH9L9olr2x0zp0EY+BFe6r/C5T98fovdVAkPEBAmq4=";
     };

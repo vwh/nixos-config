@@ -1,6 +1,6 @@
 # System monitoring and health services
 
-{ pkgs, ... }:
+{ pkgsStable, ... }:
 
 {
   services = {
@@ -14,7 +14,7 @@
     };
   };
 
-  environment.systemPackages = with pkgs; [
+  environment.systemPackages = with pkgsStable; [
     btop
     iotop
     ncdu

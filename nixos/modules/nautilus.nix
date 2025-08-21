@@ -1,9 +1,9 @@
 # Nautilus (GNOME Files) configuration.
 
-{ pkgs, ... }:
+{ pkgsStable, ... }:
 
 {
-  environment.systemPackages = with pkgs; [
+  environment.systemPackages = with pkgsStable; [
     # Core Nautilus
     nautilus
     nautilus-python # For extensions

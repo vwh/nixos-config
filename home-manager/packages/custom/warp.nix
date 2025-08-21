@@ -2,6 +2,7 @@
 
 {
   pkgs,
+  pkgsStable,
   lib,
   stdenv,
   makeWrapper,
@@ -24,7 +25,7 @@ stdenv.mkDerivation {
 
   nativeBuildInputs = [ makeWrapper ];
 
-  buildInputs = with pkgs; [
+  buildInputs = with pkgsStable; [
     appimage-run
     curl
   ];
@@ -49,7 +50,7 @@ stdenv.mkDerivation {
 
       # Retry logic for network failures
       for i in {1..3}; do
-        if ${pkgs.curl}/bin/curl -L --fail --max-time 30 -o "$APPIMAGE_PATH.tmp" "${appImageUrl}"; then
+        if ${pkgsStable.curl}/bin/curl -L --fail --max-time 30 -o "$APPIMAGE_PATH.tmp" "${appImageUrl}"; then
           mv "$APPIMAGE_PATH.tmp" "$APPIMAGE_PATH"
           chmod +x "$APPIMAGE_PATH"
           echo "Successfully downloaded Warp AppImage"
@@ -67,7 +68,7 @@ stdenv.mkDerivation {
     fi
 
     # Run the AppImage with appimage-run which provides all necessary libraries
-    exec ${pkgs.appimage-run}/bin/appimage-run "$APPIMAGE_PATH" "$@"
+    exec ${pkgsStable.appimage-run}/bin/appimage-run "$APPIMAGE_PATH" "$@"
     EOF
 
     chmod +x $out/bin/warp-terminal
@@ -92,9 +93,9 @@ stdenv.mkDerivation {
 
     # Download Warp icon
     mkdir -p $out/share/icons/hicolor/512x512/apps
-    ${pkgs.curl}/bin/curl -L -o $out/share/icons/hicolor/512x512/apps/warp-terminal.png \
+    ${pkgsStable.curl}/bin/curl -L -o $out/share/icons/hicolor/512x512/apps/warp-terminal.png \
       "https://raw.githubusercontent.com/warpdotdev/Warp/main/assets/warp-logo.png" || \
-      ${pkgs.curl}/bin/curl -L -o $out/share/icons/hicolor/512x512/apps/warp-terminal.png \
+      ${pkgsStable.curl}/bin/curl -L -o $out/share/icons/hicolor/512x512/apps/warp-terminal.png \
       "https://avatars.githubusercontent.com/u/71840468?s=512&v=4" || \
       touch $out/share/icons/hicolor/512x512/apps/warp-terminal.png
   '';
