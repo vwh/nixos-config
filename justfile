@@ -41,6 +41,13 @@ update:
 optimize-store:
 	nix store optimise
 
+# Clean up build artifacts and caches
+clean:
+	@echo -e "\n➤ Cleaning up build artifacts and caches…"
+	nix-collect-garbage --delete-older-than 1d
+	nix store optimise
+	@echo -e "✅ Cleanup completed!"
+
 # Check system health
 health:
 	@echo -e "\n➤ Checking system health…"
@@ -133,6 +140,6 @@ install-npm:
 
 # Update global packages
 update-npm:
-    @echo -e "\n➤ Updating global packages..."
-    bun update -g
-    @echo -e "✅ Global packages updated!"
+	@echo -e "\n➤ Updating global packages..."
+	bun update -g
+	@echo -e "✅ Global packages updated!"
