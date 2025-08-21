@@ -4,6 +4,7 @@
 
 let
   chunks = [
+    ./custom/prayer.nix
     ./applications.nix
     ./cli.nix
     ./cool.nix
@@ -12,7 +13,6 @@ let
     ./hyprland.nix
     ./multimedia.nix
     ./networking.nix
-    ./prayer.nix
     ./system-monitoring.nix
     ./utilities.nix
   ];
