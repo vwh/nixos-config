@@ -35,15 +35,6 @@ This repository uses [`just`](https://github.com/casey/just) as a command runner
 | `just update` | Update all flake inputs |
 | `just optimize-store` | Optimize Nix store to save disk space |
 | `just health` | Check system health and resource usage |
-| `just secrets` | Edit secrets with SOPS |
-| `just secrets-view` | View decrypted secrets (read-only) |
-| `just secrets-decrypt-file` | Decrypt to file for manual editing |
-| `just secrets-encrypt-file` | Encrypt file back to secrets |
-| `just secrets-add key value` | Add a single secret |
-| `just secrets-encrypt <file>` | Encrypt a file with SOPS |
-| `just sops-setup` | Setup SOPS age key |
-| `just sops-key` | Show SOPS public key |
-| `just setup-keys` | Setup SSH and GPG keys from SOPS |
 
 
 ---
