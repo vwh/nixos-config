@@ -18,6 +18,7 @@
     ./nix-ld.nix
     ./nix.nix
     ./printing.nix
+    ./sops.nix
     ./stability.nix
     ./timezone.nix
     ./tor.nix

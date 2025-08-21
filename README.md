@@ -35,35 +35,62 @@ This repository uses [`just`](https://github.com/casey/just) as a command runner
 | `just update` | Update all flake inputs |
 | `just optimize-store` | Optimize Nix store to save disk space |
 | `just health` | Check system health and resource usage |
+| `just secrets` | Edit secrets with SOPS |
+| `just secrets-view` | View decrypted secrets (read-only) |
+| `just secrets-decrypt-file` | Decrypt to file for manual editing |
+| `just secrets-encrypt-file` | Encrypt file back to secrets |
+| `just secrets-add key value` | Add a single secret |
+| `just secrets-encrypt <file>` | Encrypt a file with SOPS |
+| `just sops-setup` | Setup SOPS age key |
+| `just sops-key` | Show SOPS public key |
 
----
-
-## System Stability Improvements
-
-This configuration includes specific fixes for system stability issues:
-
-### Application Stability
-- **Spotify Configuration**: Added environment variables to prevent GPU-related crashes and improve stability
-- **Nix Language Server**: Enhanced Nix configuration with memory limits and performance optimizations
-- **D-Bus Service Management**: Improved service startup order to reduce conflicts
-
-### Memory Management
-- **Early OOM Killer**: Prevents system lockups due to memory exhaustion
-- **Systemd Timeouts**: Configured reasonable timeouts for service start/stop operations
-- **Resource Limits**: Added memory and CPU limits for critical services
-
-### Debugging Tools
-- **System Monitoring**: Built-in tools for real-time system monitoring
-- **Debugging Utilities**: strace, ltrace, and gdb for troubleshooting
-- **Performance Analysis**: iotop, sysstat for resource usage analysis
 
 ---
 
 ## Secrets Management
 
-This configuration uses `sops-nix` for managing secrets.
+This configuration uses `sops-nix` for managing encrypted secrets with age keys.
 
-*   To edit a secret file, run: `sops secrets/<file_name>.yaml`
+### Quick Start
+
+1. **Setup age key** (if not already done):
+   ```bash
+   just sops-setup
+   ```
+
+2. **View current secrets**:
+   ```bash
+   just sops-view
+   ```
+
+3. **Edit secrets**:
+   ```bash
+   just sops-edit
+   ```
+
+4. **Add single secret**:
+   ```bash
+   just secrets-add github_token ghp_your_token_here
+   ```
+
+### Available Commands
+
+| Command | Purpose |
+|---------|---------|
+| `just sops-view` | View decrypted secrets |
+| `just sops-edit` | Edit secrets (opens editor) |
+| `just secrets-add key value` | Add single secret |
+| `just sops-decrypt` | Decrypt to file for manual editing |
+| `just sops-encrypt` | Encrypt file back to secrets |
+| `just sops-key` | Show public key |
+| `just sops-setup` | Setup age key |
+
+### Security Notes
+
+- Secrets are encrypted at rest using age encryption
+- Private keys are stored in `~/.config/sops/age/keys.txt`
+- Never commit private keys or decrypted secrets to Git
+- Use `just sops-edit` for most editing (automatic encrypt/decrypt)
 
 ---
 
