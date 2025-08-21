@@ -1,8 +1,8 @@
 # List of CLI tools to install.
 
-{ pkgs, ... }:
+{ pkgsStable, ... }:
 
-with pkgs;
+with pkgsStable;
 [
   # File and directory utilities
   fd # Simple, fast and user-friendly alternative to find
@@ -28,7 +28,6 @@ with pkgs;
   # Development tools
   direnv # Directory environment
   lazydocker # Docker wrapper
-  lazygit # Git TUI
   gh # GitHub CLI
 
   # Media and downloads
@@ -47,4 +46,42 @@ with pkgs;
 
   # Color utilities
   vivid # LS_COLORS generator
+
+  # Network analysis and security
+  wireshark-cli # Network protocol analyzer
+  mitmproxy # HTTP proxy for debugging
+
+  # Container and process tools
+  dive # Docker image analyzer
+
+  # Backup and storage
+  restic # Backup tool
+  borgbackup # Deduplicating backup
+
+  # Text processing
+  sd # Modern sed alternative
+  choose # Modern cut/awk alternative
+  xan # CSV processing
+
+  # Performance analysis
+  flamegraph # Performance visualization
+
+  # HTTP clients
+  curlie # Modern curl alternative
+  xh # Yet another HTTP client
+
+  # Log analysis
+  angle-grinder # Log processing
+
+  # DNS and network utilities
+  dog # Modern dig alternative
+  dua # Modern du alternative
+
+  # Git tools
+  delta # Modern diff tool
+  glab # GitLab CLI
+
+  # File watching and automation
+  watchexec # File watcher
+  entr # File watcher
 ]
