@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ./glance.nix
     ./obs.nix
     ./spicetify.nix
   ];
