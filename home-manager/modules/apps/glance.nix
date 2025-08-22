@@ -22,17 +22,18 @@ with lib;
 
       # Gruvbox Dark theme - use mkForce to override any conflicting values
       theme = {
-        background-color = mkForce "40 40 40"; # Dark background
-        primary-color = mkForce "39 100 60"; # Gruvbox yellow/orange (HSL: 39° 100% 60%)
-        positive-color = mkForce "79 74 55"; # Gruvbox green (HSL: 79° 74% 55%)
-        negative-color = mkForce "4 89 58"; # Gruvbox red (HSL: 4° 89% 58%)
+        background-color = mkForce "0 0 16"; # Gruvbox background (#282828)
+        primary-color = mkForce "25 89 45"; # Gruvbox orange (#d65d0e)
+        positive-color = mkForce "45 95 60"; # Gruvbox yellow (#fabd2f)
+        negative-color = mkForce "5 71 45"; # Gruvbox red (#cc241d)
         contrast-multiplier = mkForce 1.2;
         text-saturation-multiplier = mkForce 1.3;
       };
 
       branding = mkForce {
-        app-name = "Dashboard";
-        logo-text = "D";
+        app-name = "Yazan Dashboard";
+        logo-text = "Y";
+        favicon = "https://vwh.sh/images/favicon.ico";
       };
 
       pages = mkForce [
@@ -103,53 +104,43 @@ with lib;
                       limit = 3;
                     }
                     {
-                      url = "https://carlosbecker.com/posts/index.xml";
-                      title = "Carlos Becker";
-                      limit = 2;
-                    }
-                    {
-                      url = "https://hamvocke.com/feed.xml";
-                      title = "Ham Vocke";
-                      limit = 2;
-                    }
-                    {
-                      url = "https://xn--gckvb8fzb.com/feed.xml";
-                      title = "Xe Iaso";
-                      limit = 3;
-                    }
-                    {
-                      url = "https://blog.parasrah.com/posts/index.xml";
-                      title = "Parasrah";
-                      limit = 2;
-                    }
-                    {
                       url = "https://blog.rust-lang.org/feed.xml";
                       title = "Rust Blog";
-                      limit = 2;
+                      limit = 3;
                     }
                     {
                       url = "https://bun.sh/blog/rss.xml";
                       title = "Bun Blog";
-                      limit = 2;
+                      limit = 3;
                     }
                     {
                       url = "https://deno.com/blog/feed";
                       title = "Deno Blog";
-                      limit = 2;
+                      limit = 3;
                     }
                     {
                       url = "https://nixos.org/blog/announcements-rss.xml";
                       title = "NixOS News";
-                      limit = 2;
+                      limit = 3;
                     }
                     {
                       url = "https://weekly.nixos.org/feeds/all.rss.xml";
                       title = "NixOS Weekly";
-                      limit = 2;
+                      limit = 3;
                     }
                     {
                       url = "https://ziglang.org/news/index.xml";
                       title = "Zig News";
+                      limit = 3;
+                    }
+                    {
+                      url = "https://webassembly.org/feed.xml";
+                      title = "WebAssembly";
+                      limit = 2;
+                    }
+                    {
+                      url = "https://sqlite.org/news.rss";
+                      title = "SQLite News";
                       limit = 2;
                     }
                   ];
@@ -181,32 +172,28 @@ with lib;
                   ];
                 }
                 {
-                  type = "releases";
-                  title = "Software Releases";
-                  cache = "1d";
-                  limit = 12;
-                  collapse-after = 6;
-                  repositories = [
-                    "oven-sh/bun"
-                    "nodejs/node"
-                    "denoland/deno"
-                    "ziglang/zig"
-                    "rust-lang/rust"
-                    "golang/go"
-                    "microsoft/TypeScript"
-                    "WebAssembly/wabt"
-                    "neovim/neovim"
-                    "hyprwm/Hyprland"
-                    "NixOS/nixpkgs"
-                    "microsoft/vscode"
+                  type = "rss";
+                  title = "Tech News";
+                  cache = "3h";
+                  limit = 10;
+                  collapse-after = 5;
+                  feeds = [
+                    {
+                      url = "https://github.blog/feed/";
+                      title = "GitHub Blog";
+                      limit = 3;
+                    }
+                    {
+                      url = "https://vercel.com/blog/rss.xml";
+                      title = "Vercel Blog";
+                      limit = 3;
+                    }
+                    {
+                      url = "https://blog.cloudflare.com/rss/";
+                      title = "Cloudflare Blog";
+                      limit = 4;
+                    }
                   ];
-                }
-                {
-                  type = "repository";
-                  repository = "vwh/nixos-config";
-                  pull-requests-limit = 3;
-                  issues-limit = 3;
-                  commits-limit = 5;
                 }
               ];
             }
@@ -221,8 +208,8 @@ with lib;
                 {
                   type = "videos";
                   title = "Dev YouTube";
-                  limit = 30;
-                  collapse-after = 10;
+                  limit = 20;
+                  collapse-after = 8;
                   channels = [
                     "UC5mIA5Y5_oARjxK8DCT-Cww" # IsaacHarrisHolt
                     "UC5KDiSAFxrDWhmysBcNqtMA" # EricMurphyxyz
@@ -271,31 +258,47 @@ with lib;
                   type = "reddit";
                   subreddit = "programming";
                   show-thumbnails = true;
-                  limit = 15;
-                  collapse-after = 5;
+                  limit = 12;
+                  collapse-after = 4;
                 }
-              ];
-            }
-            {
-              size = "small";
-              widgets = [
                 {
                   type = "reddit";
                   subreddit = "golang";
                   show-thumbnails = false;
-                  limit = 8;
-                  collapse-after = 4;
+                  limit = 6;
+                  collapse-after = 3;
                 }
                 {
                   type = "reddit";
                   subreddit = "typescript";
                   show-thumbnails = false;
-                  limit = 8;
-                  collapse-after = 4;
+                  limit = 6;
+                  collapse-after = 3;
                 }
                 {
                   type = "reddit";
                   subreddit = "rust";
+                  show-thumbnails = false;
+                  limit = 6;
+                  collapse-after = 3;
+                }
+                {
+                  type = "reddit";
+                  subreddit = "javascript";
+                  show-thumbnails = false;
+                  limit = 6;
+                  collapse-after = 3;
+                }
+                {
+                  type = "reddit";
+                  subreddit = "webdev";
+                  show-thumbnails = false;
+                  limit = 6;
+                  collapse-after = 3;
+                }
+                {
+                  type = "reddit";
+                  subreddit = "linux";
                   show-thumbnails = false;
                   limit = 6;
                   collapse-after = 3;
@@ -322,7 +325,7 @@ with lib;
                   groups = [
                     {
                       title = "Development";
-                      color = "25 89 54";
+                      color = "25 89 45"; # Gruvbox orange
                       links = [
                         {
                           title = "GitHub";
@@ -373,7 +376,7 @@ with lib;
                     }
                     {
                       title = "Courses & Learning";
-                      color = "62 81 45";
+                      color = "45 95 60"; # Gruvbox yellow
                       links = [
                         {
                           title = "Low Level Academy";
@@ -395,7 +398,7 @@ with lib;
                     }
                     {
                       title = "Social & Community";
-                      color = "39 100 60";
+                      color = "25 89 45"; # Gruvbox orange
                       links = [
                         {
                           title = "Dev.to";
@@ -431,7 +434,7 @@ with lib;
                     }
                     {
                       title = "Tools & Utilities";
-                      color = "0 74 55";
+                      color = "5 71 45"; # Gruvbox red
                       links = [
                         {
                           title = "Proton Mail";
@@ -444,11 +447,6 @@ with lib;
                           icon = "si:figma";
                         }
                         {
-                          title = "SQLite Online";
-                          url = "https://vwh.github.io/sqlite-online";
-                          icon = "si:sqlite";
-                        }
-                        {
                           title = "YouTube";
                           url = "https://youtube.com";
                           icon = "si:youtube";
@@ -458,11 +456,16 @@ with lib;
                           url = "https://translate.google.com";
                           icon = "si:googletranslate";
                         }
+                        {
+                          title = "Cloudflare";
+                          url = "https://dash.cloudflare.com";
+                          icon = "si:cloudflare";
+                        }
                       ];
                     }
                     {
                       title = "Local Community";
-                      color = "79 74 55";
+                      color = "45 95 60"; # Gruvbox yellow
                       links = [
                         {
                           title = "JOSA";
