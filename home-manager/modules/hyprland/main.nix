@@ -83,12 +83,21 @@
 
       input = {
         kb_layout = "us,ara";
-        kb_options = "grp:caps_toggle";
+        kb_variant = ",qwerty";
+        kb_options = "grp:caps_toggle,grp_led:caps,terminate:ctrl_alt_bksp";
 
         # Better mouse behavior
         follow_mouse = 2; # Focus on mouse enter
         float_switch_override_focus = 0;
         mouse_refocus = false;
+
+        # Fix caps lock issues
+        repeat_rate = 25;
+        repeat_delay = 600;
+
+        # Better keyboard handling
+        numlock_by_default = true;
+        force_no_accel = false;
 
         touchpad = {
           natural_scroll = true;

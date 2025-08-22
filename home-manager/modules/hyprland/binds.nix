@@ -118,6 +118,11 @@ in
       "$mainMod, equal,  exec, wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"
       "$mainMod, minus, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
 
+      # Keyboard layout and caps lock fixes
+      "$mainMod, F12, exec, hyprctl switchxkblayout current next" # Manual layout switch
+      "$mainMod SHIFT, F12, exec, hyprctl switchxkblayout current prev" # Reverse layout switch
+      "$mainMod, Escape, exec, hyprctl keyword input:kb_options 'grp:caps_toggle'" # Reset caps lock
+
       # Moving focus
       "$mainMod, left, movefocus, l"
       "$mainMod, right, movefocus, r"
