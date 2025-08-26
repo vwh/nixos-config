@@ -84,9 +84,18 @@ fi
 echo ""
 echo "⚙️  Configuring Git..."
 
-# Extract Git config from SOPS
-GIT_NAME=$(just sops-view | grep git_user_name | cut -d' ' -f2 | tr -d '"')
-GIT_EMAIL=$(just sops-view | grep git_user_email | cut -d' ' -f2 | tr -d '"')
+# Extract Git config from SSH public key (fallback if not in secrets)
+GIT_EMAIL=$(just sops-view | grep ssh_public_key | cut -d' ' -f3)
+GIT_NAME=$(echo "$GIT_EMAIL" | cut -d'@' -f1)
+
+# If we have git_user_name and git_user_email in secrets, use those instead
+if just sops-view | grep -q git_user_name; then
+    GIT_NAME=$(just sops-view | grep git_user_name | cut -d' ' -f2 | tr -d '"')
+fi
+
+if just sops-view | grep -q git_user_email; then
+    GIT_EMAIL=$(just sops-view | grep git_user_email | cut -d' ' -f2 | tr -d '"')
+fi
 
 git config --global user.name "$GIT_NAME"
 git config --global user.email "$GIT_EMAIL"
