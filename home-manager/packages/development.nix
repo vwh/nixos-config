@@ -49,7 +49,7 @@
   openjdk23 # OpenJDK 23
   rustc # Rust compiler
   cargo # Cargo package manager
-  go # Go programming language
+
   python3 # Python 3
   python3Packages.pip # Python package manager
   python3Packages.virtualenv # Python virtual environments
