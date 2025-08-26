@@ -52,7 +52,6 @@
 
   # Environment variables for input method integration
   environment.sessionVariables = {
-    GTK_IM_MODULE = "fcitx"; # GTK input method module
     QT_IM_MODULE = "fcitx"; # Qt input method module
     XMODIFIERS = "@im=fcitx"; # X11 input method modifier
     SDL_IM_MODULE = "fcitx"; # SDL input method module
