@@ -6,14 +6,50 @@
 
 {
   programs.nix-ld = {
-    enable = true; # Enable nix-ld for running non-Nix binaries
+    enable = true;
 
-    # Common shared libraries that non-Nix binaries might need
     libraries = with pkgsStable; [
-      stdenv.cc.cc # GCC compiler runtime and glibc
-      libgcc # GCC runtime library
-      zlib # Compression library
-      openssl # SSL/TLS library
+      # Core system libraries
+      stdenv.cc.cc
+      libgcc
+      glibc
+
+      # Compression and crypto
+      zlib
+      bzip2
+      xz
+      openssl
+
+      # X11 and graphics
+      xorg.libX11
+      xorg.libXext
+      xorg.libXi
+      xorg.libXrender
+      xorg.libXft
+      xorg.libXcursor
+      xorg.libXrandr
+      xorg.libXinerama
+      libGL
+
+      # System services
+      dbus
+      systemd
+
+      # Text and fonts
+      fontconfig
+      freetype
+      expat
+
+      # Development libraries
+      libffi
+      ncurses
+      readline
+
+      # Network
+      curl
+      libxml2
+      nss
+      nspr
     ];
   };
 }
