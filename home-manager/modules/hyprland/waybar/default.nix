@@ -44,8 +44,7 @@
 
         "cpu" = {
           format = "  {usage}%";
-          tooltip-format = "CPU Usage: {usage}%
-Load: {load}";
+          tooltip-format = "CPU Usage: {usage}% Load: {load}";
           interval = 2;
           states = {
             warning = 70;
@@ -54,11 +53,11 @@ Load: {load}";
         };
 
         "custom/gpu-temp" = {
-          format = " {}°C";
+          format = " {}";
           exec = "~/System/scripts/waybar/gpu-temp.sh";
           interval = 5;
           tooltip = true;
-          tooltip-format = "GPU Temperature: {}°C";
+          tooltip-format = "GPU Temperature: {}";
         };
 
         "custom/gpu-usage" = {
