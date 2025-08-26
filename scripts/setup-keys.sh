@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # setup-keys.sh - Setup SSH and GPG keys from SOPS on a new machine
 # Usage: ./setup-keys.sh
 
@@ -16,6 +16,9 @@ fi
 # Check if age key exists
 if [[ ! -f ~/.config/sops/age/keys.txt ]]; then
     echo "❌ Error: Age key not found. Please run 'just sops-setup' first."
+    exit 1
+elif ! nix shell nixpkgs#age -c age-keygen -y ~/.config/sops/age/keys.txt &> /dev/null; then
+    echo "❌ Error: Age key file is invalid or corrupt. Please ensure it contains a valid age private key."
     exit 1
 fi
 
@@ -35,32 +38,60 @@ chmod 700 ~/.ssh
 # Extract SSH keys
 echo "🔑 Setting up SSH keys..."
 
+# Temporarily move any existing SSH keys to avoid SOPS conflicts
+SSH_BACKUP_DIR=$(mktemp -d)
+if [[ -f ~/.ssh/id_ed25519 ]]; then
+    mv ~/.ssh/id_ed25519 "$SSH_BACKUP_DIR/"
+fi
+if [[ -f ~/.ssh/id_ed25519.pub ]]; then
+    mv ~/.ssh/id_ed25519.pub "$SSH_BACKUP_DIR/"
+fi
+
 # Extract SSH private key
-just sops-view | grep ssh_private_key -A 5 | tail -5 > ~/.ssh/id_ed25519
-if [[ -s ~/.ssh/id_ed25519 ]]; then
+TEMP_SSH_KEY=$(mktemp)
+just sops-view | grep -A 20 "ssh_private_key:" | tail -n +2 | sed 's/^    //' > "$TEMP_SSH_KEY"
+if [[ -s "$TEMP_SSH_KEY" ]]; then
+    mv "$TEMP_SSH_KEY" ~/.ssh/id_ed25519
     chmod 600 ~/.ssh/id_ed25519
     echo "✅ SSH private key extracted and configured"
 else
+    rm -f "$TEMP_SSH_KEY"
     echo "❌ Failed to extract SSH private key"
+    # Restore backup if extraction failed
+    if [[ -f "$SSH_BACKUP_DIR/id_ed25519" ]]; then
+        mv "$SSH_BACKUP_DIR/id_ed25519" ~/.ssh/
+    fi
+    rm -rf "$SSH_BACKUP_DIR"
     exit 1
 fi
 
 # Extract SSH public key
-just sops-view | grep ssh_public_key | cut -d' ' -f2 > ~/.ssh/id_ed25519.pub
-if [[ -s ~/.ssh/id_ed25519.pub ]]; then
+TEMP_SSH_PUB=$(mktemp)
+just sops-view | grep "ssh_public_key:" | cut -d' ' -f2- > "$TEMP_SSH_PUB"
+if [[ -s "$TEMP_SSH_PUB" ]]; then
+    mv "$TEMP_SSH_PUB" ~/.ssh/id_ed25519.pub
     chmod 644 ~/.ssh/id_ed25519.pub
     echo "✅ SSH public key extracted and configured"
 else
+    rm -f "$TEMP_SSH_PUB"
     echo "❌ Failed to extract SSH public key"
+    # Restore backup if extraction failed
+    if [[ -f "$SSH_BACKUP_DIR/id_ed25519.pub" ]]; then
+        mv "$SSH_BACKUP_DIR/id_ed25519.pub" ~/.ssh/
+    fi
+    rm -rf "$SSH_BACKUP_DIR"
     exit 1
 fi
+
+# Clean up backup directory
+rm -rf "$SSH_BACKUP_DIR"
 
 # Extract and import GPG key
 echo ""
 echo "🔐 Setting up GPG key..."
 
 # Extract GPG private key
-just sops-view | grep gpg_private_key -A 10 | tail -10 > ~/gpg_key.asc
+just sops-view | grep -A 50 "gpg_private_key:" | tail -n +2 | sed 's/^    //' > ~/gpg_key.asc
 if [[ -s ~/gpg_key.asc ]]; then
     # Import GPG key
     gpg --import ~/gpg_key.asc
@@ -85,7 +116,7 @@ echo ""
 echo "⚙️  Configuring Git..."
 
 # Extract Git config from SSH public key (fallback if not in secrets)
-GIT_EMAIL=$(just sops-view | grep ssh_public_key | cut -d' ' -f3)
+GIT_EMAIL=$(just sops-view | grep "ssh_public_key:" | awk '{print $NF}')
 GIT_NAME=$(echo "$GIT_EMAIL" | cut -d'@' -f1)
 
 # If we have git_user_name and git_user_email in secrets, use those instead
@@ -97,15 +128,21 @@ if just sops-view | grep -q git_user_email; then
     GIT_EMAIL=$(just sops-view | grep git_user_email | cut -d' ' -f2 | tr -d '"')
 fi
 
-git config --global user.name "$GIT_NAME"
-git config --global user.email "$GIT_EMAIL"
-git config --global user.signingkey "$GPG_KEY_ID"
-git config --global commit.gpgsign true
-
-echo "✅ Git configured with:"
-echo "   Name: $GIT_NAME"
-echo "   Email: $GIT_EMAIL"
-echo "   Signing Key: $GPG_KEY_ID"
+if git config --global user.name "$GIT_NAME" 2>/dev/null && \
+   git config --global user.email "$GIT_EMAIL" 2>/dev/null && \
+   git config --global user.signingkey "$GPG_KEY_ID" 2>/dev/null && \
+   git config --global commit.gpgsign true 2>/dev/null; then
+    echo "✅ Git configured with:"
+    echo "   Name: $GIT_NAME"
+    echo "   Email: $GIT_EMAIL"
+    echo "   Signing Key: $GPG_KEY_ID"
+else
+    echo "⚠️  Warning: Could not configure Git (read-only filesystem). Please configure manually:"
+    echo "   git config --global user.name \"$GIT_NAME\""
+    echo "   git config --global user.email \"$GIT_EMAIL\""
+    echo "   git config --global user.signingkey \"$GPG_KEY_ID\""
+    echo "   git config --global commit.gpgsign true"
+fi
 
 # Start SSH agent and add key
 echo ""
