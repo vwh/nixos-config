@@ -328,7 +328,7 @@
 
         backlight = {
           label = "󰃞";
-          device = "intel_backlight";
+          device = "acpi_video0";
         };
       };
 
