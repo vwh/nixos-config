@@ -196,11 +196,6 @@
         "size 80% 60%,class:^(scratchpad)$"
         "center,class:^(scratchpad)$"
 
-        # Workspace rules for better organization
-        # Development workspace
-        "workspace 2, class:(code|Code|VSCodium|sublime_text|jetbrains-*)"
-        "workspace 2, class:(Alacritty), title:^(nvim|vim|hx)"
-
         # Media workspace
         "workspace 4, class:(mpv|vlc|spotify|rhythmbox)"
 
