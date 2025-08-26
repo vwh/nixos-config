@@ -143,3 +143,18 @@ update-npm:
 	@echo -e "\n➤ Updating global packages..."
 	bun update -g
 	@echo -e "✅ Global packages updated!"
+
+# Check cleanup services status
+cleanup-status:
+	@echo -e "\n➤ Checking cleanup services status..."
+	@systemctl list-timers | grep cleanup || echo "No cleanup timers found"
+	@echo -e "\nCleanup services:"
+	@systemctl list-units --type=service | grep cleanup || echo "No cleanup services found"
+
+# Manual cleanup run
+cleanup-run:
+	@echo -e "\n➤ Running manual cleanup..."
+	@sudo systemctl start cleanup-telegram-downloads
+	@sudo systemctl start cleanup-downloads
+	@sudo systemctl start cleanup-cache
+	@echo -e "✅ Manual cleanup completed!"
