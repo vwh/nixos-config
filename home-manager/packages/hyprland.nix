@@ -21,7 +21,7 @@
   # Desktop integration and portals
   xdg-desktop-portal-hyprland # Hyprland XDG desktop portal backend
   xdg-desktop-portal-gtk # GTK XDG desktop portal frontend
-  libsForQt5.xwaylandvideobridge # XWayland video bridge for screen sharing
+  kdePackages.xwaylandvideobridge # XWayland video bridge for screen sharing
   libnotify # Desktop notification library
   playerctl # Media player control utility
 ])

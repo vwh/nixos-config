@@ -30,6 +30,6 @@
   teams-for-linux # Microsoft Teams for Linux
 
   # Productivity and knowledge management
-  anki # Spaced repetition flashcard system
+  anki-bin # Spaced repetition flashcard system (binary version to avoid compilation issues)
   obsidian # Knowledge base and note-taking application
 ])
