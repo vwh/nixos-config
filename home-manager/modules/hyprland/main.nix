@@ -23,8 +23,8 @@
         "XDG_SCREENSHOTS_DIR,$HOME/screens" # Directory for screenshots
       ];
 
-      # Monitor configuration - auto-detects connected monitors with high resolution
-      monitor = ",highres,auto,1";
+      # Monitor configuration - use preferred resolution and refresh rate
+      monitor = ",preferred,auto,1";
 
       # Variable definitions for keybindings and commands
       "$mainMod" = "SUPER"; # Main modifier key (Windows/Cmd key)

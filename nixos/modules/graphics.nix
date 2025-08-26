@@ -5,9 +5,8 @@
 { pkgs, config, ... }:
 
 let
-  # Using beta driver for recent GPUs like RTX 4070
-  # Beta drivers provide better support for newer hardware
-  nvidiaDriverChannel = config.boot.kernelPackages.nvidiaPackages.beta;
+  # Using stable driver to match kernel module version
+  nvidiaDriverChannel = config.boot.kernelPackages.nvidiaPackages.stable;
 in
 {
   # Video drivers configuration for Xorg and Wayland
@@ -32,7 +31,6 @@ in
     ELECTRON_OZONE_PLATFORM_HINT = "auto"; # Auto-detect Electron platform
     __GL_GSYNC_ALLOWED = "1"; # Enable G-Sync if available
     __GL_VRR_ALLOWED = "1"; # Enable Variable Refresh Rate
-    WLR_DRM_NO_ATOMIC = "1"; # Fix atomic mode issues with Hyprland
     NVD_BACKEND = "direct"; # Direct backend for new NVIDIA driver
     MOZ_ENABLE_WAYLAND = "1"; # Enable Wayland support in Firefox
   };

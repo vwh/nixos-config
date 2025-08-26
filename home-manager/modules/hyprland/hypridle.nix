@@ -12,7 +12,7 @@
         before_sleep_cmd = "loginctl lock-session"; # Lock screen before sleep
         after_sleep_cmd = "hyprctl dispatch dpms on"; # Turn on display after sleep
         ignore_dbus_inhibit = false; # Respect D-Bus inhibit signals
-        lock_cmd = "pidof hyprlock || hyprlock"; # Lock command (if not already running)
+        lock_cmd = "hyprlock"; # Simple lock command
       };
 
       # Idle timeout listeners with actions

@@ -51,12 +51,30 @@ clean:
 # Check system health
 health:
 	@echo -e "\n➤ Checking system health…"
+	@echo "Failed Services:"
+	@systemctl --failed --no-pager --quiet || echo "None"
+	@echo ""
+	@echo "Recent Errors (last 24h):"
+	@journalctl --since "24 hours ago" --no-pager -p 3 | head -5 || echo "None"
+	@echo ""
 	@echo "Disk usage:"
 	@df -h
 	@echo -e "\nNix store info:"
 	@timeout 10s du -sh /nix/store 2>/dev/null || echo "Nix store size: $(df -h /nix | tail -1 | awk '{print $3 "/" $2 " (" $5 " used)"}')"
 	@echo -e "\nMemory usage:"
 	@free -h
+	@echo -e "\nTop CPU Processes:"
+	@ps aux --sort=-%cpu | head -6 | tail -5
+
+# View system logs (last 7 days)
+system-logs:
+	@echo -e "\n➤ System logs (last 7 days)…"
+	@journalctl --since "7 days ago" --no-pager | tail -50
+
+# Monitor system resources in real-time
+monitor:
+	@echo -e "\n➤ System monitoring (Ctrl+C to stop)…"
+	@watch -n 2 "echo '=== CPU & Memory ===' && ps aux --sort=-%cpu | head -6 && echo -e '\n=== Disk Usage ===' && df -h / && echo -e '\n=== Memory Info ===' && free -h"
 
 # Edit secrets with SOPS
 sops-edit:
