@@ -34,6 +34,12 @@
       # Enable stylix to manage GTK and Qt themes
       gtk.enable = true;
       qt.enable = true;
+
+      # Configure zen-browser for stylix
+      zen-browser = {
+        enable = true;
+        profileNames = [ "default" ];
+      };
     };
 
     cursor = {

@@ -6,5 +6,6 @@
     ./glance.nix
     ./obs.nix
     ./spicetify.nix
+    ./zen.nix
   ];
 }
