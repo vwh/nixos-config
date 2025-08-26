@@ -1,35 +1,40 @@
 #!/usr/bin/env bash
+# modules-check.sh - Check for missing module imports in Nix configurations
+# This script validates that all .nix files in directories with default.nix are properly imported
+
 set -euo pipefail
 
 error_count=0
 
-# find all default.nix files
+# Find all default.nix files in the project
 mapfile -t defaults < <(find . -type f -name default.nix)
 
+# Check each default.nix file for import consistency
 for default in "${defaults[@]}"; do
   dir=$(dirname "$default")
   echo "⟳ Checking $default" >&2
 
   pushd "$dir" >/dev/null
 
-  # grab every "./*.nix" in the file and strip the "./"
+  # Extract all relative imports from default.nix (e.g., ./module.nix)
+  # Remove the "./" prefix to get just the filename
   mapfile -t imported < <(
     grep -oE '\./[^ ]+\.nix' default.nix | sed 's#\./##'
   )
 
-  # build a lookup set
+  # Create a lookup table of imported modules for fast checking
   declare -A imp=()
   for m in "${imported[@]}"; do
     imp["$m"]=1
   done
 
-  # list all .nix files here except default.nix
+  # Find all .nix files in current directory (excluding default.nix)
   mapfile -t locals < <(
     find . -maxdepth 1 -type f -name '*.nix' \
       ! -name default.nix -printf '%f\n'
   )
 
-  # any .nix on disk missing from imports?
+  # Check for .nix files that exist but aren't imported
   for f in "${locals[@]}"; do
     if [[ -z "${imp[$f]:-}" ]]; then
       echo "✗  Missing import: $dir/$f" >&2
@@ -37,7 +42,7 @@ for default in "${defaults[@]}"; do
     fi
   done
 
-  # any import pointing to a non-existent file?
+  # Check for imports that point to non-existent files
   for m in "${imported[@]}"; do
     if [[ ! -f $m ]]; then
       echo "✗  Bad import (no such file): $dir/$m" >&2
@@ -48,6 +53,7 @@ for default in "${defaults[@]}"; do
   popd >/dev/null
 done
 
+# Report results and exit with appropriate status code
 if (( error_count > 0 )); then
   echo "➤ Found $error_count import error(s)." >&2
   exit 1

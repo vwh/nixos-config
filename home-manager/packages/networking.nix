@@ -1,56 +1,58 @@
-# List of networking tools to install.
+# Networking and network analysis tools.
+# This module provides comprehensive networking utilities for network analysis,
+# monitoring, debugging, security testing, and connectivity management.
 
 { pkgsStable, ... }:
 
 with pkgsStable;
 [
-  # Core networking
-  openssl
-  openssl.dev
-  openssh # SSH
-  networkmanager # Network manager
-  networkmanagerapplet # Network manager applet
+  # Core networking and security
+  openssl # OpenSSL cryptographic library
+  openssl.dev # OpenSSL development headers
+  openssh # OpenSSH connectivity tools
+  networkmanager # Network connection manager
+  networkmanagerapplet # Network manager system tray
 
-  # Network utilities
+  # HTTP clients and download tools
   wget # File downloader
-  curl # HTTP client
-  httpie # Modern HTTP client
+  curl # Command-line HTTP client
+  httpie # Modern HTTP client with colors
 
-  # Network analysis
-  nmap # Network scanner
-  masscan # Fast port scanner
+  # Network scanning and reconnaissance
+  nmap # Network discovery and security auditing
+  masscan # Fast internet-scale port scanner
   zmap # Internet-wide network scanner
 
-  # Network monitoring
-  iftop # Network bandwidth monitor
+  # Network monitoring and analysis
+  iftop # Real-time network bandwidth monitor
   nethogs # Network usage by process
   nload # Network load monitor
-  vnstat # Network statistics
-  bandwhich # Network utilization by process
+  vnstat # Network traffic statistics
+  bandwhich # Network utilization by socket
 
-  # DNS utilities
-  dig # DNS lookup
-  host # DNS lookup
-  whois # Domain information
+  # DNS and domain utilities
+  dig # DNS lookup utility
+  host # DNS lookup utility (simpler)
+  whois # Domain registration information
 
-  # Network debugging
-  tcpdump # Packet capture
-  netcat # Network utility
-  socat # Socket utility
+  # Network debugging and packet analysis
+  tcpdump # Network packet capture and analyzer
+  netcat # Networking utility for reading/writing network connections
+  socat # Multipurpose relay tool for bidirectional data transfer
 
-  # VPN and tunneling
-  openvpn # VPN client
-  wireguard-tools # WireGuard VPN
+  # VPN and secure tunneling
+  openvpn # OpenVPN client
+  wireguard-tools # WireGuard VPN tools
 
-  # Network testing
-  iperf3 # Network performance testing
-  mtr # Network diagnostic tool
-  traceroute # Route tracing
+  # Network performance and diagnostics
+  iperf3 # Network bandwidth measurement
+  mtr # Network diagnostic tool (traceroute + ping)
+  traceroute # Network route tracing
 
-  # Web utilities
-  lynx # Text-based web browser
-  w3m # Text-based web browser
+  # Text-based web browsers
+  lynx # Advanced text-based web browser
+  w3m # Another text-based web browser
 
-  # Network security
-  hydra # Password cracker
+  # Network security and penetration testing
+  hydra # Network login cracker
 ]

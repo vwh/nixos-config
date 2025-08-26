@@ -1,86 +1,88 @@
-# List of CLI tools to install.
+# Command-line interface tools and utilities.
+# This module provides essential CLI tools for file management, text processing,
+# system monitoring, development workflows, and productivity enhancement.
 
 { pkgsStable, ... }:
 
 with pkgsStable;
 [
-  # File and directory utilities
-  fd # Simple, fast and user-friendly alternative to find
-  fselect # Fast and user-friendly find
-  ncdu # Disk usage analyzer
-  dust # Disk usage tree (modern du)
-  duf # Better df
+  # File and directory management utilities
+  fd # Modern find replacement with intuitive syntax
+  fselect # SQL-like file selection tool
+  ncdu # Interactive disk usage analyzer
+  dust # Modern du with tree visualization
+  duf # Enhanced df with better formatting
 
-  # Text processing and search
-  ripgrep # Fast and user-friendly grep replacement
+  # Text processing and search tools
+  ripgrep # Fast grep replacement with modern features
   fzf # Command-line fuzzy finder
-  jq # JSON processor
-  yq # YAML processor
-  htmlq # Like jq, but for HTML
+  jq # JSON processor and query tool
+  yq # YAML processor similar to jq
+  htmlq # HTML processor like jq for HTML
 
-  # System information and monitoring
-  fastfetch # Fast system information
-  microfetch # Fast system information
-  onefetch # One-line system information
-  tokei # Code analyzer
-  procs # Modern ps alternative
+  # System information and monitoring tools
+  fastfetch # Fast system information display
+  microfetch # Minimal system information
+  onefetch # Git repository information tool
+  tokei # Code statistics and analysis
+  procs # Modern process viewer (ps replacement)
 
-  # Development tools
-  direnv # Directory environment
-  lazydocker # Docker wrapper
-  gh # GitHub CLI
+  # Development and version control tools
+  direnv # Directory-specific environment variables
+  lazydocker # Terminal UI for Docker management
+  gh # GitHub CLI tool
 
-  # Media and downloads
-  yt-dlp # YouTube downloader
-  imagemagick # Image manipulation tools
+  # Media processing and download tools
+  yt-dlp # YouTube and video downloader
+  imagemagick # Image manipulation and processing suite
 
-  # Utilities
-  bc # Arbitrary-precision calculator
-  rsync # File synchronization tool
+  # General utility tools
+  bc # Arbitrary precision calculator
+  rsync # Fast file synchronization tool
 
-  # Performance and benchmarking
-  hyperfine # Benchmarking tool
+  # Performance measurement and benchmarking
+  hyperfine # Command-line benchmarking tool
 
-  # JSON/YAML/TOML utilities
-  fx # JSON viewer
+  # Data format utilities
+  fx # Interactive JSON viewer and processor
 
-  # Color utilities
-  vivid # LS_COLORS generator
+  # Terminal theming and colors
+  vivid # LS_COLORS theme generator
 
-  # Network analysis and security
-  wireshark-cli # Network protocol analyzer
-  mitmproxy # HTTP proxy for debugging
+  # Network analysis and security tools
+  wireshark-cli # Network protocol analyzer (CLI)
+  mitmproxy # HTTP proxy for debugging and analysis
 
-  # Container and process tools
-  dive # Docker image analyzer
+  # Container analysis tools
+  dive # Docker image layer analyzer
 
-  # Backup and storage
-  restic # Backup tool
-  borgbackup # Deduplicating backup
+  # Backup and storage solutions
+  restic # Modern backup program
+  borgbackup # Deduplicating backup program
 
-  # Text processing
-  sd # Modern sed alternative
-  choose # Modern cut/awk alternative
+  # Text processing and manipulation
+  sd # Modern sed replacement
+  choose # Modern cut/awk replacement
 
-  # Performance analysis
-  flamegraph # Performance visualization
+  # Performance profiling and visualization
+  flamegraph # Performance visualization tool
 
-  # HTTP clients
-  curlie # Modern curl alternative
-  xh # Yet another HTTP client
+  # HTTP client tools
+  curlie # Modern curl replacement with colors
+  xh # Friendly HTTP client
 
-  # Log analysis
-  angle-grinder # Log processing
+  # Log processing and analysis
+  angle-grinder # Log processing tool
 
-  # DNS and network utilities
-  dog # Modern dig alternative
-  dua # Modern du alternative
+  # Network diagnostic tools
+  dog # Modern DNS lookup tool
+  dua # Modern disk usage analyzer
 
-  # Git tools
-  delta # Modern diff tool
-  glab # GitLab CLI
+  # Git workflow enhancement tools
+  delta # Modern diff viewer for Git
+  glab # GitLab CLI tool
 
-  # File watching and automation
-  watchexec # File watcher
-  entr # File watcher
+  # File watching and automation tools
+  watchexec # Execute commands on file changes
+  entr # Run commands when files change
 ]

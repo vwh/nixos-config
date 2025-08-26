@@ -1,63 +1,66 @@
-# List of development tools and languages to install.
+# Development tools and programming languages.
+# This module provides essential development tools, programming languages,
+# databases, and debugging utilities for software development.
 
 { pkgs, pkgsStable }:
 
 (with pkgsStable; [
-  # C/C++ development
-  gcc # C compiler
+  # C/C++ development toolchain
+  gcc # GNU C compiler and toolchain
 
-  # Databases
-  sqlite # SQLite database
-  postgresql # PostgreSQL client
-  redis # Redis client
+  # Database systems and clients
+  sqlite # SQLite database engine
+  postgresql # PostgreSQL database client
+  redis # Redis key-value store client
 
-  # Build tools and task runners
-  just # Just command runner
-  gnumake # GNU make
-  cmake # CMake
+  # Build systems and task runners
+  just # Modern command runner
+  gnumake # GNU make build automation
+  cmake # Cross-platform build system
 
-  # Version control
+  # Version control enhancements
   git-lfs # Git Large File Storage
 
-  # Container and cloud tools
-  docker-compose # Docker Compose
+  # Container and orchestration tools
+  docker-compose # Docker container orchestration
 
-  # Database tools
-  dbeaver-bin # Universal database tool
+  # Database management tools
+  dbeaver-bin # Universal database management tool
 
-  # Debugging and profiling
-  gdb # GNU Debugger
-  valgrind # Memory debugger
+  # Debugging and profiling tools
+  gdb # GNU debugger
+  valgrind # Memory debugging and profiling
   strace # System call tracer
   ltrace # Library call tracer
 
-  # Documentation tools
-  pandoc # Document converter
+  # Documentation and conversion tools
+  pandoc # Universal document converter
 ])
 
 ++ (with pkgs; [
-  # Development
-  vscode # Visual Studio Code
-  sqlitebrowser # SQLite browser
+  # Integrated Development Environments
+  vscode # Visual Studio Code editor
+  sqlitebrowser # SQLite database browser GUI
 
-  # API development and testing
+  # API development and testing tools
   postman # API development platform
-  bruno # (Postman alternative)
-  insomnia # REST client
+  bruno # Open-source API client (Postman alternative)
+  insomnia # REST API client
 
-  # Programming languages
-  openjdk23 # OpenJDK 23
-  rustc # Rust compiler
-  cargo # Cargo package manager
+  # Programming language runtimes and toolchains
+  openjdk23 # OpenJDK 23 for Java development
+  rustc # Rust programming language compiler
+  cargo # Rust package manager and build tool
 
-  python3 # Python 3
-  python3Packages.pip # Python package manager
-  python3Packages.virtualenv # Python virtual environments
+  # Python development environment
+  python3 # Python 3 programming language
+  python3Packages.pip # Python package installer
+  python3Packages.virtualenv # Python virtual environment manager
 
-  # JavaScript/TypeScript
-  nodejs # NodeJS JavaScript runtime
-  bun # Bun JavaScript runtime
-  deno # Deno JavaScript runtime
-  pnpm # pnpm package manager
+  # JavaScript/TypeScript development tools
+  nodejs # Node.js JavaScript runtime
+  bun # Bun JavaScript runtime and toolkit
+  deno # Deno JavaScript/TypeScript runtime
+  pnpm # Fast npm alternative package manager
   yarn # Yarn package manager
 ])

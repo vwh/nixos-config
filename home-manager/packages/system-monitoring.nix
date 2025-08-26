@@ -1,42 +1,44 @@
-# System monitoring and analysis tools for AI agents and power users.
+# System monitoring and diagnostic tools.
+# This module provides comprehensive system monitoring, hardware analysis,
+# performance benchmarking, and diagnostic utilities for system administration.
 
 { pkgsStable, ... }:
 
 with pkgsStable;
 [
-  # Process monitoring
-  atop # Advanced system monitor
+  # Process and system monitoring
+  atop # Advanced interactive system monitor
 
-  # System information
-  screenfetch # System information alternative
-  inxi # Hardware information
-  lshw # Hardware lister
-  hwinfo # Hardware information
-  dmidecode # DMI table decoder
+  # Hardware information and analysis
+  screenfetch # System information display tool
+  inxi # Comprehensive hardware information tool
+  lshw # Hardware lister with detailed information
+  hwinfo # Hardware detection and information tool
+  dmidecode # DMI/SMBIOS table decoder for hardware info
 
-  # Disk monitoring
-  smartmontools # Disk health monitoring
-  hdparm # Hard disk parameters
-  sdparm # SCSI disk parameters
+  # Storage and disk monitoring
+  smartmontools # S.M.A.R.T. disk health monitoring
+  hdparm # Hard disk parameter configuration and testing
+  sdparm # SCSI/SATA disk parameter configuration
 
-  # Memory monitoring
-  smem # Memory usage reporter
+  # Memory analysis and monitoring
+  smem # Advanced memory usage reporting tool
 
-  # Log analysis
-  lnav # Log navigator
-  multitail # Multi-file tail
+  # Log analysis and monitoring
+  lnav # Advanced log file viewer and analyzer
+  multitail # Multi-file tail with color coding
 
-  # System debugging (moved to development.nix)
-  perf-tools # Performance analysis tools
+  # Performance analysis tools
+  perf-tools # Collection of Linux performance analysis tools
 
-  # File system monitoring
-  inotify-tools # File system event monitoring
+  # File system event monitoring
+  inotify-tools # File system event monitoring utilities
 
-  # Benchmarking
-  sysbench # System benchmark
-  stress # System stress testing
-  stress-ng # Next generation stress testing
+  # System benchmarking and stress testing
+  sysbench # Multi-threaded system benchmark tool
+  stress # Workload generator for stress testing
+  stress-ng # Advanced stress testing tool
 
-  # Container monitoring
-  ctop # Container monitoring
+  # Container monitoring and management
+  ctop # Top-like interface for container metrics
 ]

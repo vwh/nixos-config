@@ -1,30 +1,32 @@
 # Imports all NixOS modules.
+# This file serves as the central hub for importing all system-wide
+# configuration modules that define the complete NixOS system.
 
 {
   imports = [
-    ./audio.nix
-    ./bluetooth.nix
-    ./bootloader.nix
-    ./monitoring.nix
-    ./nautilus.nix
-    ./environment.nix
-    ./gaming.nix
-    ./gnome.nix
-    ./graphics.nix
-    ./hyprland.nix
-    ./i18n.nix
-    ./libinput.nix
-    ./networking.nix
-    ./nix-ld.nix
-    ./nix.nix
-    ./printing.nix
-    ./sops.nix
-    ./stability.nix
-    ./timezone.nix
-    ./tor.nix
-    ./upower.nix
-    ./users.nix
-    ./virtualisation.nix
-    ./xserver.nix
+    ./audio.nix # Audio system configuration (PipeWire/PulseAudio)
+    ./bluetooth.nix # Bluetooth services and device management
+    ./bootloader.nix # Boot loader configuration (GRUB/systemd-boot)
+    ./monitoring.nix # System monitoring and metrics collection
+    ./nautilus.nix # GNOME Files (Nautilus) configuration
+    ./environment.nix # System-wide environment variables and paths
+    ./gaming.nix # Gaming-related configurations and optimizations
+    ./gnome.nix # GNOME desktop environment configuration
+    ./graphics.nix # Graphics drivers and GPU configuration
+    ./hyprland.nix # Hyprland window manager system integration
+    ./i18n.nix # Internationalization and localization settings
+    ./libinput.nix # Input device configuration (touchpad, mouse, etc.)
+    ./networking.nix # Network configuration and firewall rules
+    ./nix-ld.nix # Dynamic linker for running non-Nix binaries
+    ./nix.nix # Nix package manager configuration
+    ./printing.nix # CUPS printing system and drivers
+    ./sops.nix # Secret management with SOPS
+    ./stability.nix # System stability and optimization settings
+    ./timezone.nix # Time zone and clock configuration
+    ./tor.nix # Tor network services and configuration
+    ./upower.nix # Power management and battery monitoring
+    ./users.nix # User account management and permissions
+    ./virtualisation.nix # Virtualization support (QEMU, libvirt, etc.)
+    ./xserver.nix # X11 server configuration and display settings
   ];
 }

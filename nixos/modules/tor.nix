@@ -4,8 +4,8 @@
 
 {
   services.tor = {
-    enable = lib.mkDefault true;
-    torsocks.enable = true;
-    client.enable = true;
+    enable = lib.mkDefault true; # Enable Tor daemon (can be overridden)
+    torsocks.enable = true; # Enable torsocks for transparent Tor routing
+    client.enable = true; # Enable Tor client functionality
   };
 }

@@ -1,9 +1,13 @@
 # Waybar (status bar) configuration.
+# This module configures Waybar, a highly customizable Wayland status bar
+# that displays system information, workspaces, and provides interactive controls
+# for various system components and applications.
 
 {
+  # Enable Waybar status bar
   programs.waybar = {
     enable = true;
-    style = ./style.css;
+    style = ./style.css; # External CSS styling file
 
     settings = {
       mainBar = {

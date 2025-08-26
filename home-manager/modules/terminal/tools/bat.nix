@@ -1,11 +1,14 @@
 # Bat (cat clone) configuration.
+# This module configures bat, a cat clone with syntax highlighting,
+# git integration, and other enhancements for better file viewing.
 
 { pkgsStable, ... }:
 
 {
   programs.bat = {
-    enable = true;
+    enable = true; # Enable bat for enhanced file viewing
 
+    # Custom themes (commented out - using system theme)
     # themes = {
     #   dracula = {
     #     src = pkgsStable.fetchFromGitHub {
@@ -14,7 +17,7 @@
     #       rev = "75407cc80c51814d61beb1df07e380d6f58ad767";
     #       sha256 = "186rhbljw80psf1l8hyj02ycz1wzxv4rxmbrqr8yvi30165drpay";
     #     };
-
+    #
     #     file = "gruvbox (Dark) (Medium).sublime-color-scheme";
     #   };
     # };

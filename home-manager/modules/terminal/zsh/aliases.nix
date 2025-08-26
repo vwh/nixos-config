@@ -1,107 +1,111 @@
 # Zsh shell aliases.
+# This module defines custom shell aliases for enhanced productivity,
+# navigation, development workflows, and system administration.
 
 {
   programs.zsh.shellAliases =
     let
-      editor = "code";
-      nixTemplates = "github:vwh/nixos-config/main?dir=devShells#";
+      editor = "code"; # Default editor for file operations
+      nixTemplates = "github:vwh/nixos-config/main?dir=devShells#"; # Nix flake templates
     in
     {
-      # navigation
-      ls = "eza --icons --group-directories-first";
-      ll = "eza -l --icons --group-directories-first --header";
-      la = "eza -la --icons --group-directories-first --header";
-      lt = "eza --tree --level=2 --icons";
-      etree = "eza --tree --level=1 --icons";
-      cd = "z";
-      ci = "zi";
+      # Enhanced navigation aliases using modern tools
+      ls = "eza --icons --group-directories-first"; # Enhanced ls with icons
+      ll = "eza -l --icons --group-directories-first --header"; # Long listing with headers
+      la = "eza -la --icons --group-directories-first --header"; # All files with details
+      lt = "eza --tree --level=2 --icons"; # Tree view (2 levels)
+      etree = "eza --tree --level=1 --icons"; # Extended tree view
+      cd = "z"; # Smart directory jumping
+      ci = "zi"; # Interactive directory selection
 
-      # Quick navigation
-      ".." = "cd ..";
-      "..." = "cd ../..";
-      "...." = "cd ../../..";
-      "....." = "cd ../../../..";
+      # Quick navigation shortcuts for moving up directory tree
+      ".." = "cd .."; # Go up one directory
+      "..." = "cd ../.."; # Go up two directories
+      "...." = "cd ../../.."; # Go up three directories
+      "....." = "cd ../../../.."; # Go up four directories
 
-      # Directory shortcuts
-      dl = "cd ~/Downloads";
-      dt = "cd ~/Desktop";
-      docs = "cd ~/Documents";
-      proj = "cd ~/Projects";
+      # Common directory shortcuts for quick navigation
+      dl = "cd ~/Downloads"; # Downloads directory
+      dt = "cd ~/Desktop"; # Desktop directory
+      docs = "cd ~/Documents"; # Documents directory
+      proj = "cd ~/Projects"; # Projects directory
 
-      # Enhanced search and text processing
-      find = "fd";
-      grep = "rg";
-      hq = "htmlq";
-      cat = "bat --style=auto";
-      less = "bat --style=auto --paging=always";
+      # Enhanced search and text processing tools
+      find = "fd"; # Modern find replacement
+      grep = "rg"; # Modern grep replacement
+      hq = "htmlq"; # HTML query tool
+      cat = "bat --style=auto"; # Enhanced cat with syntax highlighting
+      less = "bat --style=auto --paging=always"; # Enhanced pager
 
-      # Advanced search
-      rgi = "rg -i"; # case insensitive
-      rgf = "rg --files-with-matches"; # only show filenames
-      rgc = "rg --count"; # count matches
+      # Advanced search aliases with specific options
+      rgi = "rg -i"; # Case-insensitive search
+      rgf = "rg --files-with-matches"; # Show only filenames with matches
+      rgc = "rg --count"; # Count matches per file
 
-      # Code info
-      tk = "tokei";
-      tf = "tokei --files";
+      # Code analysis and statistics
+      tk = "tokei"; # Code statistics tool
+      tf = "tokei --files"; # Code statistics with file details
 
-      # Files
-      fs = "fselect";
+      # File selection and management
+      fs = "fselect"; # SQL-like file selection
 
-      # Editors
-      v = "${editor}";
-      se = "sudoedit";
+      # Editor shortcuts
+      v = "${editor}"; # Open file in default editor
+      se = "sudoedit"; # Edit files with sudo privileges
 
-      # System info
-      ff = "fastfetch";
-      mf = "microfetch";
-      of = "onefetch";
+      # System information and monitoring tools
+      ff = "fastfetch"; # System information display
+      mf = "microfetch"; # Minimal system info
+      of = "onefetch"; # Git repository information
 
-      # General tools
-      lg = "lazygit";
-      ld = "lazydocker";
+      # Development and productivity tools
+      lg = "lazygit"; # Terminal Git UI
+      ld = "lazydocker"; # Terminal Docker UI
 
-      # AI tools
-      gemi = "gemini";
-      open = "opencode";
+      # AI and coding assistance tools
+      gemi = "gemini"; # Google Gemini AI
+      open = "opencode"; # OpenCode AI assistant
 
-      # Nix tools
-      ns = "nix-shell";
-      nd = "nix develop --command zsh";
-      nfu = "nix flake update";
-      nfs = "nix flake show";
-      nfi = "nix flake init";
-      nfib = "nfi -t '${nixTemplates}bun'";
-      nfid = "nfi -t '${nixTemplates}deno'";
-      nfin = "nfi -t '${nixTemplates}nodejs'";
-      nfip = "nfi -t '${nixTemplates}python-venv'";
-      nfirs = "nfi -t '${nixTemplates}rust-stable'";
-      nfirn = "nfi -t '${nixTemplates}rust-nightly'";
+      # Nix ecosystem tools and shortcuts
+      ns = "nix-shell"; # Start Nix shell
+      nd = "nix develop --command zsh"; # Enter development environment
+      nfu = "nix flake update"; # Update flake dependencies
+      nfs = "nix flake show"; # Show flake outputs
+      nfi = "nix flake init"; # Initialize new flake
 
-      # System management
-      docker = "sudo docker";
-      reboot = "sudo reboot";
-      shutdown = "sudo shutdown now";
+      # Development environment templates
+      nfib = "nfi -t '${nixTemplates}bun'"; # Bun.js template
+      nfid = "nfi -t '${nixTemplates}deno'"; # Deno template
+      nfin = "nfi -t '${nixTemplates}nodejs'"; # Node.js template
+      nfip = "nfi -t '${nixTemplates}python-venv'"; # Python template
+      nfirs = "nfi -t '${nixTemplates}rust-stable'"; # Rust stable template
+      nfirn = "nfi -t '${nixTemplates}rust-nightly'"; # Rust nightly template
 
-      # Process management
-      psg = "ps aux | grep";
-      killall = "pkill -f";
+      # System administration shortcuts
+      docker = "sudo docker"; # Docker with sudo
+      reboot = "sudo reboot"; # System reboot
+      shutdown = "sudo shutdown now"; # System shutdown
 
-      # Network utilities
-      ports = "lsof -i -P -n | grep LISTEN";
-      myip = "curl -s https://ipinfo.io/ip";
-      localip = "ip route get 1.1.1.1 | awk '{print $7}'";
+      # Process management utilities
+      psg = "ps aux | grep"; # Search running processes
+      killall = "pkill -f"; # Kill processes by pattern
 
-      # Disk usage
-      du1 = "du -h --max-depth=1";
-      ducks = "du -cks * | sort -rn | head";
+      # Network diagnostic tools
+      ports = "lsof -i -P -n | grep LISTEN"; # Show listening ports
+      myip = "curl -s https://ipinfo.io/ip"; # Get public IP
+      localip = "ip route get 1.1.1.1 | awk '{print $7}'"; # Get local IP
 
-      # Docker shortcuts (enhanced)
-      d = "docker";
-      dc = "docker-compose";
-      dps = "docker ps --format 'table {{.Names}}\\t{{.Status}}\\t{{.Ports}}'";
-      dpa = "docker ps -a --format 'table {{.Names}}\\t{{.Status}}\\t{{.Ports}}'";
-      di = "docker images --format 'table {{.Repository}}\\t{{.Tag}}\\t{{.Size}}'";
-      dex = "docker exec -it";
-      dlogs = "docker logs -f";
+      # Disk usage analysis tools
+      du1 = "du -h --max-depth=1"; # Directory sizes (1 level)
+      ducks = "du -cks * | sort -rn | head"; # Largest directories
+
+      # Docker container management shortcuts
+      d = "docker"; # Docker command
+      dc = "docker-compose"; # Docker Compose
+      dps = "docker ps --format 'table {{.Names}}\\t{{.Status}}\\t{{.Ports}}'"; # Running containers
+      dpa = "docker ps -a --format 'table {{.Names}}\\t{{.Status}}\\t{{.Ports}}'"; # All containers
+      di = "docker images --format 'table {{.Repository}}\\t{{.Tag}}\\t{{.Size}}'"; # Docker images
+      dex = "docker exec -it"; # Execute into container
+      dlogs = "docker logs -f"; # Follow container logs
     };
 }

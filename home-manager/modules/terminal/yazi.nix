@@ -1,9 +1,12 @@
-# Yazi file manager configuration
+# Yazi file manager configuration.
+# This module configures Yazi, a terminal file manager written in Rust
+# with image previews, syntax highlighting, and a custom Gruvbox color theme.
 
 {
+  # Enable Yazi terminal file manager
   programs.yazi = {
-    enable = true;
-    enableZshIntegration = true;
+    enable = true; # Enable Yazi file manager
+    enableZshIntegration = true; # Enable Zsh shell integration
 
     settings = {
       mgr = {

@@ -1,30 +1,33 @@
-# System stability and service conflict resolution
+# System stability and service conflict resolution.
+# This module implements various stability improvements including memory management,
 
 { pkgsStable, ... }:
 
 {
   services = {
-    # Enable earlyoom to prevent system lockups due to memory exhaustion
+    # Early OOM (Out of Memory) killer to prevent system lockups
     earlyoom = {
-      enable = true;
-      freeMemThreshold = 5;
-      freeSwapThreshold = 10;
+      enable = true; # Enable earlyoom service
+      freeMemThreshold = 5; # Kill processes when free memory < 5%
+      freeSwapThreshold = 10; # Kill processes when free swap < 10%
     };
 
-    # Reduce D-Bus service conflicts by managing service startup order
+    # D-Bus service configuration to reduce conflicts
     dbus = {
+      # Additional D-Bus services for better integration
       packages = with pkgsStable; [
-        gnome-keyring
-        gcr
+        gnome-keyring # GNOME keyring daemon
+        gcr # GNOME credential manager
       ];
     };
   };
 
   # Environment variables to improve application stability
   environment.sessionVariables = {
-    # Reduce GPU-related crashes
+    # Disable WebKit compositing to reduce GPU-related crashes
     WEBKIT_DISABLE_COMPOSITING_MODE = "1";
-    # Reduce memory usage for some applications
+
+    # Use always-malloc for GLib memory allocation to reduce fragmentation
     G_SLICE = "always-malloc";
   };
 }

@@ -1,40 +1,50 @@
 # Main Nix flake for system and home configurations.
+# This flake provides a complete NixOS and Home Manager setup with declarative
 
 {
   description = "NixOS + Home-Manager flake";
 
+  # External dependencies (inputs) - other flakes this configuration depends on
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.05";
+    # Core package repositories
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable"; # Primary package source
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.05"; # Stable package source
 
+    # User environment management
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Theme management
     stylix = {
       url = "github:danth/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Spotify customization
     spicetify-nix = {
       url = "github:Gerg-L/spicetify-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Secret management
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
+    # Window manager
+    hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1"; # Latest Hyprland with submodules
 
+    # Web browser
     zen-browser = {
       url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
+  # Flake outputs - what this flake provides to the outside world
   outputs =
     {
       self,
@@ -44,31 +54,35 @@
       ...
     }@inputs:
     let
-      system = "x86_64-linux";
-      homeStateVersion = "25.05";
-      user = "yazan";
+      # System configuration constants
+      system = "x86_64-linux"; # Target system architecture
+      homeStateVersion = "25.05"; # Home Manager state version
+      user = "yazan"; # Primary username
 
+      # Git configuration for user
       gitConfig = {
         name = "Yazan Alqasem";
         email = "vwhe@proton.me";
-        gitKey = "0x5478BB36AC504E64";
+        gitKey = "0x5478BB36AC504E64"; # GPG key for signing commits
       };
 
+      # Host configurations - defines available systems
       hosts = [
         {
-          hostname = "pc";
-          stateVersion = "25.05";
+          hostname = "pc"; # Desktop workstation
+          stateVersion = "25.05"; # NixOS state version
         }
 
         {
-          hostname = "thinkpad";
-          stateVersion = "25.05";
+          hostname = "thinkpad"; # Laptop system
+          stateVersion = "25.05"; # NixOS state version
         }
       ];
 
+      # Package sets with configurations
       pkgs = import nixpkgs {
         inherit system;
-        config.allowUnfree = true;
+        config.allowUnfree = true; # Allow proprietary packages
       };
 
       pkgsStable = import nixpkgs-stable {
@@ -76,28 +90,31 @@
         config.allowUnfree = true;
       };
 
+      # Function to create a complete NixOS system configuration
       makeSystem =
         { hostname, stateVersion }:
 
         nixpkgs.lib.nixosSystem {
           inherit system;
 
+          # Arguments passed to all modules
           specialArgs = {
             inherit
-              inputs
-              stateVersion
-              hostname
-              user
-              gitConfig
-              pkgsStable
+              inputs # All flake inputs
+              stateVersion # NixOS state version
+              hostname # System hostname
+              user # Primary user
+              gitConfig # Git configuration
+              pkgsStable # Stable package set
               ;
           };
 
+          # Modules to include in this system
           modules = [ ./hosts/${hostname}/configuration.nix ];
         };
     in
     {
-
+      # Generate NixOS system configurations for each host
       nixosConfigurations = nixpkgs.lib.foldl' (
         configs: host:
         configs
@@ -108,19 +125,22 @@
         }
       ) { } hosts;
 
+      # Home Manager configuration for user
       homeConfigurations.${user} = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
 
+        # Arguments passed to home-manager modules
         extraSpecialArgs = {
           inherit
-            inputs
-            homeStateVersion
-            user
-            gitConfig
-            pkgsStable
+            inputs # All flake inputs
+            homeStateVersion # Home Manager state version
+            user # Username
+            gitConfig # Git configuration
+            pkgsStable # Stable package set
             ;
         };
 
+        # Home Manager modules to include
         modules = [
           ./home-manager/home.nix
         ];

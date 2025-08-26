@@ -1,23 +1,31 @@
-# NVIDIA for my thinkpad configuration additions
+# NVIDIA graphics configuration for ThinkPad.
+# This module configures NVIDIA Optimus (hybrid graphics) for ThinkPad laptops,
+# enabling proper switching between integrated Intel and dedicated NVIDIA GPUs.
 
 {
   hardware.nvidia = {
+    # Power management settings for NVIDIA GPU
     powerManagement = {
+      # Disable fine-grained power management for stability
       finegrained = false;
     };
 
+    # NVIDIA Optimus (PRIME) configuration for hybrid graphics
     prime = {
+      # Enable offloading to dedicated GPU when needed
       offload = {
-        enable = true;
-        enableOffloadCmd = true;
+        enable = true; # Enable GPU offloading
+        enableOffloadCmd = true; # Enable offload command
       };
 
+      # Disable sync mode (use offload instead)
       sync.enable = false;
 
-      # Integrated
+      # PCI bus IDs for graphics devices
+      # Integrated Intel GPU
       intelBusId = "PCI:0@2:0:0";
 
-      # Dedicated
+      # Dedicated NVIDIA GPU
       nvidiaBusId = "PCI:2@0:0:0";
     };
   };

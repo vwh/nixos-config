@@ -1,14 +1,19 @@
+# Tmux (Terminal Multiplexer) configuration.
+# This module configures Tmux with enhanced productivity features,
+# custom keybindings, plugins, and session persistence for efficient terminal management.
+
 { pkgsStable, ... }:
 
 {
+  # Enable and configure Tmux terminal multiplexer
   programs.tmux = {
-    enable = true;
-    baseIndex = 1;
-    mouse = true;
-    escapeTime = 0;
-    keyMode = "vi";
-    terminal = "tmux-256color";
-    historyLimit = 50000;
+    enable = true; # Enable Tmux
+    baseIndex = 1; # Start window numbering from 1
+    mouse = true; # Enable mouse support
+    escapeTime = 0; # Remove escape key delay
+    keyMode = "vi"; # Use vi-style keybindings
+    terminal = "tmux-256color"; # Enable 256-color support
+    historyLimit = 50000; # Increase scrollback buffer size
 
     extraConfig = ''
       set -as terminal-features ",alacritty*:RGB"

@@ -1,17 +1,21 @@
-# SOPS-Nix configuration for encrypted secrets management
+# SOPS-Nix configuration for encrypted secrets management.
+# This module configures SOPS (Secrets OPerationS) for managing encrypted
 
 { inputs, config, ... }:
 
 {
+  # Import the SOPS NixOS module
   imports = [
     inputs.sops-nix.nixosModules.sops
   ];
 
   sops = {
-    defaultSopsFile = ./secrets/secrets.yaml;
-    defaultSopsFormat = "yaml";
+    # Default secrets file location and format
+    defaultSopsFile = ./secrets/secrets.yaml; # Path to encrypted secrets file
+    defaultSopsFormat = "yaml"; # Format of the secrets file
 
-    age.keyFile = "~/.config/sops/age/keys.txt";
+    # Age encryption key configuration
+    age.keyFile = "~/.config/sops/age/keys.txt"; # Location of Age private key
   };
 
   # Example secrets configuration

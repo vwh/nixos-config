@@ -1,52 +1,54 @@
-# List of utility packages to install.
+# General utility packages and system tools.
+# This module provides essential system utilities, archive management,
+# security tools, media processing utilities, and development helpers.
 
 { pkgsStable, ... }:
 
 with pkgsStable;
 [
-  # Core system utilities
-  coreutils # Linux core utilities
-  findutils # GNU find, xargs, locate
-  diffutils # GNU diff
-  gzip # GNU gzip
-  unzip # GNU zip
-  file-roller # archive manager
-  p7zip # 7-zip
-  unrar # RAR decompression
-  xz # xz compression
-  bzip2 # bzip2 compression
-  xdg-utils # xdg utilities
-  desktop-file-utils # desktop file utilities
+  # Core GNU utilities and system tools
+  coreutils # Basic file, shell, and text manipulation utilities
+  findutils # File search utilities (find, xargs, locate)
+  diffutils # File comparison utilities
+  gzip # GNU compression utility
+  unzip # ZIP archive extraction
+  file-roller # Archive manager with GUI
+  p7zip # 7-Zip compression and encryption
+  unrar # RAR archive extraction
+  xz # High-ratio compression utility
+  bzip2 # Bzip2 compression utility
+  xdg-utils # XDG base directory utilities
+  desktop-file-utils # Desktop file management utilities
 
-  # Essential system utilities for AI agents
-  lsof # List open files and processes
+  # Essential system process and file management
+  lsof # List open files and network connections
   procps # Process utilities (ps, top, kill, etc.)
-  psmisc # Additional process utilities (killall, pgrep, pstree, etc.)
-  util-linux # System utilities (lsblk, mount, etc.)
+  psmisc # Additional process utilities (killall, pgrep, pstree)
+  util-linux # System utilities (lsblk, mount, dmesg, etc.)
 
-  # Archive and compression
-  zip # ZIP compression
+  # Archive and compression tools
+  zip # ZIP compression and archiving
 
-  # Security utilities
-  libsecret # Password manager
-  sops # Encrypted secrets
+  # Security and credential management
+  libsecret # Secret/password management library
+  sops # Encrypted secrets management
   # Note: gnupg is provided by programs.gpg in gpg.nix
 
-  # Media utilities
-  optipng # Optimize PNG files
-  jpegoptim # Optimize JPEG files
-  ueberzugpp # Terminal image viewer
+  # Media processing and optimization
+  optipng # PNG image optimization
+  jpegoptim # JPEG image optimization
+  ueberzugpp # Terminal image viewer and display
 
-  # System management
-  udisks # Automount USB, SD cards, pmount, …
-  xarchiver # Archive manager
-  pavucontrol # PulseAudio volume control
+  # System management and device handling
+  udisks # Storage device management and auto-mounting
+  xarchiver # Lightweight archive manager
+  pavucontrol # PulseAudio volume control GUI
 
-  # Development utilities
-  hexdump # Hex dump utility
-  xxd # Hex dump utility
-  tree # Directory tree viewer
+  # Development and debugging utilities
+  hexdump # Hexadecimal file dumper
+  xxd # Hex dump utility (part of vim)
+  tree # Directory tree visualization
 
-  # AppImage support
-  appimage-run # Run AppImage applications with proper libraries
+  # Application packaging and execution
+  appimage-run # Run AppImage applications with proper FHS environment
 ]

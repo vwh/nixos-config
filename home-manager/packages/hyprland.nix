@@ -1,24 +1,27 @@
-# List of Hyprland-related packages to install.
+# Hyprland window manager and Wayland utilities.
+# This module provides essential packages for the Hyprland Wayland
+# compositor, including utilities, clipboard management, and desktop integration.
 
 { pkgs, pkgsStable }:
 
 (with pkgsStable; [
-  # Utilities
-  bemoji # emoji picker
-  hyprshot # screenshot tool
-  brightnessctl # brightness control
-  hyprpicker # hyprland color picker
+  # Hyprland-specific utilities and tools
+  bemoji # Emoji picker for Wayland
+  hyprshot # Screenshot utility for Hyprland
+  brightnessctl # Screen brightness control
+  hyprpicker # Color picker for Hyprland
 
-  # Clipboard tools
-  cliphist # clipboard history
-  wl-clipboard # Wayland clipboard
-  wtype # clipboard manager
+  # Clipboard management for Wayland
+  cliphist # Clipboard history manager
+  wl-clipboard # Wayland clipboard utilities
+  wtype # Wayland keyboard and mouse input simulation
 ])
 
 ++ (with pkgs; [
-  xdg-desktop-portal-hyprland # Hyprland XDG desktop portal
-  xdg-desktop-portal-gtk # Hyprland XDG desktop portal
-  libsForQt5.xwaylandvideobridge # Xwayland video bridge
-  libnotify # notification daemon
-  playerctl # player control
+  # Desktop integration and portals
+  xdg-desktop-portal-hyprland # Hyprland XDG desktop portal backend
+  xdg-desktop-portal-gtk # GTK XDG desktop portal frontend
+  libsForQt5.xwaylandvideobridge # XWayland video bridge for screen sharing
+  libnotify # Desktop notification library
+  playerctl # Media player control utility
 ])

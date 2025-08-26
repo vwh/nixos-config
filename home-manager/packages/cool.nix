@@ -1,9 +1,11 @@
-# List of 'cool' or fun packages to install.
+# Fun and visually appealing terminal applications.
+# This module provides entertaining and visually interesting terminal
+# applications for demonstration, entertainment, and aesthetic purposes.
 
 { pkgsStable, ... }:
 
 with pkgsStable;
 [
-  peaclock # Clock in terminal
-  cmatrix # Matrix terminal
+  peaclock # Elegant terminal clock with ASCII art
+  cmatrix # Matrix-style scrolling characters animation
 ]

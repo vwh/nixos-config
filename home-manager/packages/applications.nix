@@ -1,33 +1,35 @@
-# List of applications to install.
+# General application packages.
+# This module provides essential desktop applications including browsers,
+# communication tools, productivity software, and theming packages.
 
 { pkgs, pkgsStable }:
 
 (with pkgsStable; [
-  # Applications
-  tor-browser # Tor browser
-  libreoffice-qt6-fresh # LibreOffice suite
-  protonvpn-gui
+  # Privacy and security applications
+  tor-browser # Anonymous web browser via Tor network
+  libreoffice-qt6-fresh # Full office suite with Qt6 interface
+  protonvpn-gui # ProtonVPN graphical client
 
-  # Themes
-  gruvbox-gtk-theme # Gruvbox GTK theme
-  gruvbox-kvantum # Gruvbox Qt theme
-  gnome-themes-extra # Base for many GTK themes
+  # Desktop theming and appearance
+  gruvbox-gtk-theme # Gruvbox color scheme for GTK applications
+  gruvbox-kvantum # Gruvbox theme for Qt applications
+  gnome-themes-extra # Additional GTK themes and base themes
 ])
 
 ++ (with pkgs; [
-  # Browsers
-  brave # Brave browser
-  firefox # Firefox browser
-  chromium # Chromium browser
+  # Web browsers
+  brave # Privacy-focused web browser
+  firefox # Mozilla Firefox web browser
+  chromium # Open-source web browser
 
-  # Communication
-  element-desktop # Matrix client
-  vesktop # Discord client
-  telegram-desktop # Telegram messenger
-  slack # Slack client
-  teams-for-linux # Microsoft Teams
+  # Communication and collaboration tools
+  element-desktop # Matrix protocol client for Element
+  vesktop # Enhanced Discord client
+  telegram-desktop # Telegram messaging application
+  slack # Slack team communication platform
+  teams-for-linux # Microsoft Teams for Linux
 
-  # Tools
-  anki # Anki flashcards
-  obsidian # Obsidian note-taking app
+  # Productivity and knowledge management
+  anki # Spaced repetition flashcard system
+  obsidian # Knowledge base and note-taking application
 ])

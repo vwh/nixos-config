@@ -1,118 +1,130 @@
 # Hyprland keybinds and custom scripts.
+# This module defines custom keybindings for Hyprland window manager
+# and includes utility scripts for enhanced productivity.
 
 { pkgsStable, ... }:
 
 let
+  # Directory containing e-book files
   booksDir = "$HOME/Downloads/books";
+
+  # Custom script to open books using wofi menu
   booksScript = pkgsStable.writeScriptBin "open_books" ''
     #!/bin/sh
 
     BOOKS_DIR="${booksDir}"
 
+    # Find all book files and present them in a menu
     BOOK=$(find "$BOOKS_DIR" -type f \( -iname "*.pdf" -o -iname "*.epub" -o -iname "*.djvu" \) | wofi --dmenu --prompt "Select a book" --width 1200 --height 400)
 
     if [[ -n "$BOOK" ]]; then
-        zathura "$BOOK" &
+        zathura "$BOOK" &  # Open selected book with zathura
     else
         echo "No book selected."
     fi
   '';
 
+  # Custom script for switching between windows using wofi menu
   windowSwitcher = pkgsStable.writeScriptBin "window-switcher" ''
     #!/bin/sh
+    # Get list of all windows with workspace, class, and title information
     windows=$(hyprctl clients -j | jq -r '.[] | "\(.workspace.id):\(.workspace.name) - \(.class) - \(.title)"')
     selected=$(echo "$windows" | wofi --dmenu --prompt "Switch to window" --width 800)
 
     if [[ -n "$selected" ]]; then
+      # Find the window address and focus it
       address=$(hyprctl clients -j | jq -r --arg sel "$selected" '.[] | select("\(.workspace.id):\(.workspace.name) - \(.class) - \(.title)" == $sel) | .address')
       hyprctl dispatch focuswindow "address:$address"
     fi
   '';
 in
 {
+  # Install custom scripts as system packages
   home.packages = [
-    booksScript
-    windowSwitcher
+    booksScript # Book selection script
+    windowSwitcher # Window switcher script
   ];
 
   wayland.windowManager.hyprland.settings = {
+    # Regular keybindings (pressed once)
     bind = [
-      # Window switcher menu
+      # Custom window switcher menu
       "$mainMod, W, exec, ${windowSwitcher}/bin/window-switcher"
 
       # Window focus cycling with Tab
-      "$mainMod, Tab, cyclenext,"
-      "$mainMod SHIFT, Tab, cyclenext, prev"
+      "$mainMod, Tab, cyclenext," # Next window
+      "$mainMod SHIFT, Tab, cyclenext, prev" # Previous window
 
-      # Center floating window
-      "$mainMod, C, centerwindow,"
+      # Window positioning and appearance
+      "$mainMod, C, centerwindow," # Center floating window
 
-      # Opacity toggle
-      "$mainMod, O, exec, hyprctl keyword decoration:active_opacity 0.8"
-      "$mainMod SHIFT, O, exec, hyprctl keyword decoration:active_opacity 1.0"
+      # Window opacity controls
+      "$mainMod, O, exec, hyprctl keyword decoration:active_opacity 0.8" # Semi-transparent
+      "$mainMod SHIFT, O, exec, hyprctl keyword decoration:active_opacity 1.0" # Fully opaque
 
-      # Swap windows
-      "$mainMod, S, swapnext,"
-      "$mainMod SHIFT, S, swapnext, prev"
+      # Window swapping
+      "$mainMod, S, swapnext," # Swap with next window
+      "$mainMod SHIFT, S, swapnext, prev" # Swap with previous window
 
-      # Master layout specific
-      "$mainMod, comma, layoutmsg, swapwithmaster"
-      "$mainMod, period, layoutmsg, focusmaster"
-      "$mainMod SHIFT, comma, layoutmsg, addmaster"
-      "$mainMod SHIFT, period, layoutmsg, removemaster"
+      # Master layout management
+      "$mainMod, comma, layoutmsg, swapwithmaster" # Swap with master window
+      "$mainMod, period, layoutmsg, focusmaster" # Focus master window
+      "$mainMod SHIFT, comma, layoutmsg, addmaster" # Add window to master area
+      "$mainMod SHIFT, period, layoutmsg, removemaster" # Remove window from master area
 
-      # Layout orientation toggle (vertical/horizontal)
+      # Layout orientation controls
       "$mainMod, I, layoutmsg, orientationtop" # Top orientation (horizontal)
       "$mainMod SHIFT, I, layoutmsg, orientationleft" # Left orientation (vertical)
       "$mainMod CTRL, I, layoutmsg, orientationcenter" # Center orientation
 
-      # Layout switching
-      "$mainMod, L, exec, hyprctl keyword general:layout dwindle" # Switch to dwindle
-      "$mainMod SHIFT, L, exec, hyprctl keyword general:layout master" # Switch to master
+      # Layout switching between tiling algorithms
+      "$mainMod, L, exec, hyprctl keyword general:layout dwindle" # Switch to dwindle layout
+      "$mainMod SHIFT, L, exec, hyprctl keyword general:layout master" # Switch to master layout
 
-      # Quick actions
-      "$mainMod, U, exec, hyprctl dispatch workspace previous" # Quick workspace switch
+      # Quick workspace navigation
+      "$mainMod, U, exec, hyprctl dispatch workspace previous" # Switch to previous workspace
 
-      # Window groups
-      "$mainMod, G, togglegroup,"
-      "$mainMod SHIFT, G, moveoutofgroup,"
+      # Window grouping controls
+      "$mainMod, G, togglegroup," # Toggle window grouping
+      "$mainMod SHIFT, G, moveoutofgroup," # Move window out of group
 
-      # Color picker with notification
-      "$mainMod, P, exec, hyprpicker -a && notify-send 'Color copied'"
+      # Color picker utility
+      "$mainMod, P, exec, hyprpicker -a && notify-send 'Color copied'" # Pick color and notify
 
-      # Exit, lock
-      "$mainMod SHIFT, Escape, exit,"
-      "$mainMod,       Home, exec, loginctl lock-session"
+      # Session management
+      "$mainMod SHIFT, Escape, exit," # Exit Hyprland
+      "$mainMod, Home, exec, loginctl lock-session" # Lock session
 
-      # Terminal
-      "$mainMod,       Return, exec, $terminal"
-      "$mainMod,       T, exec, $terminal --class=scratchpad"
+      # Application shortcuts
+      "$mainMod, Return, exec, $terminal" # Launch terminal
+      "$mainMod, T, exec, $terminal --class=scratchpad" # Launch terminal as scratchpad
 
       # Window management
-      "$mainMod,       Q, killactive,"
-      "$mainMod SHIFT, R, exec, $fileManager"
-      "$mainMod,       R, exec, env -u TMUX alacritty -e yazi"
-      "$mainMod,       F, togglefloating,"
-      "$mainMod,       D, exec, $menu --show drun"
-      "$mainMod,       V, exec, cliphist list | $menu --dmenu | cliphist decode | wl-copy"
-      "$mainMod,       M, fullscreen,"
+      "$mainMod, Q, killactive," # Close active window
+      "$mainMod SHIFT, R, exec, $fileManager" # Open file manager
+      "$mainMod, R, exec, env -u TMUX alacritty -e yazi" # Open file browser in terminal
+      "$mainMod, F, togglefloating," # Toggle floating mode
+      "$mainMod, D, exec, $menu --show drun" # Application launcher
+      "$mainMod, V, exec, cliphist list | $menu --dmenu | cliphist decode | wl-copy" # Clipboard manager
+      "$mainMod, M, fullscreen," # Toggle fullscreen
 
-      # Advanced window management
-      "$mainMod,       A, pin," # Pin window (always on top)
-      # Apps
-      "$mainMod,       B, exec, brave"
+      # Advanced window controls
+      "$mainMod, A, pin," # Pin window (always on top)
 
-      # Utilities
-      "$mainMod,       E, exec, bemoji -cn"
-      "$mainMod,       N, exec, swaync-client -t"
+      # Web browser shortcuts
+      "$mainMod, B, exec, brave" # Launch Brave browser
 
-      # Waybar
-      "$mainMod,       K, exec, pkill -SIGUSR2 waybar"
-      "$mainMod SHIFT, K, exec, pkill -SIGUSR1 waybar"
-      # "$mainMod,       W, exec, ${booksScript}/bin/open_books"
+      # Utility shortcuts
+      "$mainMod, E, exec, bemoji -cn" # Emoji picker
+      "$mainMod, N, exec, swaync-client -t" # Notification center
 
-      # Screenshot
-      ", Print, exec, hyprshot -m region --clipboard-only"
+      # Waybar controls
+      "$mainMod, K, exec, pkill -SIGUSR2 waybar" # Reload waybar
+      "$mainMod SHIFT, K, exec, pkill -SIGUSR1 waybar" # Toggle waybar
+      # "$mainMod, W, exec, ${booksScript}/bin/open_books"   # Book selector (commented out)
+
+      # Screenshot functionality
+      ", Print, exec, hyprshot -m region --clipboard-only" # Screenshot to clipboard
 
       # Volume control
       "$mainMod, equal,  exec, wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"
@@ -164,28 +176,28 @@ in
       # "$mainMod, bracketright, workspace, m+1" # Next workspace
     ];
 
-    # Move/resize windows with mainMod + LMB/RMB and dragging
+    # Mouse bindings for window manipulation
     bindm = [
-      "$mainMod, mouse:272, movewindow"
-      "$mainMod, mouse:273, resizewindow"
+      "$mainMod, mouse:272, movewindow" # Move window with Super + Left mouse button
+      "$mainMod, mouse:273, resizewindow" # Resize window with Super + Right mouse button
     ];
 
-    # Laptop multimedia keys for volume and LCD brightness
+    # Multimedia keys (repeat when held)
     bindel = [
-      ",XF86AudioRaiseVolume,  exec, wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"
-      ",XF86AudioLowerVolume,  exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
-      ",XF86AudioMute,         exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
-      ",XF86AudioMicMute,      exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
-      "$mainMod, bracketright, exec, brightnessctl s 10%+"
-      "$mainMod, bracketleft,  exec, brightnessctl s 10%-"
+      ",XF86AudioRaiseVolume, exec, wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+" # Volume up
+      ",XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-" # Volume down
+      ",XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle" # Mute toggle
+      ",XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle" # Mic mute toggle
+      "$mainMod, bracketright, exec, brightnessctl s 10%+" # Brightness up
+      "$mainMod, bracketleft, exec, brightnessctl s 10%-" # Brightness down
     ];
 
-    # Audio playback
+    # Media playback keys (non-repeating)
     bindl = [
-      ", XF86AudioNext,  exec, playerctl next"
-      ", XF86AudioPause, exec, playerctl play-pause"
-      ", XF86AudioPlay,  exec, playerctl play-pause"
-      ", XF86AudioPrev,  exec, playerctl previous"
+      ", XF86AudioNext, exec, playerctl next" # Next track
+      ", XF86AudioPause, exec, playerctl play-pause" # Play/pause
+      ", XF86AudioPlay, exec, playerctl play-pause" # Play/pause (alternative)
+      ", XF86AudioPrev, exec, playerctl previous" # Previous track
     ];
   };
 }

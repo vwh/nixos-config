@@ -1,4 +1,6 @@
-# Go programming language configuration
+# Go programming language configuration.
+# This module configures the Go programming language environment
+# with development tools, LSP support, and project workspace setup.
 
 {
   config,
@@ -10,93 +12,96 @@
 {
   programs = {
     go = {
-      enable = true;
-      package = pkgs.go;
+      enable = true; # Enable Go programming language
+      package = pkgs.go; # Use the standard Go package
 
-      # Go environment variables
-      goPath = "go";
-      goBin = "go/bin";
+      # Go environment configuration
+      goPath = "go"; # GOPATH relative to home directory
+      goBin = "go/bin"; # GOBIN relative to home directory
 
-      # Go private modules (if you have private repos)
-      goPrivate = [ ];
+      # Private Go modules (for private repositories)
+      goPrivate = [ ]; # Add private module patterns here
     };
 
-    # Zsh aliases for Go development
+    # Zsh shell aliases for efficient Go development
     zsh.shellAliases = {
-      # Go development
-      gorun = "go run";
-      gobuild = "go build";
-      gotest = "go test -v";
-      gomod = "go mod";
-      gofmt = "gofumpt -w";
-      golint = "golangci-lint run";
-      goair = "air";
+      # Core Go commands with shortcuts
+      gorun = "go run"; # Run Go programs
+      gobuild = "go build"; # Build Go binaries
+      gotest = "go test -v"; # Run tests with verbose output
+      gomod = "go mod"; # Go module management
+      gofmt = "gofumpt -w"; # Format Go code with gofumpt
+      golint = "golangci-lint run"; # Run comprehensive linter
+      goair = "air"; # Live reload with Air
 
-      # Go debugging
-      godebug = "dlv debug";
-      gotrace = "dlv trace";
+      # Debugging commands
+      godebug = "dlv debug"; # Start Delve debugger
+      gotrace = "dlv trace"; # Trace program execution
     };
 
-    # Git ignore for Go projects
+    # Git ignore patterns for Go projects
     git.ignores = [
-      # Go specific
-      "vendor/"
-      "*.exe"
-      "*.exe~"
-      "*.dll"
-      "*.so"
-      "*.dylib"
-      "*.test"
-      "*.out"
-      "go.work"
-      "go.work.sum"
+      # Go-specific build artifacts and dependencies
+      "vendor/" # Vendored dependencies
+      "*.exe" # Windows executables
+      "*.exe~" # Windows executable backups
+      "*.dll" # Dynamic link libraries
+      "*.so" # Shared object libraries
+      "*.dylib" # macOS dynamic libraries
+      "*.test" # Test binaries
+      "*.out" # Output files
+      "go.work" # Go workspace file
+      "go.work.sum" # Go workspace checksums
     ];
   };
 
-  # Go LSP and development tools configuration
+  # Go development environment configuration
   home = {
+    # Essential Go development packages
     packages = with pkgs; [
-      # Core Go tools
-      gopls # Go language server
-      go-tools # Collection of Go tools
+      # Core language server and tools
+      gopls # Go language server for IDE support
+      go-tools # Collection of Go development tools
       delve # Go debugger
-      golangci-lint # Go linter
-      air # Live reload for Go apps
+      golangci-lint # Comprehensive Go linter
+      air # Live reload for Go applications
 
-      # Additional Go development tools
-      gofumpt # Stricter gofmt
+      # Code formatting and generation
+      gofumpt # Stricter version of gofmt
       golines # Go line formatter
-      gotests # Generate Go tests
+      gotests # Generate Go test functions
       impl # Generate interface implementations
       gomodifytags # Modify struct field tags
+
+      # Security and quality tools
       govulncheck # Go vulnerability checker
 
-      # Go utilities
+      # Database and API tools
       go-migrate # Database migration tool
-      sqlc # Generate Go code from SQL
+      sqlc # Generate Go code from SQL queries
       protobuf # Protocol buffer compiler
-      protoc-gen-go # Go protobuf generator
-      protoc-gen-go-grpc # gRPC Go generator
+      protoc-gen-go # Go protobuf code generator
+      protoc-gen-go-grpc # gRPC Go code generator
     ];
 
     # Environment variables for Go development
     sessionVariables = {
-      GOPATH = "${config.home.homeDirectory}/go";
-      GOBIN = "${config.home.homeDirectory}/go/bin";
-      GO111MODULE = "on";
-      GOPROXY = "https://proxy.golang.org,direct";
-      GOSUMDB = "sum.golang.org";
+      GOPATH = "${config.home.homeDirectory}/go"; # Go workspace path
+      GOBIN = "${config.home.homeDirectory}/go/bin"; # Go binary installation path
+      GO111MODULE = "on"; # Enable Go modules
+      GOPROXY = "https://proxy.golang.org,direct"; # Go module proxy
+      GOSUMDB = "sum.golang.org"; # Go checksum database
     };
 
-    # Add Go bin to PATH
+    # Add Go binaries to system PATH
     sessionPath = [
-      "${config.home.homeDirectory}/go/bin"
+      "${config.home.homeDirectory}/go/bin" # Include Go bin in PATH
     ];
 
-    # Create Go workspace directories
+    # Automatic workspace directory creation
     activation.createGoWorkspace = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-      $DRY_RUN_CMD mkdir -p $HOME/go/{bin,pkg,src}
-      $DRY_RUN_CMD mkdir -p $HOME/projects/go
+      $DRY_RUN_CMD mkdir -p $HOME/go/{bin,pkg,src}       # Create Go workspace structure
+      $DRY_RUN_CMD mkdir -p $HOME/projects/go            # Create projects directory
     '';
   };
 }
