@@ -24,7 +24,7 @@
       monitor = ",highres,auto,1";
       "$mainMod" = "SUPER";
       "$terminal" = "alacritty";
-      "$browser" = "brave";
+      "$browser" = "zen";
       "$editor" = "code";
       "$fileManager" = "nautilus";
       "$menu" = "wofi";
@@ -221,7 +221,7 @@
         # Transparency for terminals
         "opacity 0.95 0.85, class:^(Alacritty|kitty|foot)$"
 
-        "opacity 0.95, class:(brave-browser)" # Slight transparency for modern feel
+        "opacity 0.95, class:(zen)" # Slight transparency for modern feel
 
         # No animations for tooltips
         "noanim, class:^(tooltip)$"
