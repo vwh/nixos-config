@@ -35,7 +35,6 @@ This repository uses [`just`](https://github.com/casey/just) as a command runner
 | `just update` | Update all flake inputs |
 | `just optimize-store` | Optimize Nix store to save disk space |
 | `just clean` | Clean up build artifacts and caches |
-| `just health` | Check system health and resource usage |
 
 
 ---
