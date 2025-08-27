@@ -57,10 +57,4 @@
   python3Packages.pip # Python package installer
   python3Packages.virtualenv # Python virtual environment manager
 
-  # JavaScript/TypeScript development tools
-  nodejs # Node.js JavaScript runtime
-  bun # Bun JavaScript runtime and toolkit
-  deno # Deno JavaScript/TypeScript runtime
-  pnpm # Fast npm alternative package manager
-  yarn # Yarn package manager
 ])
