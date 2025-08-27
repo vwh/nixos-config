@@ -31,7 +31,10 @@
     # Oh My Zsh configuration
     oh-my-zsh = {
       enable = true; # Enable Oh My Zsh framework
-      custom = builtins.toString ./custom_omz_dir; # Custom themes and plugins
+      custom = builtins.path {
+        path = ./custom_omz_dir;
+        name = "oh-my-zsh-custom";
+      }; # Custom themes and plugins
       theme = "oxide"; # Custom oxide theme
 
       # Oh My Zsh plugins for enhanced functionality
