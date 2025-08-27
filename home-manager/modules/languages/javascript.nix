@@ -14,6 +14,7 @@ let
   globalNpmPackages = [
     "opencode-ai"
     "@google/gemini-cli"
+    "@charmland/crush"
   ];
 in
 {
