@@ -5,5 +5,6 @@
   imports = [
     ./go.nix
     ./javascript.nix
+    ./python.nix
   ];
 }

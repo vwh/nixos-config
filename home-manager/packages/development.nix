@@ -51,10 +51,4 @@
   openjdk23 # OpenJDK 23 for Java development
   rustc # Rust programming language compiler
   cargo # Rust package manager and build tool
-
-  # Python development environment
-  python3 # Python 3 programming language
-  python3Packages.pip # Python package installer
-  python3Packages.virtualenv # Python virtual environment manager
-
 ])
