@@ -107,5 +107,7 @@
       di = "docker images --format 'table {{.Repository}}\\t{{.Tag}}\\t{{.Size}}'"; # Docker images
       dex = "docker exec -it"; # Execute into container
       dlogs = "docker logs -f"; # Follow container logs
+
+      j = "just"; # Justfile runner
     };
 }
