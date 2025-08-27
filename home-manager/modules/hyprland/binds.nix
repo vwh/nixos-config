@@ -1,6 +1,5 @@
 # Hyprland keybinds and custom scripts.
 # This module defines custom keybindings for Hyprland window manager
-# and includes utility scripts for enhanced productivity.
 
 { pkgsStable, ... }:
 

@@ -1,6 +1,4 @@
 # OBS Studio configuration.
-# This module configures OBS Studio, a powerful open-source streaming
-# and recording software with plugins for enhanced functionality.
 
 { pkgsStable, ... }:
 

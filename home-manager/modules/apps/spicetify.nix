@@ -1,6 +1,4 @@
 # Spicetify (Spotify client customizer) configuration.
-# This module configures Spicetify to customize the Spotify client with
-# themes, extensions, and custom color schemes integrated with Stylix.
 
 {
   pkgs,

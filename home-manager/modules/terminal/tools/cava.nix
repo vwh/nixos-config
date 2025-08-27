@@ -1,6 +1,5 @@
 # Cava audio visualizer configuration.
 # This module configures cava, a console-based audio visualizer
-# with custom colors matching the Gruvbox color scheme.
 
 {
   programs.cava = {

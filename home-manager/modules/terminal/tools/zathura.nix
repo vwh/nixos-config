@@ -1,6 +1,4 @@
 # Zathura PDF viewer configuration.
-# This module configures zathura, a highly customizable document viewer
-# with vim-like keybindings and support for PDF, PS, and DJVU formats.
 
 {
   programs.zathura = {

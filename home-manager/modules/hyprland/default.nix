@@ -1,6 +1,4 @@
 # Hyprland modules aggregation.
-# This module imports all Hyprland-related configurations including
-# the main compositor settings, keybindings, utilities, and desktop components.
 
 {
   imports = [

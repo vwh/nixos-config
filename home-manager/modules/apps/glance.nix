@@ -24,7 +24,7 @@ with lib;
         port = mkDefault 8080;
       };
 
-      # Gruvbox Dark theme - use mkForce to override any conflicting values
+      # Gruvbox Dark theme
       theme = {
         background-color = mkForce "0 0 16"; # Gruvbox background (#282828)
         primary-color = mkForce "25 89 45"; # Gruvbox orange (#d65d0e)

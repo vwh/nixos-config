@@ -1,12 +1,8 @@
 # Wofi (application launcher) configuration.
-# This module configures Wofi, a lightweight Wayland application launcher
-# and menu system that provides fuzzy searching and application discovery
-# with customizable appearance and behavior.
 
 {
-  # Enable Wofi application launcher
   programs.wofi = {
-    enable = true;
+    enable = true; # Enable Wofi application launcher
 
     settings = {
       # Visual appearance settings

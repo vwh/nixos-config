@@ -1,6 +1,4 @@
 # Bat (cat clone) configuration.
-# This module configures bat, a cat clone with syntax highlighting,
-# git integration, and other enhancements for better file viewing.
 
 { pkgsStable, ... }:
 

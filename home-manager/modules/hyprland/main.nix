@@ -23,7 +23,7 @@
         "XDG_SCREENSHOTS_DIR,$HOME/screens" # Directory for screenshots
       ];
 
-      # Monitor configuration - use preferred resolution and refresh rate
+      # Monitor configuration
       monitor = ",preferred,auto,1";
 
       # Variable definitions for keybindings and commands

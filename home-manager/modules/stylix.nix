@@ -1,5 +1,5 @@
 # Stylix theme and font configuration.
-# This module configures system-wide theming using Stylix, which provides
+# This module configures system-wide theming using Stylix
 
 { pkgsStable, inputs, ... }:
 

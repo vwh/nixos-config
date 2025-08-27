@@ -1,6 +1,4 @@
 # Fun and visually appealing terminal applications.
-# This module provides entertaining and visually interesting terminal
-# applications for demonstration, entertainment, and aesthetic purposes.
 
 { pkgsStable, ... }:
 

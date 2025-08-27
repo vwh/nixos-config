@@ -1,5 +1,4 @@
 # Sway Notification Center configuration.
-# This module configures SwayNC (Sway Notification Center), a feature-rich
 # notification daemon for Wayland compositors with a customizable interface
 # and control center for managing notifications and system controls.
 

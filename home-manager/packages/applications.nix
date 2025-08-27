@@ -5,9 +5,10 @@
 { pkgs, pkgsStable }:
 
 (with pkgsStable; [
+  libreoffice-qt6-fresh # Full office suite with Qt6 interface
+
   # Privacy and security applications
   tor-browser # Anonymous web browser via Tor network
-  libreoffice-qt6-fresh # Full office suite with Qt6 interface
   protonvpn-gui # ProtonVPN graphical client
 
   # Desktop theming and appearance
@@ -30,6 +31,6 @@
   teams-for-linux # Microsoft Teams for Linux
 
   # Productivity and knowledge management
-  anki-bin # Spaced repetition flashcard system (binary version to avoid compilation issues)
+  anki-bin # Spaced repetition flashcard system
   obsidian # Knowledge base and note-taking application
 ])

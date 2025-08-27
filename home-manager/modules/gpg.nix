@@ -1,3 +1,5 @@
+# GnuPG configuration
+
 {
   pkgsStable,
   lib,

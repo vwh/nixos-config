@@ -1,6 +1,4 @@
 # Eza (ls replacement) configuration.
-# This module configures eza, a modern replacement for ls with colors,
-# icons, git integration, and enhanced file listing features.
 
 {
   programs.eza = {

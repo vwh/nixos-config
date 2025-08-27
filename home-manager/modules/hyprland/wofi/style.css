@@ -88,7 +88,6 @@ window {
   font-weight: 700;
 }
 
-/* Entry text and icon */
 #text {
   margin: 0;
   padding: 0;
@@ -141,7 +140,6 @@ scrollbar slider:active {
   border-left: 3px solid #d79921;
 }
 
-/* High contrast and reduced motion */
 @media (prefers-contrast: high) {
   window {
     border-width: 4px;

@@ -1,6 +1,5 @@
 # Lazygit (Git TUI) configuration.
 # This module configures lazygit, a terminal UI for git commands
-# with a custom theme optimized for dark mode usage.
 
 {
   programs.lazygit = {

@@ -11,6 +11,6 @@
 
   # Install Warp terminal package
   home.packages = with pkgs; [
-    warp-terminal-latest # Warp terminal with auto-updating AppImage
+    warp-terminal-latest
   ];
 }

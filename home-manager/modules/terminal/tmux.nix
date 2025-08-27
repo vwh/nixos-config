@@ -1,6 +1,4 @@
 # Tmux (Terminal Multiplexer) configuration.
-# This module configures Tmux with enhanced productivity features,
-# custom keybindings, plugins, and session persistence for efficient terminal management.
 
 { pkgsStable, ... }:
 

@@ -1,11 +1,11 @@
-/* WAYBAR — GRUVBOX MINIMAL (dense, no gaps) */
+/* WAYBAR — GRUVBOX MINIMAL */
 
 * {
   border: 0;
   border-radius: 0;
   font-family: "JetBrains Mono", monospace;
   font-weight: 600;
-  font-size: 13px; /* set 14px if you want default size back */
+  font-size: 13px;
   min-height: 0;
   color: #ebdbb2;
   transition: color 120ms ease, background 120ms ease;
@@ -16,7 +16,6 @@ window#waybar {
   border-bottom: 1px solid #3c3836;
 }
 
-/* Dense, flat modules — no margins, no backgrounds, no shadows */
 #clock,
 #battery,
 #pulseaudio,
@@ -38,7 +37,6 @@ window#waybar {
   box-shadow: none;
 }
 
-/* Subtle hover: brighten text only */
 #clock:hover,
 #battery:hover,
 #pulseaudio:hover,
@@ -57,7 +55,6 @@ window#waybar {
   color: #fbf1c7;
 }
 
-/* Window title minimal */
 #window {
   color: #a89984;
 }
@@ -71,7 +68,6 @@ window#waybar {
   opacity: 0;
 }
 
-/* WORKSPACES — text only, underline for active, no gaps */
 #workspaces {
   padding: 0;
   margin: 0;
@@ -110,7 +106,6 @@ window#waybar {
   color: #bdae93;
 }
 
-/* Module coloring (Gruvbox) */
 #cpu,
 #custom-cpu-temp {
   color: #fabd2f;
@@ -174,7 +169,7 @@ window#waybar {
   color: #cc241d;
 }
 #battery.charging {
-  color: #8ec07c; /* no glow animation for minimal vibe */
+  color: #8ec07c; 
 }
 #battery.plugged {
   color: #d79921;
@@ -192,7 +187,6 @@ window#waybar {
   color: #d65d0e;
 }
 
-/* Tooltips, minimal */
 tooltip {
   background: rgba(29, 32, 33, 0.92);
   border: 1px solid #3c3836;

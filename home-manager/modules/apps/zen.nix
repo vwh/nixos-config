@@ -41,9 +41,8 @@
       # Remove default bookmarks
       NoDefaultBookmarks = true;
 
-      # Extension settings - Only verified working extensions
+      # Extension settings
       ExtensionSettings = {
-        # Working extensions (confirmed installed)
         "addon@darkreader.org" = {
           install_url = "https://addons.mozilla.org/firefox/downloads/latest/darkreader/latest.xpi";
           installation_mode = "force_installed";
@@ -84,7 +83,6 @@
           installation_mode = "force_installed";
         };
 
-        # Additional extensions from your current setup
         "{a6c4a591-f1b2-4f03-b3ff-767e5bedf4e7}" = {
           install_url = "https://addons.mozilla.org/firefox/downloads/file/4497925/user_agent_string_switcher-0.6.5.1.xpi";
           installation_mode = "force_installed";

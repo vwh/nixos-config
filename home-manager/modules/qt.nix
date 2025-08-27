@@ -1,3 +1,5 @@
+# Qt theming and configuration
+
 { pkgs, ... }:
 
 {

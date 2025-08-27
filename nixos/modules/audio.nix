@@ -1,6 +1,4 @@
 # Audio configuration (PipeWire).
-# This module configures the PipeWire audio system, which provides
-# unified audio handling for applications using ALSA, PulseAudio, and JACK APIs.
 
 { config, lib, ... }:
 
