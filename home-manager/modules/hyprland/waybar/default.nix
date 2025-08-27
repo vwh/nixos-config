@@ -157,9 +157,9 @@
 
           scroll-step = 5;
           on-click = "pavucontrol";
-          on-click-right = "pactl set-sink-mute @DEFAULT_SINK@ toggle";
-          on-scroll-up = "pactl set-sink-volume @DEFAULT_SINK@ +5%";
-          on-scroll-down = "pactl set-sink-volume @DEFAULT_SINK@ -5%";
+          on-click-right = "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
+          on-scroll-up = "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+";
+          on-scroll-down = "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-";
           tooltip-format = "Volume: {volume}%\nDevice: {desc}";
         };
 
@@ -168,9 +168,9 @@
           format-source = " {volume}%";
           format-source-muted = "";
           on-click = "pavucontrol -t 4";
-          on-click-right = "pactl set-source-mute @DEFAULT_SOURCE@ toggle";
-          on-scroll-up = "pactl set-source-volume @DEFAULT_SOURCE@ +5%";
-          on-scroll-down = "pactl set-source-volume @DEFAULT_SOURCE@ -5%";
+          on-click-right = "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle";
+          on-scroll-up = "wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 5%+";
+          on-scroll-down = "wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 5%-";
           tooltip-format = "Mic: {volume}%\nDevice: {desc}";
         };
 
