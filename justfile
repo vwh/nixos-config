@@ -97,12 +97,12 @@ secrets-add key value:
 # Setup SOPS age key
 sops-setup:
 	@echo -e "\n➤ Setting up SOPS age key…"
-	./scripts/sops-setup.sh
+	./scripts/sops/sops-setup.sh
 
 # Setup SSH and GPG keys from SOPS
 setup-keys:
 	@echo -e "\n➤ Setting up SSH and GPG keys from SOPS…"
-	./scripts/setup-keys.sh
+	./scripts/sops/setup-keys.sh
 
 # Show SOPS public key
 sops-key:
