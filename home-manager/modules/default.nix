@@ -5,6 +5,7 @@
   imports = [
     ./apps # Application-specific configurations (browsers, editors, etc.)
     ./hyprland # Hyprland window manager and related services
+    ./languages # Programming languages configurations
     ./terminal # Terminal emulator and shell configurations
     ./overlays.nix # Nix package overlays for customizations
     ./gpg.nix # GPG key management and configuration

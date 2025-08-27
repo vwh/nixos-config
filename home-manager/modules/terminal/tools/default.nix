@@ -6,7 +6,6 @@
     ./cava.nix
     ./eza.nix
     ./git.nix
-    ./go.nix
     ./htop.nix
     ./lazygit.nix
     ./zathura.nix
