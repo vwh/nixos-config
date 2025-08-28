@@ -86,6 +86,27 @@
       VISUAL = "code"; # Default visual editor
       PAGER = "bat"; # Default pager with syntax highlighting
       MANPAGER = "sh -c 'col -bx | bat -l man -p'"; # Enhanced man page viewer
+
+      # Development environment variables
+      LESS = "-R"; # Enable raw ANSI color codes in less
+      LESSHISTFILE = "${config.xdg.cacheHome}/less/history"; # Less history file
+      LESSHISTSIZE = "1000"; # Maximum lines in less history
+
+      # Git configuration
+      GIT_EDITOR = "code --wait"; # Git editor
+      GIT_PAGER = "bat"; # Git pager with syntax highlighting
+      
+      # Python configuration
+      PYTHONSTARTUP = "$HOME/.pythonrc"; # Python startup script
+      PIP_CACHE_DIR = "${config.xdg.cacheHome}/pip"; # Pip cache directory
+
+      # Node.js configuration
+      NODE_REPL_HISTORY = "${config.xdg.dataHome}/node/node_repl_history"; # Node REPL history
+      NPM_CONFIG_CACHE = "${config.xdg.cacheHome}/npm"; # NPM cache directory
+      YARN_CACHE_FOLDER = "${config.xdg.cacheHome}/yarn"; # Yarn cache directory
+
+      # Go configuration
+      CGO_ENABLED = "1"; # Enable CGO for Go
     };
 
     # Zsh initialization script with enhanced options and functions
@@ -114,7 +135,44 @@
 
       # Extend PATH with additional directories
       export PATH="$HOME/.npm-global/bin:$PATH"  # NPM global packages
+      export PATH="$HOME/.cache/.bun/bin:$PATH"  # Bun global packages
       export PATH="$HOME/.local/bin:$PATH"       # Local user binaries
+      export PATH="$HOME/.cargo/bin:$PATH"       # Rust/Cargo binaries
+      export PATH="$HOME/go/bin:$PATH"           # Go binaries
+      export PATH="$HOME/.local/share/pnpm:$PATH" # pnpm global packages
+      export PATH="$HOME/.deno/bin:$PATH"        # Deno binaries
+      export PATH="$HOME/.config/composer/vendor/bin:$PATH" # PHP Composer
+      export PATH="$HOME/.local/share/gem/ruby/3.1.0/bin:$PATH" # Ruby gems
+      export PATH="/usr/local/sbin:$PATH"        # System admin binaries
+      export PATH="/usr/local/bin:$PATH"         # Additional system binaries
+
+      # Development environment variables
+      export GOPATH="$HOME/go"                   # Go workspace path
+      export GOBIN="$HOME/go/bin"                # Go binary installation path
+      export CARGO_HOME="$HOME/.cargo"           # Rust/Cargo home directory
+      export RUSTUP_HOME="$HOME/.rustup"         # Rustup installation directory
+      export PYENV_ROOT="$HOME/.pyenv"           # Python version manager
+      export NVM_DIR="$HOME/.nvm"                # Node Version Manager
+      export PNPM_HOME="$HOME/.local/share/pnpm" # pnpm home directory
+      export BUN_INSTALL="$HOME/.bun"            # Bun installation directory
+      export COMPOSER_HOME="$HOME/.config/composer" # PHP Composer home
+
+      # XDG Base Directory specification
+      export XDG_CONFIG_HOME="$HOME/.config"     # User config directory
+      export XDG_CACHE_HOME="$HOME/.cache"       # User cache directory
+      export XDG_DATA_HOME="$HOME/.local/share"  # User data directory
+      export XDG_STATE_HOME="$HOME/.local/state" # User state directory
+
+      # Language and locale settings
+      export LANG="en_US.UTF-8"                  # Default language
+      export LC_ALL="en_US.UTF-8"                # All locale categories
+      export LC_CTYPE="en_US.UTF-8"              # Character classification
+
+      # Development tool configurations
+      export DOCKER_BUILDKIT=1                   # Enable BuildKit for Docker
+      export COMPOSE_DOCKER_CLI_BUILD=1          # Use BuildKit with Docker Compose
+      export DOTNET_CLI_TELEMETRY_OPTOUT=1       # Disable .NET telemetry
+      export NEXT_TELEMETRY_DISABLED=1           # Disable Next.js telemetry
 
       # Enhanced color scheme using vivid (if available)
       if command -v vivid >/dev/null 2>&1; then

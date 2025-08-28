@@ -15,6 +15,7 @@ let
     "opencode-ai"
     "@google/gemini-cli"
     "@charmland/crush"
+    "@openai/codex"
   ];
 in
 {
@@ -30,6 +31,9 @@ in
       jt = "jest --watch"; # Jest watch mode
       vt = "npx vitest"; # Run Vitest
       pt = "npx playwright"; # Run Playwright tests
+
+      # AI tools
+      codex = "codex"; # OpenAI Codex CLI
     };
 
     # Git ignore patterns for JavaScript/TypeScript projects
@@ -213,6 +217,7 @@ in
     sessionPath = [
       "${config.home.homeDirectory}/.npm-global/bin" # Global npm packages
       "${config.home.homeDirectory}/.bun/bin" # Bun binaries
+      "${config.home.homeDirectory}/.cache/.bun/bin" # Bun global packages
       "${config.home.homeDirectory}/.local/share/pnpm" # pnpm binaries
       "${config.home.homeDirectory}/.deno/bin" # Deno binaries
     ];
@@ -234,14 +239,19 @@ in
       if command -v bun &> /dev/null; then
         echo "📦 Managing global npm packages with bun..."
         for package in ${lib.escapeShellArgs globalNpmPackages}; do
-          if bun pm ls -g | grep -q "$package"; then
-            echo "Updating $package..."
-            $DRY_RUN_CMD bun update -g "$package" || true
-          else
-            echo "Installing $package..."
-            $DRY_RUN_CMD bun install -g "$package" || true
-          fi
-        done
+           if bun pm ls -g | grep -q "$package"; then
+             echo "Updating $package..."
+             if ! $DRY_RUN_CMD bun update -g "$package"; then
+               echo "❌ Failed to update $package"
+             fi
+           else
+             echo "Installing $package..."
+             if ! $DRY_RUN_CMD bun install -g "$package"; then
+               echo "❌ Failed to install $package"
+               echo "   Try manual installation: bun install -g $package"
+             fi
+           fi
+         done
         echo "✅ Global packages management completed"
       fi
     '';
