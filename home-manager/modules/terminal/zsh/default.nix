@@ -95,7 +95,7 @@
       # Git configuration
       GIT_EDITOR = "code --wait"; # Git editor
       GIT_PAGER = "bat"; # Git pager with syntax highlighting
-      
+
       # Python configuration
       PYTHONSTARTUP = "$HOME/.pythonrc"; # Python startup script
       PIP_CACHE_DIR = "${config.xdg.cacheHome}/pip"; # Pip cache directory

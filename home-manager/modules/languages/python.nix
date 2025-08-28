@@ -269,7 +269,7 @@
     # Environment variables for Python development
     sessionVariables = {
       # Python configuration
-      PYTHONPATH = "${config.home.homeDirectory}/projects/python"; # Python path for local packages
+      PYTHONPATH = "${config.home.homeDirectory}/Projects/python"; # Python path for local packages
       PYTHONSTARTUP = "${config.home.homeDirectory}/.pythonrc.py"; # Python startup script
 
       # Virtual environment
@@ -295,11 +295,11 @@
 
     # Automatic workspace directory creation
     activation.createPythonWorkspace = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-            $DRY_RUN_CMD mkdir -p $HOME/projects/python    # Create Python projects directory
-            $DRY_RUN_CMD mkdir -p $HOME/projects/django    # Create Django projects directory
-            $DRY_RUN_CMD mkdir -p $HOME/projects/flask     # Create Flask projects directory
-            $DRY_RUN_CMD mkdir -p $HOME/projects/fastapi   # Create FastAPI projects directory
-            $DRY_RUN_CMD mkdir -p $HOME/projects/data      # Create data science projects directory
+            $DRY_RUN_CMD mkdir -p $HOME/Projects/python    # Create Python projects directory
+            $DRY_RUN_CMD mkdir -p $HOME/Projects/django    # Create Django projects directory
+            $DRY_RUN_CMD mkdir -p $HOME/Projects/flask     # Create Flask projects directory
+            $DRY_RUN_CMD mkdir -p $HOME/Projects/fastapi   # Create FastAPI projects directory
+            $DRY_RUN_CMD mkdir -p $HOME/Projects/data      # Create data science projects directory
             $DRY_RUN_CMD mkdir -p $HOME/.jupyter           # Create Jupyter config directory
 
             # Create Python startup script if it doesn't exist

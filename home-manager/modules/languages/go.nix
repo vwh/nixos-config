@@ -101,7 +101,7 @@
     # Automatic workspace directory creation
     activation.createGoWorkspace = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
       $DRY_RUN_CMD mkdir -p $HOME/go/{bin,pkg,src}       # Create Go workspace structure
-      $DRY_RUN_CMD mkdir -p $HOME/projects/go            # Create projects directory
+      $DRY_RUN_CMD mkdir -p $HOME/Projects/go            # Create projects directory
     '';
   };
 }

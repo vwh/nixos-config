@@ -224,10 +224,10 @@ in
 
     # Automatic workspace directory creation and global package installation
     activation.createJSWorkspace = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-      $DRY_RUN_CMD mkdir -p $HOME/projects/javascript    # Create JavaScript projects directory
-      $DRY_RUN_CMD mkdir -p $HOME/projects/typescript    # Create TypeScript projects directory
-      $DRY_RUN_CMD mkdir -p $HOME/projects/react         # Create React projects directory
-      $DRY_RUN_CMD mkdir -p $HOME/projects/node          # Create Node.js projects directory
+      $DRY_RUN_CMD mkdir -p $HOME/Projects/javascript    # Create JavaScript projects directory
+      $DRY_RUN_CMD mkdir -p $HOME/Projects/typescript    # Create TypeScript projects directory
+      $DRY_RUN_CMD mkdir -p $HOME/Projects/react         # Create React projects directory
+      $DRY_RUN_CMD mkdir -p $HOME/Projects/node          # Create Node.js projects directory
       $DRY_RUN_CMD mkdir -p $HOME/.npm-global            # Create global npm packages directory
 
       # Configure npm to use global directory
