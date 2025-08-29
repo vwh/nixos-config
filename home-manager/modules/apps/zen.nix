@@ -1,4 +1,4 @@
-# Zen Browser configuration.
+# Zen Browser configuration
 
 { inputs, ... }:
 
@@ -8,58 +8,50 @@
   programs.zen-browser = {
     enable = true;
 
-    # Policies for enhanced privacy and security
+    # Enhanced policies for privacy, security, and productivity
     policies = {
       # Disable telemetry and data collection
       DisableTelemetry = true;
       DisableFirefoxStudies = true;
       DisablePocket = true;
       DisableFeedbackCommands = true;
+      DisableFirefoxAccounts = true;
 
-      # Privacy settings
+      # Enhanced privacy settings
       EnableTrackingProtection = {
         Value = true;
         Locked = true;
         Cryptomining = true;
         Fingerprinting = true;
+        Social = true;
       };
 
-      # Disable automatic updates and checks
+      # Security enhancements
       DisableAppUpdate = true;
       DontCheckDefaultBrowser = true;
+      DisableSafeMode = true;
+      DisableDeveloperTools = false; # Keep dev tools enabled for development
 
       # Login and autofill settings
       OfferToSaveLogins = false;
       AutofillAddressEnabled = true;
       AutofillCreditCardEnabled = false;
+      PasswordManagerEnabled = false; # Use external password manager
 
-      # Remove default bookmarks
+      # Remove default bookmarks and customize
       NoDefaultBookmarks = true;
+      DontUseDownloadDir = false;
+      DownloadDirectory = "\${home}/Downloads";
 
-      # Extension settings
+      # HTTPS enforcement
+      HTTPSOnlyMode = "force_enhanced";
+      AutomaticHttpsRewrites = true;
+
+      # Essential Extensions - Organized by category
       ExtensionSettings = {
-        "addon@darkreader.org" = {
-          install_url = "https://addons.mozilla.org/firefox/downloads/latest/darkreader/latest.xpi";
-          installation_mode = "force_installed";
-        };
-
-        "{446900e4-71c2-419f-a6a7-df9c091e268b}" = {
-          install_url = "https://addons.mozilla.org/firefox/downloads/latest/bitwarden-password-manager/latest.xpi";
-          installation_mode = "force_installed";
-        };
-
-        "{c3c10168-4186-445c-9c5b-63f12b8e2c87}" = {
-          install_url = "https://addons.mozilla.org/firefox/downloads/latest/cookie-editor/latest.xpi";
-          installation_mode = "force_installed";
-        };
-
-        "{6AC85730-7D0F-4de0-B3FA-21142DD85326}" = {
-          install_url = "https://addons.mozilla.org/firefox/downloads/latest/colorzilla/latest.xpi";
-          installation_mode = "force_installed";
-        };
-
-        "amptra@keepa.com" = {
-          install_url = "https://addons.mozilla.org/firefox/downloads/latest/keepa/latest.xpi";
+        # 🔒 Privacy & Security
+        "adguardadblocker@adguard.com" = {
+          install_url = "https://addons.mozilla.org/firefox/downloads/latest/adguard-adblocker/latest.xpi";
           installation_mode = "force_installed";
         };
 
@@ -68,31 +60,68 @@
           installation_mode = "force_installed";
         };
 
-        "adguardadblocker@adguard.com" = {
-          install_url = "https://addons.mozilla.org/firefox/downloads/latest/adguard-adblocker/latest.xpi";
+        "addon@darkreader.org" = {
+          install_url = "https://addons.mozilla.org/firefox/downloads/latest/darkreader/latest.xpi";
           installation_mode = "force_installed";
         };
 
-        "wappalyzer@crunchlabz.com" = {
-          install_url = "https://addons.mozilla.org/firefox/downloads/latest/wappalyzer/latest.xpi";
+        # 🔑 Password & Security
+        "{446900e4-71c2-419f-a6a7-df9c091e268b}" = {
+          install_url = "https://addons.mozilla.org/firefox/downloads/latest/bitwarden-password-manager/latest.xpi";
           installation_mode = "force_installed";
         };
 
-        "{a6c4a591-f1b2-4f03-b3ff-767e5bedf4e7}" = {
-          install_url = "https://addons.mozilla.org/firefox/downloads/file/4497925/user_agent_string_switcher-0.6.5.1.xpi";
-          installation_mode = "force_installed";
-        };
-
-        "jid1-ZAdIEUB7XOzOJw@jetpack" = {
-          install_url = "https://addons.mozilla.org/firefox/downloads/file/4540706/duckduckgo_for_firefox-2025.7.23.xpi";
-          installation_mode = "force_installed";
-        };
-
+        # 🛠️ Development Tools
         "{c45c406e-ab73-11d8-be73-000a95be3b12}" = {
           install_url = "https://addons.mozilla.org/firefox/downloads/file/4306323/web_developer-3.0.1.xpi";
           installation_mode = "force_installed";
         };
 
+        "{c3c10168-4186-445c-9c5b-63f12b8e2c87}" = {
+          install_url = "https://addons.mozilla.org/firefox/downloads/latest/cookie-editor/latest.xpi";
+          installation_mode = "force_installed";
+        };
+
+        "{16a49f65-1369-4839-a5ef-db2581e08b16}" = {
+          install_url = "https://addons.mozilla.org/firefox/downloads/file/3736573/json_lite-21.3.0.xpi";
+          installation_mode = "force_installed";
+        };
+
+        "@react-devtools" = {
+          install_url = "https://addons.mozilla.org/firefox/downloads/file/4432990/react_devtools-6.1.1.xpi";
+          installation_mode = "force_installed";
+        };
+
+        # 🎨 Design & Media
+        "{6AC85730-7D0F-4de0-B3FA-21142DD85326}" = {
+          install_url = "https://addons.mozilla.org/firefox/downloads/latest/colorzilla/latest.xpi";
+          installation_mode = "force_installed";
+        };
+
+        # 🔍 Analysis & SEO
+        "wappalyzer@crunchlabz.com" = {
+          install_url = "https://addons.mozilla.org/firefox/downloads/latest/wappalyzer/latest.xpi";
+          installation_mode = "force_installed";
+        };
+
+        "amptra@keepa.com" = {
+          install_url = "https://addons.mozilla.org/firefox/downloads/latest/keepa/latest.xpi";
+          installation_mode = "force_installed";
+        };
+
+        # 🛡️ User Agent & Privacy
+        "{a6c4a591-f1b2-4f03-b3ff-767e5bedf4e7}" = {
+          install_url = "https://addons.mozilla.org/firefox/downloads/file/4497925/user_agent_string_switcher-0.6.5.1.xpi";
+          installation_mode = "force_installed";
+        };
+
+        # 🔎 Search & Navigation
+        "jid1-ZAdIEUB7XOzOJw@jetpack" = {
+          install_url = "https://addons.mozilla.org/firefox/downloads/file/4540706/duckduckgo_for_firefox-2025.7.23.xpi";
+          installation_mode = "force_installed";
+        };
+
+        # 📺 Media Enhancement
         "sponsorBlocker@ajay.app" = {
           install_url = "https://addons.mozilla.org/firefox/downloads/file/4541835/sponsorblock-5.14.xpi";
           installation_mode = "force_installed";
@@ -103,13 +132,14 @@
           installation_mode = "force_installed";
         };
 
-        "{a4c4eda4-fb84-4a84-b4a1-f7c1cbf2a1ad}" = {
-          install_url = "https://addons.mozilla.org/firefox/downloads/file/4563040/refined_github-25.8.23.xpi";
+        "{3c6bf0cc-3ae2-42fb-9993-0d33104fdcaf}" = {
+          install_url = "https://addons.mozilla.org/firefox/downloads/file/4544885/youtube_addon-4.1323.xpi";
           installation_mode = "force_installed";
         };
 
-        "@react-devtools" = {
-          install_url = "https://addons.mozilla.org/firefox/downloads/file/4432990/react_devtools-6.1.1.xpi";
+        # 🐙 Development Platforms
+        "{a4c4eda4-fb84-4a84-b4a1-f7c1cbf2a1ad}" = {
+          install_url = "https://addons.mozilla.org/firefox/downloads/file/4563040/refined_github-25.8.23.xpi";
           installation_mode = "force_installed";
         };
 
@@ -117,50 +147,177 @@
           install_url = "https://addons.mozilla.org/firefox/downloads/file/4472493/minimaltwitter-6.3.0.xpi";
           installation_mode = "force_installed";
         };
-
-        "{16a49f65-1369-4839-a5ef-db2581e08b16}" = {
-          install_url = "https://addons.mozilla.org/firefox/downloads/file/3736573/json_lite-21.3.0.xpi";
-          installation_mode = "force_installed";
-        };
-
-        "{3c6bf0cc-3ae2-42fb-9993-0d33104fdcaf}" = {
-          install_url = "https://addons.mozilla.org/firefox/downloads/file/4544885/youtube_addon-4.1323.xpi";
-          installation_mode = "force_installed";
-        };
       };
 
-      # Preferences
+      # 📚 Managed Bookmarks - Organized by category
+      # ManagedBookmarks = [
+      #   {
+      #     name = "Development";
+      #     children = [
+      #       {
+      #         name = "Nix Resources";
+      #         children = [
+      #           { name = "NixOS Manual"; url = "https://nixos.org/manual/nixos/stable/"; }
+      #           { name = "Nix Pills"; url = "https://nixos.org/guides/nix-pills/"; }
+      #           { name = "Home Manager Options"; url = "https://nix-community.github.io/home-manager/options.html"; }
+      #           { name = "Search NixOS"; url = "https://search.nixos.org/"; }
+      #         ];
+      #       }
+      #       {
+      #         name = "Git Platforms";
+      #         children = [
+      #           { name = "GitHub"; url = "https://github.com/"; }
+      #           { name = "GitLab"; url = "https://gitlab.com/"; }
+      #           { name = "Codeberg"; url = "https://codeberg.org/"; }
+      #         ];
+      #       }
+      #       {
+      #         name = "Package Registries";
+      #         children = [
+      #           { name = "NPM"; url = "https://www.npmjs.com/"; }
+      #           { name = "PyPI"; url = "https://pypi.org/"; }
+      #           { name = "Crates.io"; url = "https://crates.io/"; }
+      #         ];
+      #       }
+      #     ];
+      #   }
+      #   {
+      #     name = "Productivity";
+      #     children = [
+      #       {
+      #         name = "Communication";
+      #         children = [
+      #           { name = "Proton Mail"; url = "https://mail.proton.me/"; }
+      #           { name = "Discord"; url = "https://discord.com/app"; }
+      #           { name = "Matrix"; url = "https://app.element.io/"; }
+      #         ];
+      #       }
+      #       {
+      #         name = "Organization";
+      #         children = [
+      #           { name = "Notion"; url = "https://www.notion.so/"; }
+      #           { name = "Obsidian"; url = "https://obsidian.md/"; }
+      #           { name = "Todoist"; url = "https://todoist.com/"; }
+      #         ];
+      #       }
+      #     ];
+      #   }
+      #   {
+      #     name = "Learning & Research";
+      #     children = [
+      #       {
+      #         name = "Technical Documentation";
+      #         children = [
+      #           { name = "MDN Web Docs"; url = "https://developer.mozilla.org/"; }
+      #           { name = "DevDocs"; url = "https://devdocs.io/"; }
+      #           { name = "OWASP"; url = "https://owasp.org/"; }
+      #         ];
+      #       }
+      #       {
+      #         name = "Academic Resources";
+      #         children = [
+      #           { name = "Google Scholar"; url = "https://scholar.google.com/"; }
+      #           { name = "ResearchGate"; url = "https://www.researchgate.net/"; }
+      #           { name = "arXiv"; url = "https://arxiv.org/"; }
+      #         ];
+      #       }
+      #     ];
+      #   }
+      # ];
+
+      # Enhanced Preferences - Productivity & UX focused
       Preferences = {
-        # Set homepage and new tab page
+        # 🏠 Homepage & Startup
         "browser.startup.homepage" = "http://localhost:8080/development";
         "browser.newtabpage.enabled" = false;
         "browser.startup.page" = 1; # 0=blank, 1=home, 2=last visited page, 3=resume previous session
+        "browser.newtabpage.activity-stream.showSponsoredTopSites" = false;
 
-        # Disable tab warnings
+        # 📑 Tab Management
         "browser.tabs.warnOnClose" = false;
         "browser.tabs.warnOnOpen" = false;
+        "browser.tabs.closeWindowWithLastTab" = false;
+        "browser.tabs.insertAfterCurrent" = true;
+        "browser.tabs.insertRelatedAfterCurrent" = true;
 
-        # Enable hardware acceleration
-        "media.hardware-video-decoding.enabled" = true;
-
-        # Better scrolling
-        "general.smoothScroll" = true;
-
-        # Disable webRTC leak protection
-        "media.peerconnection.enabled" = false;
-
-        # Browser layout - collapsed toolbar
+        # 🎨 Zen Browser UI - Optimized for productivity
         "zen.view.compact" = true;
         "zen.view.sidebar-expanded" = false;
         "zen.tabs.hide-tabbar" = true;
-
-        # Zen-specific preferences
         "zen.workspaces.enabled" = true;
         "zen.sidebar.enabled" = true;
         "zen.sidebar.position" = "left";
         "zen.view.use-single-toolbar" = true;
         "zen.view.show-newtab-button" = false;
         "zen.view.hide-window-controls" = false;
+        "zen.view.experimental-vertical-tabs" = false;
+
+        # ⚡ Performance & Hardware
+        "media.hardware-video-decoding.enabled" = true;
+        "media.hardware-video-decoding.force-enabled" = true;
+        "dom.webgpu.enabled" = true;
+        "gfx.webrender.all" = true;
+        "layers.acceleration.force-enabled" = true;
+
+        # 🖱️ Scrolling & Interaction
+        "general.smoothScroll" = true;
+        "general.smoothScroll.mouseWheel.durationMaxMS" = 400;
+        "general.smoothScroll.mouseWheel.durationMinMS" = 200;
+        "apz.gtk.kinetic_scroll.enabled" = true;
+
+        # 🔒 Privacy & Security
+        "media.peerconnection.enabled" = false;
+        "privacy.resistFingerprinting" = true;
+        "privacy.trackingprotection.enabled" = true;
+        "privacy.trackingprotection.socialtracking.enabled" = true;
+        "privacy.userContext.enabled" = true;
+        "dom.security.https_only_mode" = true;
+
+        # 💾 Downloads & Files
+        "browser.download.useDownloadDir" = true;
+        "browser.download.alwaysOpenPanel" = false;
+        "browser.download.manager.addToRecentDocs" = false;
+
+        # 🔍 Search & Find
+        "findbar.highlightAll" = true;
+        "findbar.modalHighlight" = true;
+        "accessibility.typeaheadfind" = true;
+
+        # 📝 Developer Tools
+        "devtools.theme" = "dark";
+        "devtools.toolbox.host" = "bottom";
+        "devtools.debugger.ui.editor-wrapping" = true;
+        "devtools.editor.keymap" = "vim";
+
+        # 🌐 Network & Performance
+        "network.http.max-connections" = 256;
+        "network.http.max-persistent-connections-per-server" = 10;
+        "network.dns.disablePrefetch" = false;
+        "network.predictor.enabled" = true;
+
+        # 🎵 Media & Audio
+        "media.autoplay.default" = 1; # 0=allow, 1=block, 2=prompt
+        "media.autoplay.blocking_policy" = 2;
+        "media.block-autoplay-until-in-foreground" = true;
+
+        # 📱 Touch & Gestures
+        "apz.gtk.pinch_to_zoom.enabled" = true;
+        "apz.gtk.touchpad_pinch.enabled" = true;
+        "browser.gesture.pinch.in" = "cmd_fullZoomReduce";
+        "browser.gesture.pinch.out" = "cmd_fullZoomEnlarge";
+
+        # ⌨️ Keyboard Shortcuts
+        "ui.key.accelKey" = 17; # Ctrl key
+        "ui.key.menuAccessKey" = 18; # Alt key
+
+        # 🖼️ Images & Content
+        "permissions.default.image" = 1; # Block images by default for privacy
+        "browser.display.use_document_fonts" = 1;
+        "layout.css.devPixelsPerPx" = "1.0";
+
+        "toolkit.telemetry.enabled" = false;
+        "datareporting.healthreport.uploadEnabled" = false;
+        "browser.crashReports.unsubmittedCheck.enabled" = false;
       };
     };
 
