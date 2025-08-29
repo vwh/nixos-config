@@ -10,6 +10,7 @@
     ./cleanup.nix # Automated file cleanup services
     ./monitoring.nix # System monitoring and metrics collection
     ./nautilus.nix # GNOME Files (Nautilus) configuration
+    ./nh.nix # Nix Helper (nh) configuration
     ./environment.nix # System-wide environment variables and paths
     ./gaming.nix # Gaming-related configurations and optimizations
     ./gnome.nix # GNOME desktop environment configuration

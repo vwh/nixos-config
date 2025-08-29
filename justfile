@@ -26,12 +26,12 @@ modules:
 # Switch Home-Manager generation
 home:
     @echo -e "\n➤ Switching Home-Manager…"
-    home-manager switch --flake '.?submodules=1'
+    nh home switch '.?submodules=1'
 
 # Switch NixOS generation
 nixos:
     @echo -e "\n➤ Rebuilding NixOS…"
-    sudo nixos-rebuild switch --flake .
+    nh os switch .
 
 # All of the above, in order
 all:
