@@ -15,7 +15,7 @@ format:
 # Lint all .nix files
 lint:
     @echo -e "\n➤ Linting Nix files…"
-    nix run statix check
+    nix run nixpkgs#statix -- check --ignore '.git/**'
     @echo "✔ Linting passed!"
 
 # Check all missing imports
