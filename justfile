@@ -10,7 +10,7 @@ _default:
 # Format all .nix files
 format:
     @echo -e "\n➤ Formatting Nix files…"
-    find . -type f -name '*.nix' -exec nixfmt {} +
+    fd -e nix -X nixfmt --strict
 
 # Lint all .nix files
 lint:
