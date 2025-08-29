@@ -247,6 +247,16 @@
       if uwsm check may-start > /dev/null && uwsm select; then
         exec systemd-cat -t uwsm_start uwsm start default  # Start UWSM with logging
       fi
+
+      # Source Home Manager environment variables
+      if [ -f ~/.nix-profile/etc/profile.d/hm-session-vars.sh ]; then
+        source ~/.nix-profile/etc/profile.d/hm-session-vars.sh
+      fi
+
+      # Add Home Manager Python packages to PYTHONPATH
+      if [ -d ~/.nix-profile/lib/python3.13/site-packages ]; then
+        export PYTHONPATH="$HOME/.nix-profile/lib/python3.13/site-packages:$PYTHONPATH"
+      fi
     '';
   };
 }

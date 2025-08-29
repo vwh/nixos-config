@@ -218,6 +218,8 @@
       python3Packages.matplotlib # Plotting library
       python3Packages.scipy # Scientific computing
       python3Packages.scikit-learn # Machine learning
+      python3Packages.jupyterlab # Jupyter Lab interface
+      python3Packages.notebook # Jupyter Notebook
 
       # Web development
       python3Packages.django # Django web framework
@@ -270,7 +272,7 @@
     sessionVariables = {
       # Python configuration
       PYTHONPATH = "${config.home.homeDirectory}/Projects/python"; # Python path for local packages
-      PYTHONSTARTUP = "${config.home.homeDirectory}/.pythonrc.py"; # Python startup script
+      PYTHONSTARTUP = "${config.home.homeDirectory}/.pythonrc"; # Python startup script (correct filename)
 
       # Virtual environment
       VIRTUAL_ENV_DISABLE_PROMPT = "1"; # Don't modify prompt in virtual environments
@@ -303,8 +305,8 @@
             $DRY_RUN_CMD mkdir -p $HOME/.jupyter           # Create Jupyter config directory
 
             # Create Python startup script if it doesn't exist
-            if [[ ! -f $HOME/.pythonrc.py ]]; then
-              $DRY_RUN_CMD cat > $HOME/.pythonrc.py << 'PYTHONRC_EOF'
+            if [[ ! -f $HOME/.pythonrc ]]; then
+              $DRY_RUN_CMD cat > $HOME/.pythonrc << 'PYTHONRC_EOF'
       import atexit
       import os
       import readline
