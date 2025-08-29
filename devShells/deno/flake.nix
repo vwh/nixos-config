@@ -27,9 +27,7 @@
         };
       in
       rec {
-        apps.default = utils.lib.mkApp {
-          drv = packages.default;
-        };
+        apps.default = utils.lib.mkApp { drv = packages.default; };
 
         packages.default = pkgs.deno2nix.mkExecutable {
           pname = "template";
@@ -40,11 +38,7 @@
           entrypoint = "./src/index.ts";
         };
 
-        devShell = pkgs.mkShell {
-          buildInputs = with pkgs; [
-            deno
-          ];
-        };
+        devShell = pkgs.mkShell { buildInputs = with pkgs; [ deno ]; };
       }
     );
 }

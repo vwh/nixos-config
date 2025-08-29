@@ -1,14 +1,9 @@
 # Zen Browser configuration.
 
-{
-  inputs,
-  ...
-}:
+{ inputs, ... }:
 
 {
-  imports = [
-    inputs.zen-browser.homeModules.default
-  ];
+  imports = [ inputs.zen-browser.homeModules.default ];
 
   programs.zen-browser = {
     enable = true;

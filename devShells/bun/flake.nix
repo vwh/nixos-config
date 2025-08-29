@@ -21,9 +21,7 @@
       {
         devShell = pkgs.mkShell {
           name = "bun-app";
-          buildInputs = with pkgs; [
-            bun
-          ];
+          buildInputs = with pkgs; [ bun ];
 
           shellHook = ''
             if [ ! -f package.json ]; then

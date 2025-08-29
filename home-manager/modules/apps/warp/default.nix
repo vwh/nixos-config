@@ -10,7 +10,5 @@
   # for organizational purposes.
 
   # Install Warp terminal package
-  home.packages = with pkgs; [
-    warp-terminal-latest
-  ];
+  home.packages = with pkgs; [ warp-terminal-latest ];
 }

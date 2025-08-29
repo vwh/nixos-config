@@ -5,9 +5,7 @@
 
 {
   # Import the SOPS NixOS module
-  imports = [
-    inputs.sops-nix.nixosModules.sops
-  ];
+  imports = [ inputs.sops-nix.nixosModules.sops ];
 
   sops = {
     # Default secrets file location and format

@@ -117,12 +117,7 @@
       # Generate NixOS system configurations for each host
       nixosConfigurations = nixpkgs.lib.foldl' (
         configs: host:
-        configs
-        // {
-          "${host.hostname}" = makeSystem {
-            inherit (host) hostname stateVersion;
-          };
-        }
+        configs // { "${host.hostname}" = makeSystem { inherit (host) hostname stateVersion; }; }
       ) { } hosts;
 
       # Home Manager configuration for user
@@ -141,9 +136,7 @@
         };
 
         # Home Manager modules to include
-        modules = [
-          ./home-manager/home.nix
-        ];
+        modules = [ ./home-manager/home.nix ];
       };
     };
 }

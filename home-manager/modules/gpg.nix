@@ -1,10 +1,6 @@
 # GnuPG configuration
 
-{
-  pkgsStable,
-  lib,
-  ...
-}:
+{ pkgsStable, lib, ... }:
 
 {
   programs.gpg = {

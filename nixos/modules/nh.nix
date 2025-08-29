@@ -13,9 +13,7 @@
   # Simple nh configuration - just install and setup environment
   environment = {
     # Install nh package
-    systemPackages = with pkgs; [
-      nh
-    ];
+    systemPackages = with pkgs; [ nh ];
 
     # Set FLAKE environment variable using user from flake
     sessionVariables = {
@@ -24,7 +22,5 @@
   };
 
   # Basic nh directories
-  systemd.tmpfiles.rules = [
-    "d /var/cache/nh 0755 root root -"
-  ];
+  systemd.tmpfiles.rules = [ "d /var/cache/nh 0755 root root -" ];
 }

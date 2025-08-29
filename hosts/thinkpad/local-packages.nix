@@ -1,10 +1,6 @@
 # Local system packages for the 'thinkpad' host.
 
-{
-  pkgs,
-  pkgsStable,
-  ...
-}:
+{ pkgs, pkgsStable, ... }:
 {
   environment.systemPackages = with pkgs; [
     tlp # Power management

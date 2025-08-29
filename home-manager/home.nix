@@ -12,9 +12,7 @@
 
 {
   # Import all user-specific modules and configurations
-  imports = [
-    ./modules
-  ];
+  imports = [ ./modules ];
 
   # Basic home directory configuration
   home = {
