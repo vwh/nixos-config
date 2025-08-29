@@ -31,8 +31,9 @@
     in
     # Core development packages
     (with pkgsStable; [
-      nixfmt-rfc-style # Official Nix code formatter
-      nixd # Nix language server for IDE support
+      nixfmt-rfc-style # Nix code formatter
+      nixd # Nix language server
+      statix # Nix linter
     ])
     ++ extraPkgs; # Additional packages from custom definitions
 
