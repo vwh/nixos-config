@@ -10,6 +10,19 @@ This repository contains my personal NixOS system configurations, managed with N
 
 ---
 
+## System Information
+
+- **OS**: NixOS 25.05 (Unstable)
+- **Kernel**: Linux 6.12
+- **Window Manager**: Hyprland
+- **Shell**: Zsh with Oh My Zsh
+- **Terminal**: Alacritty
+- **Editor**: VSCode + Neovim
+- **Theme**: Gruvbox Dark Soft
+- **Font**: JetBrains Mono
+
+---
+
 ## Quick Start
 
 ### Installation
@@ -87,34 +100,6 @@ The system runs several services that are accessible via web interfaces or netwo
 
 ---
 
-## Desktop Environment
-
-### Window Manager
-- **Hyprland** - Modern Wayland compositor
-- **UWSM** - Universal Wayland Session Manager
-- **Custom keybindings** and window rules
-
-### Theming
-- **Gruvbox** color scheme (dark/soft variant)
-- **JetBrains Mono** font
-- **Stylix** theming system
-- **Custom wallpapers** and icons
-
-### Applications
-- **Zen Browser** - Firefox-based browser with custom configuration
-- **Alacritty** - GPU-accelerated terminal
-- **Waybar** - Status bar with system information
-- **SwayNC** - Notification center
-- **Rofi/Wofi** - Application launchers
-
-### Multimedia
-- **MPV** - Video player with custom configuration
-- **Pavucontrol** - Audio control interface
-- **OBS Studio** - Screen recording and streaming
-- **Spotify** - Music streaming with Spicetify customization
-
----
-
 ## Secrets Management
 
 This configuration uses `sops-nix` for managing encrypted secrets with age keys.
@@ -159,6 +144,27 @@ This configuration uses `sops-nix` for managing encrypted secrets with age keys.
 - Private keys are stored in `~/.config/sops/age/keys.txt`
 - Never commit private keys or decrypted secrets to Git
 - Use `just sops-edit` for most editing (automatic encrypt/decrypt)
+
+---
+
+## Deployment
+
+### Daily Workflow
+
+This repository uses [`just`](https://github.com/casey/just) as a command runner to simplify common tasks.
+
+### Essential Commands
+| Command | Description |
+|---------|-------------|
+| `just` | List all available commands |
+| `just all` | Run the full pipeline: check, lint, format, and deploy |
+| `just nixos` | Rebuild and switch NixOS configuration |
+| `just home` | Apply Home-Manager configuration |
+| `just format` | Format all `.nix` files with `nixfmt` |
+| `just lint` | Lint all `.nix` files with `statix` |
+| `just modules` | Check for missing module imports |
+| `just update` | Update all flake inputs |
+| `just clean` | Clean up build artifacts and caches |
 
 ---
 
@@ -329,27 +335,6 @@ This configuration uses `sops-nix` for managing encrypted secrets with age keys.
 
 ---
 
-## Deployment
-
-### Daily Workflow
-
-This repository uses [`just`](https://github.com/casey/just) as a command runner to simplify common tasks.
-
-### Essential Commands
-| Command | Description |
-|---------|-------------|
-| `just` | List all available commands |
-| `just all` | Run the full pipeline: check, lint, format, and deploy |
-| `just nixos` | Rebuild and switch NixOS configuration |
-| `just home` | Apply Home-Manager configuration |
-| `just format` | Format all `.nix` files with `nixfmt` |
-| `just lint` | Lint all `.nix` files with `statix` |
-| `just modules` | Check for missing module imports |
-| `just update` | Update all flake inputs |
-| `just clean` | Clean up build artifacts and caches |
-
----
-
 
 ### Getting Help
 
@@ -357,16 +342,3 @@ This repository uses [`just`](https://github.com/casey/just) as a command runner
 - **Home Manager Manual**: https://nix-community.github.io/home-manager/
 - **Hyprland Wiki**: https://hyprland.org/
 - **Nix Flakes**: https://nixos.wiki/wiki/Flakes
-
----
-
-## System Information
-
-- **OS**: NixOS 25.05 (Unstable)
-- **Kernel**: Linux 6.12
-- **Window Manager**: Hyprland
-- **Shell**: Zsh with Oh My Zsh
-- **Terminal**: Alacritty + Warp
-- **Editor**: VSCode + Neovim
-- **Theme**: Gruvbox Dark Soft
-- **Font**: JetBrains Mono
