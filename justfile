@@ -9,19 +9,20 @@ _default:
 
 # Format all .nix files
 format:
-    @echo -e "\n➤ Formatting Nix files…"
-    fd -e nix -X nixfmt --strict
+    @echo -e "\n➤ Formatting Nix files"
+    @nix run nixpkgs#time -- -f "⏱ Completed in %E" fd -e nix -X nixfmt --strict
+    @echo "✔ Formatting passed!"
 
 # Lint all .nix files
 lint:
     @echo -e "\n➤ Linting Nix files…"
-    nix run nixpkgs#statix -- check --ignore '.git/**'
+    @nix run nixpkgs#time -- -f "⏱ Completed in %E" nix run nixpkgs#statix -- check --ignore '.git/**'
     @echo "✔ Linting passed!"
 
 # Check all missing imports
 modules:
-    @echo -e "\n➤ Checking modules…"
-    bash ./scripts/build/modules-check.sh
+    @echo -e "\n➤ Checking modules"
+    @nix run nixpkgs#time -- -f "⏱ Completed in %E" bash ./scripts/build/modules-check.sh
 
 # Switch Home-Manager generation
 home:
@@ -41,26 +42,22 @@ all:
     {{JUST}} format
     {{JUST}} nixos
     {{JUST}} home
-    @echo -e "✅ All done!"
+    @echo -e "✔ All done!"
 
 # Update all flake inputs
 update:
 	nix flake update
 
-# Optimize Nix store
-optimize-store:
-	nix store optimise
-
 # Clean up build artifacts and caches
 clean:
 	@echo -e "\n➤ Cleaning up build artifacts and caches…"
-	@echo "🗑️  Cleaning Nix store (1 day older)..."
+	@echo "[DEL] Cleaning Nix store (1 day older)..."
 	nh clean all --keep 1
-	@echo "🏠 Cleaning Home Manager generations..."
+	@echo "[HM] Cleaning Home Manager generations..."
 	home-manager expire-generations "-1 days"
-	@echo "⚡ Optimizing Nix store..."
+	@echo "[OPT] Optimizing Nix store..."
 	nix store optimise
-	@echo -e "✅ Cleanup completed!"
+	@echo -e "✔ Cleanup completed!"
 
 # Edit secrets with SOPS
 sops-edit:
@@ -72,7 +69,7 @@ sops-edit:
     @echo "Encrypting secrets back..."
     @sops --encrypt secrets/secrets-decrypted.yaml > secrets/secrets.yaml
     @rm secrets/secrets-decrypted.yaml
-    @echo "✅ Encrypted and cleaned up!"
+    @echo "✔ Encrypted and cleaned up!"
 
 # View decrypted secrets (read-only)
 sops-view:
@@ -90,13 +87,13 @@ sops-encrypt:
 	@echo -e "\n➤ Encrypting secrets/secrets-decrypted.yaml to secrets/secrets.yaml…"
 	sops --encrypt secrets/secrets-decrypted.yaml > secrets/secrets.yaml
 	@rm secrets/secrets-decrypted.yaml
-	@echo "✅ Encrypted and cleaned up!"
+	@echo "✔ Encrypted and cleaned up!"
 
 # Add a single secret
 secrets-add key value:
 	@echo -e "\n➤ Adding secret: {{key}} = {{value}}"
 	sops --set '["{{key}}"] "{{value}}"' secrets/secrets.yaml
-	@echo "✅ Secret added!"
+	@echo "✔ Secret added!"
 
 # Setup SOPS age key
 sops-setup:

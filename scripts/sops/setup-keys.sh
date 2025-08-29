@@ -28,7 +28,7 @@ if [[ ! -f secrets/secrets.yaml ]]; then
     exit 1
 fi
 
-echo "✅ Prerequisites check passed!"
+echo "✔ Prerequisites check passed!"
 echo ""
 
 # Create SSH directory if it doesn't exist
@@ -53,7 +53,7 @@ just sops-view | grep -A 20 "ssh_private_key:" | tail -n +2 | sed 's/^    //' > 
 if [[ -s "$TEMP_SSH_KEY" ]]; then
     mv "$TEMP_SSH_KEY" ~/.ssh/id_ed25519
     chmod 600 ~/.ssh/id_ed25519
-    echo "✅ SSH private key extracted and configured"
+    echo "✔ SSH private key extracted and configured"
 else
     rm -f "$TEMP_SSH_KEY"
     echo "❌ Failed to extract SSH private key"
@@ -71,7 +71,7 @@ just sops-view | grep "ssh_public_key:" | cut -d' ' -f2- > "$TEMP_SSH_PUB"
 if [[ -s "$TEMP_SSH_PUB" ]]; then
     mv "$TEMP_SSH_PUB" ~/.ssh/id_ed25519.pub
     chmod 644 ~/.ssh/id_ed25519.pub
-    echo "✅ SSH public key extracted and configured"
+    echo "✔ SSH public key extracted and configured"
 else
     rm -f "$TEMP_SSH_PUB"
     echo "❌ Failed to extract SSH public key"
@@ -96,7 +96,7 @@ if [[ -s ~/gpg_key.asc ]]; then
     # Import GPG key
     gpg --import ~/gpg_key.asc
     rm ~/gpg_key.asc
-    echo "✅ GPG private key extracted and imported"
+    echo "✔ GPG private key extracted and imported"
 else
     echo "❌ Failed to extract GPG private key"
     exit 1
@@ -105,7 +105,7 @@ fi
 # Get GPG key ID
 GPG_KEY_ID=$(gpg --list-secret-keys --keyid-format LONG | grep sec | cut -d'/' -f2 | cut -d' ' -f1)
 if [[ -n "$GPG_KEY_ID" ]]; then
-    echo "✅ GPG Key ID: $GPG_KEY_ID"
+    echo "✔ GPG Key ID: $GPG_KEY_ID"
 else
     echo "❌ Failed to get GPG key ID"
     exit 1
@@ -132,7 +132,7 @@ if git config --global user.name "$GIT_NAME" 2>/dev/null && \
    git config --global user.email "$GIT_EMAIL" 2>/dev/null && \
    git config --global user.signingkey "$GPG_KEY_ID" 2>/dev/null && \
    git config --global commit.gpgsign true 2>/dev/null; then
-    echo "✅ Git configured with:"
+    echo "✔ Git configured with:"
     echo "   Name: $GIT_NAME"
     echo "   Email: $GIT_EMAIL"
     echo "   Signing Key: $GPG_KEY_ID"
@@ -149,7 +149,7 @@ echo ""
 echo "🚀 Starting SSH agent..."
 if eval "$(ssh-agent -s)" 2>/dev/null; then
     ssh-add ~/.ssh/id_ed25519
-    echo "✅ SSH agent started and key added"
+    echo "✔ SSH agent started and key added"
 else
     echo "⚠️  Warning: Could not start SSH agent"
 fi
@@ -158,7 +158,7 @@ fi
 echo ""
 echo "🧪 Testing SSH connection to GitHub..."
 if ssh -T git@github.com -o ConnectTimeout=5 2>&1 | grep -q "successfully authenticated"; then
-    echo "✅ SSH connection to GitHub successful!"
+    echo "✔ SSH connection to GitHub successful!"
 else
     echo "⚠️  Warning: SSH connection test failed. You may need to add the key to your GitHub account."
 fi

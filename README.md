@@ -68,15 +68,15 @@ The system runs several services that are accessible via web interfaces or netwo
 ### System Services
 | Service | Status | Description |
 |---------|--------|-------------|
-| **Hyprland** | ✅ Enabled | Wayland window manager |
-| **PipeWire** | ✅ Enabled | Audio server with PulseAudio compatibility |
-| **NetworkManager** | ✅ Enabled | Network management |
-| **Bluetooth** | ✅ Enabled | Wireless device support |
-| **Tor** | ✅ Enabled | Anonymous networking |
-| **Printing** | ✅ Enabled | CUPS print services |
-| **Docker** | ✅ Enabled | Container runtime |
-| **VirtualBox** | ✅ Enabled | Virtualization platform |
-| **SOPS** | ✅ Enabled | Secret management |
+| **Hyprland** | ✔ Enabled | Wayland window manager |
+| **PipeWire** | ✔ Enabled | Audio server with PulseAudio compatibility |
+| **NetworkManager** | ✔ Enabled | Network management |
+| **Bluetooth** | ✔ Enabled | Wireless device support |
+| **Tor** | ✔ Enabled | Anonymous networking |
+| **Printing** | ✔ Enabled | CUPS print services |
+| **Docker** | ✔ Enabled | Container runtime |
+| **VirtualBox** | ✔ Enabled | Virtualization platform |
+| **SOPS** | ✔ Enabled | Secret management |
 
 ### Monitoring & System
 | Service | Purpose |
@@ -346,7 +346,6 @@ This repository uses [`just`](https://github.com/casey/just) as a command runner
 | `just lint` | Lint all `.nix` files with `statix` |
 | `just modules` | Check for missing module imports |
 | `just update` | Update all flake inputs |
-| `just optimize-store` | Optimize Nix store to save disk space |
 | `just clean` | Clean up build artifacts and caches |
 
 ---

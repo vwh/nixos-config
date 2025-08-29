@@ -252,7 +252,7 @@ in
              fi
            fi
          done
-        echo "✅ Global packages management completed"
+        echo "✔ Global packages management completed"
       fi
     '';
   };
