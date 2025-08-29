@@ -19,6 +19,18 @@
       extraGroups = [
         "networkmanager" # Access to NetworkManager for network configuration
         "wheel" # Sudo privileges for system administration
+        "video" # Access to video devices (NVIDIA control, webcam, etc.)
+        "input" # Access to input devices (keyboard, mouse, touchpad)
+        "render" # Access to GPU rendering (NVIDIA, AMD, Intel)
+        "audio" # Access to audio devices
+        "i2c" # Access to I2C devices (some hardware sensors)
+        "disk" # Access to disk devices
+        "optical" # Access to optical drives
+        "scanner" # Access to scanners
+        "lp" # Access to printers
+        "dialout" # Access to serial ports (Arduino, etc.)
+        "uucp" # Access to serial devices
+        "plugdev" # Access to pluggable devices (USB, etc.)
       ];
     };
   };

@@ -51,6 +51,7 @@ in
 
       powerManagement = {
         enable = true; # Enable power management for better battery life
+        finegrained = false; # Disable fine-grained power management
       };
     };
 
@@ -89,4 +90,12 @@ in
     glxinfo # OpenGL and GLX information utility
     libva-utils # VA-API debugging and testing utilities
   ];
+
+  # Udev rules for NVIDIA device access
+  services.udev.extraRules = ''
+    # NVIDIA GPU access for users in video group
+    KERNEL=="nvidia*", GROUP="video", MODE="0660"
+    KERNEL=="nvidiactl", GROUP="video", MODE="0660"
+    KERNEL=="nvidia-modeset", GROUP="video", MODE="0660"
+  '';
 }
