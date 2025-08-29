@@ -54,7 +54,11 @@ optimize-store:
 # Clean up build artifacts and caches
 clean:
 	@echo -e "\n➤ Cleaning up build artifacts and caches…"
-	nix-collect-garbage --delete-older-than 1d
+	@echo "🗑️  Cleaning Nix store (1 day older)..."
+	nh clean all --keep 1
+	@echo "🏠 Cleaning Home Manager generations..."
+	home-manager expire-generations "-1 days"
+	@echo "⚡ Optimizing Nix store..."
 	nix store optimise
 	@echo -e "✅ Cleanup completed!"
 
