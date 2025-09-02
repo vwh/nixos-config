@@ -17,7 +17,7 @@
 
     # Set FLAKE environment variable using user from flake
     sessionVariables = {
-      FLAKE = "/home/${user}/System";
+      NH_FLAKE = "/home/${user}/System";
     };
   };
 
