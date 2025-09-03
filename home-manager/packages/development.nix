@@ -43,6 +43,7 @@
   sqlitebrowser # SQLite database browser GUI
 
   # API development and testing tools
+  burpsuite # Web application security testing tool
   postman # API development platform
   bruno # Open-source API client (Postman alternative)
   insomnia # REST API client
@@ -51,4 +52,14 @@
   openjdk23 # OpenJDK 23 for Java development
   rustc # Rust programming language compiler
   cargo # Rust package manager and build tool
+
+  # Reverse engineering tools
+  ghidra # Reverse engineering framework
+  radare2 # Binary analysis tool
+  binwalk # Firmware analysis tool
+  cutter # GUI for radare2
+  apktool # Android APK analysis
+  jadx # Java decompiler
+  frida-tools # Dynamic instrumentation toolkit
+  android-tools # Android development tools for device interaction
 ])
