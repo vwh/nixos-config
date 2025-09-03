@@ -31,6 +31,8 @@ with pkgsStable;
   direnv # Directory-specific environment variables
   lazydocker # Terminal UI for Docker management
   gh # GitHub CLI tool
+  hcloud # Hetzner Cloud CLI
+  mise # Tool version manager (runtime, env vars, tasks)
 
   # Media processing and download tools
   yt-dlp # YouTube and video downloader
