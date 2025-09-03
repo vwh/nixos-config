@@ -99,6 +99,8 @@
       # Python configuration
       PYTHONSTARTUP = "$HOME/.pythonrc"; # Python startup script
       PIP_CACHE_DIR = "${config.xdg.cacheHome}/pip"; # Pip cache directory
+      UV_CACHE_DIR = "${config.xdg.cacheHome}/uv"; # uv cache directory
+      UV_PYTHON_INSTALL_DIR = "${config.xdg.dataHome}/uv/python"; # uv Python installations
 
       # Node.js configuration
       NODE_REPL_HISTORY = "${config.xdg.dataHome}/node/node_repl_history"; # Node REPL history
@@ -143,6 +145,7 @@
       export PATH="$HOME/.deno/bin:$PATH"        # Deno binaries
       export PATH="$HOME/.config/composer/vendor/bin:$PATH" # PHP Composer
       export PATH="$HOME/.local/share/gem/ruby/3.1.0/bin:$PATH" # Ruby gems
+      export PATH="$HOME/.local/share/uv/tools:$PATH" # uv tools
       export PATH="/usr/local/sbin:$PATH"        # System admin binaries
       export PATH="/usr/local/bin:$PATH"         # Additional system binaries
 

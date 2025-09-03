@@ -29,6 +29,20 @@
       pipreq = "pip install -r requirements.txt"; # Install from requirements
       pipfreeze = "pip freeze > requirements.txt"; # Freeze to requirements
 
+      # uv package management
+      uvi = "uv pip install"; # Install package with uv
+      uvu = "uv pip install --upgrade"; # Upgrade package with uv
+      uvr = "uv pip uninstall"; # Remove package with uv
+      uvl = "uv pip list"; # List installed packages with uv
+      uvf = "uv pip freeze"; # Show installed packages with uv
+      uvreq = "uv pip install -r requirements.txt"; # Install from requirements with uv
+      uvfreeze = "uv pip freeze > requirements.txt"; # Freeze to requirements with uv
+      uvinit = "uv init"; # Initialize uv project
+      uvadd = "uv add"; # Add dependency to uv project
+      uvdev = "uv add --dev"; # Add dev dependency to uv project
+      uvrun = "uv run"; # Run script with uv
+      uvsync = "uv sync"; # Sync dependencies with uv
+
       # Virtual environments
       venvc = "python3 -m venv"; # Create virtual environment
       venva = "source venv/bin/activate"; # Activate virtual environment
@@ -245,6 +259,7 @@
       # Package management
       poetry # Python dependency management
       pipenv # Python virtual environment management
+      uv # Fast Python package installer and resolver
 
       # Documentation
       python3Packages.sphinx # Documentation generator
@@ -287,6 +302,11 @@
       # Pip configuration
       PIP_DISABLE_PIP_VERSION_CHECK = "1"; # Disable pip version check
       PIP_NO_WARN_SCRIPT_LOCATION = "1"; # Don't warn about script location
+
+      # uv configuration
+      UV_CACHE_DIR = "${config.xdg.cacheHome}/uv"; # uv cache directory
+      UV_PYTHON_INSTALL_DIR = "${config.xdg.dataHome}/uv/python"; # uv Python installations
+      UV_COMPILE_BYTECODE = "1"; # Compile bytecode for faster startup
     };
 
     # Add Python binaries to system PATH
