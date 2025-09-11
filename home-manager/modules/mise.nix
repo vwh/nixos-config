@@ -20,11 +20,11 @@
       quiet = false;
       python_compile = false;
       python_venv_auto_create = false;
-      disable_tools = ["python"];  # Completely disable Python tool management
+      disable_tools = [ "python" ]; # Completely disable Python tool management
     };
 
     # No global tool versions - let system handle Python
-    globalConfig = {};
+    globalConfig = { };
   };
 
   # Environment variables for Mise
