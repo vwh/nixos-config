@@ -31,6 +31,7 @@
     (with pkgsStable; [
       nixfmt-rfc-style # Nix code formatter
       nixd # Nix language server
+      nil # Another Nix language server
       statix # Nix linter
     ])
     ++ extraPkgs; # Additional packages from custom definitions
