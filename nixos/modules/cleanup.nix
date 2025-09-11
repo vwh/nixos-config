@@ -19,9 +19,9 @@
         serviceConfig = {
           Type = "oneshot";
           User = user;
-          ExecStart = "${pkgs.bash}/bin/bash -c '${pkgs.findutils}/bin/find /home/${user}/Downloads/Telegram\\ Desktop -type f -mtime +14 -delete 2>/dev/null || true'";
+          ExecStart = "${pkgs.bash}/bin/bash -c \"${pkgs.findutils}/bin/find '/home/${user}/Downloads/Telegram Desktop' -type f -mtime +14 -delete 2>/dev/null || true\"";
           # Clean empty directories after removing files
-          ExecStartPost = "${pkgs.bash}/bin/bash -c '${pkgs.findutils}/bin/find /home/${user}/Downloads/Telegram\\ Desktop -type d -empty -delete 2>/dev/null || true'";
+          ExecStartPost = "${pkgs.bash}/bin/bash -c \"${pkgs.findutils}/bin/find '/home/${user}/Downloads/Telegram Desktop' -type d -empty -delete 2>/dev/null || true\"";
         };
       };
 

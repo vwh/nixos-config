@@ -3,12 +3,7 @@
 
 {
   services.xserver = {
-    enable = true; # Enable the X.Org X server
-
-    # Keyboard layout configuration for X11
-    xkb = {
-      layout = "us"; # US English keyboard layout
-      variant = ""; # Default variant (empty for standard layout)
-    };
+    enable = true; # Enable the X.Org X server for XWayland compatibility
+    # Note: Keyboard layout is configured in i18n.nix with mkForce for consistency
   };
 }

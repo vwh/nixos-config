@@ -64,5 +64,6 @@
     fcitx5-with-addons # Complete Fcitx5 with all addons
     fcitx5-gtk # GTK integration
     fcitx5-configtool # Configuration GUI
+    libpinyin # Pinyin input method library
   ];
 }

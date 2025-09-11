@@ -9,7 +9,6 @@
     settings = {
       # General lock screen settings
       general = {
-        disable_loading_bar = true; # Hide loading bar during authentication
         grace = 10; # Grace period before locking (seconds)
         hide_cursor = true; # Hide cursor when locked
         no_fade_in = false; # Enable fade-in animation

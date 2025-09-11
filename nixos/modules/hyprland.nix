@@ -27,4 +27,11 @@
       gdm.enableGnomeKeyring = true; # Enable GNOME keyring with GDM
     };
   };
+
+  # Enable XDG desktop portal for proper clipboard and file dialog support
+  xdg.portal = {
+    enable = true;
+    wlr.enable = true; # Enable wlroots portal
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ]; # GTK portal for file dialogs
+  };
 }

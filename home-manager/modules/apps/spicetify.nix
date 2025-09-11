@@ -53,16 +53,10 @@ in
 
   # Environment variables to improve Spotify stability and performance
   home.sessionVariables = {
-    # Disable GPU acceleration to prevent crashes
-    SPOTIFY_DISABLE_GPU = "1";
-
-    # Force software rendering if GPU issues persist
-    SPOTIFY_FORCE_SOFTWARE_RENDERING = "1";
-
     # Increase memory cache size for better performance
     SPOTIFY_MAX_CACHE_SIZE_MB = "1024";
 
-    # Disable hardware acceleration for stability
-    SPOTIFY_DISABLE_HARDWARE_ACCELERATION = "1";
+    # Additional stability flags
+    SPOTIFY_SKIP_LINUX_NOTIFICATIONS = "1"; # Skip problematic notifications
   };
 }

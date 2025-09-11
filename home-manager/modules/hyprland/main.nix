@@ -17,7 +17,7 @@
         "XDG_CURRENT_DESKTOP,Hyprland" # Set current desktop for XDG compliance
         "XDG_SESSION_TYPE,wayland" # Indicate Wayland session
         "XDG_SESSION_DESKTOP,Hyprland" # Set session desktop
-        "QT_QPA_PLATFORM,wayland" # Force Qt applications to use Wayland
+        "QT_QPA_PLATFORM,wayland;xcb" # Force Qt applications to use Wayland with X11 fallback
         "GTK_THEME=Gruvbox-Dark" # Set GTK theme for consistency
         "QT_STYLE_OVERRIDE=kvantum" # Use Kvantum Qt style
         "XDG_SCREENSHOTS_DIR,$HOME/screens" # Directory for screenshots
