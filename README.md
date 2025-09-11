@@ -284,6 +284,7 @@ This repository uses [`just`](https://github.com/casey/just) as a command runner
 │       ├── audio.nix              ← Audio system (PipeWire)
 │       ├── bluetooth.nix          ← Bluetooth support
 │       ├── bootloader.nix         ← Boot loader configuration
+│       ├── browser-deps.nix       ← Browser dependencies for Chrome/Chromium
 │       ├── cleanup.nix            ← System cleanup tasks
 │       ├── default.nix            ← Module imports
 │       ├── environment.nix        ← Environment variables

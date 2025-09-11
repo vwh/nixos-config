@@ -7,6 +7,7 @@
     ./audio.nix # Audio system configuration (PipeWire/PulseAudio)
     ./bluetooth.nix # Bluetooth services and device management
     ./bootloader.nix # Boot loader configuration (GRUB/systemd-boot)
+    ./browser-deps.nix # Browser dependencies for Chrome/Chromium-based applications
     ./cleanup.nix # Automated file cleanup services
     ./monitoring.nix # System monitoring and metrics collection
     ./nautilus.nix # GNOME Files (Nautilus) configuration

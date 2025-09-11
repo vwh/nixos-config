@@ -21,7 +21,6 @@
   # Web browsers
   brave # Privacy-focused web browser
   firefox # Mozilla Firefox web browser
-  chromium # Open-source web browser
 
   # Communication and collaboration tools
   element-desktop # Matrix protocol client for Element

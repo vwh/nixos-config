@@ -13,12 +13,19 @@
       stdenv.cc.cc
       libgcc
       glibc
+      glib # Added for Chrome/Chromium support
 
       # Compression and crypto
       zlib
       bzip2
       xz
       openssl
+
+      # Printing support (needed by Chrome)
+      cups
+
+      # XCB protocol library (needed by Chrome)
+      xorg.libxcb
 
       # X11 and graphics
       xorg.libX11
@@ -31,6 +38,15 @@
       xorg.libXinerama
       libGL
 
+      # Additional X11 libraries for Chrome/Chromium
+      xorg.libXcomposite
+      xorg.libXdamage
+      xorg.libXfixes
+      xorg.libXScrnSaver
+      xorg.libXtst
+      xorg.libxkbfile
+      xorg.libxshmfence
+
       # System services
       dbus
       systemd
@@ -39,6 +55,19 @@
       fontconfig
       freetype
       expat
+
+      # Additional libraries for Chrome/Chromium
+      atk
+      at-spi2-atk
+      cairo
+      gdk-pixbuf
+      gtk3
+      pango
+      alsa-lib
+      libdrm
+      libxkbcommon
+      mesa
+      libgbm
 
       # Development libraries
       libffi
