@@ -16,6 +16,7 @@ let
     "@google/gemini-cli"
     "@charmland/crush"
     "@openai/codex"
+    "@anthropic-ai/claude-code"
   ];
 in
 {
@@ -31,9 +32,6 @@ in
       jt = "jest --watch"; # Jest watch mode
       vt = "npx vitest"; # Run Vitest
       pt = "npx playwright"; # Run Playwright tests
-
-      # AI tools
-      codex = "codex"; # OpenAI Codex CLI
     };
 
     # Git ignore patterns for JavaScript/TypeScript projects
