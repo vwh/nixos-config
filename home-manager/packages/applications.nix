@@ -33,4 +33,7 @@
   # Productivity and knowledge management
   anki-bin # Spaced repetition flashcard system
   obsidian # Knowledge base and note-taking application
+
+  # Gaming and compatibility tools
+  (bottles.override { removeWarningPopup = true; }) # Run Windows applications on Linux
 ])

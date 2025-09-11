@@ -27,6 +27,9 @@
       steam = {
         enable = true; # Enable Steam gaming platform
         gamescopeSession.enable = config.mySystem.gaming.enableGamescope; # Enable GameScope session
+        extraCompatPackages = with pkgs; [
+          proton-ge-bin # Proton-GE for better game compatibility
+        ];
       };
     };
 
