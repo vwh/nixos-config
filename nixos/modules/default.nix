@@ -21,7 +21,9 @@
     ./networking.nix # Network configuration and firewall rules
     ./nix-ld.nix # Dynamic linker for running non-Nix binaries
     ./nix.nix # Nix package manager configuration
+    ./ollama.nix # Ollama service for local AI models and embeddings
     ./printing.nix # CUPS printing system and drivers
+    ./qdrant.nix # Qdrant vector search engine for AI code indexing
     ./sops.nix # Secret management with SOPS
     ./stability.nix # System stability and optimization settings
     ./timezone.nix # Time zone and clock configuration

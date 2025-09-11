@@ -77,6 +77,7 @@ The system runs several services that are accessible via web interfaces or netwo
 |---------|-----|-------------|
 | **Glance Dashboard** | `http://localhost:8080` | System overview dashboard with widgets |
 | **CUPS Print Server** | `http://localhost:631` | Printer configuration and management |
+| **Qdrant Web UI** | `http://localhost:6333` | Vector search engine interface for AI code indexing |
 
 ### System Services
 | Service | Status | Description |
@@ -90,6 +91,8 @@ The system runs several services that are accessible via web interfaces or netwo
 | **Docker** | ✔ Enabled | Container runtime |
 | **VirtualBox** | ✔ Enabled | Virtualization platform |
 | **SOPS** | ✔ Enabled | Secret management |
+| **Ollama** | ✔ Enabled | Local AI models and embeddings service (port 11434) |
+| **Qdrant** | ✔ Enabled | Vector search engine for AI-powered code indexing (port 6333) |
 
 ### Monitoring & System
 | Service | Purpose |
