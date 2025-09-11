@@ -13,7 +13,7 @@
       stdenv.cc.cc
       libgcc
       glibc
-      glib # Added for Chrome/Chromium support
+      glib
 
       # Compression and crypto
       zlib
@@ -21,10 +21,10 @@
       xz
       openssl
 
-      # Printing support (needed by Chrome)
+      # Printing support
       cups
 
-      # XCB protocol library (needed by Chrome)
+      # XCB protocol library
       xorg.libxcb
 
       # X11 and graphics
@@ -79,6 +79,54 @@
       libxml2
       nss
       nspr
+
+      # Additional libraries for broader application support
+      sqlite # Database support for many applications
+      icu # Unicode support
+      libpng # PNG image support
+      libjpeg # JPEG image support
+      libwebp # WebP image support
+      libtiff # TIFF image support
+      librsvg # SVG rendering
+      gdk-pixbuf # Image loading
+      harfbuzz # Text shaping
+      graphite2 # Smart font rendering
+      pcre # Regular expressions
+      gmp # Arbitrary precision arithmetic
+      libtasn1 # ASN.1 library
+      libunistring # Unicode string library
+      libidn2 # Internationalized domain names
+      libpsl # Public Suffix List library
+      libssh2 # SSH2 library
+      nghttp2 # HTTP/2 library
+      libbsd # BSD library functions
+      libcap # POSIX capabilities
+      libseccomp # seccomp filtering
+      libapparmor # AppArmor support
+      systemd # Systemd libraries
+
+      # Video and audio codecs
+      ffmpegthumbnailer # Video thumbnail generation
+      ffmpeg-full # Complete FFmpeg suite
+      libva # VAAPI support
+      libvdpau # VDPAU support
+      intel-media-driver # Intel GPU media driver
+      mesa.drivers # Mesa GPU drivers
+
+      # Python support (for Python applications)
+      python3
+      python3Packages.numpy
+      python3Packages.pillow
+
+      # Node.js support (for Node applications)
+      nodejs
+
+      # Java support (for Java applications)
+      jdk17
+
+      # Wine and Proton compatibility
+      wine
+      winetricks
     ];
   };
 }

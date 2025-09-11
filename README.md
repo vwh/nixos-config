@@ -77,7 +77,6 @@ The system runs several services that are accessible via web interfaces or netwo
 |---------|-----|-------------|
 | **Glance Dashboard** | `http://localhost:8080` | System overview dashboard with widgets |
 | **CUPS Print Server** | `http://localhost:631` | Printer configuration and management |
-| **Qdrant Web UI** | `http://localhost:6333` | Vector search engine interface for AI code indexing |
 
 ### System Services
 | Service | Status | Description |
@@ -100,6 +99,7 @@ The system runs several services that are accessible via web interfaces or netwo
 | **System Monitoring** | Hardware sensors, system resources |
 | **Network Monitoring** | Connection monitoring and diagnostics |
 | **Power Management** | Battery and power optimization |
+| **GameMode** | Performance optimization for gaming |
 
 ---
 
@@ -284,7 +284,7 @@ This repository uses [`just`](https://github.com/casey/just) as a command runner
 │       ├── audio.nix              ← Audio system (PipeWire)
 │       ├── bluetooth.nix          ← Bluetooth support
 │       ├── bootloader.nix         ← Boot loader configuration
-│       ├── browser-deps.nix       ← Browser dependencies for Chrome/Chromium
+│       ├── browser-deps.nix       ← Browser environment configuration
 │       ├── cleanup.nix            ← System cleanup tasks
 │       ├── default.nix            ← Module imports
 │       ├── environment.nix        ← Environment variables
@@ -297,9 +297,11 @@ This repository uses [`just`](https://github.com/casey/just) as a command runner
 │       ├── monitoring.nix         ← System monitoring
 │       ├── nautilus.nix           ← File manager configuration
 │       ├── networking.nix         ← Network configuration
-│       ├── nix-ld.nix             ← Dynamic linker
+│       ├── nix-ld.nix             ← Dynamic linker for non-Nix binaries
 │       ├── nix.nix                ← Nix package manager config
+│       ├── ollama.nix             ← Local AI models service
 │       ├── printing.nix           ← Print services
+│       ├── qdrant.nix             ← Vector search engine
 │       ├── sops.nix               ← Secret management
 │       ├── stability.nix          ← System stability
 │       ├── timezone.nix           ← Time zone configuration
