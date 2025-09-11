@@ -40,6 +40,7 @@
 ++ (with pkgs; [
   # Integrated Development Environments
   vscode # Visual Studio Code editor
+  zed-editor # Zed editor
   sqlitebrowser # SQLite database browser GUI
 
   # API development and testing tools
