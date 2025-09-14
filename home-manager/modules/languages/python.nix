@@ -81,8 +81,6 @@
       "downloads/" # Downloaded packages
       "eggs/" # Egg packages
       ".eggs/" # Egg packages
-      "lib/" # Library files
-      "lib64/" # 64-bit library files
       "parts/" # Buildout parts
       "sdist/" # Source distribution
       ".installed.cfg" # Buildout configuration
