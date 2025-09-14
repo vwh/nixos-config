@@ -32,6 +32,7 @@
     ./upower.nix # Power management and battery monitoring
     ./users.nix # User account management and permissions
     ./virtualisation.nix # Virtualization support (QEMU, libvirt, etc.)
+    ./xdg-desktop-portal.nix # XDG desktop portal configuration
     ./xserver.nix # X11 server configuration and display settings
   ];
 }
