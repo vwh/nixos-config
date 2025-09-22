@@ -111,7 +111,7 @@
       libva # VAAPI support
       libvdpau # VDPAU support
       intel-media-driver # Intel GPU media driver
-      mesa.drivers # Mesa GPU drivers
+      mesa # Mesa GPU drivers
 
       # Python support (for Python applications)
       python3
