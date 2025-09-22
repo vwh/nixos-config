@@ -63,11 +63,8 @@
       ld = "lazydocker"; # Terminal Docker UI
 
       # AI and coding assistance tools
-      cx = "codex"; # OpenAI Codex CLI
       cl = "claude"; # Anthropic Claude CLI
-      cc = "crush"; # Charmland Crush CLI
       gemi = "gemini"; # Google Gemini AI
-      open = "opencode"; # OpenCode AI
 
       # Nix ecosystem tools and shortcuts
       ns = "nix-shell"; # Start Nix shell
