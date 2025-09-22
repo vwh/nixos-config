@@ -146,13 +146,6 @@
         ];
       };
 
-      # Touchpad gesture configuration
-      gestures = {
-        workspace_swipe = true; # Enable workspace switching with swipe
-        workspace_swipe_invert = false; # Don't invert swipe direction
-        workspace_swipe_forever = true; # Allow continuous swiping
-      };
-
       # Dwindle layout configuration (tiling algorithm)
       dwindle = {
         pseudotile = true; # Enable pseudotiling for some windows
