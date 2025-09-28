@@ -9,7 +9,7 @@
 
   sops = {
     # Default secrets file location and format
-    defaultSopsFile = ./secrets/secrets.yaml; # Path to encrypted secrets file
+    defaultSopsFile = ../../secrets/secrets.yaml; # Path to encrypted secrets file
     defaultSopsFormat = "yaml"; # Format of the secrets file
 
     # Age encryption key configuration
