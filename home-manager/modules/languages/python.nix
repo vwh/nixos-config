@@ -44,7 +44,7 @@
       uvsync = "uv sync"; # Sync dependencies with uv
 
       # Virtual environments
-      venvc = "python3 -m venv"; # Create virtual environment
+      venvc = "python3 -m venv venv"; # Create virtual environment
       venva = "source venv/bin/activate"; # Activate virtual environment
       venvd = "deactivate"; # Deactivate virtual environment
       venvi = "venv/bin/pip install"; # Install in virtual environment
@@ -239,6 +239,7 @@
       python3Packages.fastapi # FastAPI web framework
       python3Packages.uvicorn # ASGI server
       python3Packages.requests # HTTP library
+      python3Packages.urllib3 # HTTP library
       python3Packages.aiohttp # Async HTTP client
 
       # Database
