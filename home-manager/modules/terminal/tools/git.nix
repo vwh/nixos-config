@@ -11,7 +11,7 @@
     userName = gitConfig.name;
     userEmail = gitConfig.email;
     signing = {
-      key = gitConfig.gitKey;
+      key = gitConfig.signingKey;
       signByDefault = true;
     };
 

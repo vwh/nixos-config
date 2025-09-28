@@ -4,110 +4,178 @@
 
 set -euo pipefail
 
+TEMP_DIR=$(mktemp -d)
+trap 'rm -rf "$TEMP_DIR"' EXIT INT TERM
+
 echo "=== Setting Up SSH and GPG Keys from SOPS ==="
 echo ""
 
+# Color codes for output
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+NC='\033[0m' # No Color
+
+# Logging functions
+log_error() {
+    echo -e "${RED}❌ Error: $1${NC}" >&2
+}
+
+log_success() {
+    echo -e "${GREEN}✔ $1${NC}"
+}
+
+log_warning() {
+    echo -e "${YELLOW}⚠️  Warning: $1${NC}"
+}
+
+log_info() {
+    echo "ℹ️  $1"
+}
+
+# Validate key integrity
+validate_ssh_key() {
+    local key_file="$1"
+    if ! ssh-keygen -l -f "$key_file" >/dev/null 2>&1; then
+        log_error "Invalid SSH key: $key_file"
+        return 1
+    fi
+    return 0
+}
+
+validate_gpg_key() {
+    local key_file="$1"
+    if ! gpg --import-options show-only --import "$key_file" >/dev/null 2>&1; then
+        log_error "Invalid GPG key: $key_file"
+        return 1
+    fi
+    return 0
+}
+
 # Check if SOPS is available
 if ! command -v sops &> /dev/null; then
-    echo "❌ Error: SOPS is not installed. Please install sops-nix first."
+    log_error "SOPS is not installed. Please install sops-nix first."
     exit 1
 fi
 
-# Check if age key exists
+# Check if age key exists and is valid
 if [[ ! -f ~/.config/sops/age/keys.txt ]]; then
-    echo "❌ Error: Age key not found. Please run 'just sops-setup' first."
+    log_error "Age key not found. Please run 'just sops-setup' first."
     exit 1
 elif ! nix shell nixpkgs#age -c age-keygen -y ~/.config/sops/age/keys.txt &> /dev/null; then
-    echo "❌ Error: Age key file is invalid or corrupt. Please ensure it contains a valid age private key."
+    log_error "Age key file is invalid or corrupt. Please ensure it contains a valid age private key."
     exit 1
 fi
 
 # Check if secrets file exists
 if [[ ! -f secrets/secrets.yaml ]]; then
-    echo "❌ Error: secrets/secrets.yaml not found. Please copy it from your main machine."
+    log_error "secrets/secrets.yaml not found. Please copy it from your main machine."
     exit 1
 fi
 
-echo "✔ Prerequisites check passed!"
+# Check if we can decrypt secrets
+if ! just sops-view >/dev/null 2>&1; then
+    log_error "Cannot decrypt secrets. Check your age key and secrets file."
+    exit 1
+fi
+
+log_success "Prerequisites check passed!"
 echo ""
 
-# Create SSH directory if it doesn't exist
+# Create SSH directory with secure permissions
 mkdir -p ~/.ssh
 chmod 700 ~/.ssh
 
-# Extract SSH keys
-echo "🔑 Setting up SSH keys..."
+# Extract SSH keys with enhanced security
+log_info "Setting up SSH keys..."
 
-# Temporarily move any existing SSH keys to avoid SOPS conflicts
-SSH_BACKUP_DIR=$(mktemp -d)
+# Backup existing SSH keys securely
+SSH_BACKUP_DIR="$TEMP_DIR/ssh_backup"
+mkdir -p "$SSH_BACKUP_DIR"
+
 if [[ -f ~/.ssh/id_ed25519 ]]; then
-    mv ~/.ssh/id_ed25519 "$SSH_BACKUP_DIR/"
+    cp ~/.ssh/id_ed25519 "$SSH_BACKUP_DIR/"
+    log_info "Backed up existing SSH private key"
 fi
 if [[ -f ~/.ssh/id_ed25519.pub ]]; then
-    mv ~/.ssh/id_ed25519.pub "$SSH_BACKUP_DIR/"
+    cp ~/.ssh/id_ed25519.pub "$SSH_BACKUP_DIR/"
+    log_info "Backed up existing SSH public key"
 fi
 
-# Extract SSH private key
-TEMP_SSH_KEY=$(mktemp)
-just sops-view | grep -A 20 "ssh_private_key:" | tail -n +2 | sed 's/^    //' > "$TEMP_SSH_KEY"
-if [[ -s "$TEMP_SSH_KEY" ]]; then
-    mv "$TEMP_SSH_KEY" ~/.ssh/id_ed25519
-    chmod 600 ~/.ssh/id_ed25519
-    echo "✔ SSH private key extracted and configured"
+# Extract SSH private key securely
+SSH_PRIVATE="$TEMP_DIR/ssh_private"
+if just sops-view | grep -A 50 "ssh_private_key:" | tail -n +2 | sed 's/^    //' > "$SSH_PRIVATE" && [[ -s "$SSH_PRIVATE" ]]; then
+    if validate_ssh_key "$SSH_PRIVATE"; then
+        mv "$SSH_PRIVATE" ~/.ssh/id_ed25519
+        chmod 600 ~/.ssh/id_ed25519
+        log_success "SSH private key extracted and configured"
+    else
+        rm -f "$SSH_PRIVATE"
+        log_error "Extracted SSH private key is invalid"
+        # Restore backup if validation failed
+        if [[ -f "$SSH_BACKUP_DIR/id_ed25519" ]]; then
+            mv "$SSH_BACKUP_DIR/id_ed25519" ~/.ssh/
+        fi
+        exit 1
+    fi
 else
-    rm -f "$TEMP_SSH_KEY"
-    echo "❌ Failed to extract SSH private key"
+    rm -f "$SSH_PRIVATE"
+    log_error "Failed to extract SSH private key from secrets"
     # Restore backup if extraction failed
     if [[ -f "$SSH_BACKUP_DIR/id_ed25519" ]]; then
         mv "$SSH_BACKUP_DIR/id_ed25519" ~/.ssh/
     fi
-    rm -rf "$SSH_BACKUP_DIR"
     exit 1
 fi
 
-# Extract SSH public key
-TEMP_SSH_PUB=$(mktemp)
-just sops-view | grep "ssh_public_key:" | cut -d' ' -f2- > "$TEMP_SSH_PUB"
-if [[ -s "$TEMP_SSH_PUB" ]]; then
-    mv "$TEMP_SSH_PUB" ~/.ssh/id_ed25519.pub
+# Extract SSH public key securely
+SSH_PUBLIC="$TEMP_DIR/ssh_public"
+if just sops-view | grep "ssh_public_key:" | cut -d' ' -f2- > "$SSH_PUBLIC" && [[ -s "$SSH_PUBLIC" ]]; then
+    mv "$SSH_PUBLIC" ~/.ssh/id_ed25519.pub
     chmod 644 ~/.ssh/id_ed25519.pub
-    echo "✔ SSH public key extracted and configured"
+    log_success "SSH public key extracted and configured"
 else
-    rm -f "$TEMP_SSH_PUB"
-    echo "❌ Failed to extract SSH public key"
+    log_error "Failed to extract SSH public key from secrets"
     # Restore backup if extraction failed
     if [[ -f "$SSH_BACKUP_DIR/id_ed25519.pub" ]]; then
         mv "$SSH_BACKUP_DIR/id_ed25519.pub" ~/.ssh/
     fi
-    rm -rf "$SSH_BACKUP_DIR"
     exit 1
 fi
 
-# Clean up backup directory
-rm -rf "$SSH_BACKUP_DIR"
+# Extract and import GPG key securely
+log_info "Setting up GPG key..."
 
-# Extract and import GPG key
-echo ""
-echo "🔐 Setting up GPG key..."
-
-# Extract GPG private key
-just sops-view | grep -A 50 "gpg_private_key:" | tail -n +2 | sed 's/^    //' > ~/gpg_key.asc
-if [[ -s ~/gpg_key.asc ]]; then
-    # Import GPG key
-    gpg --import ~/gpg_key.asc
-    rm ~/gpg_key.asc
-    echo "✔ GPG private key extracted and imported"
+# Extract GPG private key to secure temporary location
+GPG_KEY_FILE="$TEMP_DIR/gpg_key.asc"
+if just sops-view | grep -A 50 "gpg_private_key:" | tail -n +2 | sed 's/^    //' > "$GPG_KEY_FILE" && [[ -s "$GPG_KEY_FILE" ]]; then
+    if validate_gpg_key "$GPG_KEY_FILE"; then
+        # Import GPG key with secure options
+        if gpg --import-options import-show --import "$GPG_KEY_FILE" >/dev/null 2>&1; then
+            gpg --import "$GPG_KEY_FILE"
+            log_success "GPG private key extracted and imported"
+        else
+            rm -f "$GPG_KEY_FILE"
+            log_error "GPG key import failed - key may be corrupted"
+            exit 1
+        fi
+    else
+        rm -f "$GPG_KEY_FILE"
+        log_error "Extracted GPG key is invalid"
+        exit 1
+    fi
 else
-    echo "❌ Failed to extract GPG private key"
+    rm -f "$GPG_KEY_FILE"
+    log_error "Failed to extract GPG private key from secrets"
     exit 1
 fi
 
-# Get GPG key ID
-GPG_KEY_ID=$(gpg --list-secret-keys --keyid-format LONG | grep sec | cut -d'/' -f2 | cut -d' ' -f1)
+# Get GPG key ID with validation
+GPG_KEY_ID=$(gpg --list-secret-keys --keyid-format LONG | grep sec | head -1 | cut -d'/' -f2 | cut -d' ' -f1)
 if [[ -n "$GPG_KEY_ID" ]]; then
-    echo "✔ GPG Key ID: $GPG_KEY_ID"
+    log_success "GPG Key ID: $GPG_KEY_ID"
 else
-    echo "❌ Failed to get GPG key ID"
+    log_error "Failed to get GPG key ID"
     exit 1
 fi
 

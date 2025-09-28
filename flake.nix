@@ -2,7 +2,7 @@
 # This flake provides a complete NixOS and Home Manager setup with declarative
 
 {
-  description = "NixOS + Home-Manager flake";
+  description = "Personal NixOS configuration";
 
   # External dependencies (inputs) - other flakes this configuration depends on
   inputs = {
@@ -59,11 +59,11 @@
       homeStateVersion = "25.05"; # Home Manager state version
       user = "yazan"; # Primary username
 
-      # Git configuration for user
+      # Git configuration
       gitConfig = {
         name = "Yazan Alqasem";
         email = "vwhe@proton.me";
-        gitKey = "0x5478BB36AC504E64"; # GPG key for signing commits
+        signingKey = "0x5478BB36AC504E64"; # GPG key for signing commits
       };
 
       # Host configurations - defines available systems
@@ -82,12 +82,22 @@
       # Package sets with configurations
       pkgs = import nixpkgs {
         inherit system;
-        config.allowUnfree = true; # Allow proprietary packages
+        config = {
+          allowUnfree = true; # Allow proprietary packages
+          allowBroken = false; # Don't allow broken packages
+          allowInsecure = false; # Don't allow insecure packages
+          allowUnsupportedSystem = false; # Don't allow unsupported systems
+        };
       };
 
       pkgsStable = import nixpkgs-stable {
         inherit system;
-        config.allowUnfree = true;
+        config = {
+          allowUnfree = true;
+          allowBroken = false;
+          allowInsecure = false;
+          allowUnsupportedSystem = false;
+        };
       };
 
       # Function to create a complete NixOS system configuration

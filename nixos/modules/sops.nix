@@ -8,12 +8,15 @@
   imports = [ inputs.sops-nix.nixosModules.sops ];
 
   sops = {
-    # Default secrets file location and format
-    defaultSopsFile = ../../secrets/secrets.yaml; # Path to encrypted secrets file
+    defaultSopsFile = ./../../secrets/secrets.yaml; # Path to encrypted secrets file (relative to this module)
     defaultSopsFormat = "yaml"; # Format of the secrets file
+    validateSopsFiles = true; # Enable SOPS file validation
 
     # Age encryption key configuration
-    age.keyFile = "~/.config/sops/age/keys.txt"; # Location of Age private key
+    age = {
+      keyFile = "/home/${config.mySystem.user}/.config/sops/age/keys.txt"; # Location of Age private key
+      generateKey = false; # Don't auto-generate keys (use just sops-setup)
+    };
   };
 
   # Example secrets configuration

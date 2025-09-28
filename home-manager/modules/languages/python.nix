@@ -16,11 +16,10 @@
       # Python execution
       py = "python3"; # Run Python 3
       py2 = "python2"; # Run Python 2 (if available)
-      pyrun = "python3"; # Run Python script
       pyi = "python3 -i"; # Interactive Python
       pym = "python3 -m"; # Run Python module
 
-      # Package management
+      # Package management (pip)
       pipi = "pip install"; # Install package
       pipu = "pip install --upgrade"; # Upgrade package
       pipr = "pip uninstall"; # Remove package
@@ -29,7 +28,7 @@
       pipreq = "pip install -r requirements.txt"; # Install from requirements
       pipfreeze = "pip freeze > requirements.txt"; # Freeze to requirements
 
-      # uv package management
+      # Package management (uv) - faster alternative to pip
       uvi = "uv pip install"; # Install package with uv
       uvu = "uv pip install --upgrade"; # Upgrade package with uv
       uvr = "uv pip uninstall"; # Remove package with uv
@@ -49,7 +48,7 @@
       venvd = "deactivate"; # Deactivate virtual environment
       venvi = "venv/bin/pip install"; # Install in virtual environment
 
-      # Development tools
+      # Code quality and development tools
       blackf = "black --line-length 88"; # Format with Black
       isortf = "isort --profile black"; # Sort imports with isort
       flake8l = "flake8 --max-line-length 88"; # Lint with flake8
@@ -58,7 +57,7 @@
       pytestrw = "pytest -v --tb=short"; # Run tests with short traceback
       coverage = "coverage run -m pytest && coverage report"; # Run tests with coverage
 
-      # Jupyter
+      # Jupyter notebooks
       jupyterl = "jupyter lab"; # Start Jupyter Lab
       jupytern = "jupyter notebook"; # Start Jupyter Notebook
     };
@@ -200,29 +199,43 @@
 
   # Python development environment configuration
   home = {
-    # Essential Python development packages
+    # Essential Python development packages - organized by category
     packages = with pkgs; [
+      # Core Python
       python3 # Python 3 interpreter
 
-      # Python package management (without base python3 to avoid conflicts)
+      # Package management
       python3Packages.pip # Python package installer
-      python3Packages.virtualenv # Python virtual environment manager
+      python3Packages.virtualenv # Virtual environment manager
+      poetry # Python dependency management
+      pipenv # Alternative virtual environment management
+      uv # Fast Python package installer and resolver
 
-      # Development tools
-      python3Packages.black # Python code formatter
-      python3Packages.isort # Python import sorter
-      python3Packages.flake8 # Python linter
-      python3Packages.mypy # Python type checker
-      python3Packages.pytest # Python testing framework
-      python3Packages.coverage # Python coverage tool
-      python3Packages.setuptools # Python packaging
-      python3Packages.wheel # Python wheel builder
+      # Code quality and development tools
+      python3Packages.black # Code formatter
+      python3Packages.isort # Import sorter
+      python3Packages.flake8 # Linter
+      python3Packages.mypy # Type checker
+      python3Packages.pytest # Testing framework
+      python3Packages.coverage # Coverage tool
+      python3Packages.setuptools # Packaging
+      python3Packages.wheel # Wheel builder
+      python3Packages.bandit # Security linter
+      python3Packages.safety # Security vulnerability checker
+      python3Packages.vulture # Dead code detection
 
       # LSP and IDE support
       python3Packages.python-lsp-server # Python LSP server
       python3Packages.pylsp-mypy # MyPy plugin for Python LSP
       python3Packages.pyls-isort # isort plugin for Python LSP
       python3Packages.pyls-flake8 # flake8 plugin for Python LSP
+
+      # Enhanced REPL and debugging
+      python3Packages.ipython # Enhanced Python shell
+      python3Packages.ptpython # Better Python REPL
+      python3Packages.pudb # Python debugger
+      python3Packages.pytest-cov # Coverage plugin for pytest
+      python3Packages.pytest-xdist # Parallel test execution
 
       # Data science and scientific computing
       python3Packages.numpy # Numerical computing
@@ -233,79 +246,70 @@
       python3Packages.jupyterlab # Jupyter Lab interface
       python3Packages.notebook # Jupyter Notebook
 
-      # Web development
+      # Web development frameworks
       python3Packages.django # Django web framework
       python3Packages.flask # Flask web framework
       python3Packages.fastapi # FastAPI web framework
       python3Packages.uvicorn # ASGI server
+
+      # HTTP and async libraries
       python3Packages.requests # HTTP library
-      python3Packages.urllib3 # HTTP library
+      python3Packages.urllib3 # HTTP library (dependency)
       python3Packages.aiohttp # Async HTTP client
 
-      # Database
+      # Database connectors
       python3Packages.sqlalchemy # SQL toolkit
       python3Packages.psycopg2 # PostgreSQL adapter
       python3Packages.pymongo # MongoDB driver
       python3Packages.redis # Redis client
 
-      # Development utilities
-      python3Packages.ipython # Enhanced Python shell
-      python3Packages.ptpython # Better Python REPL
-      python3Packages.pudb # Python debugger
-      python3Packages.pytest-cov # Coverage plugin for pytest
-      python3Packages.pytest-xdist # Parallel test execution
-
-      # Package management
-      poetry # Python dependency management
-      pipenv # Python virtual environment management
-      uv # Fast Python package installer and resolver
-
       # Documentation
       python3Packages.sphinx # Documentation generator
       python3Packages.mkdocs # Markdown documentation
 
-      # Security and quality
-      python3Packages.bandit # Security linter
-      python3Packages.safety # Security vulnerability checker
-      python3Packages.vulture # Dead code detection
-
       # Cloud and deployment
       python3Packages.boto3 # AWS SDK
-      python3Packages.azure-storage-blob # Azure storage
-      python3Packages.google-cloud-storage # Google Cloud storage
       python3Packages.docker # Docker SDK
       python3Packages.kubernetes # Kubernetes client
 
-      # Automation and scripting
+      # Automation and SSH tools
       python3Packages.fabric # SSH automation
       python3Packages.ansible # Configuration management
       python3Packages.paramiko # SSH client
     ];
 
-    # Environment variables for Python development
+    # Environment variables for Python development - organized by tool
     sessionVariables = {
-      # Python configuration
+      # Python core configuration
       PYTHONPATH = "${config.home.homeDirectory}/Projects/python"; # Python path for local packages
-      PYTHONSTARTUP = "${config.home.homeDirectory}/.pythonrc"; # Python startup script (correct filename)
+      PYTHONSTARTUP = "${config.home.homeDirectory}/.pythonrc"; # Python startup script
+      PYTHONUTF8 = "1"; # Enable UTF-8 mode by default
+      PYTHONLEGACYWINDOWSSTDIO = ""; # Disable legacy Windows stdio handling on Unix
 
-      # Virtual environment
+      # Virtual environment settings
       VIRTUAL_ENV_DISABLE_PROMPT = "1"; # Don't modify prompt in virtual environments
 
       # Jupyter configuration
       JUPYTER_CONFIG_DIR = "${config.home.homeDirectory}/.jupyter"; # Jupyter config directory
+      JUPYTER_PLATFORM_DIRS = "1"; # Use platform-specific directories
 
-      # Poetry configuration
+      # Package manager configurations
       POETRY_VIRTUALENVS_IN_PROJECT = "true"; # Create virtual environments in project directory
       POETRY_NO_INTERACTION = "1"; # Non-interactive mode
+      POETRY_PYPI_TOKEN_PYPI = ""; # PyPI token (set via secrets)
 
-      # Pip configuration
       PIP_DISABLE_PIP_VERSION_CHECK = "1"; # Disable pip version check
       PIP_NO_WARN_SCRIPT_LOCATION = "1"; # Don't warn about script location
+      PIP_INDEX_URL = ""; # Custom PyPI index (set via secrets if needed)
 
-      # uv configuration
       UV_CACHE_DIR = "${config.xdg.cacheHome}/uv"; # uv cache directory
       UV_PYTHON_INSTALL_DIR = "${config.xdg.dataHome}/uv/python"; # uv Python installations
       UV_COMPILE_BYTECODE = "1"; # Compile bytecode for faster startup
+      UV_LINK_MODE = "copy"; # How to link packages (copy for better isolation)
+
+      # Development and testing
+      PYTHONDEVMODE = ""; # Enable Python development mode (set to '1' for debugging)
+      PYTHONWARNINGS = "default"; # Show deprecation warnings
     };
 
     # Add Python binaries to system PATH
@@ -314,14 +318,11 @@
       "${config.home.homeDirectory}/.poetry/bin" # Poetry binaries
     ];
 
-    # Automatic workspace directory creation
+    # Automatic workspace directory creation and Python setup
     activation.createPythonWorkspace = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-            $DRY_RUN_CMD mkdir -p $HOME/Projects/python    # Create Python projects directory
-            $DRY_RUN_CMD mkdir -p $HOME/Projects/django    # Create Django projects directory
-            $DRY_RUN_CMD mkdir -p $HOME/Projects/flask     # Create Flask projects directory
-            $DRY_RUN_CMD mkdir -p $HOME/Projects/fastapi   # Create FastAPI projects directory
-            $DRY_RUN_CMD mkdir -p $HOME/Projects/data      # Create data science projects directory
-            $DRY_RUN_CMD mkdir -p $HOME/.jupyter           # Create Jupyter config directory
+            # Create Python project directories
+            $DRY_RUN_CMD mkdir -p $HOME/Projects/{python,django,flask,fastapi,data}
+            $DRY_RUN_CMD mkdir -p $HOME/.jupyter
 
             # Create Python startup script if it doesn't exist
             if [[ ! -f $HOME/.pythonrc ]]; then
@@ -336,7 +337,8 @@
 
       # History file
       history_file = os.path.expanduser("~/.python_history")
-      readline.read_history_file(history_file)
+      if os.path.exists(history_file):
+        readline.read_history_file(history_file)
       atexit.register(readline.write_history_file, history_file)
 
       # Set history length
