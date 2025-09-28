@@ -24,8 +24,16 @@
           buildInputs = with pkgs; [ bun ];
 
           shellHook = ''
+            # Initialize Bun project if no package.json exists
             if [ ! -f package.json ]; then
-              bun init
+              echo "📦 No package.json found. Initializing Bun project..."
+              bun init --yes
+            else
+              echo "🟢 Bun development environment ready!"
+              echo "   bun install    # Install dependencies"
+              echo "   bun run dev    # Start development server"
+              echo "   bun build      # Build project"
+              echo "   bun test       # Run tests"
             fi
           '';
         };

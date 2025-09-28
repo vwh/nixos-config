@@ -37,19 +37,44 @@
 
         # Used by `nix develop`
         devShells.default = pkgs.mkShell {
-          buildInputs = with pkgs; [
-            (with toolchain; [
-              cargo
-              rustc
-              rustLibSrc
-            ])
-            clippy
-            rustfmt
-            pkg-config
-          ];
+          buildInputs =
+            with pkgs;
+            [
+              (with toolchain; [
+                cargo
+                rustc
+                rustLibSrc
+              ])
+              clippy
+              rustfmt
+              pkg-config
+            ]
+            ++ pkgs.lib.optionals (builtins.pathExists ./Cargo.lock) [
+              # Include cargo-audit for security checks when Cargo.lock exists
+              cargo-audit
+            ];
 
           # Specify the rust-src path (many editors rely on this)
           RUST_SRC_PATH = "${toolchain.rustLibSrc}";
+
+          shellHook = ''
+            # Show helpful messages for common Rust project setup
+            if [ ! -f Cargo.toml ]; then
+              echo "⚠️  Warning: Cargo.toml not found. Initialize with: cargo init"
+            fi
+
+            if [ ! -f Cargo.lock ] && [ -f Cargo.toml ]; then
+              echo "💡 Tip: Run 'cargo build' to generate Cargo.lock"
+            fi
+
+            if [ -f Cargo.toml ]; then
+              echo "🦀 Rust development environment ready!"
+              echo "   cargo build    # Build project"
+              echo "   cargo check    # Check for errors"
+              echo "   cargo clippy   # Lint code"
+              echo "   cargo test     # Run tests"
+            fi
+          '';
         };
       }
     );

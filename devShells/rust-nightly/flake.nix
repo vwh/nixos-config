@@ -50,19 +50,45 @@
         # Used by `nix develop`
         devShells.default = pkgs.mkShell {
           # Use nightly cargo & rustc provided by fenix. Add for packages for the dev shell here
-          buildInputs = with pkgs; [
-            (with toolchain; [
-              cargo
-              rustc
-              rust-src
-              clippy
-              rustfmt
-            ])
-            pkg-config
-          ];
+          buildInputs =
+            with pkgs;
+            [
+              (with toolchain; [
+                cargo
+                rustc
+                rust-src
+                clippy
+                rustfmt
+              ])
+              pkg-config
+            ]
+            ++ pkgs.lib.optionals (builtins.pathExists ./Cargo.lock) [
+              # Include cargo-audit for security checks when Cargo.lock exists
+              cargo-audit
+            ];
 
           # Specify the rust-src path (many editors rely on this)
           RUST_SRC_PATH = "${toolchain.rust-src}/lib/rustlib/src/rust/library";
+
+          shellHook = ''
+            # Show helpful messages for Rust nightly project setup
+            if [ ! -f Cargo.toml ]; then
+              echo "⚠️  Warning: Cargo.toml not found. Initialize with: cargo init"
+            fi
+
+            if [ ! -f Cargo.lock ] && [ -f Cargo.toml ]; then
+              echo "💡 Tip: Run 'cargo build' to generate Cargo.lock"
+            fi
+
+            if [ -f Cargo.toml ]; then
+              echo "🦀 Rust nightly development environment ready!"
+              echo "   cargo build    # Build project with nightly"
+              echo "   cargo check    # Check for errors"
+              echo "   cargo clippy   # Lint code"
+              echo "   cargo test     # Run tests"
+              echo "   rustup override set nightly  # Ensure nightly toolchain"
+            fi
+          '';
         };
       }
     );

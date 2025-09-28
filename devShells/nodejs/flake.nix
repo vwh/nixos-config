@@ -20,7 +20,7 @@
       in
       {
         devShell = pkgs.mkShell {
-          name = "bun-app";
+          name = "nodejs-app";
           buildInputs = with pkgs; [ nodejs ];
 
           shellHook = ''

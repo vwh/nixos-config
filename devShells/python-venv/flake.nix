@@ -36,10 +36,11 @@
             # Those are dependencies that we would like to use from nixpkgs, which will
             # add them to PYTHONPATH and thus make them accessible from within the venv.
             pythonPackages.requests
-          ];
+          ]
+          ++ pkgs.lib.optionals (builtins.pathExists ./requirements.txt) [ pythonPackages.pip ];
 
           # Run this command, only after creating the virtual environment
-          postVenvCreation = ''
+          postVenvCreation = pkgs.lib.optionalString (builtins.pathExists ./requirements.txt) ''
             unset SOURCE_DATE_EPOCH
             pip install -r requirements.txt
           '';
@@ -49,6 +50,11 @@
           postShellHook = ''
             # allow pip to install wheels
             unset SOURCE_DATE_EPOCH
+
+            # Show helpful message if requirements.txt is missing
+            if [ ! -f requirements.txt ]; then
+              echo "⚠️  Warning: requirements.txt not found. Create it to install dependencies automatically."
+            fi
           '';
         };
       }
