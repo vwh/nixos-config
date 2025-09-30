@@ -64,7 +64,8 @@
 
       # AI and coding assistance tools
       cl = "claude"; # Anthropic Claude CLI
-      gemi = "gemini"; # Google Gemini AI
+      gm = "gemini"; # Google Gemini AI
+      oc = "opencode"; # OpenCode AI
 
       # Nix ecosystem tools and shortcuts
       ns = "nix-shell"; # Start Nix shell

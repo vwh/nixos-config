@@ -14,6 +14,7 @@ let
   globalNpmPackages = [
     "@google/gemini-cli"
     "@anthropic-ai/claude-code"
+    "opencode-ai"
   ];
 in
 {
