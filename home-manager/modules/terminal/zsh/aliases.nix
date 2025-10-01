@@ -66,6 +66,9 @@
       cl = "claude"; # Anthropic Claude CLI
       gm = "gemini"; # Google Gemini AI
       oc = "opencode"; # OpenCode AI
+      "ac" = "ai-commit"; # Generate conventional commit messages
+      "ak" = "ai-ask"; # Ask AI questions
+      "ah" = "ai-help"; # Get command suggestions
 
       # Nix ecosystem tools and shortcuts
       ns = "nix-shell"; # Start Nix shell
