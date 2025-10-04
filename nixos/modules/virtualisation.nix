@@ -12,7 +12,10 @@
 
   virtualisation = {
     # Docker container runtime
-    docker.enable = true;
+    docker = {
+      enable = true;
+      enableOnBoot = false; # Enable Docker socket but not daemon
+    };
 
     # VirtualBox virtualization platform
     virtualbox.host.enable = true;

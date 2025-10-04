@@ -1,11 +1,16 @@
-# GNOME display and desktop manager configuration.
-# This module enables the GNOME desktop environment with GDM display manager
-# and GNOME keyring for secure credential storage.
+# GNOME core services configuration for Hyprland.
+# This module enables essential GNOME services without the full desktop
+# environment to avoid conflicts with Hyprland window manager.
 
 {
   services = {
-    displayManager.gdm.enable = true; # Enable GNOME Display Manager (login screen)
-    desktopManager.gnome.enable = true; # Enable GNOME desktop environment
+    displayManager.gdm.enable = true; # Enable GDM for graphical login
+    desktopManager.gnome.enable = false; # Disable GNOME desktop - using Hyprland
     gnome.gnome-keyring.enable = true; # Enable GNOME keyring for password storage
+  };
+
+  # Enable GNOME keyring PAM module for authentication
+  security.pam.services.gnome-keyring = {
+    enable = true;
   };
 }
