@@ -86,7 +86,6 @@
       nfirn = "nfi -t '${nixTemplates}rust-nightly'"; # Rust nightly template
 
       # System administration shortcuts
-      docker = "sudo docker"; # Docker with sudo
       reboot = "sudo reboot"; # System reboot
       shutdown = "sudo shutdown now"; # System shutdown
 
