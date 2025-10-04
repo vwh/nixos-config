@@ -9,11 +9,14 @@
     drivers = [ pkgsStable.foo2zjs ]; # Driver for HP LaserJet P1102
   };
 
-  # Enable network discovery for printers (optional but recommended)
+  # Enable network discovery for printers
   services.avahi = {
     enable = true;
     nssmdns4 = true;
     openFirewall = true;
+
+    # Optimize avahi startup to prevent PID file conflicts
+    package = pkgsStable.avahi;
   };
 
   # Open firewall ports for CUPS
