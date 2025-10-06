@@ -36,12 +36,59 @@ let
       hyprctl dispatch focuswindow "address:$address"
     fi
   '';
+
+  # Robust screenshot script with timeout handling
+  screenshotScript = pkgsStable.writeScriptBin "smart-screenshot" ''
+    #!${pkgsStable.bash}/bin/bash
+    # Smart screenshot with freeze timeout handling
+
+    SCREENSHOT_DIR="$HOME/screens"
+    mkdir -p "$SCREENSHOT_DIR"
+
+    # Function to take screenshot with timeout
+    take_screenshot() {
+        local mode="$1"
+        local freeze="$2"
+        local timeout=10  # 10 second timeout for freeze
+
+        if [[ "$freeze" == "true" ]]; then
+            # Run hyprshot with timeout to prevent hanging
+            timeout "$timeout" hyprshot -m "$mode" --freeze --clipboard-only --silent || {
+                # Fallback if freeze times out
+                notify-send "Screenshot" "Freeze timed out, using normal mode" -t 3000
+                hyprshot -m "$mode" --clipboard-only --silent
+            }
+        else
+            hyprshot -m "$mode" --clipboard-only --silent
+        fi
+    }
+
+    case "$1" in
+        "region")
+            take_screenshot "region" "true"
+            ;;
+        "region-no-freeze")
+            take_screenshot "region" "false"
+            ;;
+        "window")
+            take_screenshot "window" "true"
+            ;;
+        "active")
+            take_screenshot "active" "false"
+            ;;
+        *)
+            echo "Usage: smart-screenshot {region|region-no-freeze|window|active}"
+            exit 1
+            ;;
+    esac
+  '';
 in
 {
   # Install custom scripts as system packages
   home.packages = [
     booksScript # Book selection script
     windowSwitcher # Window switcher script
+    screenshotScript # Smart screenshot script with timeout
   ];
 
   wayland.windowManager.hyprland.settings = {
@@ -123,7 +170,10 @@ in
       # "$mainMod, W, exec, ${booksScript}/bin/open_books"   # Book selector (commented out)
 
       # Screenshot functionality
-      ", Print, exec, hyprshot -m region --clipboard-only" # Screenshot to clipboard
+      ", Print, exec, ${screenshotScript}/bin/smart-screenshot region" # Screenshot region with freeze and timeout protection
+      "$mainMod SHIFT, Print, exec, ${screenshotScript}/bin/smart-screenshot region-no-freeze" # Screenshot region without freeze (fallback)
+      "$mainMod, Print, exec, ${screenshotScript}/bin/smart-screenshot window" # Screenshot window with freeze
+      "$mainMod CTRL, Print, exec, ${screenshotScript}/bin/smart-screenshot active" # Screenshot active window without freeze
 
       # Volume control
       "$mainMod, equal,  exec, wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"
