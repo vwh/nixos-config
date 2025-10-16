@@ -20,7 +20,8 @@ get_nvidia_temp() {
     fi
 
     # Get temperature for all GPUs
-    local temps=$(nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader,nounits 2>/dev/null | tr '\n' ' ')
+    local temps
+    temps=$(nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader,nounits 2>/dev/null | tr '\n' ' ')
 
     if [[ -z "$temps" ]] || [[ "$temps" == "[Not Supported]" ]]; then
         return 1
@@ -45,7 +46,8 @@ get_nvidia_temp() {
         return 1
     fi
 
-    local avg_temp=$((total_temp / gpu_count))
+    # Calculate average temp (currently unused but kept for potential future use)
+    # local avg_temp=$((total_temp / gpu_count))
 
     # Color code based on temperature
     if [[ $max_temp -ge $CRITICAL_TEMP ]]; then
@@ -64,7 +66,8 @@ get_amd_temp() {
         return 1
     fi
 
-    local temp=$(rocm-smi --showtemp 2>/dev/null | grep "GPU" | head -1 | awk '{print $2}' | tr -d '°C')
+    local temp
+    temp=$(rocm-smi --showtemp 2>/dev/null | grep "GPU" | head -1 | awk '{print $2}' | tr -d '°C')
 
     if [[ -z "$temp" ]] || ! [[ "$temp" =~ ^[0-9]+$ ]]; then
         return 1
@@ -87,7 +90,8 @@ get_intel_temp() {
         return 1
     fi
 
-    local temp=$(sensors 2>/dev/null | grep -i "gpu\|igpu" | head -1 | awk '{print $2}' | tr -d '+°C')
+    local temp
+    temp=$(sensors 2>/dev/null | grep -i "gpu\|igpu" | head -1 | awk '{print $2}' | tr -d '+°C')
 
     if [[ -z "$temp" ]] || ! [[ "$temp" =~ ^[0-9]+$ ]]; then
         return 1
