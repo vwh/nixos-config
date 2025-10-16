@@ -13,11 +13,14 @@ format:
     @nix run nixpkgs#time -- -f "⏱ Completed in %E" fd -e nix -X nixfmt --strict
     @echo "✔ Formatting passed!"
 
-# Lint all .nix files
+# Lint all .nix files and bash scripts
 lint:
     @echo -e "\n➤ Linting Nix files…"
     @nix run nixpkgs#time -- -f "⏱ Completed in %E" nix run nixpkgs#statix -- check --ignore '.git/**'
-    @echo "✔ Linting passed!"
+    @echo "✔ Nix linting passed!"
+    @echo -e "\n➤ Checking Bash scripts…"
+    @nix run nixpkgs#time -- -f "⏱ Completed in %E" find . -name "*.sh" -not -path "./.git/*" -exec nix run nixpkgs#shellcheck -- {} +
+    @echo "✔ ShellCheck passed!"
 
 # Check all missing imports
 modules:
