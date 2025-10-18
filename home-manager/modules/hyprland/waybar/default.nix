@@ -15,6 +15,10 @@
         position = "top";
         height = 27;
 
+        # Performance settings
+        gtk-layer-shell = true;
+        spacing = 2;
+
         modules-left = [
           "hyprland/workspaces"
           "hyprland/window"
@@ -44,8 +48,8 @@
 
         "cpu" = {
           format = "  {usage}%";
-          tooltip-format = "CPU Usage: {usage}% Load: {load}";
-          interval = 2;
+          tooltip-format = "CPU Usage: {usage}%";
+          interval = 5;
           states = {
             warning = 70;
             critical = 90;
@@ -55,7 +59,7 @@
         "custom/gpu-temp" = {
           format = " {}";
           exec = "~/System/scripts/waybar/gpu-temp.sh";
-          interval = 5;
+          interval = 10;
           tooltip = true;
           tooltip-format = "GPU Temperature: {}";
         };
@@ -71,8 +75,8 @@
 
         "custom/cpu-temp" = {
           format = " {}°C";
-          exec = "sensors | grep 'Package id 0:' | awk '{printf \"%.0f\\n\", $4}' | sed 's/+//;s/°C.*//' || sensors | grep 'Tctl:' | awk '{printf \"%.0f\\n\", $2}' | sed 's/+//;s/°C.*//' || echo 'N/A'";
-          interval = 5;
+          exec = "cat /sys/class/hwmon/hwmon*/temp*_input 2>/dev/null | head -n1 | awk '{printf \"%.0f\", $1/1000}' || echo 'N/A'";
+          interval = 10;
           tooltip = true;
           tooltip-format = "CPU Temperature: {}°C";
         };
@@ -80,7 +84,7 @@
         "memory" = {
           format = " {percentage}%";
           tooltip-format = "Memory: {used:0.1f}G/{total:0.1f}G ({percentage}%)\nAvailable: {avail:0.1f}G";
-          interval = 2;
+          interval = 5;
           states = {
             warning = 80;
             critical = 95;
@@ -91,7 +95,7 @@
           path = "/";
           format = " {percentage_used}%";
           tooltip-format = "Disk Usage: {used}/{total} ({percentage_used}%)";
-          interval = 30;
+          interval = 60;
           states = {
             warning = 80;
             critical = 95;
@@ -177,13 +181,13 @@
         "custom/prayerbar" = {
           format = "{}";
           tooltip = true;
-          interval = 600;
+          interval = 1000;
           exec = "prayerbar --city Amman --country JO --method 4 --ampm";
           "return-type" = "json";
         };
 
         "custom/network" = {
-          interval = 30;
+          interval = 60;
           exec = "~/System/scripts/waybar/network.sh";
           format = "  {}";
           on-click = "nm-connection-editor";
