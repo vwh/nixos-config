@@ -9,9 +9,9 @@
     settings = {
       # Visual appearance settings
       allow_images = true; # Show application icons
-      image_size = 24; # Reduced icon size for better performance
+      image_size = 24; # Small icons for speed
       width = 400; # Window width
-      height = 400; # Reduced window height for faster rendering
+      height = 300;
       location = "center"; # Window position on screen
       orientation = "vertical"; # Layout orientation
       halign = "fill"; # Horizontal alignment
@@ -19,12 +19,13 @@
       # User interaction behavior
       show = "drun"; # Desktop apps only (faster than drun,run)
       prompt = "Search"; # Input prompt text
-      filter_rate = 50; # Reduced filtering rate for better responsiveness
+      filter_rate = 16; # 60fps response - MUCH faster than 50ms
       allow_markup = false; # Disable markup for better performance
       no_actions = true; # Hide context actions
       show_all = false; # Don't show all results by default
       print_command = true; # Print selected command to stdout
       layer = "overlay"; # Window layer (overlay on desktop)
+      normal_window = true; # Use window animations (faster)
       insensitive = true; # Case-insensitive search
 
       # Performance optimizations
@@ -35,16 +36,20 @@
 
       # Available search modes
       modes = "drun"; # Desktop applications only for better performance
+      columns = 1; # Single column for performance
 
       # Advanced search and display options
       matching = "fuzzy"; # Faster fuzzy matching instead of contains
       hide_scroll = true; # Hide scroll bar
       dynamic_lines = false; # Fixed number of lines
-      lines = 15; # Limit number of visible lines for better performance
+      lines = 12;
 
       # Keyboard shortcuts
       key_expand = "Tab"; # Key to expand selection
       key_exit = "Escape"; # Key to exit launcher
+
+      # Gruvbox dark theme optimization
+      gtk_dark = true; # Force dark theme
     };
   };
 

@@ -176,6 +176,8 @@
         # DPMS settings to fix display wake issues
         mouse_move_enables_dpms = true; # Mouse movement wakes display
         key_press_enables_dpms = true; # Keyboard input wakes display
+        # Performance optimization: Variable Frame Rate
+        vfr = true; # Only render frames when something changes (30-50% power savings when idle)
       };
 
       # Window rules for specific application behavior

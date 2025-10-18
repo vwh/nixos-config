@@ -1,50 +1,46 @@
-/* WOFI — Gruvbox */
+/* WOFI — Minimal Gruvbox Dark - Perfectly Matches Waybar */
 
+/* Main window - sharp and clean like Waybar */
 window {
   margin: 0;
   padding: 0;
-  border: 2px solid #d65d0e;
-  border-radius: 0;
-  background: #282828;
+  border: 2px solid #d65d0e;           /* Accent orange - matches Waybar */
+  border-radius: 0;                    /* Sharp corners like Waybar */
+  background: #282828;                 /* Dark background */
   font-family: "JetBrains Mono", monospace;
-  font-weight: 600;
+  font-weight: 500;
   font-size: 13px;
-  color: #ebdbb2;
+  color: #ebdbb2;                      /* Normal foreground */
 }
 
-/* Search input */
+/* Search input - minimal and clean */
 #input {
   all: unset;
-  margin: 4px;
-  padding: 4px 8px;
-  border: 2px solid #3c3836;
+  margin: 8px;
+  padding: 8px 12px;
+  border: 1px solid #504945;           /* Subtle border */
   border-radius: 0;
-  background: #1d2021;
+  background: #1d2021;                 /* Darker background */
   color: #ebdbb2;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 500;
 }
 
 #input:focus {
-  border-color: #d65d0e;
+  border-color: #d65d0e;               /* Accent on focus */
   background: #282828;
-  color: #fbf1c7;
+  outline: none;
 }
 
 #input::placeholder {
-  color: #928374;
+  color: #928374;                      /* Gray placeholder */
   font-style: italic;
 }
 
-/* Containers */
-#outer-box {
-  margin: 0;
-  padding: 0;
-  border: none;
-  background: transparent;
-}
-
-#inner-box {
+/* Containers - zero overhead */
+#outer-box,
+#inner-box,
+#scroll {
   margin: 0;
   padding: 0;
   border: none;
@@ -52,111 +48,53 @@ window {
 }
 
 #scroll {
-  margin: 0 4px 4px 4px;
-  padding: 0;
-  border: none;
-  background: transparent;
+  margin: 0 8px 8px 8px;
 }
 
-/* Entries - Optimized */
+/* Entry items - instant response, no animations */
 #entry {
   all: unset;
-  padding: 3px 6px;
-  margin: 0;
-  min-height: 24px;
+  padding: 6px 12px;
+  margin: 1px 0;
+  min-height: 28px;
   border-radius: 0;
-  border: 1px solid transparent;
+  border-left: 3px solid transparent;  /* Left indicator bar */
   background: transparent;
   color: #ebdbb2;
-  display: flex;
-  align-items: center;
 }
 
+/* Subtle zebra striping */
 #entry:nth-child(even) {
-  background: rgba(60, 56, 54, 0.05);
+  background: rgba(60, 56, 54, 0.15);  /* Very subtle bg1 */
 }
 
+/* Hover - yellow accent like Waybar modules */
 #entry:hover {
-  background: rgba(40, 40, 40, 0.30);
-  border-color: rgba(60, 56, 54, 0.40);
+  background: #3c3836;                 /* bg1 */
+  border-left-color: #fabd2f;          /* Yellow indicator */
 }
 
+/* Selected - bold orange like Waybar active workspace */
 #entry:selected {
-  background: #d65d0e;
-  border-color: #fabd2f;
-  color: #1d2021;
+  background: #d65d0e;                 /* Accent orange */
+  border-left-color: #d65d0e;
+  color: #1d2021;                      /* Dark text for contrast */
   font-weight: 600;
 }
 
+/* Text styling */
 #text {
   margin: 0;
   padding: 0;
-  border: none;
   color: inherit;
-  font-size: 15px;
-  font-weight: 500;
+  font-size: 13px;
+  font-weight: inherit;
 }
 
-#entry image {
-  margin-right: 6px;
+/* Icon spacing */
+#img {
+  margin-right: 10px;
+  padding: 0;
 }
 
-/* Scrollbar */
-scrollbar {
-  background: rgba(60, 56, 54, 0.30);
-  border-radius: 0;
-  margin: 2px;
-  width: 6px;
-}
-
-scrollbar slider {
-  background: #665c54;
-  border-radius: 0;
-  min-height: 20px;
-}
-
-scrollbar slider:hover {
-  background: #7c6f64;
-}
-
-scrollbar slider:active {
-  background: #d65d0e;
-}
-
-/* Category color accents via data attributes (optional) */
-#entry[data-category="System"] {
-  border-left: 3px solid #cc241d;
-}
-#entry[data-category="Development"] {
-  border-left: 3px solid #458588;
-}
-#entry[data-category="Graphics"] {
-  border-left: 3px solid #b16286;
-}
-#entry[data-category="Internet"] {
-  border-left: 3px solid #689d6a;
-}
-#entry[data-category="Office"] {
-  border-left: 3px solid #d79921;
-}
-
-@media (prefers-contrast: high) {
-  window {
-    border-width: 4px;
-  }
-  #entry:selected {
-    background: #fabd2f;
-    color: #1d2021;
-    border: 2px solid #1d2021;
-  }
-  #input:focus {
-    outline: 3px solid #d65d0e;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  * {
-    transition-duration: 0.01s !important;
-    animation-duration: 0.01s !important;
-  }
-}
+/* CRITICAL: NO animations or transitions for instant responsiveness */
