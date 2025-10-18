@@ -2,19 +2,12 @@
 # This module configures Hyprland as the Wayland window manager with
 # Universal Wayland Session Manager (UWSM) and necessary security services.
 
-{ inputs, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   programs.hyprland = {
     enable = true; # Enable Hyprland window manager
     withUWSM = true; # Enable Universal Wayland Session Manager for better session handling
-
-    # Use the latest Hyprland from the flake input
-    package = inputs.hyprland.packages."${pkgs.system}".hyprland;
-
-    # Use the matching XDG desktop portal for Hyprland
-    portalPackage =
-      inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
   };
 
   # Enable security services required by Hyprland

@@ -34,9 +34,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Window manager
-    hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1"; # Latest Hyprland with submodules
-
     # Web browser
     zen-browser = {
       url = "github:0xc000022070/zen-browser-flake";
