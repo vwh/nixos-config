@@ -168,7 +168,6 @@ in
       eslint_d # Fast ESLint daemon
 
       # Build tools and bundlers
-      vite # Next generation frontend tooling
       esbuild # Extremely fast JavaScript bundler
       swc # Super-fast TypeScript/JavaScript compiler
 

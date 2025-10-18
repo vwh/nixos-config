@@ -28,8 +28,6 @@
     libvirtd.qemu = {
       package = pkgsStable.qemu_kvm; # QEMU with KVM acceleration
       swtpm.enable = true; # Software TPM for VMs
-      ovmf.enable = true; # UEFI firmware for VMs
-      ovmf.packages = [ pkgsStable.OVMFFull.fd ]; # OVMF firmware package
     };
   };
 
