@@ -173,6 +173,9 @@
       misc = {
         force_default_wallpaper = 0; # Don't force default wallpaper
         disable_hyprland_logo = true; # Disable Hyprland logo on startup
+        # DPMS settings to fix display wake issues
+        mouse_move_enables_dpms = true; # Mouse movement wakes display
+        key_press_enables_dpms = true; # Keyboard input wakes display
       };
 
       # Window rules for specific application behavior

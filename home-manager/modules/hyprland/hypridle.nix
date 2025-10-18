@@ -10,9 +10,9 @@
       # General idle management settings
       general = {
         before_sleep_cmd = "loginctl lock-session"; # Lock screen before sleep
-        after_sleep_cmd = "hyprctl dispatch dpms on"; # Turn on display after sleep
+        after_sleep_cmd = "sleep 2 && hyprctl dispatch dpms on"; # Turn on display after sleep with delay
         ignore_dbus_inhibit = false; # Respect D-Bus inhibit signals
-        lock_cmd = "hyprlock"; # Simple lock command
+        lock_cmd = "pidof hyprlock || hyprlock"; # Check if hyprlock is already running
       };
 
       # Idle timeout listeners with actions
@@ -34,7 +34,7 @@
         {
           timeout = 1400; # 23 minutes
           on-timeout = "hyprctl dispatch dpms off"; # Turn off display
-          on-resume = "hyprctl dispatch dpms on"; # Turn on display on activity
+          on-resume = "sleep 2 && hyprctl dispatch dpms on"; # Turn on display on activity with delay
         }
 
         # Suspend system after 37 minutes of inactivity

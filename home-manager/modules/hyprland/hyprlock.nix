@@ -9,9 +9,10 @@
     settings = {
       # General lock screen settings
       general = {
-        grace = 10; # Grace period before locking (seconds)
+        grace = 0; # Disable grace period to prevent phantom auth failures
         hide_cursor = true; # Hide cursor when locked
         no_fade_in = false; # Enable fade-in animation
+        ignore_empty_input = true; # Ignore empty input to prevent auth failures
       };
 
       # Time display label configuration

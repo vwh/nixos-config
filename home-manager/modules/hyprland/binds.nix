@@ -37,50 +37,66 @@ let
     fi
   '';
 
-  # Robust screenshot script with timeout handling
+  # Simple screenshot script using grim+slurp only
   screenshotScript = pkgsStable.writeScriptBin "smart-screenshot" ''
     #!${pkgsStable.bash}/bin/bash
-    # Smart screenshot with freeze timeout handling
+    # Screenshot using grim+slurp - the standard Wayland tools
 
     SCREENSHOT_DIR="$HOME/screens"
     mkdir -p "$SCREENSHOT_DIR"
 
-    # Function to take screenshot with timeout
+    # Function to take screenshot
     take_screenshot() {
         local mode="$1"
-        local freeze="$2"
-        local timeout=10  # 10 second timeout for freeze
 
-        if [[ "$freeze" == "true" ]]; then
-            # Run hyprshot with timeout to prevent hanging
-            timeout "$timeout" hyprshot -m "$mode" --freeze --clipboard-only --silent || {
-                # Fallback if freeze times out
-                notify-send "Screenshot" "Freeze timed out, using normal mode" -t 3000
-                hyprshot -m "$mode" --clipboard-only --silent
-            }
-        else
-            hyprshot -m "$mode" --clipboard-only --silent
-        fi
+        case "$mode" in
+            "region")
+                # Region selection with slurp
+                region=$(slurp 2>/dev/null)
+                if [[ -n "$region" ]]; then
+                    if grim -g "$region" - | wl-copy; then
+                        notify-send "Screenshot" "Region saved to clipboard" -t 2000
+                    else
+                        notify-send "Screenshot" "Failed to capture region" -t 2000
+                    fi
+                else
+                    notify-send "Screenshot" "Region selection cancelled" -t 2000
+                fi
+                ;;
+            "window")
+                # Active window
+                window_geometry=$(hyprctl activewindow -j 2>/dev/null | jq -r '"\(.at[0]),\(.at[1]) \(.size[0])x\(.size[1])"' 2>/dev/null)
+                if [[ -n "$window_geometry" ]] && [[ "$window_geometry" != "null" ]]; then
+                    if grim -g "$window_geometry" - | wl-copy; then
+                        notify-send "Screenshot" "Window saved to clipboard" -t 2000
+                    else
+                        notify-send "Screenshot" "Failed to capture window" -t 2000
+                    fi
+                else
+                    notify-send "Screenshot" "Failed to get window geometry" -t 2000
+                fi
+                ;;
+            "active")
+                # Active monitor
+                monitor=$(hyprctl monitors -j 2>/dev/null | jq -r '.[] | select(.focused) | .name' 2>/dev/null)
+                if [[ -n "$monitor" ]] && [[ "$monitor" != "null" ]]; then
+                    if grim -o "$monitor" - | wl-copy; then
+                        notify-send "Screenshot" "Active screen saved to clipboard" -t 2000
+                    else
+                        notify-send "Screenshot" "Failed to capture screen" -t 2000
+                    fi
+                else
+                    notify-send "Screenshot" "Failed to get active monitor" -t 2000
+                fi
+                ;;
+            *)
+                echo "Usage: smart-screenshot {region|window|active}"
+                exit 1
+                ;;
+        esac
     }
 
-    case "$1" in
-        "region")
-            take_screenshot "region" "true"
-            ;;
-        "region-no-freeze")
-            take_screenshot "region" "false"
-            ;;
-        "window")
-            take_screenshot "window" "true"
-            ;;
-        "active")
-            take_screenshot "active" "false"
-            ;;
-        *)
-            echo "Usage: smart-screenshot {region|region-no-freeze|window|active}"
-            exit 1
-            ;;
-    esac
+    take_screenshot "$1"
   '';
 in
 {
@@ -170,10 +186,9 @@ in
       # "$mainMod, W, exec, ${booksScript}/bin/open_books"   # Book selector (commented out)
 
       # Screenshot functionality
-      ", Print, exec, ${screenshotScript}/bin/smart-screenshot region" # Screenshot region with freeze and timeout protection
-      "$mainMod SHIFT, Print, exec, ${screenshotScript}/bin/smart-screenshot region-no-freeze" # Screenshot region without freeze (fallback)
-      "$mainMod, Print, exec, ${screenshotScript}/bin/smart-screenshot window" # Screenshot window with freeze
-      "$mainMod CTRL, Print, exec, ${screenshotScript}/bin/smart-screenshot active" # Screenshot active window without freeze
+      ", Print, exec, ${screenshotScript}/bin/smart-screenshot region" # Screenshot region selection
+      "$mainMod SHIFT, Print, exec, ${screenshotScript}/bin/smart-screenshot window" # Screenshot active window
+      "$mainMod CTRL, Print, exec, ${screenshotScript}/bin/smart-screenshot active" # Screenshot active screen
 
       # Volume control
       "$mainMod, equal,  exec, wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"

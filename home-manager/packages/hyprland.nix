@@ -7,9 +7,12 @@
 (with pkgsStable; [
   # Hyprland-specific utilities and tools
   bemoji # Emoji picker for Wayland
-  hyprshot # Screenshot utility for Hyprland
   brightnessctl # Screen brightness control
   hyprpicker # Color picker for Hyprland
+
+  # Screenshot utilities
+  grim # Screenshot utility for Wayland
+  slurp # Region selection utility for Wayland
 
   # Clipboard management for Wayland
   cliphist # Clipboard history manager
