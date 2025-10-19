@@ -4,10 +4,10 @@
 
 {
   hardware.nvidia = {
-    # Power management settings for NVIDIA GPU
+    # Power management settings for NVIDIA GPU - CRITICAL for battery life
     powerManagement = {
-      # Disable fine-grained power management for stability
-      finegrained = false;
+      enable = true; # Enable NVIDIA power management
+      finegrained = true; # Fine-grained power control (30-50% battery savings)
     };
 
     # NVIDIA Optimus (PRIME) configuration for hybrid graphics

@@ -19,5 +19,16 @@
     # Enable ThinkPad throttling prevention daemon
     # Helps prevent thermal throttling on ThinkPad laptops
     throttled.enable = lib.mkDefault true;
+
+    # Enable auto-cpufreq for better CPU frequency control
+    # Works well with TLP on ThinkPads for optimal battery life
+    auto-cpufreq.enable = lib.mkDefault true;
   };
+
+  # ThinkPad-specific kernel modules for battery control
+  boot.kernelModules = [
+    "acpi_call"
+    "tp_smapi"
+    "thinkpad_acpi"
+  ];
 }
