@@ -28,7 +28,6 @@ with pkgsStable;
   procs # Modern process viewer (ps replacement)
 
   # Development and version control tools
-  direnv # Directory-specific environment variables
   lazydocker # Terminal UI for Docker management
   gh # GitHub CLI tool
   hcloud # Hetzner Cloud CLI

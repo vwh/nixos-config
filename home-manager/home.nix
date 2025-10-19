@@ -24,17 +24,11 @@
   # User packages - core development tools and utilities
   home.packages =
     let
-      # Import additional packages from custom package definitions
-      extraPkgs = import ./packages { inherit pkgs pkgsStable; };
+      # Import packages from custom package definitions
+      Pkgs = import ./packages { inherit pkgs pkgsStable; };
     in
-    # Core development packages
-    (with pkgsStable; [
-      nixfmt-rfc-style # Nix code formatter
-      nixd # Nix language server
-      nil # Another Nix language server
-      statix # Nix linter
-    ])
-    ++ extraPkgs; # Additional packages from custom definitions
+    # All packages from custom definitions
+    Pkgs;
 
   # Environment variables for session-wide configuration
   home.sessionVariables = {

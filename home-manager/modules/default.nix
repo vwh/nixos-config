@@ -13,5 +13,6 @@
     ./qt.nix # Qt theming and configuration
     ./stylix.nix # System theming and styling
     ./mise.nix # Mise runtime manager configuration
+    ./shell.nix # Shell integration and development tools
   ];
 }

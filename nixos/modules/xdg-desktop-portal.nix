@@ -1,5 +1,6 @@
 # XDG Desktop Portal Configuration
 # This module provides proper configuration for xdg-desktop-portal services
+# optimized for Hyprland Wayland environment
 
 { pkgs, ... }:
 
@@ -8,34 +9,34 @@
   environment.systemPackages = with pkgs; [
     xdg-desktop-portal
     xdg-desktop-portal-gtk
-    xdg-desktop-portal-wlr
+    xdg-desktop-portal-hyprland # Hyprland-specific portal
     xdg-utils
   ];
 
-  # Set default portal implementations
+  # Set default portal implementations for Wayland/Hyprland
   environment.sessionVariables = {
-    XDG_CURRENT_DESKTOP = "GNOME";
-    XDG_SESSION_DESKTOP = "GNOME";
+    XDG_CURRENT_DESKTOP = "Hyprland";
+    XDG_SESSION_DESKTOP = "Hyprland";
     XDG_SESSION_TYPE = "wayland";
     GTK_USE_PORTAL = "1";
   };
 
-  # Configure portal implementations
+  # Configure portal implementations for Hyprland
   xdg.portal = {
     enable = true;
     extraPortals = with pkgs; [
       xdg-desktop-portal-gtk
-      xdg-desktop-portal-wlr
+      xdg-desktop-portal-hyprland # Use Hyprland portal instead of wlr
     ];
     config = {
       common = {
         default = [
+          "hyprland"
           "gtk"
-          "wlr"
         ];
-        "org.freedesktop.impl.portal.Screenshot" = "wlr";
-        "org.freedesktop.impl.portal.ScreenCast" = "wlr";
-        "org.freedesktop.impl.portal.FileChooser" = "gtk";
+        "org.freedesktop.impl.portal.FileChooser" = [ "gtk" ];
+        "org.freedesktop.impl.portal.Screenshot" = [ "hyprland" ];
+        "org.freedesktop.impl.portal.ScreenCast" = [ "hyprland" ];
       };
     };
   };
