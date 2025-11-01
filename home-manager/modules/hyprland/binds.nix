@@ -160,6 +160,7 @@ in
       # Application shortcuts
       "$mainMod, Return, exec, $terminal" # Launch terminal
       "$mainMod, T, exec, $terminal --class=scratchpad" # Launch terminal as scratchpad
+      "$mainMod, SPACE, exec, hexecute" # Launch Hexecute gesture launcher
 
       # Window management
       "$mainMod, Q, killactive," # Close active window

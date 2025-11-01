@@ -39,6 +39,12 @@
       url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # Gesture-based launcher
+    hexecute = {
+      url = "github:ThatOtherAndrew/Hexecute";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   # Flake outputs - what this flake provides to the outside world

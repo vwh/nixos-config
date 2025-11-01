@@ -138,6 +138,26 @@
         "type": "github"
       }
     },
+    "hexecute": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1761947942,
+        "narHash": "sha256-t93tj2yXv6oqahuB7b7occZPek6yI5gfasYMgljjYaY=",
+        "owner": "ThatOtherAndrew",
+        "repo": "Hexecute",
+        "rev": "e0f6ada7c5c1e9e65b482ed42e3798b36640be74",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ThatOtherAndrew",
+        "repo": "Hexecute",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -238,6 +258,7 @@
     },
     "root": {
       "inputs": {
+        "hexecute": "hexecute",
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs",
         "nixpkgs-stable": "nixpkgs-stable",
