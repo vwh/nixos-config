@@ -9,9 +9,6 @@
     enable = true;
   };
 
-  # Open firewall port for Ollama API (port 11434)
-  networking.firewall.allowedTCPPorts = [ 11434 ];
-
   # Add Ollama to system packages for CLI tools
   environment.systemPackages = with pkgs; [
     ollama # Ollama CLI and service
