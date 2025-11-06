@@ -113,7 +113,7 @@ stdenv.mkDerivation {
     downloadPage = "https://www.warp.dev/download";
     changelog = "https://docs.warp.dev/help/changelog";
     license = licenses.unfree;
-    platforms = [ "x86_64-linux" ];
+    platforms = [ stdenv.hostPlatform.system ];
     sourceProvenance = with sourceTypes; [ binaryNativeCode ];
     maintainers = [ ];
     mainProgram = "warp-terminal";

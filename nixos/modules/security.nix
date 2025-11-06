@@ -94,19 +94,19 @@
       allowInterfaces = [ "lo" ]; # Only allow on loopback interface
     };
 
-    # System monitoring
-    prometheus.exporters = {
-      node = {
-        enable = true;
-        enabledCollectors = [
-          "systemd"
-          "processes"
-          "network"
-        ];
-        port = 9100;
-        listenAddress = "127.0.0.1";
-      };
-    };
+    # System monitoring - prometheus removed due to service failures
+    # prometheus.exporters = {
+    #   node = {
+    #     enable = true;
+    #     enabledCollectors = [
+    #       "systemd"
+    #       "processes"
+    #       "network"
+    #     ];
+    #     port = 9100;
+    #     listenAddress = "127.0.0.1";
+    #   };
+    # };
   };
 
   # Systemd service hardening for better security

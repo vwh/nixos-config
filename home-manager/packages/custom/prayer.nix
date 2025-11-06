@@ -26,6 +26,7 @@
       description = "A simple prayer time indicator for Waybar"; # Package description
       homepage = "https://github.com/Onizuka893/prayerbar"; # Project homepage
       license = licenses.mit; # Open source license
+      platforms = [ pkgsStable.stdenv.hostPlatform.system ];
     };
   })
 ]

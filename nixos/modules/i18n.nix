@@ -33,8 +33,8 @@
         # Additional input method addons and language support
         addons = with pkgs; [
           fcitx5-gtk # GTK integration for Fcitx5
-          fcitx5-configtool # Configuration tool for Fcitx5
-          fcitx5-chinese-addons # Chinese input methods
+          qt6Packages.fcitx5-configtool # Configuration tool for Fcitx5
+          qt6Packages.fcitx5-chinese-addons # Chinese input methods
           fcitx5-anthy # Japanese input method
         ];
       };
@@ -61,9 +61,9 @@
 
   # Install additional input method packages
   environment.systemPackages = with pkgs; [
-    fcitx5-with-addons # Complete Fcitx5 with all addons
+    qt6Packages.fcitx5-with-addons # Complete Fcitx5 with all addons
     fcitx5-gtk # GTK integration
-    fcitx5-configtool # Configuration GUI
+    qt6Packages.fcitx5-configtool # Configuration GUI
     libpinyin # Pinyin input method library
   ];
 }

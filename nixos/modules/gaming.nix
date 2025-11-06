@@ -41,7 +41,7 @@
     # Gaming-related system packages
     environment.systemPackages = with pkgs; [
       mangohud # Vulkan overlay for performance monitoring
-      protonup # Tool for managing Proton compatibility layers
+      protonup-ng # Tool for managing Proton compatibility layers
     ];
   };
 }
