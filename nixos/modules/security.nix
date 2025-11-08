@@ -15,9 +15,9 @@
   boot.kernel.sysctl = {
     # Prevent SYN flood attacks
     "net.ipv4.tcp_syncookies" = 1;
-    # Prevent IP spoofing
-    "net.ipv4.conf.all.rp_filter" = 1;
-    "net.ipv4.conf.default.rp_filter" = 1;
+    # Less strict reverse path filtering for desktop networks
+    "net.ipv4.conf.all.rp_filter" = 2; # Loose mode (better for home networks)
+    "net.ipv4.conf.default.rp_filter" = 2;
     # Ignore ICMP broadcasts to avoid participation in Smurf attacks
     "net.ipv4.icmp_echo_ignore_broadcasts" = 1;
     # Ignore bogus ICMP errors
@@ -80,7 +80,7 @@
 
   # Services configuration
   services = {
-    # Avahi network discovery (local network only)
+    # Avahi network discovery (local network discovery - fixed)
     avahi = {
       enable = true;
       nssmdns4 = true;
@@ -90,8 +90,8 @@
         workstation = true;
         userServices = true;
       };
-      # Restrict to local network (ipv4/ipv6 options are booleans, not CIDR)
-      allowInterfaces = [ "lo" ]; # Only allow on loopback interface
+      # Allow on all interfaces for proper network discovery
+      # allowInterfaces = [ "lo" ]; # REMOVED: This was causing network instability
     };
 
     # System monitoring - prometheus removed due to service failures
@@ -111,12 +111,12 @@
 
   # Systemd service hardening for better security
   systemd = {
-    # Global systemd hardening
+    # Global systemd hardening (network-friendly timeouts)
     settings = {
       Manager = {
-        DefaultTimeoutStopSec = "10s";
-        DefaultTimeoutStartSec = "10s";
-        DefaultDeviceTimeoutSec = "10s";
+        DefaultTimeoutStopSec = "30s"; # Increased from 10s to allow proper service shutdown
+        DefaultTimeoutStartSec = "30s"; # Increased from 10s to allow network services to start properly
+        DefaultDeviceTimeoutSec = "30s"; # Increased from 10s for network devices
       };
     };
 
