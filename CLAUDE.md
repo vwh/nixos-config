@@ -21,7 +21,7 @@ For immediate setup on a new machine:
 # Clone and apply configuration
 git clone git@github.com:vwh/nixos-config.git ~/System
 cd ~/System
-just all  # Runs full pipeline: modules check, lint, format, nixos rebuild, home-manager switch
+just all  # Runs full pipeline: modules check, lint, format, nh os switch, home-manager switch
 ```
 
 The `just` command runner provides all essential development tasks - run `just` to see all available commands.
@@ -34,11 +34,11 @@ The `just` command runner provides all essential development tasks - run `just` 
 just lint           # Lint all .nix files with statix + bash shellcheck
 just format         # Format all .nix files with nixfmt
 just modules        # Check for missing module imports (critical before commits)
-just home           # Apply Home Manager configuration (safe, user-level only)
-just nixos          # Rebuild and switch NixOS system (full system rebuild)
-just all            # Run full pipeline: modules check, lint, format, nixos, home
+just home           # Apply Home Manager configuration using nh (safe, user-level only)
+just nixos          # Rebuild and switch NixOS system using nh (full system rebuild)
+just all            # Run full pipeline: modules check, lint, format, nh os switch, home-manager switch
 just update         # Update all flake inputs
-just clean          # Clean up old generations and optimize store
+just clean          # Clean up old generations and optimize store using nh
 ```
 
 ### Testing Changes
@@ -95,6 +95,8 @@ nixos/modules/              # System-wide modules
 ├── networking.nix         # Network configuration
 ├── ollama.nix             # Local AI models (port 11434)
 ├── qdrant.nix             # Vector search (port 6333)
+├── security.nix          # System security hardening
+├── nh.nix                # Nix Helper configuration
 └── virtualisation.nix     # Docker/VirtualBox
 ```
 
@@ -159,6 +161,15 @@ builtins.concatLists (map (f: import f { inherit pkgs pkgsStable; }) chunks)
 |---------|------|---------|
 | **Glance Dashboard** | 8080 | System monitoring dashboard |
 | **CUPS Print Server** | 631 | Printer management |
+
+### System Security Module
+- **Security Hardening**: Comprehensive security module with kernel hardening, automatic updates, and audit tools
+- Configuration: `nixos/modules/security.nix`
+
+### Nix Helper (nh) Integration
+- **Nix Helper**: Modern Nix management tool with improved build and switch operations
+- Commands: `nh os switch`, `nh home switch`, `nh clean all`
+- Configuration: `nixos/modules/nh.nix`
 
 ### Service Configuration Pattern
 
@@ -267,6 +278,11 @@ The repository includes sophisticated AI-powered utilities in `scripts/ai/`:
 
 These tools integrate with the z.ai OpenAI-compatible API service and provide context-aware assistance for NixOS development, conventional commits, and command-line operations.
 
+### Gesture-Based Launcher
+- **Hexecute**: Gesture-based application launcher with mouse gesture recognition
+- Integration: Hyprland keybind (`$mainMod, SPACE, exec, hexecute`)
+- Package: Included in host-specific packages
+
 ### Advanced Window Manager Integration
 - **Hyprland with UWSM**: Universal Wayland Session Manager integration
 - **Custom Keybinds**: Extensive Hyprland configuration
@@ -369,6 +385,8 @@ home-manager switch --rollback  # Home configuration rollback
 - Follow existing module patterns and naming conventions
 - **Critical workflow**: `just modules && just lint && just format` before any commit
 - The `just` command runner provides all essential development tasks
-- Use `nh` (Nix Helper) for advanced operations like searching and rollback
+- **Use `nh` (Nix Helper) for modern Nix operations** - replaces direct `nixos-rebuild` commands
 - Module import validation (`just modules`) prevents broken configurations
 - AI services are properly integrated and secured with firewall rules
+- **Hexecute gesture launcher** available via `$mainMod+SPACE` in Hyprland
+- **Security hardening** automatically applied via security module
