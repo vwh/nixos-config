@@ -4,7 +4,7 @@
 [![Hyprland](https://img.shields.io/badge/Hyprland-58A6FF?style=for-the-badge&logo=hyprland&logoColor=white)](https://hyprland.org)
 [![Flakes](https://img.shields.io/badge/Flakes-Enabled-5277C3?style=for-the-badge)](https://nixos.wiki/wiki/Flakes)
 
-This repository contains my personal NixOS system configurations, managed with Nix Flakes. It features a complete desktop environment with Hyprland compositor, beautiful Gruvbox theming, and extensive development tooling.
+This repository contains my personal NixOS system configurations, managed with Nix Flakes. It features a complete desktop environment with Hyprland compositor, beautiful Gruvbox theming, extensive development tooling.
 
 <img width="1034" height="1280" alt="Desktop Screenshot" src="https://github.com/user-attachments/assets/e819499b-5dde-4ca7-a4dc-75b3e790e5d3" />
 
@@ -14,7 +14,7 @@ This repository contains my personal NixOS system configurations, managed with N
 
 - **OS**: NixOS 25.05 (Unstable)
 - **Kernel**: Linux 6.12
-- **Window Manager**: Hyprland
+- **Window Manager**: Hyprland with UWSM integration
 - **Shell**: Zsh with Oh My Zsh
 - **Terminal**: Alacritty
 - **Editor**: VSCode + Neovim
@@ -31,7 +31,7 @@ This repository contains my personal NixOS system configurations, managed with N
 git clone git@github.com:vwh/nixos-config.git ~/System
 cd ~/System
 
-# Apply the configuration
+# Apply the configuration (runs full pipeline: modules check, lint, format, nh os switch, home-manager switch)
 just all  # or follow the step-by-step process below
 ```
 
@@ -59,11 +59,15 @@ just all  # or follow the step-by-step process below
 
 5. **Deploy the system:**
    ```bash
-   # For the new host
-   sudo nixos-rebuild switch --flake ~/System#<new-hostname>
+   # For the new host (using modern nh)
+   nh os switch --flake ~/System#<new-hostname>
 
-   # For home-manager
-   home-manager switch --flake ~/System#yazan
+   # For home-manager (using nh)
+   nh home switch --flake ~/System#yazan
+
+   # Or use the just commands:
+   just nixos  # System rebuild
+   just home   # Home Manager only
    ```
 
 ---
@@ -157,17 +161,18 @@ This configuration uses `sops-nix` for managing encrypted secrets with age keys.
 This repository uses [`just`](https://github.com/casey/just) as a command runner to simplify common tasks.
 
 ### Essential Commands
+
 | Command | Description |
 |---------|-------------|
 | `just` | List all available commands |
-| `just all` | Run the full pipeline: check, lint, format, and deploy |
-| `just nixos` | Rebuild and switch NixOS configuration |
-| `just home` | Apply Home-Manager configuration |
+| `just all` | **Run full pipeline**: modules check, lint, format, nh os switch, home-manager switch |
+| `just nixos` | Rebuild and switch NixOS configuration using **nh** (modern Nix Helper) |
+| `just home` | Apply Home-Manager configuration using **nh** (safe, user-level only) |
 | `just format` | Format all `.nix` files with `nixfmt` |
-| `just lint` | Lint all `.nix` files with `statix` |
-| `just modules` | Check for missing module imports |
+| `just lint` | Lint all `.nix` files with `statix` + bash shellcheck |
+| `just modules` | Check for missing module imports (**critical before commits**) |
 | `just update` | Update all flake inputs |
-| `just clean` | Clean up build artifacts and caches |
+| `just clean` | Clean up old generations and optimize store using **nh** |
 
 ---
 
@@ -297,11 +302,14 @@ This repository uses [`just`](https://github.com/casey/just) as a command runner
 │       ├── monitoring.nix         ← System monitoring
 │       ├── nautilus.nix           ← File manager configuration
 │       ├── networking.nix         ← Network configuration
+│       ├── nh.nix                 ← Nix Helper (nh) configuration
 │       ├── nix-ld.nix             ← Dynamic linker for non-Nix binaries
 │       ├── nix.nix                ← Nix package manager config
 │       ├── ollama.nix             ← Local AI models service
 │       ├── printing.nix           ← Print services
 │       ├── qdrant.nix             ← Vector search engine
+│       ├── scripts.nix            ← Custom utility scripts
+│       ├── security.nix           ← **System security hardening**
 │       ├── sops.nix               ← Secret management
 │       ├── stability.nix          ← System stability
 │       ├── timezone.nix           ← Time zone configuration
@@ -309,10 +317,16 @@ This repository uses [`just`](https://github.com/casey/just) as a command runner
 │       ├── upower.nix             ← Power management
 │       ├── users.nix              ← User account management
 │       ├── virtualisation.nix     ← Docker/VirtualBox
+│       ├── xdg-desktop-portal.nix ← XDG desktop portal configuration
 │       └── xserver.nix            ← X11 server configuration
 ├── scripts/                       ← Utility scripts
+│   ├── ai/                       ← **AI-powered development tools**
+│   │   ├── ask.sh                ← General-purpose AI assistant
+│   │   ├── commit.sh             ← Intelligent commit generation
+│   │   └── help.sh               ← Command-line assistant
 │   ├── build/
 │   │   └── modules-check.sh
+│   ├── generate-file-context.sh  ← **AI file context generator**
 │   └── waybar/
 │       ├── gpu-temp.sh
 │       └── network.sh
@@ -338,6 +352,7 @@ This repository uses [`just`](https://github.com/casey/just) as a command runner
 - **`secrets/`** - Encrypted configuration files using sops-nix
 - **`themes/`** - Custom application themes matching the Gruvbox aesthetic
 - **`scripts/`** - Utility scripts for automation and setup
+- **`scripts/ai/`** - AI-powered development tools and assistants
 
 ---
 
