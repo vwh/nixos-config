@@ -19,8 +19,11 @@
     sushi # Quick file previews on hover
   ];
 
+  # Enable GVFS for Trash, SFTP, and other virtual file systems
+  services.gvfs.enable = true;
+
   # Enable udisks2 for automatic device mounting
-  systemd.services.udisks2.enable = true;
+  services.udisks2.enable = true;
 
   # PolicyKit rule for passwordless mounting by wheel group members
   security.polkit.extraConfig = ''
