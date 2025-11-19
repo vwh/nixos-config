@@ -42,9 +42,13 @@
     ];
   };
 
+  # NVIDIA Container Toolkit for GPU support in Docker
+  hardware.nvidia-container-toolkit.enable = true;
+
   # Install virtualization management tools
   environment.systemPackages = with pkgsStable; [
     virtualbox # VirtualBox command-line tools and GUI
     virt-manager # GUI for managing libvirt/QEMU/KVM virtual machines
+    nvidia-container-toolkit # NVIDIA Container Toolkit CLI tools
   ];
 }
