@@ -24,13 +24,6 @@
         "render" # Access to GPU rendering (NVIDIA, AMD, Intel)
         "audio" # Access to audio devices
         "i2c" # Access to I2C devices (some hardware sensors)
-        "disk" # Access to disk devices
-        "optical" # Access to optical drives
-        "scanner" # Access to scanners
-        "lp" # Access to printers
-        "dialout" # Access to serial ports (Arduino, etc.)
-        "uucp" # Access to serial devices
-        "plugdev" # Access to pluggable devices (USB, etc.)
       ];
     };
   };

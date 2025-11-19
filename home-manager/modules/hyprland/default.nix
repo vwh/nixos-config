@@ -23,7 +23,7 @@
 
     Service = {
       Type = "oneshot";
-      ExecStart = "${pkgs.bash}/bin/bash -c 'sleep 3 && hyprctl dispatch dpms on'";
+      ExecStart = "${pkgs.bash}/bin/bash -c '${pkgs.hyprland}/bin/hyprctl dispatch dpms on'";
     };
 
     Install = {

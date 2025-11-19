@@ -71,7 +71,7 @@ get_commit_context() {
     local num_commits=${1:-5}
     echo "Recent commit history (last $num_commits):"
     local git_output
-    git_output="$(GIT_PAGER=cat git log --oneline -n "$num_commits" 2>/dev/null || echo "No previous commits")"
+    git_output="$(git --no-pager log --oneline -n "$num_commits" 2>/dev/null || echo "No previous commits")"
     echo "$git_output"
 }
 
@@ -205,11 +205,11 @@ analyze_changes() {
 
     # Categorize changes
     local new_files
-    new_files="$(GIT_PAGER=cat git diff --cached --name-status | grep '^A' | cut -f2- | tr '\n' ' ' || true)"
+    new_files="$(git --no-pager diff --cached --name-status | grep '^A' | cut -f2- | tr '\n' ' ' || true)"
     local modified_files
-    modified_files="$(GIT_PAGER=cat git diff --cached --name-status | grep '^M' | cut -f2- | tr '\n' ' ' || true)"
+    modified_files="$(git --no-pager diff --cached --name-status | grep '^M' | cut -f2- | tr '\n' ' ' || true)"
     local deleted_files
-    deleted_files="$(GIT_PAGER=cat git diff --cached --name-status | grep '^D' | cut -f2- | tr '\n' ' ' || true)"
+    deleted_files="$(git --no-pager diff --cached --name-status | grep '^D' | cut -f2- | tr '\n' ' ' || true)"
 
     [[ -n "$new_files" ]] && echo "New files: $new_files"
     [[ -n "$modified_files" ]] && echo "Modified files: $modified_files"
@@ -217,21 +217,21 @@ analyze_changes() {
 
     # Intelligent diff handling - use stat instead of full diff to avoid bat
     local diff_size
-    diff_size="$(GIT_PAGER=cat git diff --cached | wc -l)"
+    diff_size="$(git --no-pager diff --cached | wc -l)"
     if [[ "$diff_size" -gt 1000 ]]; then
         print_warning "Large diff detected ($diff_size lines). Using summarized analysis."
         local diff_stat
-        diff_stat="$(GIT_PAGER=cat git diff --cached --stat=120,120)"
+        diff_stat="$(git --no-pager diff --cached --stat=120,120)"
         echo "$diff_stat"
         echo ""
         echo "Key file changes:"
         local diff_numstat
-        diff_numstat="$(GIT_PAGER=cat git diff --cached --numstat | head -15 | awk '{printf "  %s: +%s -%s lines\n", $3, $1, $2}')"
+        diff_numstat="$(git --no-pager diff --cached --numstat | head -15 | awk '{printf "  %s: +%s -%s lines\n", $3, $1, $2}')"
         echo "$diff_numstat"
     else
         # Use stat instead of full diff to avoid bat opening
         local diff_summary
-        diff_summary="$(GIT_PAGER=cat git diff --cached --stat)"
+        diff_summary="$(git --no-pager diff --cached --stat)"
         echo "$diff_summary"
     fi
 }
