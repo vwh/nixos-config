@@ -2,7 +2,7 @@
 # This module configures the Hyprland Wayland compositor with custom keybindings,
 # window rules, animations, and workspace management.
 
-{ pkgsStable, ... }:
+{ monitorConfig, ... }:
 
 {
   # Enable Hyprland window manager with systemd integration
@@ -24,7 +24,7 @@
       ];
 
       # Monitor configuration
-      monitor = ",preferred,auto,1";
+      monitor = monitorConfig;
 
       # Variable definitions for keybindings and commands
       "$mainMod" = "SUPER"; # Main modifier key (Windows/Cmd key)

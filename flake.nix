@@ -64,7 +64,7 @@
 
       # Git configuration
       gitConfig = {
-        name = "Yazan Alqasem";
+        name = "Yazan";
         email = "vwhe@proton.me";
         signingKey = "0x5478BB36AC504E64"; # GPG key for signing commits
       };
@@ -74,11 +74,13 @@
         {
           hostname = "pc"; # Desktop workstation
           stateVersion = "25.05"; # NixOS state version
+          monitorConfig = ",1920x1080@144,auto,1"; # 144Hz monitor
         }
 
         {
           hostname = "thinkpad"; # Laptop system
           stateVersion = "25.05"; # NixOS state version
+          monitorConfig = ",preferred,auto,1"; # Auto monitor config
         }
       ];
 
@@ -134,22 +136,29 @@
       ) { } hosts;
 
       # Home Manager configuration for user
-      homeConfigurations.${user} = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
+      homeConfigurations = nixpkgs.lib.foldl' (
+        configs: host:
+        configs
+        // {
+          "${user}@${host.hostname}" = home-manager.lib.homeManagerConfiguration {
+            inherit pkgs;
 
-        # Arguments passed to home-manager modules
-        extraSpecialArgs = {
-          inherit
-            inputs # All flake inputs
-            homeStateVersion # Home Manager state version
-            user # Username
-            gitConfig # Git configuration
-            pkgsStable # Stable package set
-            ;
-        };
+            # Arguments passed to home-manager modules
+            extraSpecialArgs = {
+              inherit
+                inputs # All flake inputs
+                homeStateVersion # Home Manager state version
+                user # Username
+                gitConfig # Git configuration
+                pkgsStable # Stable package set
+                ;
+              inherit (host) hostname monitorConfig; # Pass hostname and monitor config
+            };
 
-        # Home Manager modules to include
-        modules = [ ./home-manager/home.nix ];
-      };
+            # Home Manager modules to include
+            modules = [ ./home-manager/home.nix ];
+          };
+        }
+      ) { } hosts;
     };
 }
