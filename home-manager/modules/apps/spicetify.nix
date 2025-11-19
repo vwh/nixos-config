@@ -10,7 +10,7 @@
 
 let
   # Spicetify package set from the flake input
-  spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.system};
+  spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.stdenv.hostPlatform.system};
 
   # Extract colors from Stylix theme for consistent theming
   accent = "${config.lib.stylix.colors.base0D}"; # Accent color from theme
