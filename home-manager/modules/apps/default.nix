@@ -7,5 +7,6 @@
     ./obs.nix
     ./spicetify.nix
     ./zen.nix
+    ./antigravity.nix
   ];
 }
