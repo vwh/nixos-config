@@ -38,10 +38,10 @@
         }
 
         # Suspend system after 37 minutes of inactivity
-        {
-          timeout = 2200; # 37 minutes
-          on-timeout = "systemctl suspend"; # Suspend the system
-        }
+        # {
+        #   timeout = 2200; # 37 minutes
+        #   on-timeout = "systemctl suspend"; # Suspend the system
+        # }
       ];
     };
   };
