@@ -50,7 +50,7 @@
   insomnia # REST API client
 
   # Programming language runtimes and toolchains
-  openjdk23 # OpenJDK 23 for Java development
+  openjdk21 # OpenJDK 21 LTS for Java development
   rustc # Rust programming language compiler
   cargo # Rust package manager and build tool
 

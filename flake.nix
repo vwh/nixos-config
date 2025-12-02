@@ -8,7 +8,7 @@
   inputs = {
     # Core package repositories
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable"; # Primary package source
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.05"; # Stable package source
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.11"; # Stable package source
 
     # User environment management
     home-manager = {
@@ -66,7 +66,7 @@
     let
       # System configuration constants
       system = "x86_64-linux"; # Target system architecture
-      homeStateVersion = "25.05"; # Home Manager state version
+      homeStateVersion = "25.11"; # Home Manager state version
       user = "yazan"; # Primary username
 
       # Git configuration
@@ -80,13 +80,13 @@
       hosts = [
         {
           hostname = "pc"; # Desktop workstation
-          stateVersion = "25.05"; # NixOS state version
+          stateVersion = "25.11"; # NixOS state version
           monitorConfig = ",1920x1080@144,auto,1"; # 144Hz monitor
         }
 
         {
           hostname = "thinkpad"; # Laptop system
-          stateVersion = "25.05"; # NixOS state version
+          stateVersion = "25.11"; # NixOS state version
           monitorConfig = ",preferred,auto,1"; # Auto monitor config
         }
       ];

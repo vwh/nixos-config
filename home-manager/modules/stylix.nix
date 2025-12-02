@@ -14,7 +14,7 @@
     noto-fonts # Comprehensive font collection
     noto-fonts-lgc-plus # Extended language coverage
     texlivePackages.hebrew-fonts # Hebrew language support
-    noto-fonts-emoji # Emoji font support
+    noto-fonts-color-emoji # Emoji font support
     font-awesome # Icon font for UI elements
     powerline-fonts # Special characters for status bars
     powerline-symbols # Additional powerline symbols
@@ -27,6 +27,9 @@
     enable = true; # Enable Stylix theming system
     polarity = "dark"; # Use dark theme variant
     base16Scheme = "${pkgsStable.base16-schemes}/share/themes/gruvbox-dark-soft.yaml"; # Gruvbox color scheme
+
+    # Suppress version mismatch warning (temporary fix for NixOS 25.11 upgrade)
+    enableReleaseChecks = false;
 
     # Target applications for theming
     targets = {

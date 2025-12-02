@@ -13,7 +13,7 @@
 
     # Thumbnail and preview support
     gst_all_1.gst-plugins-good # GStreamer plugins for media thumbnails
-    poppler_utils # PDF thumbnail generation
+    poppler-utils # PDF thumbnail generation
     ffmpegthumbnailer # Video thumbnail generation
     gnome-epub-thumbnailer # EPUB and book preview thumbnails
     sushi # Quick file previews on hover

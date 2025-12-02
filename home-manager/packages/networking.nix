@@ -31,8 +31,7 @@ with pkgsStable;
   bandwhich # Network utilization by socket
 
   # DNS and domain utilities
-  dig # DNS lookup utility
-  host # DNS lookup utility (simpler)
+  dnsutils # DNS utilities
   whois # Domain registration information
 
   # Network debugging and packet analysis
