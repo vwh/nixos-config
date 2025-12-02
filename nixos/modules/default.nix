@@ -19,6 +19,7 @@
     ./i18n.nix # Internationalization and localization settings
     ./libinput.nix # Input device configuration (touchpad, mouse, etc.)
     ./monitoring.nix # System monitoring and hardware sensors
+    ./mullvad-vpn.nix # Mullvad VPN configuration and service
     ./networking.nix # Network configuration and firewall rules
     ./nix-ld.nix # Dynamic linker for running non-Nix binaries
     ./nix.nix # Nix package manager configuration
