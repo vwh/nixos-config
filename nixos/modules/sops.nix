@@ -1,5 +1,4 @@
 # SOPS-Nix configuration for encrypted secrets management.
-# This module configures SOPS (Secrets OPerationS) for managing encrypted
 
 { inputs, user, ... }:
 

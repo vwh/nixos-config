@@ -1,6 +1,4 @@
 # Graphics and NVIDIA driver configuration.
-# This module configures NVIDIA graphics drivers with optimized settings
-# for gaming, Wayland compositors, and hardware acceleration.
 
 { pkgs, config, ... }:
 

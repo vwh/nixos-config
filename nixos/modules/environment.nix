@@ -1,6 +1,4 @@
 # Environment variables and session settings.
-# This module configures system-wide environment variables that affect
-# application behavior, default programs, and system paths.
 
 {
   environment.sessionVariables = rec {
@@ -14,8 +12,6 @@
     XDG_BIN_HOME = "$HOME/.local/bin";
 
     # System PATH with additional directories
-    PATH = [
-      "${XDG_BIN_HOME}" # Include user local bin directory in PATH
-    ];
+    PATH = [ "${XDG_BIN_HOME}" ];
   };
 }

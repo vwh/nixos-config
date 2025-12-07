@@ -1,14 +1,6 @@
 # File cleanup services configuration.
-# This module provides automated cleanup services for various directories
-# to prevent disk space issues from accumulating temporary files.
 
-{
-  config,
-  lib,
-  pkgs,
-  user,
-  ...
-}:
+{ pkgs, user, ... }:
 
 {
   # Telegram downloads cleanup service

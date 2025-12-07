@@ -1,14 +1,31 @@
 # Bootloader configuration (systemd-boot).
-# This module configures the system bootloader using systemd-boot,
-# which provides a modern, secure, and feature-rich boot experience.
 
 {
-  boot.loader = {
-    # Enable systemd-boot as the bootloader
-    systemd-boot.enable = true;
+  boot = {
+    # Enable bootspec and systemd-boot
+    bootspec.enable = true;
+    loader = {
+      efi.canTouchEfiVariables = true;
+      systemd-boot = {
+        enable = true;
+        consoleMode = "auto";
+        configurationLimit = 8;
+      };
+    };
 
-    # Allow systemd-boot to modify EFI variables
-    # This is required for managing boot entries and boot order
-    efi.canTouchEfiVariables = true;
+    # Cleanup tmp on boot
+    tmp.cleanOnBoot = true;
+
+    # Silent boot
+    kernelParams = [
+      "quiet"
+      "splash"
+      "rd.systemd.show_status=false"
+      "rd.udev.log_level=3"
+      "udev.log_priority=3"
+      "boot.shell_on_fail"
+    ];
+    consoleLogLevel = 0;
+    initrd.verbose = false;
   };
 }

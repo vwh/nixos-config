@@ -1,6 +1,4 @@
 # GNOME core services configuration for Hyprland.
-# This module enables essential GNOME services without the full desktop
-# environment to avoid conflicts with Hyprland window manager.
 
 {
   services = {

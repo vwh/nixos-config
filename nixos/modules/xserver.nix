@@ -1,5 +1,4 @@
 # X server configuration.
-# This module configures the X.Org X server for traditional X11 applications,
 
 {
   services.xserver = {

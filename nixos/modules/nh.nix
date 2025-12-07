@@ -1,16 +1,8 @@
 # Nix Helper (nh) - Simple configuration module.
-# Installs nh and sets up basic environment for better NixOS management.
+
+{ pkgs, user, ... }:
 
 {
-  config,
-  lib,
-  pkgs,
-  user,
-  ...
-}:
-
-{
-  # Simple nh configuration - just install and setup environment
   environment = {
     # Install nh package
     systemPackages = with pkgs; [ nh ];

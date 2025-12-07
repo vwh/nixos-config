@@ -1,10 +1,9 @@
 # Audio configuration (PipeWire).
 
-{ config, lib, ... }:
+{ config, ... }:
 
 {
   # Validation: Ensure PulseAudio and PipeWire don't conflict
-  # This prevents configuration errors that could cause audio issues
   assertions = [
     {
       assertion = !(config.services.pulseaudio.enable && config.services.pipewire.enable);

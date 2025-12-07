@@ -1,6 +1,4 @@
 # Gaming-related configurations (Steam, MangoHud, etc.).
-# This module provides a custom gaming configuration with Steam,
-# performance monitoring, and compatibility tools for running Windows games.
 
 {
   config,

@@ -1,5 +1,4 @@
 # System security hardening module.
-# This module provides comprehensive security configurations optimized for desktop NixOS.
 
 { pkgs, ... }:
 

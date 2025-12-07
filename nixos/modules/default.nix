@@ -1,4 +1,3 @@
-# Imports all NixOS modules.
 # This file serves as the central hub for importing all system-wide
 # configuration modules that define the complete NixOS system.
 

@@ -1,5 +1,4 @@
 # Virtualisation (Docker, VirtualBox, libvirt) configuration.
-# This module enables various virtualization technologies for running
 
 { pkgsStable, user, ... }:
 

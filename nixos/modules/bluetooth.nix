@@ -1,6 +1,4 @@
 # Bluetooth configuration.
-# This module enables Bluetooth support with Blueman as the management interface,
-# providing wireless device connectivity for keyboards, mice, audio devices, etc.
 
 { pkgsStable, ... }:
 

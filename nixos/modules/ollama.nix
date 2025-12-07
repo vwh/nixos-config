@@ -1,5 +1,4 @@
 # Ollama service configuration for local AI models and embeddings.
-# This module enables Ollama which can provide embedding services for AI code indexing.
 
 { pkgs, ... }:
 
