@@ -4,22 +4,9 @@
 [![Hyprland](https://img.shields.io/badge/Hyprland-58A6FF?style=for-the-badge&logo=hyprland&logoColor=white)](https://hyprland.org)
 [![Flakes](https://img.shields.io/badge/Flakes-Enabled-5277C3?style=for-the-badge)](https://nixos.wiki/wiki/Flakes)
 
-This repository contains my personal NixOS system configurations, managed with Nix Flakes. It features a complete desktop environment with Hyprland compositor, beautiful Gruvbox theming, extensive development tooling.
+This repository contains my personal NixOS system configurations, managed with Nix Flakes. It features a complete desktop environment with Hyprland compositor, beautiful Gruvbox theming, extensive development tooling, and AI-powered development utilities.
 
 <img width="1034" height="1280" alt="Desktop Screenshot" src="https://github.com/user-attachments/assets/e819499b-5dde-4ca7-a4dc-75b3e790e5d3" />
-
----
-
-## System Information
-
-- **OS**: NixOS 25.05 (Unstable)
-- **Kernel**: Linux 6.12
-- **Window Manager**: Hyprland with UWSM integration
-- **Shell**: Zsh with Oh My Zsh
-- **Terminal**: Alacritty
-- **Editor**: VSCode + Neovim
-- **Theme**: Gruvbox Dark Soft
-- **Font**: JetBrains Mono
 
 ---
 
@@ -72,41 +59,6 @@ just all  # or follow the step-by-step process below
 
 ---
 
-## Services
-
-The system runs several services that are accessible via web interfaces or network ports:
-
-### Web Services
-| Service | URL | Description |
-|---------|-----|-------------|
-| **Glance Dashboard** | `http://localhost:8080` | System overview dashboard with widgets |
-| **CUPS Print Server** | `http://localhost:631` | Printer configuration and management |
-
-### System Services
-| Service | Status | Description |
-|---------|--------|-------------|
-| **Hyprland** | ✔ Enabled | Wayland window manager |
-| **PipeWire** | ✔ Enabled | Audio server with PulseAudio compatibility |
-| **NetworkManager** | ✔ Enabled | Network management |
-| **Bluetooth** | ✔ Enabled | Wireless device support |
-| **Tor** | ✔ Enabled | Anonymous networking |
-| **Printing** | ✔ Enabled | CUPS print services |
-| **Docker** | ✔ Enabled | Container runtime |
-| **VirtualBox** | ✔ Enabled | Virtualization platform |
-| **SOPS** | ✔ Enabled | Secret management |
-| **Ollama** | ✔ Enabled | Local AI models and embeddings service (port 11434) |
-| **Qdrant** | ✔ Enabled | Vector search engine for AI-powered code indexing (port 6333) |
-
-### Monitoring & System
-| Service | Purpose |
-|---------|---------|
-| **System Monitoring** | Hardware sensors, system resources |
-| **Network Monitoring** | Connection monitoring and diagnostics |
-| **Power Management** | Battery and power optimization |
-| **GameMode** | Performance optimization for gaming |
-
----
-
 ## Secrets Management
 
 This configuration uses `sops-nix` for managing encrypted secrets with age keys.
@@ -151,6 +103,22 @@ This configuration uses `sops-nix` for managing encrypted secrets with age keys.
 - Private keys are stored in `~/.config/sops/age/keys.txt`
 - Never commit private keys or decrypted secrets to Git
 - Use `just sops-edit` for most editing (automatic encrypt/decrypt)
+
+---
+
+## Flake Inputs
+
+This configuration uses the following flakes:
+
+- **nixpkgs** - NixOS unstable packages
+- **nixpkgs-stable** - NixOS 25.11 stable packages
+- **home-manager** - User environment management
+- **stylix** - System theming and styling (Gruvbox theme)
+- **spicetify-nix** - Spotify customization
+- **sops-nix** - Secret management with age encryption
+- **zen-browser** - Privacy-focused web browser
+- **hexecute** - Gesture-based application launcher
+- **antigravity-nix** - AI-powered IDE integration
 
 ---
 
@@ -300,6 +268,7 @@ This repository uses [`just`](https://github.com/casey/just) as a command runner
 │       ├── i18n.nix               ← Internationalization
 │       ├── libinput.nix           ← Input device support
 │       ├── monitoring.nix         ← System monitoring
+│       ├── mullvad-vpn.nix        ← Mullvad VPN configuration
 │       ├── nautilus.nix           ← File manager configuration
 │       ├── networking.nix         ← Network configuration
 │       ├── nh.nix                 ← Nix Helper (nh) configuration
@@ -321,15 +290,18 @@ This repository uses [`just`](https://github.com/casey/just) as a command runner
 │       └── xserver.nix            ← X11 server configuration
 ├── scripts/                       ← Utility scripts
 │   ├── ai/                       ← **AI-powered development tools**
-│   │   ├── ask.sh                ← General-purpose AI assistant
+│   │   ├── ask.sh                ← General-purpose AI assistant (GLM-4.6)
 │   │   ├── commit.sh             ← Intelligent commit generation
 │   │   └── help.sh               ← Command-line assistant
 │   ├── build/
-│   │   └── modules-check.sh
+│   │   └── modules-check.sh      ← Module import validation
 │   ├── generate-file-context.sh  ← **AI file context generator**
+│   ├── sops/
+│   │   ├── sops-setup.sh         ← SOPS age key initialization
+│   │   └── setup-keys.sh         ← SSH/GPG keys from SOPS
 │   └── waybar/
-│       ├── gpu-temp.sh
-│       └── network.sh
+│       ├── gpu-temp.sh           ← GPU temperature widget
+│       └── network.sh            ← Network monitoring widget
 ├── secrets/                       ← Encrypted secrets (sops-nix)
 │   └── secrets.yaml
 ├── themes/                        ← Custom themes and wallpapers
@@ -342,24 +314,3 @@ This repository uses [`just`](https://github.com/casey/just) as a command runner
 ├── README.md                      ← This file
 └── .sops.yaml                     ← SOPS configuration
 ```
-
-### Key Directories Explained
-
-- **`home-manager/`** - User-space configuration managed by Home-Manager
-- **`hosts/`** - Machine-specific system configurations
-- **`devShells/`** - Isolated development environments for different languages
-- **`nixos/modules/`** - Reusable system-level modules
-- **`secrets/`** - Encrypted configuration files using sops-nix
-- **`themes/`** - Custom application themes matching the Gruvbox aesthetic
-- **`scripts/`** - Utility scripts for automation and setup
-- **`scripts/ai/`** - AI-powered development tools and assistants
-
----
-
-
-### Getting Help
-
-- **NixOS Documentation**: https://nixos.org/manual/
-- **Home Manager Manual**: https://nix-community.github.io/home-manager/
-- **Hyprland Wiki**: https://hyprland.org/
-- **Nix Flakes**: https://nixos.wiki/wiki/Flakes
