@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 # setup-keys.sh - Setup SSH and GPG keys from SOPS on a new machine
-# Usage: ./setup-keys.sh
 
 set -euo pipefail
 

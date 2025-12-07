@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 # Combined GPU monitoring script for Waybar
 # This script reduces nvidia-smi calls by getting both temp and usage in one call
-# Output format for Waybar: {"text": " 65°C 󰍹 45%", "tooltip": "GPU Temp: 65°C\nGPU Usage: 45%"}
 
 set -euo pipefail
 

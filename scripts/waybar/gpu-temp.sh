@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 # Enhanced GPU temperature monitor for Waybar
 # Supports NVIDIA, AMD, and Intel GPUs with multi-GPU detection
-# Usage: Called by Waybar
 
 set -euo pipefail
 
