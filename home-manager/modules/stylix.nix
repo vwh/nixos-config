@@ -43,6 +43,13 @@
       gtk.enable = true; # Apply theme to GTK applications
       qt.enable = true; # Apply theme to Qt applications
 
+      # Fix GTK theme compatibility issues
+      gtk.extraCss = ''
+        * {
+          border-spacing: inherit;
+        }
+      '';
+
       # Configure Zen Browser theming
       zen-browser = {
         enable = true; # Enable Zen Browser theming
