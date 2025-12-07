@@ -30,6 +30,13 @@ in
       jt = "jest --watch"; # Jest watch mode
       vt = "npx vitest"; # Run Vitest
       pt = "npx playwright"; # Run Playwright tests
+
+      # Biome commands
+      bc = "biome check"; # Check with Biome
+      bf = "biome format"; # Format with Biome
+      bcf = "biome check --apply"; # Check and fix with Biome
+      blint = "biome lint"; # Lint with Biome
+      bfmt = "biome format --write"; # Format files with Biome
     };
 
     # Git ignore patterns for JavaScript/TypeScript projects
@@ -166,6 +173,7 @@ in
       prettier # Code formatter
       stylelint # CSS/SCSS linter
       eslint_d # Fast ESLint daemon
+      biome # Modern JavaScript/TypeScript toolchain (linter, formatter, bundler)
 
       # Build tools and bundlers
       esbuild # Extremely fast JavaScript bundler
