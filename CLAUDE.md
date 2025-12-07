@@ -12,6 +12,7 @@ This is a comprehensive NixOS configuration repository using Nix Flakes to manag
 - **Development Environments**: Isolated devShells for multiple programming languages
 - **Secret Management**: SOPS-based encrypted secrets with age encryption
 - **AI Integration**: Local AI models (Ollama) and vector search (Qdrant) for intelligent development
+- **AI Tools**: Command-line AI assistants with GLM-4.6 model integration
 
 ## Quick Start
 
@@ -170,6 +171,7 @@ builtins.concatLists (map (f: import f { inherit pkgs pkgsStable; }) chunks)
 - **Nix Helper**: Modern Nix management tool with improved build and switch operations
 - Commands: `nh os switch`, `nh home switch`, `nh clean all`
 - Configuration: `nixos/modules/nh.nix`
+- FLAKE environment variable automatically set to `/home/yazan/System` for convenience
 
 ### Service Configuration Pattern
 
@@ -200,6 +202,15 @@ Isolated devShells in `devShells/` with flake templates:
 - `bun/`, `deno/`, `go/`, `nodejs/`, `python-venv/`, `rust-stable/`, `rust-nightly/`
 
 **Usage**: `nix flake init -t "github:vwh/nixos-config/main?dir=devShells#<name>"`
+
+### Docker Commands
+
+Docker commands should be run in bash (not zsh) due to password configuration:
+```bash
+# Use bash for Docker operations
+bash -c "docker ps"
+bash -c "docker build -t myapp ."
+```
 
 ## Code Style Guidelines
 
@@ -257,7 +268,7 @@ The repository includes sophisticated AI-powered utilities in `scripts/ai/`:
 
 **`ai-ask`** - General-purpose AI assistant:
 ```bash
-./scripts/ai/ask.sh "Explain quantum computing"           # Basic query
+./scripts/ai/ask.sh "Explain quantum computing"           # Basic query (GLM-4.6)
 ./scripts/ai/ask.sh -d "Complex analysis task"          # Deep model (GLM-4.6)
 ./scripts/ai/ask.sh -c "Generate command"               # Copy to clipboard
 ./scripts/ai/ask.sh -s "You are expert" "Help me"       # Custom system prompt
@@ -390,3 +401,4 @@ home-manager switch --rollback  # Home configuration rollback
 - AI services are properly integrated and secured with firewall rules
 - **Hexecute gesture launcher** available via `$mainMod+SPACE` in Hyprland
 - **Security hardening** automatically applied via security module
+- **Docker password**: Use `bash` for Docker commands, not zsh (password alice)
