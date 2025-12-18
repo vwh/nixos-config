@@ -261,7 +261,7 @@ This repository uses [`just`](https://github.com/casey/just) as a command runner
 │       ├── cleanup.nix            ← System cleanup tasks
 │       ├── default.nix            ← Module imports
 │       ├── environment.nix        ← Environment variables
-│       ├── gaming.nix             ← Gaming optimizations
+│       ├── gaming.nix             ← Gaming (Steam, Lutris, Wine, MangoHud)
 │       ├── gnome.nix              ← GNOME desktop (optional)
 │       ├── graphics.nix           ← Graphics drivers
 │       ├── hyprland.nix           ← Window manager setup

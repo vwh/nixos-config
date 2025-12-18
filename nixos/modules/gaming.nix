@@ -40,6 +40,9 @@
     environment.systemPackages = with pkgs; [
       mangohud # Vulkan overlay for performance monitoring
       protonup-ng # Tool for managing Proton compatibility layers
+      lutris # Open gaming platform for managing multiple game sources
+      wine # Compatibility layer for running Windows programs
+      winetricks # Helper for configuring Wine
     ];
   };
 }
