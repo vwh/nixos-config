@@ -28,6 +28,7 @@
   telegram-desktop # Telegram messaging application
   slack # Slack team communication platform
   teams-for-linux # Microsoft Teams for Linux
+  remmina # Remote desktop client
 
   # Productivity and knowledge management
   anki-bin # Spaced repetition flashcard system
@@ -35,4 +36,6 @@
 
   # Gaming and compatibility tools
   (bottles.override { removeWarningPopup = true; }) # Run Windows applications on Linux
+
+  youtube-music # YouTube Music desktop client
 ])
