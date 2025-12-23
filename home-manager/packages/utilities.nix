@@ -41,6 +41,7 @@ with pkgsStable;
 
   # System management and device handling
   udisks # Storage device management and auto-mounting
+  udiskie # Automatic disk mounting for USB drives with notifications
   xarchiver # Lightweight archive manager
   pavucontrol # PulseAudio volume control GUI
 

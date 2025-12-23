@@ -191,6 +191,10 @@ in
       "$mainMod SHIFT, Print, exec, ${screenshotScript}/bin/smart-screenshot window" # Screenshot active window
       "$mainMod CTRL, Print, exec, ${screenshotScript}/bin/smart-screenshot active" # Screenshot active screen
 
+      # Screen recording functionality
+      "$mainMod, Z, exec, wf-recorder -f $HOME/screens/$(date +%Y%m%d_%H%M%S).mp4" # Start recording
+      "$mainMod SHIFT, Z, exec, pkill -SIGINT wf-recorder && notify-send 'Recording stopped'" # Stop recording
+
       # Volume control
       "$mainMod, equal,  exec, wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"
       "$mainMod, minus, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"

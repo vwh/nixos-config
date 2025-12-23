@@ -46,16 +46,12 @@
         "[workspace 2 silent] $editor" # Editor in workspace 2
         "[workspace 3 silent] Telegram" # Telegram in workspace 3
         "[workspace 4 silent] spotify" # Spotify in workspace 4
-
-        # Enhanced clipboard management
-        "wl-paste -t text --watch clipman store" # Primary clipboard
-        "wl-paste -p -t text --watch clipman store -P --histpath=\"~/.local/share/clipman-primary.json\""
       ];
 
       # General Hyprland settings
       general = {
-        gaps_in = 0; # Inner window gaps
-        gaps_out = 0; # Outer window gaps
+        gaps_in = 2; # Inner window gaps (breathing room)
+        gaps_out = 5; # Outer window gaps
         border_size = 5; # Window border width
 
         # Border colors with gradient

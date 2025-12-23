@@ -27,4 +27,10 @@
   # kdePackages.xwaylandvideobridge # XWayland video bridge - temporarily removed (not available)
   libnotify # Desktop notification library
   playerctl # Media player control utility
+
+  # Screen recording
+  wf-recorder # Wayland screen recorder
+
+  # Hyprland plugins
+  hyprlandPlugins.hyprbars # Title bar for floating windows
 ])
