@@ -186,6 +186,11 @@
         "move 990 60,size 900 170,pin,noinitialfocus,class:(showmethekey-gtk)"
         "noborder,nofocus,class:(showmethekey-gtk)"
 
+        # Telegram media viewer - float and center
+        "float,class:^(org.telegram.desktop)$,title:^Media viewer$"
+        "center,class:^(org.telegram.desktop)$,title:^Media viewer$"
+        "size 80% 80%,class:^(org.telegram.desktop)$,title:^Media viewer$"
+
         # Key display utilities (use `hyprctl clients` to find window info)
         "float,class:^(one.alynx.showmethekey)$"
         "float,class:^(showmethekey-gtk)$" # Make window floating
@@ -193,7 +198,7 @@
 
         # Workspace assignments
         "workspace 1,class:($browser)" # Browser to workspace 1
-        "workspace 3,class:(Telegram)" # Telegram to workspace 3
+        "workspace 3,class:(org.telegram.desktop)" # Telegram to workspace 3
         "workspace 3,class:(vesktop)" # Discord client to workspace 3
         "workspace 4,class:(spotify)" # Spotify to workspace 4
 
