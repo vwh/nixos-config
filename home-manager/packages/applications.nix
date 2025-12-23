@@ -33,6 +33,7 @@
   # Productivity and knowledge management
   anki-bin # Spaced repetition flashcard system
   obsidian # Knowledge base and note-taking application
+  antigravity-fhs # AI-powered agentic IDE
 
   # Gaming and compatibility tools
   (bottles.override { removeWarningPopup = true; }) # Run Windows applications on Linux

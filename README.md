@@ -118,7 +118,6 @@ This configuration uses the following flakes:
 - **sops-nix** - Secret management with age encryption
 - **zen-browser** - Privacy-focused web browser
 - **hexecute** - Gesture-based application launcher
-- **antigravity-nix** - AI-powered IDE integration
 
 ---
 

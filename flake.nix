@@ -45,12 +45,6 @@
       url = "github:ThatOtherAndrew/Hexecute";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    # Antigravity Agentic IDE
-    antigravity-nix = {
-      url = "github:jacopone/antigravity-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   # Flake outputs - what this flake provides to the outside world
@@ -60,7 +54,6 @@
       nixpkgs,
       nixpkgs-stable,
       home-manager,
-      antigravity-nix,
       ...
     }@inputs:
     let
@@ -128,7 +121,6 @@
               user # Primary user
               gitConfig # Git configuration
               pkgsStable # Stable package set
-              antigravity-nix # Antigravity IDE
               ;
           };
 
@@ -159,7 +151,6 @@
                 user # Username
                 gitConfig # Git configuration
                 pkgsStable # Stable package set
-                antigravity-nix # Antigravity IDE
                 ;
               inherit (host) hostname monitorConfig; # Pass hostname and monitor config
             };
