@@ -218,16 +218,16 @@
 
       # Create directory and navigate to it
       mkcd() {
-        mkdir -p "$1" && builtin cd "$1"  # Create dir and cd into it
+        mkdir -p "$1" && cd "$1"  # Create dir and cd into it
       }
 
       # Quick project directory navigation
       proj() {
         local project_dir="$HOME/Projects"  # Default projects directory
         if [ -z "$1" ]; then
-          builtin cd "$project_dir"         # Go to projects root
+          cd "$project_dir"         # Go to projects root
         else
-          builtin cd "$project_dir/$1"      # Go to specific project
+          cd "$project_dir/$1"      # Go to specific project
         fi
       }
 

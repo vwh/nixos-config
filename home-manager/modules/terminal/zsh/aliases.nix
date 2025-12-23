@@ -15,7 +15,6 @@
       la = "eza -la --icons --group-directories-first --header"; # All files with details
       lt = "eza --tree --level=2 --icons"; # Tree view (2 levels)
       etree = "eza --tree --level=1 --icons"; # Extended tree view
-      cd = "z"; # Smart directory jumping
       ci = "zi"; # Interactive directory selection
 
       # Quick navigation shortcuts for moving up directory tree
@@ -28,7 +27,6 @@
       dl = "cd ~/Downloads"; # Downloads directory
       dt = "cd ~/Desktop"; # Desktop directory
       docs = "cd ~/Documents"; # Documents directory
-      proj = "cd ~/Projects"; # Projects directory
 
       # Enhanced search and text processing tools
       find = "fd"; # Modern find replacement
@@ -57,10 +55,6 @@
       ff = "fastfetch"; # System information display
       mf = "microfetch"; # Minimal system info
       of = "onefetch"; # Git repository information
-
-      # Development and productivity tools
-      lg = "lazygit"; # Terminal Git UI
-      ld = "lazydocker"; # Terminal Docker UI
 
       # AI and coding assistance tools
       cl = "claude"; # Anthropic Claude CLI

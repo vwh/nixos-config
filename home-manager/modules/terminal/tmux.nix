@@ -135,7 +135,7 @@
       {
         plugin = continuum;
         extraConfig = ''
-          set -g @continuum-restore 'on'
+          set -g @continuum-restore 'off'  # Disabled - always start new sessions in home dir
           set -g @continuum-save-interval '15'
           set -g @continuum-boot 'on'
         '';
