@@ -61,7 +61,7 @@ just clean          # Clean up old generations and optimize store using nh
 - **Special Args**: `inputs`, `stateVersion`, `hostname`, `user`, `gitConfig`, `pkgsStable`
 - **Hosts**: `pc` (desktop), `thinkpad` (laptop)
 
-**Key Design Pattern**: The flake uses a factory function `makeSystem` that generates complete NixOS configurations for each host, ensuring consistency while allowing host-specific customizations.
+**Key Design Pattern**: The flake uses a factory function `makeSystem` combined with `foldl'` to generate NixOS and Home Manager configurations for each host from a single `hosts` list, ensuring consistency while allowing host-specific customizations (hostname, stateVersion, monitorConfig).
 
 ```nix
 # Factory pattern implementation
@@ -92,12 +92,13 @@ home-manager/               # User environment configuration
 └── home.nix               # Main home configuration
 nixos/modules/              # System-wide modules
 ├── audio.nix              # PipeWire/PulseAudio
+├── gaming.nix             # Steam, Lutris, Wine, MangoHud (with Gamescope option)
 ├── graphics.nix           # GPU drivers
 ├── networking.nix         # Network configuration
 ├── ollama.nix             # Local AI models (port 11434)
 ├── qdrant.nix             # Vector search (port 6333)
-├── security.nix          # System security hardening
-├── nh.nix                # Nix Helper configuration
+├── security.nix           # Kernel hardening, auto-updates, weekly Lynis audits
+├── nh.nix                 # Nix Helper configuration
 └── virtualisation.nix     # Docker/VirtualBox
 ```
 
@@ -149,6 +150,18 @@ Home Manager uses sophisticated package aggregation:
 builtins.concatLists (map (f: import f { inherit pkgs pkgsStable; }) chunks)
 ```
 
+## Gaming Module
+
+The gaming module (`nixos/modules/gaming.nix`) provides Steam, Lutris, Wine, and MangoHud support with optional Gamescope:
+
+```nix
+# Enable gaming (in host configuration)
+mySystem.gaming.enable = true;
+mySystem.gaming.enableGamescope = true;  # Optional: Enable Gamescope session
+```
+
+Includes: Steam with Proton-GE, Lutris with FHS environment and Wine dependencies, MangoHud overlay, wineWowPackages, winetricks.
+
 ## Service Configuration
 
 ### AI Services
@@ -164,8 +177,9 @@ builtins.concatLists (map (f: import f { inherit pkgs pkgsStable; }) chunks)
 | **CUPS Print Server** | 631 | Printer management |
 
 ### System Security Module
-- **Security Hardening**: Comprehensive security module with kernel hardening, automatic updates, and audit tools
+- **Security Hardening**: Comprehensive security module with kernel hardening (SYN cookies, reverse path filtering), automatic daily updates, weekly Lynis security audits via systemd timer, and AppArmor confinement
 - Configuration: `nixos/modules/security.nix`
+- PAM limits: Increased file descriptors (1048576) for gaming/Wine, disabled core dumps, real-time priority support
 
 ### Nix Helper (nh) Integration
 - **Nix Helper**: Modern Nix management tool with improved build and switch operations
