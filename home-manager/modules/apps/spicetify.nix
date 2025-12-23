@@ -26,7 +26,7 @@ in
   # Spicetify configuration
   programs.spicetify = {
     enable = true; # Enable Spicetify customization
-    theme = lib.mkForce spicePkgs.themes.dribbblish; # Use Dribbblish theme
+    #theme = lib.mkForce spicePkgs.themes.dribbblish; # Use Dribbblish theme
     colorScheme = "custom"; # Use custom color scheme
 
     # Custom color scheme using Stylix theme colors
