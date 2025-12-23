@@ -1,6 +1,6 @@
 # Tmux (Terminal Multiplexer) configuration.
 
-{ pkgsStable, ... }:
+{ pkgs, ... }:
 
 {
   # Enable and configure Tmux terminal multiplexer
@@ -120,7 +120,7 @@
       set -g activity-action other
     '';
 
-    plugins = with pkgsStable.tmuxPlugins; [
+    plugins = with pkgs.tmuxPlugins; [
       # Session management and persistence
       {
         plugin = resurrect;
