@@ -3,11 +3,10 @@
 { pkgs, ... }:
 
 {
-  # Enable automatic system updates for security patches
+  # Automatic system updates DISABLED - using flakes with manual 'just update' instead
+  # The old-style autoUpgrade is incompatible with flakes. Use 'just update' and 'just nixos'
   system.autoUpgrade = {
-    enable = true;
-    allowReboot = false;
-    dates = "daily";
+    enable = false;
   };
 
   # Harden the kernel and system
@@ -143,16 +142,15 @@
           ProtectHome = true;
           ProtectSystem = "strict";
           ReadWritePaths = [ "/tmp" ];
-          ExecStart = ''
-            ${pkgs.bash}/bin/bash -c "
-              echo 'Starting security audit...'
+          ExecStart = pkgs.writeShellScript "security-audit.sh" ''
+            #!${pkgs.bash}/bin/bash
+            echo 'Starting security audit...'
 
-              # Run Lynis security audit (fixed path)
-              echo 'Running Lynis audit...'
-              ${pkgs.lynis}/bin/lynis audit system --quiet
+            # Run Lynis security audit (fixed path)
+            echo 'Running Lynis audit...'
+            ${pkgs.lynis}/bin/lynis audit system --quiet
 
-              echo 'Security audit completed!'
-            "
+            echo 'Security audit completed!'
           '';
         };
       };
