@@ -284,7 +284,7 @@ This repository uses [`just`](https://github.com/casey/just) as a command runner
 │       ├── tor.nix                ← Tor network
 │       ├── upower.nix             ← Power management
 │       ├── users.nix              ← User account management
-│       ├── virtualisation.nix     ← Docker/VirtualBox
+│       ├── virtualisation.nix     ← Docker/libvirt
 │       ├── xdg-desktop-portal.nix ← XDG desktop portal configuration
 │       └── xserver.nix            ← X11 server configuration
 ├── scripts/                       ← Utility scripts

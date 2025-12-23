@@ -99,7 +99,7 @@ nixos/modules/              # System-wide modules
 ├── qdrant.nix             # Vector search (port 6333)
 ├── security.nix           # Kernel hardening, auto-updates, weekly Lynis audits
 ├── nh.nix                 # Nix Helper configuration
-└── virtualisation.nix     # Docker/VirtualBox
+└── virtualisation.nix     # Docker/libvirt
 ```
 
 ### Module Architecture
