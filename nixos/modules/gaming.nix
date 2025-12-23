@@ -40,9 +40,11 @@
     environment.systemPackages = with pkgs; [
       mangohud # Vulkan overlay for performance monitoring
       protonup-ng # Tool for managing Proton compatibility layers
-      lutris # Open gaming platform for managing multiple game sources
-      wine # Compatibility layer for running Windows programs
-      winetricks # Helper for configuring Wine
+      lutris # Game launcher for non-Steam games
+      steam-run # Steam-run for FHS environment
+      wine # Wine compatibility layer
+      winetricks # Wine utilities
+      libunwind # Required Wine dependencies for NixOS
     ];
   };
 }
