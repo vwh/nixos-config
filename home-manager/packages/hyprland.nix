@@ -22,8 +22,7 @@ with pkgsStable;
   wtype # Wayland keyboard and mouse input simulation
 
   # === Desktop Integration ===
-  xdg-desktop-portal-hyprland # Hyprland XDG desktop portal backend
-  xdg-desktop-portal-gtk # GTK XDG desktop portal frontend
+  # Note: xdg-desktop-portal-hyprland and xdg-desktop-portal-gtk are in nixos/modules/xdg-desktop-portal.nix
   libnotify # Desktop notification library
   playerctl # Media player control utility
 
