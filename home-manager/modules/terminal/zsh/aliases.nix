@@ -27,9 +27,6 @@
       docs = "cd ~/Documents"; # Documents directory
 
       # Enhanced search and text processing tools
-      find = "fd"; # Modern find replacement
-      grep = "rg"; # Modern grep replacement
-      hq = "htmlq"; # HTML query tool
       cat = "bat --style=auto"; # Enhanced cat with syntax highlighting
       less = "bat --style=auto --paging=always"; # Enhanced pager
 
