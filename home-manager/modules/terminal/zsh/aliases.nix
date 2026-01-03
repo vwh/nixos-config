@@ -1,6 +1,4 @@
 # Zsh shell aliases.
-# This module defines custom shell aliases for enhanced productivity,
-# navigation, development workflows, and system administration.
 
 {
   programs.zsh.shellAliases =

@@ -1,6 +1,4 @@
 # Warp terminal module.
-# This module installs Warp, a modern, Rust-based terminal emulator
-# with AI assistance, collaborative features, and modern UI design.
 
 { pkgs, ... }:
 

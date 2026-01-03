@@ -1,36 +1,32 @@
-# Hyprland window manager and Wayland utilities.
-# This module provides essential packages for the Hyprland Wayland
-# compositor, including utilities, clipboard management, and desktop integration.
+# Hyprland window manager and Wayland utilities including screenshot tools,
+# clipboard management, and desktop integration.
 
 { pkgs, pkgsStable }:
 
-(with pkgsStable; [
-  # Hyprland-specific utilities and tools
+with pkgs;
+with pkgsStable;
+[
+  # === Hyprland-Specific Utilities ===
   bemoji # Emoji picker for Wayland
   brightnessctl # Screen brightness control
   hyprpicker # Color picker for Hyprland
 
-  # Screenshot utilities
+  # === Screenshot and Capture Utilities ===
   grim # Screenshot utility for Wayland
   slurp # Region selection utility for Wayland
+  wf-recorder # Wayland screen recorder
 
-  # Clipboard management for Wayland
+  # === Clipboard Management ===
   cliphist # Clipboard history manager
   wl-clipboard # Wayland clipboard utilities
   wtype # Wayland keyboard and mouse input simulation
-])
 
-++ (with pkgs; [
-  # Desktop integration and portals
+  # === Desktop Integration ===
   xdg-desktop-portal-hyprland # Hyprland XDG desktop portal backend
   xdg-desktop-portal-gtk # GTK XDG desktop portal frontend
-  # kdePackages.xwaylandvideobridge # XWayland video bridge - temporarily removed (not available)
   libnotify # Desktop notification library
   playerctl # Media player control utility
 
-  # Screen recording
-  wf-recorder # Wayland screen recorder
-
-  # Hyprland plugins
+  # === Hyprland Plugins ===
   hyprlandPlugins.hyprbars # Title bar for floating windows
-])
+]

@@ -1,5 +1,4 @@
 # Cava audio visualizer configuration.
-# This module configures cava, a console-based audio visualizer
 
 {
   programs.cava = {

@@ -1,6 +1,4 @@
 # Custom prayer times application package.
-# This module defines a custom Nix package for prayerbar, a Rust-based
-# prayer time indicator designed for integration with Waybar status bar.
 
 { pkgsStable, ... }:
 

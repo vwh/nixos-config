@@ -1,6 +1,4 @@
 # Z-shell (Oh My Zsh) configuration.
-# This module configures Zsh with Oh My Zsh framework, providing
-# enhanced shell experience with plugins, themes, and custom functions.
 
 { config, ... }:
 

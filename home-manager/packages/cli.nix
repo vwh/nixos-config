@@ -1,88 +1,78 @@
-# Command-line interface tools and utilities.
-# This module provides essential CLI tools for file management, text processing,
-# system monitoring, development workflows, and productivity enhancement.
+# Command-line interface tools and utilities for file management,
+# text processing, system monitoring, and development workflows.
 
 { pkgsStable, ... }:
 
 with pkgsStable;
 [
-  # File and directory management utilities
+  # === File and Directory Management ===
   fd # Modern find replacement with intuitive syntax
   fselect # SQL-like file selection tool
   ncdu # Interactive disk usage analyzer
   dust # Modern du with tree visualization
   duf # Enhanced df with better formatting
+  dua # Modern disk usage analyzer
 
-  # Text processing and search tools
+  # === Text Processing and Search ===
   ripgrep # Fast grep replacement with modern features
   fzf # Command-line fuzzy finder
   jq # JSON processor and query tool
   yq # YAML processor similar to jq
   htmlq # HTML processor like jq for HTML
+  sd # Modern sed replacement
+  choose # Modern cut/awk replacement
 
-  # System information and monitoring tools
+  # === System Information and Monitoring ===
   fastfetch # Fast system information display
   microfetch # Minimal system information
   onefetch # Git repository information tool
   tokei # Code statistics and analysis
   procs # Modern process viewer (ps replacement)
 
-  # Development and version control tools
+  # === Development and Version Control ===
   lazydocker # Terminal UI for Docker management
   gh # GitHub CLI tool
+  glab # GitLab CLI tool
   hcloud # Hetzner Cloud CLI
+  delta # Modern diff viewer for Git
 
-  # Media processing and download tools
+  # === Media Processing and Download ===
   yt-dlp # YouTube and video downloader
   imagemagick # Image manipulation and processing suite
 
-  # General utility tools
-  bc # Arbitrary precision calculator
-  rsync # Fast file synchronization tool
-
-  # Performance measurement and benchmarking
+  # === Performance Measurement and Benchmarking ===
   hyperfine # Command-line benchmarking tool
-
-  # Data format utilities
-  fx # Interactive JSON viewer and processor
-
-  # Terminal theming and colors
-  vivid # LS_COLORS theme generator
-
-  # Network analysis and security tools
-  wireshark-cli # Network protocol analyzer (CLI)
-  mitmproxy # HTTP proxy for debugging and analysis
-
-  # Container analysis tools
-  dive # Docker image layer analyzer
-
-  # Backup and storage solutions
-  restic # Modern backup program
-  borgbackup # Deduplicating backup program
-
-  # Text processing and manipulation
-  sd # Modern sed replacement
-  choose # Modern cut/awk replacement
-
-  # Performance profiling and visualization
   flamegraph # Performance visualization tool
 
-  # HTTP client tools
+  # === HTTP Client Tools ===
   curlie # Modern curl replacement with colors
   xh # Friendly HTTP client
 
-  # Log processing and analysis
+  # === Log Processing and Analysis ===
   angle-grinder # Log processing tool
 
-  # Network diagnostic tools
-  dog # Modern DNS lookup tool
-  dua # Modern disk usage analyzer
+  # === Network Analysis ===
+  wireshark-cli # Network protocol analyzer (CLI)
+  mitmproxy # HTTP proxy for debugging and analysis
 
-  # Git workflow enhancement tools
-  delta # Modern diff viewer for Git
-  glab # GitLab CLI tool
+  # === Container Analysis ===
+  dive # Docker image layer analyzer
 
-  # File watching and automation tools
+  # === Backup and Storage ===
+  restic # Modern backup program
+  borgbackup # Deduplicating backup program
+
+  # === Data Format Utilities ===
+  fx # Interactive JSON viewer and processor
+
+  # === Terminal Theming ===
+  vivid # LS_COLORS theme generator
+
+  # === General Utilities ===
+  bc # Arbitrary precision calculator
+  rsync # Fast file synchronization tool
+
+  # === File Watching and Automation ===
   watchexec # Execute commands on file changes
   entr # Run commands when files change
 ]

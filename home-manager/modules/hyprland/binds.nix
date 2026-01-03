@@ -1,5 +1,4 @@
 # Hyprland keybinds and custom scripts.
-# This module defines custom keybindings for Hyprland window manager
 
 { pkgsStable, ... }:
 
@@ -165,7 +164,6 @@ in
       # Window management
       "$mainMod, Q, killactive," # Close active window
       "$mainMod SHIFT, R, exec, $fileManager" # Open file manager
-      "$mainMod, R, exec, env -u TMUX alacritty -e yazi" # Open file browser in terminal
       "$mainMod, F, togglefloating," # Toggle floating mode
       "$mainMod, D, exec, $menu --show drun" # Application launcher
       "$mainMod, V, exec, cliphist list | $menu --dmenu | cliphist decode | wl-copy" # Clipboard manager

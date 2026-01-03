@@ -1,6 +1,4 @@
 # Python programming language configuration.
-# This module configures Python development environment with tools,
-# package management, LSP support, and project workspace setup.
 
 {
   config,

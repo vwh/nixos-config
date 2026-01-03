@@ -1,5 +1,4 @@
 # Alacritty terminal emulator configuration.
-# This module configures Alacritty, a fast, cross-platform, OpenGL terminal emulator
 
 { lib, ... }:
 

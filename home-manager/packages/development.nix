@@ -1,60 +1,57 @@
-# Development tools and programming languages.
-# This module provides essential development tools, programming languages,
-# databases, and debugging utilities for software development.
+# Development tools and programming languages for software development,
+# debugging, database management, and reverse engineering.
 
 { pkgs, pkgsStable }:
 
-(with pkgsStable; [
-  # C/C++ development toolchain
-  gcc # GNU C compiler and toolchain
-
-  # Database systems and clients
-  sqlite # SQLite database engine
-  postgresql # PostgreSQL database client
-  redis # Redis key-value store client
-
-  # Build systems and task runners
-  just # Modern command runner
-  gnumake # GNU make build automation
-  cmake # Cross-platform build system
-
-  # Version control enhancements
-  git-lfs # Git Large File Storage
-
-  # Container and orchestration tools
-  docker-compose # Docker container orchestration
-
-  # Database management tools
-  dbeaver-bin # Universal database management tool
-
-  # Debugging and profiling tools
-  gdb # GNU debugger
-  valgrind # Memory debugging and profiling
-  strace # System call tracer
-  ltrace # Library call tracer
-
-  # Documentation and conversion tools
-  pandoc # Universal document converter
-])
-
-++ (with pkgs; [
-  # Integrated Development Environments
+with pkgs;
+with pkgsStable;
+[
+  # === Integrated Development Environments ===
   vscode # Visual Studio Code editor
   zed-editor # Zed editor
   sqlitebrowser # SQLite database browser GUI
 
-  # API development and testing tools
+  # === API Development and Testing ===
   burpsuite # Web application security testing tool
   postman # API development platform
   bruno # Open-source API client (Postman alternative)
   insomnia # REST API client
 
-  # Programming language runtimes and toolchains
-  openjdk21 # OpenJDK 21 LTS for Java development
+  # === C/C++ Development ===
+  gcc # GNU C compiler and toolchain
+  gdb # GNU debugger
+  cmake # Cross-platform build system
+  gnumake # GNU make build automation
+  valgrind # Memory debugging and profiling
+  strace # System call tracer
+  ltrace # Library call tracer
+
+  # === Database Systems and Clients ===
+  sqlite # SQLite database engine
+  postgresql # PostgreSQL database client
+  redis # Redis key-value store client
+  dbeaver-bin # Universal database management tool
+
+  # === Build Systems and Task Runners ===
+  just # Modern command runner
+
+  # === Version Control ===
+  git-lfs # Git Large File Storage
+
+  # === Container and Orchestration ===
+  docker-compose # Docker container orchestration
+
+  # === Documentation and Conversion ===
+  pandoc # Universal document converter
+
+  # === Rust Development ===
   rustc # Rust programming language compiler
   cargo # Rust package manager and build tool
 
-  # Reverse engineering tools
+  # === Java Development ===
+  openjdk21 # OpenJDK 21 LTS for Java development
+
+  # === Reverse Engineering ===
   ghidra # Reverse engineering framework
   radare2 # Binary analysis tool
   binwalk # Firmware analysis tool
@@ -63,4 +60,4 @@
   jadx # Java decompiler
   frida-tools # Dynamic instrumentation toolkit
   android-tools # Android development tools for device interaction
-])
+]

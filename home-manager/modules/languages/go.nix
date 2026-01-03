@@ -1,6 +1,4 @@
 # Go programming language configuration.
-# This module configures the Go programming language environment
-# with development tools, LSP support, and project workspace setup.
 
 {
   config,

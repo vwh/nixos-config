@@ -6,6 +6,5 @@
     ./zsh
     ./alacritty.nix
     ./tmux.nix
-    ./yazi.nix
   ];
 }

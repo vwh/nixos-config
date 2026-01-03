@@ -1,5 +1,4 @@
 # Lazygit (Git TUI) configuration.
-# This module configures lazygit, a terminal UI for git commands
 
 {
   programs.lazygit = {

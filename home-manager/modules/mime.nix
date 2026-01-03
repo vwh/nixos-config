@@ -1,5 +1,4 @@
 # MIME type associations for default applications.
-# This module configures XDG MIME type associations to ensure files open with the correct applications.
 
 { lib, ... }:
 

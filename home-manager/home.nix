@@ -1,5 +1,4 @@
 # Main Home Manager configuration file.
-# This file defines the core user environment, packages, and session settings
 
 {
   inputs,

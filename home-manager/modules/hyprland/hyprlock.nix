@@ -1,6 +1,4 @@
 # Hyprlock (screen locker) configuration.
-# This module configures Hyprlock, a GPU-accelerated screen locker for Hyprland
-# with customizable appearance, animations, and authentication methods.
 
 {
   programs.hyprlock = {

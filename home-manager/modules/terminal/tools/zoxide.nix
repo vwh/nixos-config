@@ -1,6 +1,4 @@
 # Zoxide (fast directory changer) configuration.
-# This module configures zoxide, a fast alternative to cd that learns
-# your directory navigation patterns and provides smart directory jumping.
 
 { pkgs, ... }:
 
