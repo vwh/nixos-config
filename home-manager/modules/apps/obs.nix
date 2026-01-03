@@ -1,17 +1,25 @@
-# OBS Studio configuration.
+# OBS Studio configuration with CUDA and essential plugins.
 
-{ pkgsStable, ... }:
+{ pkgs, ... }:
 
 {
   programs.obs-studio = {
-    enable = true; # Enable OBS Studio for streaming and recording
+    enable = true;
 
-    # OBS Studio plugins for enhanced functionality
-    plugins = with pkgsStable.obs-studio-plugins; [
-      input-overlay # Display keyboard/mouse input on screen
-      wlrobs # Wayland screen capture support
-      obs-backgroundremoval # AI-powered background removal
-      obs-pipewire-audio-capture # PipeWire audio capture support
+    package = pkgs.obs-studio.override { cudaSupport = true; };
+
+    plugins = with pkgs.obs-studio-plugins; [
+      input-overlay # Display keyboard/mouse input
+      wlrobs # Wayland screen capture
+      obs-backgroundremoval # AI background removal
+      obs-pipewire-audio-capture # PipeWire audio capture
+      obs-vkcapture # Vulkan/OpenGL game capture
+      obs-gstreamer # GStreamer integration for more sources
+      obs-vaapi # VA-API hardware encoding (AMD/Intel)
+      obs-move-transition # Smooth animated transitions between scenes
+      obs-shaderfilter # Custom shader effects
+      obs-source-record # Record individual sources separately
+      advanced-scene-switcher # Automate scene switching
     ];
   };
 }
