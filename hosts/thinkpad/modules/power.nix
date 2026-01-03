@@ -2,8 +2,6 @@
 # This module configures power management settings optimized for ThinkPad
 # laptops, including thermal throttling prevention and power profiles.
 
-{ lib, ... }:
-
 {
   # Enable NixOS power management
   powerManagement.enable = true;
@@ -18,11 +16,11 @@
 
     # Enable ThinkPad throttling prevention daemon
     # Helps prevent thermal throttling on ThinkPad laptops
-    throttled.enable = lib.mkDefault true;
+    throttled.enable = true;
 
     # Enable auto-cpufreq for better CPU frequency control
     # Works well with TLP on ThinkPads for optimal battery life
-    auto-cpufreq.enable = lib.mkDefault true;
+    auto-cpufreq.enable = true;
   };
 
   # ThinkPad-specific kernel modules for battery control

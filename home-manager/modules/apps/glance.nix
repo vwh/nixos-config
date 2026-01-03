@@ -20,8 +20,8 @@ with lib;
     # Use the settings as a YAML value (compatible with existing service)
     settings = {
       server = {
-        host = mkDefault "127.0.0.1";
-        port = mkDefault 8080;
+        host = "127.0.0.1";
+        port = 8080;
       };
 
       # Gruvbox Dark theme

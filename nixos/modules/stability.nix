@@ -1,7 +1,7 @@
 # System stability and high-performance networking optimization.
 # Ultra-high RPS tuning for load testing and development environments.
 
-{ pkgsStable, lib, ... }:
+{ pkgsStable, ... }:
 
 {
   boot.kernel.sysctl = {
@@ -15,9 +15,6 @@
     # Connection reuse and scalability (conservative settings)
     "net.ipv4.tcp_tw_reuse" = 1; # Integer: Reuse TIME_WAIT sockets
     "net.ipv4.tcp_fin_timeout" = 15; # Integer: FIN timeout for closed sockets
-
-    # SYN handling
-    "net.ipv4.tcp_syncookies" = lib.mkDefault 1; # Integer: Protects against SYN floods
 
     # TCP buffer tuning - integers for single values
     "net.core.rmem_max" = 16777216; # Integer: Max receive buffer (16 MB)

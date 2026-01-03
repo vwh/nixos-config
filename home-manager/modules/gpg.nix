@@ -34,6 +34,6 @@
     enable = true;
     defaultCacheTtl = 86400;
     enableSshSupport = true;
-    pinentry.package = lib.mkDefault pkgsStable.pinentry-gnome3;
+    pinentry.package = pkgsStable.pinentry-gnome3;
   };
 }
