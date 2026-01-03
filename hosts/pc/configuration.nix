@@ -30,15 +30,30 @@
     inherit stateVersion; # NixOS state version from flake
   };
 
-  # Gaming configuration - enable gaming features and GameScope
-  mySystem.gaming = {
-    enable = true; # Enable gaming module
-    enableGamescope = true; # Enable GameScope for gaming session management
-  };
-
-  # Sandbox configuration - enable application sandboxing
-  mySystem.sandboxing = {
-    enable = true; # Enable Firejail and bubblewrap sandboxing
+  # System module configurations with all options explicitly set
+  mySystem = {
+    gaming = {
+      enable = true;
+      enableGamescope = true;
+    };
+    sandboxing = {
+      enable = true;
+      enableUserNamespaces = true;
+      enableWrappedBinaries = false;
+    };
+    bluetooth = {
+      enable = false;
+      powerOnBoot = false;
+    };
+    flatpak = {
+      enable = true;
+    };
+    mullvadVpn = {
+      enable = true;
+    };
+    tor = {
+      enable = true;
+    };
   };
 
   # System-wide packages (empty - packages managed via Home Manager)

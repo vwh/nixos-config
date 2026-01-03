@@ -11,7 +11,7 @@ This is a comprehensive NixOS configuration repository using Nix Flakes to manag
 - **Hyprland**: Wayland window manager with custom theming (Gruvbox)
 - **Development Environments**: Isolated devShells for multiple programming languages
 - **Secret Management**: SOPS-based encrypted secrets with age encryption
-- **AI Integration**: Local AI models (Ollama) and vector search (Qdrant) for intelligent development
+- **AI Integration**: Vector search (Qdrant) for intelligent development
 - **AI Tools**: Command-line AI assistants with GLM-4.6 model integration
 
 ## Quick Start
@@ -97,7 +97,6 @@ nixos/modules/              # System-wide modules
 ├── gaming.nix             # Steam, Lutris, Wine, MangoHud (with Gamescope option)
 ├── graphics.nix           # GPU drivers
 ├── networking.nix         # Network configuration
-├── ollama.nix             # Local AI models (port 11434)
 ├── qdrant.nix             # Vector search (port 6333)
 ├── sandboxing.nix         # Firejail and bubblewrap for application sandboxing
 ├── security.nix           # Kernel hardening, auto-updates, weekly Lynis audits
@@ -111,7 +110,7 @@ nixos/modules/              # System-wide modules
 - Each module handles a specific subsystem (audio, graphics, networking, AI services)
 - Modules are imported through `default.nix` for clean separation
 - Hardware-specific configurations live in host directories
-- AI services (Ollama, Qdrant) are properly networked and firewalled
+- AI services (Qdrant) are properly networked and firewalled
 
 **The `mySystem` Namespace Pattern**:
 
@@ -188,7 +187,6 @@ Includes: Steam with Proton-GE, Lutris with FHS environment and Wine dependencie
 ### AI Services
 | Service | Port | Purpose |
 |---------|------|---------|
-| **Ollama** | 11434 | Local AI models and embeddings |
 | **Qdrant** | 6333 | Vector search for code indexing |
 
 ### Web Services
@@ -331,7 +329,6 @@ environment.sessionVariables = { ... };
 ## Key Features and Integration
 
 ### AI-Powered Development Environment
-- **Ollama Service**: Local AI models and embeddings (port 11434)
 - **Qdrant Vector Search**: AI-powered code indexing (port 6333)
 - **AI Assistant Scripts**: Integrated AI utilities for enhanced development workflow
 - **Language Server Support**: Complete LSP setups for all major languages

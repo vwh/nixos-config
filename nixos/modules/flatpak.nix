@@ -1,23 +1,30 @@
 # Flatpak configuration for sandboxed application distribution.
 
-{ config, ... }:
+{ config, lib, ... }:
 
 {
-  # Enable Flatpak service
-  services.flatpak.enable = true;
+  # Custom module options for Flatpak configuration
+  options.mySystem.flatpak = {
+    enable = lib.mkEnableOption "Flatpak support for sandboxed applications";
+  };
 
-  # Configure Flatpak to use Flathub as the default remote
-  # This will be set up on first system rebuild
-  systemd.services.add-flathub = {
-    description = "Add Flathub remote";
-    wantedBy = [ "multi-user.target" ];
-    after = [
-      "network.target"
-      "flatpak-system.service"
-    ];
-    path = [ config.services.flatpak.package ];
-    script = ''
-      flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-    '';
+  # Configuration applied when Flatpak is enabled
+  config = lib.mkIf config.mySystem.flatpak.enable {
+    # Enable Flatpak service
+    services.flatpak.enable = true;
+
+    # Configure Flatpak to use Flathub as the default remote
+    systemd.services.add-flathub = {
+      description = "Add Flathub remote";
+      wantedBy = [ "multi-user.target" ];
+      after = [
+        "network.target"
+        "flatpak-system.service"
+      ];
+      path = [ config.services.flatpak.package ];
+      script = ''
+        flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+      '';
+    };
   };
 }

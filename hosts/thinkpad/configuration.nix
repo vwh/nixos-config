@@ -30,9 +30,30 @@
     inherit stateVersion; # NixOS state version from flake
   };
 
-  # Sandbox configuration - enable application sandboxing
-  mySystem.sandboxing = {
-    enable = true; # Enable Firejail and bubblewrap sandboxing
+  # System module configurations with all options explicitly set
+  mySystem = {
+    gaming = {
+      enable = false;
+      enableGamescope = false;
+    };
+    sandboxing = {
+      enable = true;
+      enableUserNamespaces = true;
+      enableWrappedBinaries = false;
+    };
+    bluetooth = {
+      enable = true;
+      powerOnBoot = false;
+    };
+    flatpak = {
+      enable = true;
+    };
+    mullvadVpn = {
+      enable = true;
+    };
+    tor = {
+      enable = true;
+    };
   };
 
   # System-wide packages (empty - packages managed via Home Manager)

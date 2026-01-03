@@ -273,7 +273,6 @@ This repository uses [`just`](https://github.com/casey/just) as a command runner
 │       ├── nh.nix                 ← Nix Helper (nh) configuration
 │       ├── nix-ld.nix             ← Dynamic linker for non-Nix binaries
 │       ├── nix.nix                ← Nix package manager config
-│       ├── ollama.nix             ← Local AI models service
 │       ├── printing.nix           ← Print services
 │       ├── qdrant.nix             ← Vector search engine
 │       ├── sandboxing.nix         ← Application sandboxing (Firejail, bubblewrap)
