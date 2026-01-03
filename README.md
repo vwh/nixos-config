@@ -149,8 +149,8 @@ This repository uses [`just`](https://github.com/casey/just) as a command runner
 ├── devShells/                     ← Project development environments
 │   ├── bun/                       ← Bun runtime environment
 │   ├── deno/                      ← Deno runtime environment
-│   ├── go/                        ← Go development environment
 │   ├── nodejs/                    ← Node.js environment
+│   ├── postgresql/                ← PostgreSQL development environment
 │   ├── python-venv/               ← Python virtual environment
 │   ├── rust-nightly/              ← Rust nightly toolchain
 │   ├── rust-stable/               ← Rust stable toolchain
@@ -172,11 +172,9 @@ This repository uses [`just`](https://github.com/casey/just) as a command runner
 │   │   │   ├── swaync/
 │   │   │   │   └── default.nix
 │   │   │   ├── waybar/
-│   │   │   │   ├── default.nix
-│   │   │   │   └── style.css
+│   │   │   │   └── default.nix
 │   │   │   ├── wofi/
-│   │   │   │   ├── default.nix
-│   │   │   │   └── style.css
+│   │   │   │   └── default.nix
 │   │   │   ├── binds.nix
 │   │   │   ├── default.nix
 │   │   │   ├── hypridle.nix
@@ -207,13 +205,15 @@ This repository uses [`just`](https://github.com/casey/just) as a command runner
 │   │   │   │   └── default.nix
 │   │   │   ├── alacritty.nix
 │   │   │   ├── default.nix
-│   │   │   ├── tmux.nix
-│   │   │   └── yazi.nix
+│   │   │   └── tmux.nix
+│   │   ├── browser-isolation.nix  ← Browser sandboxing
 │   │   ├── default.nix
 │   │   ├── gpg.nix
 │   │   ├── mime.nix
+│   │   ├── mise.nix               ← Mise tool version manager
 │   │   ├── overlays.nix
 │   │   ├── qt.nix
+│   │   ├── shell.nix              ← Shell configuration
 │   │   └── stylix.nix
 │   ├── packages/                  ← Grouped package lists
 │   │   ├── custom/
@@ -228,6 +228,7 @@ This repository uses [`just`](https://github.com/casey/just) as a command runner
 │   │   ├── hyprland.nix
 │   │   ├── multimedia.nix
 │   │   ├── networking.nix
+│   │   ├── privacy.nix
 │   │   ├── system-monitoring.nix
 │   │   └── utilities.nix
 │   └── home.nix                   ← Main home configuration
@@ -258,6 +259,7 @@ This repository uses [`just`](https://github.com/casey/just) as a command runner
 │       ├── cleanup.nix            ← System cleanup tasks
 │       ├── default.nix            ← Module imports
 │       ├── environment.nix        ← Environment variables
+│       ├── flatpak.nix            ← Flatpak support with Flathub
 │       ├── gaming.nix             ← Gaming (Steam, Lutris, Wine, MangoHud)
 │       ├── gnome.nix              ← GNOME desktop (optional)
 │       ├── graphics.nix           ← Graphics drivers
@@ -274,6 +276,7 @@ This repository uses [`just`](https://github.com/casey/just) as a command runner
 │       ├── ollama.nix             ← Local AI models service
 │       ├── printing.nix           ← Print services
 │       ├── qdrant.nix             ← Vector search engine
+│       ├── sandboxing.nix         ← Application sandboxing (Firejail, bubblewrap)
 │       ├── scripts.nix            ← Custom utility scripts
 │       ├── security.nix           ← **System security hardening**
 │       ├── sops.nix               ← Secret management
@@ -292,11 +295,11 @@ This repository uses [`just`](https://github.com/casey/just) as a command runner
 │   │   └── help.sh               ← Command-line assistant
 │   ├── build/
 │   │   └── modules-check.sh      ← Module import validation
-│   ├── generate-file-context.sh  ← **AI file context generator**
 │   ├── sops/
 │   │   ├── sops-setup.sh         ← SOPS age key initialization
 │   │   └── setup-keys.sh         ← SSH/GPG keys from SOPS
 │   └── waybar/
+│       ├── gpu-combined.sh       ← GPU combined stats widget
 │       ├── gpu-temp.sh           ← GPU temperature widget
 │       └── network.sh            ← Network monitoring widget
 ├── secrets/                       ← Encrypted secrets (sops-nix)

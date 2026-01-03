@@ -92,11 +92,14 @@ home-manager/               # User environment configuration
 └── home.nix               # Main home configuration
 nixos/modules/              # System-wide modules
 ├── audio.nix              # PipeWire/PulseAudio
+├── cleanup.nix            # Automated cleanup services for downloads, cache, pip, npm, docker, etc.
+├── flatpak.nix            # Flatpak sandboxed application support with Flathub
 ├── gaming.nix             # Steam, Lutris, Wine, MangoHud (with Gamescope option)
 ├── graphics.nix           # GPU drivers
 ├── networking.nix         # Network configuration
 ├── ollama.nix             # Local AI models (port 11434)
 ├── qdrant.nix             # Vector search (port 6333)
+├── sandboxing.nix         # Firejail and bubblewrap for application sandboxing
 ├── security.nix           # Kernel hardening, auto-updates, weekly Lynis audits
 ├── nh.nix                 # Nix Helper configuration
 └── virtualisation.nix     # Docker/libvirt
@@ -109,6 +112,22 @@ nixos/modules/              # System-wide modules
 - Modules are imported through `default.nix` for clean separation
 - Hardware-specific configurations live in host directories
 - AI services (Ollama, Qdrant) are properly networked and firewalled
+
+**The `mySystem` Namespace Pattern**:
+
+Several modules use a custom `mySystem` options namespace for enabling optional features:
+
+```nix
+# Example: Enable optional features in host configuration
+mySystem.gaming.enable = true;
+mySystem.gaming.enableGamescope = true;  # Optional sub-feature
+mySystem.sandboxing.enable = true;       # Application sandboxing with Firejail
+```
+
+Available `mySystem` options:
+- `mySystem.gaming.enable` - Gaming support (Steam, Lutris, Wine, MangoHud)
+- `mySystem.gaming.enableGamescope` - Optional Gamescope compositor session
+- `mySystem.sandboxing.enable` - Application sandboxing (Firejail, bubblewrap)
 
 **Home Manager Modules** (`home-manager/modules/`):
 - User-specific configurations and dotfiles
@@ -160,6 +179,8 @@ mySystem.gaming.enable = true;
 mySystem.gaming.enableGamescope = true;  # Optional: Enable Gamescope session
 ```
 
+**Note**: The `mySystem` namespace is a custom options pattern used for organizing optional system features. This pattern allows for clean, hierarchical configuration of major subsystems.
+
 Includes: Steam with Proton-GE, Lutris with FHS environment and Wine dependencies, MangoHud overlay, wineWowPackages, winetricks.
 
 ## Service Configuration
@@ -181,11 +202,38 @@ Includes: Steam with Proton-GE, Lutris with FHS environment and Wine dependencie
 - Configuration: `nixos/modules/security.nix`
 - PAM limits: Increased file descriptors (1048576) for gaming/Wine, disabled core dumps, real-time priority support
 
+### Automated Cleanup Services
+- **Cleanup Module**: Systemd timers for automatic maintenance of downloads, cache, and language-specific package caches
+- Configuration: `nixos/modules/cleanup.nix`
+- Services include:
+  - `cleanup-telegram-downloads` (daily, 14+ days old)
+  - `cleanup-downloads` (weekly, 30+ days old)
+  - `cleanup-screenshots` (monthly, 14+ days old)
+  - `cleanup-cache` (weekly, 30+ days old)
+  - `cleanup-pip-cache`, `cleanup-npm-cache`, `cleanup-bun-cache`, `cleanup-go-cache` (monthly/weekly)
+  - `cleanup-playwright` (monthly)
+  - `cleanup-telegram-desktop` (monthly, 60+ days old)
+  - `cleanup-docker` (monthly, full system prune)
+
+### Application Sandboxing
+- **Sandboxing Module**: Firejail and bubblewrap for application containment
+- Configuration: `nixos/modules/sandboxing.nix`
+- Enable with `mySystem.sandboxing.enable = true;`
+- Includes Firejail profiles, bubblewrap (bwrap), and squashfs tools
+- Note: Some Firejail profiles (librewolf, tor-browser) are disabled due to NixOS path incompatibilities
+
+### Flatpak Support
+- **Flatpak Module**: Sandboxed application distribution with automatic Flathub setup
+- Configuration: `nixos/modules/flatpak.nix`
+- Automatically adds Flathub remote on first build via systemd service
+- Use `flatpak install flathub <app>` to install applications
+
 ### Nix Helper (nh) Integration
 - **Nix Helper**: Modern Nix management tool with improved build and switch operations
 - Commands: `nh os switch`, `nh home switch`, `nh clean all`
 - Configuration: `nixos/modules/nh.nix`
-- FLAKE environment variable automatically set to `/home/yazan/System` for convenience
+- FLAKE environment variable: Automatically set to `/home/yazan/System`, so you can run `nh os switch` without specifying the flake path
+- Shortcut: With FLAKE set, `nh os switch .` is equivalent to running from the System directory
 
 ### Service Configuration Pattern
 
@@ -205,15 +253,27 @@ Uses SOPS with age encryption:
 
 ```bash
 just sops-setup    # Initialize age keys
-just sops-edit      # Edit secrets (automatic encrypt/decrypt)
-just sops-view      # View decrypted secrets
+just sops-edit      # Edit secrets in VS Code (automatic encrypt/decrypt)
+just sops-view      # View decrypted secrets (read-only)
+just sops-decrypt   # Decrypt secrets to file for manual editing
+just sops-encrypt   # Encrypt file back to secrets.yaml
+just sops-key       # Show SOPS public age key
 just secrets-add key value  # Add single secret
+just setup-keys     # Setup SSH and GPG keys from SOPS secrets
 ```
 
 ## Development Environments
 
 Isolated devShells in `devShells/` with flake templates:
-- `bun/`, `deno/`, `go/`, `nodejs/`, `python-venv/`, `rust-stable/`, `rust-nightly/`
+
+Available templates:
+- **`bun/`** - Bun JavaScript/TypeScript runtime with project initialization
+- **`deno/`** - Deno secure JavaScript/TypeScript runtime
+- **`go/`** - Go development environment
+- **`nodejs/`** - Node.js with npm/yarn/pnpm package managers
+- **`python-venv/`** - Python with virtual environment support
+- **`rust-stable/`** - Rust stable toolchain with cargo
+- **`rust-nightly/`** - Rust nightly toolchain for bleeding-edge features
 
 **Usage**: `nix flake init -t "github:vwh/nixos-config/main?dir=devShells#<name>"`
 
@@ -282,8 +342,8 @@ The repository includes sophisticated AI-powered utilities in `scripts/ai/`:
 
 **`ai-ask`** - General-purpose AI assistant:
 ```bash
-./scripts/ai/ask.sh "Explain quantum computing"           # Basic query (GLM-4.6)
-./scripts/ai/ask.sh -d "Complex analysis task"          # Deep model (GLM-4.6)
+./scripts/ai/ask.sh "Explain quantum computing"           # Query AI (GLM-4.6)
+./scripts/ai/ask.sh -d "Complex analysis task"          # Same model, explicit deep mode flag
 ./scripts/ai/ask.sh -c "Generate command"               # Copy to clipboard
 ./scripts/ai/ask.sh -s "You are expert" "Help me"       # Custom system prompt
 ```
@@ -301,7 +361,7 @@ The repository includes sophisticated AI-powered utilities in `scripts/ai/`:
 ./scripts/ai/commit.sh -d                               # Use deep model for better analysis
 ```
 
-These tools integrate with the z.ai OpenAI-compatible API service and provide context-aware assistance for NixOS development, conventional commits, and command-line operations.
+These tools integrate with the z.ai OpenAI-compatible API service using GLM-4.6 and provide context-aware assistance for NixOS development, conventional commits, and command-line operations.
 
 ### Gesture-Based Launcher
 - **Hexecute**: Gesture-based application launcher with mouse gesture recognition
@@ -335,6 +395,22 @@ These tools integrate with the z.ai OpenAI-compatible API service and provide co
 2. Add import to relevant `default.nix`
 3. **Critical**: Run `just modules` to validate import structure
 4. Test with `just home` or `just nixos`
+
+**For optional system-level features**, consider using the `mySystem` namespace pattern:
+
+```nix
+# In your module (e.g., nixos/modules/myfeature.nix)
+{ config, lib, ... }:
+{
+  options.mySystem.myfeature.enable = lib.mkEnableOption "my feature description";
+
+  config = lib.mkIf config.mySystem.myfeature.enable {
+    # Your configuration here
+  };
+}
+```
+
+Then enable in host configuration with `mySystem.myfeature.enable = true;`.
 
 ### Updating Packages
 
@@ -404,15 +480,9 @@ home-manager switch --rollback  # Home configuration rollback
 
 ## Important Notes
 
-- This is a personal system configuration with specific hardware and user setups
-- **Always test changes with `just home` before running `just nixos`**
-- Use stable packages for important tools, unstable for user applications
-- Follow existing module patterns and naming conventions
+- This is a personal system configuration with specific hardware (`pc` desktop, `thinkpad` laptop) and user (`yazan`) setups
 - **Critical workflow**: `just modules && just lint && just format` before any commit
-- The `just` command runner provides all essential development tasks
-- **Use `nh` (Nix Helper) for modern Nix operations** - replaces direct `nixos-rebuild` commands
+- **Always test changes with `just home` before running `just nixos`** - user-level changes are safer to test
+- **Use `nh` (Nix Helper) for all Nix operations** - it replaces direct `nixos-rebuild` and `home-manager` commands
 - Module import validation (`just modules`) prevents broken configurations
-- AI services are properly integrated and secured with firewall rules
-- **Hexecute gesture launcher** available via `$mainMod+SPACE` in Hyprland
-- **Security hardening** automatically applied via security module
-- **Docker password**: Use `bash` for Docker commands, not zsh (password alice)
+- **Docker password**: Use `bash` for Docker commands, not zsh (configured password: `alice`)
