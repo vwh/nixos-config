@@ -8,6 +8,7 @@
     ./bootloader.nix # Boot loader configuration (GRUB/systemd-boot)
     ./browser-deps.nix # Browser dependencies for Chrome/Chromium-based applications
     ./cleanup.nix # Automated file cleanup services
+    ./dnscrypt-proxy.nix # DNSCrypt-Proxy for encrypted DNS
     ./nautilus.nix # GNOME Files (Nautilus) configuration
     ./nh.nix # Nix Helper (nh) configuration
     ./sandboxing.nix # Application sandboxing and isolation
@@ -19,6 +20,7 @@
     ./hyprland.nix # Hyprland window manager system integration
     ./i18n.nix # Internationalization and localization settings
     ./libinput.nix # Input device configuration (touchpad, mouse, etc.)
+    ./macchanger.nix # MAC address randomization for privacy
     ./monitoring.nix # System monitoring and hardware sensors
     ./mullvad-vpn.nix # Mullvad VPN configuration and service
     ./networking.nix # Network configuration and firewall rules

@@ -54,6 +54,12 @@
     tor = {
       enable = true;
     };
+    dnscryptProxy = {
+      enable = true;
+    };
+    macchanger = {
+      enable = true;
+    };
   };
 
   # System-wide packages (empty - packages managed via Home Manager)
