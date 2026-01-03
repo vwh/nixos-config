@@ -30,6 +30,11 @@
     inherit stateVersion; # NixOS state version from flake
   };
 
+  # Sandbox configuration - enable application sandboxing
+  mySystem.sandboxing = {
+    enable = true; # Enable Firejail and bubblewrap sandboxing
+  };
+
   # System-wide packages (empty - packages managed via Home Manager)
   environment.systemPackages = [ ];
 }

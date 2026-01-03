@@ -4,6 +4,7 @@
 {
   imports = [
     ./apps # Application-specific configurations (browsers, editors, etc.)
+    ./browser-isolation.nix # Browser profile isolation scripts
     ./hyprland # Hyprland window manager and related services
     ./languages # Programming languages configurations
     ./terminal # Terminal emulator and shell configurations

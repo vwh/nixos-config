@@ -35,9 +35,9 @@ with lib;
       };
 
       branding = mkForce {
-        app-name = "Yazan Dashboard";
-        logo-text = "Y";
-        favicon = "https://vwh.sh/images/favicon.ico";
+        app-name = "Dashboard";
+        logo-text = "D";
+        favicon = "";
       };
 
       pages = mkForce [
@@ -338,7 +338,7 @@ with lib;
                         }
                         {
                           title = "My Repos";
-                          url = "https://github.com/vwh";
+                          url = "https://github.com";
                           icon = "si:github";
                         }
                         {

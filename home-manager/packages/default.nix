@@ -16,6 +16,7 @@ let
     ./hyprland.nix # Hyprland window manager packages
     ./multimedia.nix # Media and entertainment packages
     ./networking.nix # Network-related tools
+    ./privacy.nix # Privacy and opsec tools
     ./system-monitoring.nix # System monitoring and diagnostics
     ./utilities.nix # General utility packages
   ];
