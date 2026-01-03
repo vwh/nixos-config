@@ -44,6 +44,7 @@ with pkgsStable;
   udiskie # Automatic disk mounting for USB drives with notifications
   xarchiver # Lightweight archive manager
   pavucontrol # PulseAudio volume control GUI
+  easyeffects # Audio effects for PipeWire applications
 
   # Development and debugging utilities
   hexdump # Hexadecimal file dumper
