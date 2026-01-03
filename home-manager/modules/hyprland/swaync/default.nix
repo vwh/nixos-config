@@ -2,15 +2,13 @@
 # notification daemon for Wayland compositors with a customizable interface
 # and control center for managing notifications and system controls.
 
-{ lib, ... }:
-
 {
   # Enable SwayNC notification daemon
   services.swaync = {
     enable = true;
 
     # Flat Gruvbox style (matches your Waybar). No blur.
-    style = lib.mkForce ''
+    style = ''
       * {
         font-family: "JetBrains Mono", monospace;
         font-weight: 600;

@@ -2,7 +2,7 @@
 # This module configures locale settings, input methods, and keyboard layouts
 # for multilingual support, particularly for English and Arabic.
 
-{ pkgs, lib, ... }:
+{ pkgs, ... }:
 
 {
   i18n = {
@@ -44,9 +44,9 @@
   # Keyboard layout configuration for X11/Wayland
   services.xserver = {
     xkb = {
-      layout = lib.mkForce "us,ara"; # US English + Arabic layouts
-      variant = lib.mkForce ",qwerty"; # Default variants
-      options = lib.mkForce "grp:caps_toggle,grp_led:caps"; # Caps lock toggles layout, LED indicates state
+      layout = "us,ara"; # US English + Arabic layouts
+      variant = ",qwerty"; # Default variants
+      options = "grp:caps_toggle,grp_led:caps"; # Caps lock toggles layout, LED indicates state
     };
   };
 

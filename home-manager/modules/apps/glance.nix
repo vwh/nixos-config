@@ -2,14 +2,7 @@
 # This module configures Glance, a self-hosted dashboard that aggregates
 # Features include RSS feeds, weather, calendar, bookmarks, and more.
 
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}:
-
-with lib;
+{ pkgs, lib, ... }:
 
 {
   # Glance dashboard service configuration
@@ -25,22 +18,22 @@ with lib;
       };
 
       # Gruvbox Dark theme
-      theme = {
-        background-color = mkForce "0 0 16"; # Gruvbox background (#282828)
-        primary-color = mkForce "25 89 45"; # Gruvbox orange (#d65d0e)
-        positive-color = mkForce "45 95 60"; # Gruvbox yellow (#fabd2f)
-        negative-color = mkForce "5 71 45"; # Gruvbox red (#cc241d)
-        contrast-multiplier = mkForce 1.2;
-        text-saturation-multiplier = mkForce 1.3;
+      theme = lib.mkForce {
+        background-color = "0 0 16"; # Gruvbox background (#282828)
+        primary-color = "25 89 45"; # Gruvbox orange (#d65d0e)
+        positive-color = "45 95 60"; # Gruvbox yellow (#fabd2f)
+        negative-color = "5 71 45"; # Gruvbox red (#cc241d)
+        contrast-multiplier = 1.2;
+        text-saturation-multiplier = 1.3;
       };
 
-      branding = mkForce {
+      branding = lib.mkForce {
         app-name = "Dashboard";
         logo-text = "D";
         favicon = "";
       };
 
-      pages = mkForce [
+      pages = lib.mkForce [
         {
           name = "Home";
           columns = [
