@@ -28,7 +28,7 @@
       # Variable definitions for keybindings and commands
       "$mainMod" = "SUPER"; # Main modifier key (Windows/Cmd key)
       "$terminal" = "alacritty"; # Default terminal emulator
-      "$browser" = "zen"; # Default web browser
+      "$browser" = "brave"; # Default web browser
       "$editor" = "code"; # Default code editor
       "$fileManager" = "nautilus"; # Default file manager
       "$menu" = "wofi"; # Application launcher menu
@@ -239,7 +239,7 @@
 
         # Transparency settings
         "opacity 0.95 0.85, class:^(Alacritty|kitty|foot)$" # Terminal transparency
-        "opacity 0.95, class:(zen)" # Browser transparency
+        "opacity 0.95, class:(brave)" # Browser transparency
 
         # Performance optimizations
         "noanim, class:^(tooltip)$" # Disable animations for tooltips

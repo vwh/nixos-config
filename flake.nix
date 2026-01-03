@@ -34,12 +34,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Web browser
-    zen-browser = {
-      url = "github:0xc000022070/zen-browser-flake";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     # Gesture-based launcher
     hexecute = {
       url = "github:ThatOtherAndrew/Hexecute";

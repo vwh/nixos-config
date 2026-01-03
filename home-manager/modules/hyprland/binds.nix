@@ -175,7 +175,7 @@ in
       "$mainMod, A, pin," # Pin window (always on top)
 
       # Web browser shortcuts
-      "$mainMod, B, exec, zen" # Launch Zen browser
+      "$mainMod, B, exec, brave" # Launch Brave browser
 
       # Utility shortcuts
       "$mainMod, E, exec, bemoji -cn" # Emoji picker

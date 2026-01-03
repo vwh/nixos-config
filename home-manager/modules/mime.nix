@@ -8,7 +8,7 @@ with lib;
 # Default application mappings for different file categories
 let
   defaultApps = {
-    browser = [ "zen.desktop" ]; # Web browser for HTML and URLs
+    browser = [ "brave-browser.desktop" ]; # Web browser for HTML and URLs
     text = [ "org.gnome.TextEditor.desktop" ]; # Plain text editor
     image = [ "imv.desktop" ]; # Image viewer
     audio = [ "mpv.desktop" ]; # Audio player

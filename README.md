@@ -116,7 +116,6 @@ This configuration uses the following flakes:
 - **stylix** - System theming and styling (Gruvbox theme)
 - **spicetify-nix** - Spotify customization
 - **sops-nix** - Secret management with age encryption
-- **zen-browser** - Privacy-focused web browser
 - **hexecute** - Gesture-based application launcher
 
 ---
@@ -168,8 +167,7 @@ This repository uses [`just`](https://github.com/casey/just) as a command runner
 │   │   │   ├── default.nix
 │   │   │   ├── glance.nix
 │   │   │   ├── obs.nix
-│   │   │   ├── spicetify.nix
-│   │   │   └── zen.nix
+│   │   │   └── spicetify.nix
 │   │   ├── hyprland/              ← Window manager configuration
 │   │   │   ├── swaync/
 │   │   │   │   └── default.nix

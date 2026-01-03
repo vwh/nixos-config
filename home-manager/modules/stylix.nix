@@ -49,12 +49,6 @@
           border-spacing: inherit;
         }
       '';
-
-      # Configure Zen Browser theming
-      zen-browser = {
-        enable = true; # Enable Zen Browser theming
-        profileNames = [ "default" ]; # Apply to default profile
-      };
     };
 
     # Cursor configuration
