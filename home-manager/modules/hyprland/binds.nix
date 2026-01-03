@@ -41,7 +41,7 @@ let
     #!${pkgsStable.bash}/bin/bash
     # Screenshot using grim+slurp - the standard Wayland tools
 
-    SCREENSHOT_DIR="$HOME/screens"
+    SCREENSHOT_DIR="$HOME/Screens"
     mkdir -p "$SCREENSHOT_DIR"
 
     # Function to take screenshot
@@ -190,7 +190,7 @@ in
       "$mainMod CTRL, Print, exec, ${screenshotScript}/bin/smart-screenshot active" # Screenshot active screen
 
       # Screen recording functionality
-      "$mainMod, Z, exec, wf-recorder -f $HOME/screens/$(date +%Y%m%d_%H%M%S).mp4" # Start recording
+      "$mainMod, Z, exec, wf-recorder -f $HOME/Screens/$(date +%Y%m%d_%H%M%S).mp4" # Start recording
       "$mainMod SHIFT, Z, exec, pkill -SIGINT wf-recorder && notify-send 'Recording stopped'" # Stop recording
 
       # Volume control

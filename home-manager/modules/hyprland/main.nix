@@ -19,7 +19,7 @@
         "XDG_SESSION_DESKTOP,Hyprland" # Set session desktop
         "QT_QPA_PLATFORM,wayland;xcb" # Force Qt applications to use Wayland with X11 fallback
         "QT_STYLE_OVERRIDE=kvantum" # Use Kvantum Qt style
-        "XDG_SCREENSHOTS_DIR,$HOME/screens" # Directory for screenshots
+        "XDG_SCREENSHOTS_DIR,$HOME/Screens" # Directory for screenshots
       ];
 
       # Monitor configuration
