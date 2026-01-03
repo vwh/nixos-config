@@ -42,7 +42,6 @@
         # Auto-start applications in specific workspaces
         "[workspace 1 silent] $browser" # Browser in workspace 1
         "[workspace 2 silent] $terminal" # Terminal in workspace 2
-        "[workspace 2 silent] $editor" # Editor in workspace 2
         "[workspace 3 silent] Telegram" # Telegram in workspace 3
         "[workspace 4 silent] spotify" # Spotify in workspace 4
       ];
