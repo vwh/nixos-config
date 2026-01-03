@@ -1,5 +1,7 @@
 # Environment variables and session settings.
 
+{ lib, ... }:
+
 {
   environment.sessionVariables = rec {
     # Default terminal emulator for applications that need one
@@ -10,6 +12,15 @@
 
     # XDG Base Directory specification for user binaries
     XDG_BIN_HOME = "$HOME/.local/bin";
+
+    # XDG data directories - include Flatpak exports for app launchers
+    # This ensures wofi and other launchers can find Flatpak applications
+    # Using mkForce to override the display-managers default
+    XDG_DATA_DIRS = lib.mkForce [
+      "/var/lib/flatpak/exports/share"
+      "/home/yazan/.local/share/flatpak/exports/share"
+      "/run/current-system/sw/share"
+    ];
 
     # System PATH with additional directories
     PATH = [ "${XDG_BIN_HOME}" ];

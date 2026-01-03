@@ -12,6 +12,7 @@
     ./nh.nix # Nix Helper (nh) configuration
     ./sandboxing.nix # Application sandboxing and isolation
     ./environment.nix # System-wide environment variables and paths
+    ./flatpak.nix # Flatpak sandboxed application support
     ./gaming.nix # Gaming-related configurations and optimizations
     ./gnome.nix # GNOME desktop environment configuration
     ./graphics.nix # Graphics drivers and GPU configuration
