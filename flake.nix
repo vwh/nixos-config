@@ -58,7 +58,7 @@
 
       # Git configuration
       gitConfig = {
-        name = "Yazan";
+        name = "vwh";
         email = "vwhe@proton.me";
         signingKey = "0x5478BB36AC504E64"; # GPG key for signing commits
       };
