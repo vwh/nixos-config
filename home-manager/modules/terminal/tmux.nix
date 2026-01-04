@@ -11,19 +11,18 @@
     escapeTime = 0; # Remove escape key delay
     keyMode = "vi"; # Use vi-style keybindings
     terminal = "tmux-256color"; # Enable 256-color support
-    historyLimit = 50000; # Increase scrollback buffer size
+    historyLimit = 5000; # Reduced scrollback to reduce Claude Code flickering
 
     extraConfig = ''
       set -as terminal-features ",alacritty*:RGB"
 
       # Make status bar stick to bottom and handle resizing properly
       set -g status-position bottom
-      set -g aggressive-resize on
       set -g automatic-rename on
       set -g renumber-windows on
 
       # Better window resizing handling
-      setw -g aggressive-resize on
+      setw -g aggressive-resize off
 
       bind -n M-r source-file ~/.config/tmux/tmux.conf \; display "Reloaded!"
       bind C-p previous-window
