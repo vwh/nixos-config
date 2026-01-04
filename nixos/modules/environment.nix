@@ -1,5 +1,7 @@
 # Environment variables and session settings.
 
+{ user, ... }:
+
 {
   environment.sessionVariables = rec {
     # Default terminal emulator for applications that need one
@@ -15,7 +17,7 @@
     # This ensures wofi and other launchers can find Flatpak applications
     XDG_DATA_DIRS = [
       "/var/lib/flatpak/exports/share"
-      "/home/yazan/.local/share/flatpak/exports/share"
+      "/home/${user}/.local/share/flatpak/exports/share"
       "/run/current-system/sw/share"
     ];
 
