@@ -100,6 +100,9 @@
       dex = "docker exec -it"; # Execute into container
       dlogs = "docker logs -f"; # Follow container logs
 
+      # NVIDIA GPU fan control
+      gpu-fans = "nvidia-fans"; # Set GPU fan speed (e.g., gpu-fans 40)
+
       j = "just"; # Justfile runner
     };
 }

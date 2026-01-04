@@ -25,6 +25,14 @@
       # Analyzes staged changes and generates conventional commit message
       exec /home/${user}/System/scripts/ai/commit.sh "$@"
     '')
+
+    # NVIDIA fan control script
+    (writeShellScriptBin "nvidia-fans" ''
+      # Set NVIDIA GPU fan speed manually
+      # Usage: nvidia-fans <speed>
+      # Example: nvidia-fans 40  (sets fans to 40%)
+      exec /home/${user}/System/scripts/nvidia-fans.sh "$@"
+    '')
   ];
 
   # Ensure scripts have proper permissions
