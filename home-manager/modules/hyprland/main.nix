@@ -220,7 +220,7 @@
         "center,class:^(scratchpad)$"
 
         # Media workspace assignments
-        "workspace 4, class:(mpv|vlc|spotify|rhythmbox)"
+        "workspace 4, class:(spotify|rhythmbox)"
 
         # Documents workspace assignments
         "workspace special:docs, class:(libreoffice|soffice|zathura|evince|okular)"
