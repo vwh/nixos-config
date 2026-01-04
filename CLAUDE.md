@@ -92,16 +92,41 @@ home-manager/               # User environment configuration
 └── home.nix               # Main home configuration
 nixos/modules/              # System-wide modules
 ├── audio.nix              # PipeWire/PulseAudio
+├── bluetooth.nix          # Bluetooth services and device management
+├── bootloader.nix         # Boot loader configuration (GRUB/systemd-boot)
+├── browser-deps.nix       # Browser dependencies for Chrome/Chromium-based applications
 ├── cleanup.nix            # Automated cleanup services for downloads, cache, pip, npm, docker, etc.
+├── dnscrypt-proxy.nix     # DNSCrypt-Proxy for encrypted DNS
+├── environment.nix        # System-wide environment variables and paths
 ├── flatpak.nix            # Flatpak sandboxed application support with Flathub
 ├── gaming.nix             # Steam, Lutris, Wine, MangoHud (with Gamescope option)
+├── gnome.nix              # GNOME desktop environment configuration
 ├── graphics.nix           # GPU drivers
-├── networking.nix         # Network configuration
+├── hyprland.nix           # Hyprland window manager system integration
+├── i18n.nix               # Internationalization and localization settings
+├── libinput.nix           # Input device configuration (touchpad, mouse, etc.)
+├── macchanger.nix         # MAC address randomization for privacy
+├── monitoring.nix         # System monitoring and hardware sensors
+├── mullvad-vpn.nix        # Mullvad VPN configuration and service
+├── networking.nix         # Network configuration and firewall rules
+├── nix-ld.nix             # Dynamic linker for running non-Nix binaries
+├── nix.nix                # Nix package manager configuration
+├── nautilus.nix           # GNOME Files (Nautilus) configuration
+├── nh.nix                 # Nix Helper configuration
+├── printing.nix           # CUPS printing system and drivers
 ├── qdrant.nix             # Vector search (port 6333)
 ├── sandboxing.nix         # Firejail and bubblewrap for application sandboxing
+├── scripts.nix            # Custom utility scripts and tools
 ├── security.nix           # Kernel hardening, auto-updates, weekly Lynis audits
-├── nh.nix                 # Nix Helper configuration
-└── virtualisation.nix     # Docker/libvirt
+├── sops.nix               # Secret management with SOPS
+├── stability.nix          # System stability and optimization settings
+├── timezone.nix           # Time zone and clock configuration
+├── tor.nix                # Tor network services and configuration
+├── upower.nix             # Power management and battery monitoring
+├── users.nix              # User account management and permissions
+├── virtualisation.nix     # Docker/libvirt
+├── xdg-desktop-portal.nix # XDG desktop portal configuration
+└── xserver.nix            # X11 server configuration and display settings
 ```
 
 ### Module Architecture
@@ -127,6 +152,12 @@ Available `mySystem` options:
 - `mySystem.gaming.enable` - Gaming support (Steam, Lutris, Wine, MangoHud)
 - `mySystem.gaming.enableGamescope` - Optional Gamescope compositor session
 - `mySystem.sandboxing.enable` - Application sandboxing (Firejail, bubblewrap)
+- `mySystem.flatpak.enable` - Flatpak support with automatic Flathub setup
+- `mySystem.bluetooth.enable` - Bluetooth services and device management
+- `mySystem.mullvadVpn.enable` - Mullvad VPN client integration
+- `mySystem.tor.enable` - Tor network services and SOCKS proxy
+- `mySystem.dnscryptProxy.enable` - DNSCrypt-Proxy for encrypted DNS
+- `mySystem.macchanger.enable` - MAC address randomization for privacy
 
 **Home Manager Modules** (`home-manager/modules/`):
 - User-specific configurations and dotfiles
@@ -194,6 +225,14 @@ Includes: Steam with Proton-GE, Lutris with FHS environment and Wine dependencie
 |---------|------|---------|
 | **Glance Dashboard** | 8080 | System monitoring dashboard |
 | **CUPS Print Server** | 631 | Printer management |
+
+### Privacy and Security Services
+| Service | Purpose |
+|---------|---------|
+| **Tor** | SOCKS5 proxy on ports 9050 (system) and 9150 (Tor Browser) |
+| **Mullvad VPN** | VPN client with kill switch |
+| **DNSCrypt-Proxy** | Encrypted DNS with DNSSEC |
+| **MAC Changer** | Automatic MAC randomization on network interface up |
 
 ### System Security Module
 - **Security Hardening**: Comprehensive security module with kernel hardening (SYN cookies, reverse path filtering), automatic daily updates, weekly Lynis security audits via systemd timer, and AppArmor confinement
@@ -267,8 +306,8 @@ Isolated devShells in `devShells/` with flake templates:
 Available templates:
 - **`bun/`** - Bun JavaScript/TypeScript runtime with project initialization
 - **`deno/`** - Deno secure JavaScript/TypeScript runtime
-- **`go/`** - Go development environment
 - **`nodejs/`** - Node.js with npm/yarn/pnpm package managers
+- **`postgresql/`** - PostgreSQL database development environment
 - **`python-venv/`** - Python with virtual environment support
 - **`rust-stable/`** - Rust stable toolchain with cargo
 - **`rust-nightly/`** - Rust nightly toolchain for bleeding-edge features
@@ -359,6 +398,19 @@ The repository includes sophisticated AI-powered utilities in `scripts/ai/`:
 ```
 
 These tools integrate with the z.ai OpenAI-compatible API service using GLM-4.6 and provide context-aware assistance for NixOS development, conventional commits, and command-line operations.
+
+### Browser Isolation
+- **Multi-Profile Browser Setup**: Isolated browser contexts for different use cases
+- Configuration: `home-manager/modules/browser-isolation.nix`
+- Available browsers:
+  - `browser-work` - LibreWolf work profile (isolated)
+  - `browser-personal` - Brave personal profile (isolated)
+  - `browser-work-tor` - LibreWolf with Tor SOCKS5 proxy (persistent profile)
+  - `browser-tmp-tor` - LibreWolf with Tor SOCKS5 proxy (ephemeral profile, deleted on exit)
+- Each profile provides complete isolation including:
+  - Separate cache, cookies, and history
+  - Tor integration with WebRTC blocking and DNS leak prevention
+  - Desktop entries for Wofi launcher integration
 
 ### Gesture-Based Launcher
 - **Hexecute**: Gesture-based application launcher with mouse gesture recognition

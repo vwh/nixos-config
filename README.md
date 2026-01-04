@@ -258,6 +258,7 @@ This repository uses [`just`](https://github.com/casey/just) as a command runner
 │       ├── browser-deps.nix       ← Browser environment configuration
 │       ├── cleanup.nix            ← System cleanup tasks
 │       ├── default.nix            ← Module imports
+│       ├── dnscrypt-proxy.nix     ← DNSCrypt-Proxy for encrypted DNS
 │       ├── environment.nix        ← Environment variables
 │       ├── flatpak.nix            ← Flatpak support with Flathub
 │       ├── gaming.nix             ← Gaming (Steam, Lutris, Wine, MangoHud)
@@ -266,6 +267,7 @@ This repository uses [`just`](https://github.com/casey/just) as a command runner
 │       ├── hyprland.nix           ← Window manager setup
 │       ├── i18n.nix               ← Internationalization
 │       ├── libinput.nix           ← Input device support
+│       ├── macchanger.nix         ← MAC address randomization
 │       ├── monitoring.nix         ← System monitoring
 │       ├── mullvad-vpn.nix        ← Mullvad VPN configuration
 │       ├── nautilus.nix           ← File manager configuration
@@ -312,4 +314,55 @@ This repository uses [`just`](https://github.com/casey/just) as a command runner
 ├── LICENSE                        ← License information
 ├── README.md                      ← This file
 └── .sops.yaml                     ← SOPS configuration
+```
+
+---
+
+## System Configuration Options
+
+This configuration uses a custom `mySystem` namespace pattern for organizing optional system-level features. These options are set in the host configuration file (e.g., `hosts/pc/configuration.nix`).
+
+### Available Options
+
+| Option | Description |
+|--------|-------------|
+| `mySystem.gaming.enable` | Enable gaming support (Steam, Lutris, Wine, MangoHud) |
+| `mySystem.gaming.enableGamescope` | Enable Gamescope compositor session for Steam |
+| `mySystem.sandboxing.enable` | Enable application sandboxing (Firejail, bubblewrap) |
+| `mySystem.flatpak.enable` | Enable Flatpak support with automatic Flathub setup |
+| `mySystem.bluetooth.enable` | Enable Bluetooth services and device management |
+| `mySystem.bluetooth.powerOnBoot` | Enable Bluetooth power on boot |
+| `mySystem.mullvadVpn.enable` | Enable Mullvad VPN client integration |
+| `mySystem.tor.enable` | Enable Tor network services and SOCKS proxy |
+| `mySystem.dnscryptProxy.enable` | Enable DNSCrypt-Proxy for encrypted DNS |
+| `mySystem.macchanger.enable` | Enable MAC address randomization for privacy |
+
+### Example Configuration
+
+```nix
+# In hosts/pc/configuration.nix
+mySystem = {
+  gaming = {
+    enable = true;
+    enableGamescope = true;
+  };
+  sandboxing = {
+    enable = true;
+  };
+  flatpak = {
+    enable = true;
+  };
+  mullvadVpn = {
+    enable = true;
+  };
+  tor = {
+    enable = true;
+  };
+  dnscryptProxy = {
+    enable = true;
+  };
+  macchanger = {
+    enable = true;
+  };
+};
 ```
