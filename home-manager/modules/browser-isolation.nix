@@ -179,5 +179,50 @@
         exec librewolf --profile "$PROFILE_DIR" --new-instance 2>/dev/null
       '';
     };
+
+    # Desktop files for wofi integration
+    ".local/share/applications/browser-work.desktop" = {
+      text = ''
+        [Desktop Entry]
+        Name=Browser (Work)
+        Exec=browser-work
+        Type=Application
+        Icon=librewolf
+        Categories=Network;WebBrowser;
+      '';
+    };
+
+    ".local/share/applications/browser-personal.desktop" = {
+      text = ''
+        [Desktop Entry]
+        Name=Browser (Personal)
+        Exec=browser-personal
+        Type=Application
+        Icon=brave
+        Categories=Network;WebBrowser;
+      '';
+    };
+
+    ".local/share/applications/browser-work-tor.desktop" = {
+      text = ''
+        [Desktop Entry]
+        Name=Browser (Work + Tor)
+        Exec=browser-work-tor
+        Type=Application
+        Icon=librewolf
+        Categories=Network;WebBrowser;
+      '';
+    };
+
+    ".local/share/applications/browser-tmp-tor.desktop" = {
+      text = ''
+        [Desktop Entry]
+        Name=Browser (Temporary + Tor)
+        Exec=browser-tmp-tor
+        Type=Application
+        Icon=librewolf
+        Categories=Network;WebBrowser;
+      '';
+    };
   };
 }

@@ -17,7 +17,7 @@
       halign = "fill"; # Horizontal alignment
 
       # User interaction behavior
-      show = "drun"; # Desktop apps only (faster than drun,run)
+      show = "drun,run"; # Desktop apps + commands from PATH (including ~/.local/bin)
       prompt = "Search"; # Input prompt text
       filter_rate = 16; # 60fps response - MUCH faster than 50ms
       allow_markup = false; # Disable markup for better performance
@@ -35,7 +35,7 @@
       term = "alacritty"; # Default terminal
 
       # Available search modes
-      modes = "drun"; # Desktop applications only for better performance
+      modes = "drun,run"; # Desktop apps + commands from PATH
       columns = 1; # Single column for performance
 
       # Advanced search and display options
