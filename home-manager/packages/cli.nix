@@ -8,10 +8,8 @@ with pkgsStable;
   # === File and Directory Management ===
   fd # Modern find replacement with intuitive syntax
   fselect # SQL-like file selection tool
-  ncdu # Interactive disk usage analyzer
-  dust # Modern du with tree visualization
+  dust # Modern du with tree visualization (replaces ncdu, dua)
   duf # Enhanced df with better formatting
-  dua # Modern disk usage analyzer
 
   # === Text Processing and Search ===
   ripgrep # Fast grep replacement with modern features
