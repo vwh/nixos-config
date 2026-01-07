@@ -158,7 +158,6 @@
         new_on_top = true; # New windows appear on top
         mfact = 0.55; # Master window takes 55% of screen space
         orientation = "left"; # Default to vertical split (master on left)
-        inherit_fullscreen = true; # Slave windows inherit fullscreen
         smart_resizing = true; # Enable smart resizing
         drop_at_cursor = true; # Drop new windows at cursor position
       };
