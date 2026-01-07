@@ -7,6 +7,7 @@
     ./browser-isolation.nix # Browser profile isolation scripts
     ./hyprland # Hyprland window manager and related services
     ./languages # Programming languages configurations
+    ./lsp-servers.nix # Language servers for OpenCode (pyright, ruff, etc.)
     ./terminal # Terminal emulator and shell configurations
     ./overlays.nix # Nix package overlays for customizations
     ./gpg.nix # GPG key management and configuration

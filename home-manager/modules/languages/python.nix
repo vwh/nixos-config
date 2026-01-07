@@ -47,6 +47,12 @@
       venvi = "venv/bin/pip install"; # Install in virtual environment
 
       # Code quality and development tools
+      # Ruff (fast linter + formatter - replaces flake8, isort, black)
+      rufff = "ruff format"; # Format code with Ruff
+      ruffl = "ruff check"; # Lint code with Ruff
+      rufffi = "ruff format --check"; # Check formatting without changes
+
+      # Legacy tools (still available)
       blackf = "black --line-length 88"; # Format with Black
       isortf = "isort --profile black"; # Sort imports with isort
       flake8l = "flake8 --max-line-length 88"; # Lint with flake8
@@ -210,9 +216,10 @@
       uv # Fast Python package installer and resolver
 
       # Code quality and development tools
-      python3Packages.black # Code formatter
-      python3Packages.isort # Import sorter
-      python3Packages.flake8 # Linter
+      ruff # Fast Python linter, formatter (replaces flake8, isort, black)
+      python3Packages.black # Code formatter (fallback)
+      python3Packages.isort # Import sorter (fallback)
+      python3Packages.flake8 # Linter (fallback)
       python3Packages.mypy # Type checker
       python3Packages.pytest # Testing framework
       python3Packages.coverage # Coverage tool
@@ -223,7 +230,6 @@
       python3Packages.vulture # Dead code detection
 
       # LSP and IDE support
-      python3Packages.python-lsp-server # Python LSP server
       python3Packages.pylsp-mypy # MyPy plugin for Python LSP
       python3Packages.pyls-isort # isort plugin for Python LSP
       python3Packages.pyls-flake8 # flake8 plugin for Python LSP
