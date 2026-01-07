@@ -17,7 +17,6 @@
     font-awesome # Icon font for UI elements
     powerline-fonts # Special characters for status bars
     powerline-symbols # Additional powerline symbols
-    font-awesome # (Duplicate - can be removed)
     nerd-fonts.jetbrains-mono # JetBrains Mono with Nerd Font patches
   ];
 

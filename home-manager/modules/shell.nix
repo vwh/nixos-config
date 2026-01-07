@@ -23,7 +23,6 @@
     statix # Nix linter for best practices
     deadnix # Find dead code in Nix expressions
     nixd # Nix language server
-    nil # Another Nix language server
 
     # Nix development utilities
     nix-tree # Browse Nix store in a tree view
