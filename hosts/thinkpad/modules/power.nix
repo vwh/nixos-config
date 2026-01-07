@@ -14,13 +14,11 @@
     # Disable power-profiles-daemon to avoid conflicts with TLP
     power-profiles-daemon.enable = false;
 
-    # Enable ThinkPad throttling prevention daemon
-    # Helps prevent thermal throttling on ThinkPad laptops
-    throttled.enable = true;
+    # TLP is enabled in tlp.nix - disable conflicting services
+    # to prevent system instability and improve power management
 
-    # Enable auto-cpufreq for better CPU frequency control
-    # Works well with TLP on ThinkPads for optimal battery life
-    auto-cpufreq.enable = true;
+    # Disabled: throttled (conflicts with TLP)
+    # Disabled: auto-cpufreq (conflicts with TLP)
   };
 
   # ThinkPad-specific kernel modules for battery control

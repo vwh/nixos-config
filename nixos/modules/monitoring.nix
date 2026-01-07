@@ -5,8 +5,10 @@
 { pkgsStable, ... }:
 
 {
-  # Intel thermal daemon - CRITICAL for ThinkPad thermal management
-  services.thermald.enable = true;
+  # Intel thermal daemon disabled on ThinkPad
+  # (conflicts with TLP - TLP handles thermal management better)
+  # Note: Enable thermald on non-ThinkPad systems if needed
+  # services.thermald.enable = true;
 
   # System monitoring and diagnostic tools
   environment.systemPackages = with pkgsStable; [
