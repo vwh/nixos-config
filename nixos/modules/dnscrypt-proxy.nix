@@ -25,10 +25,11 @@
           "cloudflare-security"
         ];
 
-        # Fallback resolvers
+        # Fallback resolvers - using privacy-focused DNS-over-TLS
+        # Removed Google/Quad9 to prevent DNS leaks when dnscrypt fails
         fallback_resolvers = [
-          "9.9.9.9:53"
-          "8.8.8.8:53"
+          "1.1.1.1:53"
+          "1.0.0.1:53"
         ];
 
         # Cache settings
