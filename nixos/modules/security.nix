@@ -86,12 +86,23 @@
         enable = true;
         addresses = true;
         workstation = false; # Don't publish workstation info (privacy fix)
-        userServices = true;
+        userServices = false; # Disable for privacy
       };
-      # Restrict to physical interfaces only (prevents exposure on public WiFi/VPN)
+
+      # Restrict to specific trusted LAN interface only
+      # Prevents exposure on public WiFi, VPN tunnels, etc.
       allowInterfaces = [
-        "enp*"
-        "wlp*"
+        "eno1" # Specific LAN interface
+        # DO NOT include wlp* - use specific WiFi interface names only if needed
+      ];
+
+      # Don't expose on Docker, container, or bridge networks
+      denyInterfaces = [
+        "docker*" # Don't expose on Docker networks
+        "veth*" # Don't expose on container interfaces
+        "br-*" # Don't expose on bridge networks
+        "virbr*" # Don't expose on libvirt networks
+        "tun*" # Don't expose on VPN tunnels
       ];
     };
 
