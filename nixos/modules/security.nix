@@ -9,13 +9,13 @@
     enable = false;
   };
 
-  # Harden the kernel and system
+  # Harden kernel and system
   boot.kernel.sysctl = {
     # Prevent SYN flood attacks
     "net.ipv4.tcp_syncookies" = 1;
-    # Less strict reverse path filtering for desktop networks
-    "net.ipv4.conf.all.rp_filter" = 2; # Loose mode (better for home networks)
-    "net.ipv4.conf.default.rp_filter" = 2;
+    # Reverse path filtering - strict mode for better security
+    "net.ipv4.conf.all.rp_filter" = 1; # Strict mode (better for security)
+    "net.ipv4.conf.default.rp_filter" = 1;
     # Ignore ICMP broadcasts to avoid participation in Smurf attacks
     "net.ipv4.icmp_echo_ignore_broadcasts" = 1;
     # Ignore bogus ICMP errors
@@ -44,7 +44,7 @@
     }
   ];
 
-  # Harden the system against attacks
+  # Harden system against attacks
   security = {
     # AppArmor confinement (additional security layer)
     apparmor.enable = true;
@@ -78,7 +78,7 @@
 
   # Services configuration
   services = {
-    # Avahi network discovery (local network discovery )
+    # Avahi network discovery (local network discovery - SECURITY FIX)
     avahi = {
       enable = true;
       nssmdns4 = true;
@@ -139,7 +139,7 @@
         description = "Run security audit tasks";
         serviceConfig = {
           Type = "oneshot";
-          # Systemd hardening for the security service itself
+          # Systemd hardening for security service itself
           PrivateNetwork = true;
           PrivateTmp = true;
           ProtectHome = true;
