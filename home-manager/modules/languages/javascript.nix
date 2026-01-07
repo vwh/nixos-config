@@ -10,7 +10,6 @@
 let
   # Configurable list of global npm packages to install
   globalNpmPackages = [
-    "@google/gemini-cli"
     "@anthropic-ai/claude-code"
     "opencode-ai"
   ];
