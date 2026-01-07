@@ -3,6 +3,14 @@
 # enabling proper switching between integrated Intel and dedicated NVIDIA GPUs.
 
 {
+  hardware,
+  lib,
+  host,
+  ...
+}:
+
+{
+  # Hardware configuration for NVIDIA graphics on ThinkPad
   hardware.nvidia = {
     # Power management settings for NVIDIA GPU - CRITICAL for battery life
     powerManagement = {
@@ -12,6 +20,10 @@
 
     # NVIDIA Optimus (PRIME) configuration for hybrid graphics
     prime = {
+      # PCI bus IDs for graphics devices (from host config)
+      # These values are hardware-specific and should be verified with lspci | grep -i vga
+      inherit (host) intelBusId nvidiaBusId;
+
       # Enable offloading to dedicated GPU when needed
       offload = {
         enable = true; # Enable GPU offloading
@@ -20,13 +32,6 @@
 
       # Disable sync mode (use offload instead)
       sync.enable = false;
-
-      # PCI bus IDs for graphics devices
-      # Integrated Intel GPU
-      intelBusId = "PCI:0@2:0:0";
-
-      # Dedicated NVIDIA GPU
-      nvidiaBusId = "PCI:2@0:0:0";
     };
   };
 }

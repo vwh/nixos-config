@@ -49,7 +49,8 @@ in
 
       powerManagement = {
         enable = true; # Enable power management for better battery life
-        finegrained = false; # Disable fine-grained power management
+        # Note: finegrained setting is configured in host-specific modules
+        # (e.g., hosts/thinkpad/modules/nvidia.nix for ThinkPad with NVIDIA)
       };
     };
 

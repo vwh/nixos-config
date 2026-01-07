@@ -75,6 +75,8 @@
           hostname = "thinkpad"; # Laptop system
           stateVersion = "25.11"; # NixOS state version
           monitorConfig = ",preferred,auto,1"; # Auto monitor config
+          intelBusId = "PCI:0@2:0:0"; # Intel GPU bus ID for Optimus
+          nvidiaBusId = "PCI:2@0:0:0"; # NVIDIA GPU bus ID for Optimus
         }
       ];
 
