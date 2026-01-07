@@ -10,8 +10,8 @@
     settings = {
       # Window configuration
       window = {
-        opacity = lib.mkForce 0.95; # Slight transparency for modern look
-        blur = true; # Enable background blur
+        opacity = lib.mkForce 1.0; # Fully opaque (no compositing overhead)
+        blur = false; # Disable terminal-level blur (use Hyprland blur instead)
         padding = {
           x = 8;
           y = 8;
@@ -28,8 +28,8 @@
 
       # Scrolling
       scrolling = {
-        history = 50000; # Increased from default 10k
-        multiplier = 3; # Scroll speed
+        history = 10000;
+        multiplier = 3;
       };
 
       # Font configuration
@@ -288,25 +288,9 @@
         }
       ];
 
-      # Hints (URL/path detection) - simplified to avoid TOML escaping issues
+      # Hints (URL/path detection) - disabled for performance
       hints = {
-        enabled = [
-          {
-            regex = "https?://[a-zA-Z0-9._~:/?#@!$&'()*+,;=-]+";
-            hyperlinks = true;
-            post_processing = true;
-            persist = false;
-            action = "Copy";
-            binding = {
-              key = "U";
-              mods = "Control|Shift";
-            };
-            mouse = {
-              enabled = true;
-              mods = "None";
-            };
-          }
-        ];
+        enabled = [ ];
       };
 
       # Debug

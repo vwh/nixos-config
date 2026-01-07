@@ -56,7 +56,7 @@
         "custom/gpu-temp" = {
           format = " {}";
           exec = "~/System/scripts/waybar/gpu-temp.sh";
-          interval = 10;
+          interval = 15;
           tooltip = true;
           tooltip-format = "GPU Temperature: {}";
         };

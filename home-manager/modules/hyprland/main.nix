@@ -66,21 +66,21 @@
         # Shadow effects for window depth
         shadow = {
           enabled = true;
-          range = 8; # Shadow spread distance
-          render_power = 2; # Shadow rendering quality
-          color = "rgba(0, 0, 0, 0.3)"; # Active window shadow color
-          color_inactive = "rgba(0, 0, 0, 0.2)"; # Inactive window shadow color
+          range = 6;
+          render_power = 1;
+          color = "rgba(0, 0, 0, 0.25)";
+          color_inactive = "rgba(0, 0, 0, 0.15)";
         };
 
         # Blur effects for modern look
         blur = {
           enabled = true;
-          size = 3; # Blur kernel size
-          passes = 2; # Number of blur passes
-          ignore_opacity = false; # Respect window opacity
-          new_optimizations = true; # Use newer blur optimizations
-          xray = false; # Don't blur transparent windows
-          special = false; # Don't blur special workspaces
+          size = 2;
+          passes = 1;
+          ignore_opacity = false;
+          new_optimizations = true;
+          xray = false;
+          special = false;
         };
       };
 
@@ -127,16 +127,16 @@
 
         # Animation rules for different window events
         animation = [
-          "windows, 1, 3, fluent_decel, slide" # Window open/close
-          "windowsOut, 1, 3, fluent_decel, slide" # Window close
-          "windowsMove, 1, 2, softAcDecel" # Window movement
-          "workspaces, 0, 0, fluent_decel" # Workspace switching
-          "specialWorkspace, 1, 3, fluent_decel, slidevert" # Special workspace
-          "layers, 1, 3, easeOutCirc" # Layer transitions
-          "layersIn, 1, 3, easeOutCirc, left" # Layer in animation
-          "layersOut, 1, 3, fluent_decel, right" # Layer out animation
-          "fade, 1, 3, fluent_decel" # Fade transitions
-          "border, 1, 2.5, easeOutCirc" # Border animations
+          "windows, 1, 2, fluent_decel, slide"
+          "windowsOut, 1, 2, fluent_decel, slide"
+          "windowsMove, 1, 1, fluent_decel"
+          "workspaces, 0, 0, fluent_decel"
+          "specialWorkspace, 1, 2, fluent_decel, slidevert"
+          "layers, 1, 2, easeOutCirc"
+          "layersIn, 1, 2, easeOutCirc, left"
+          "layersOut, 1, 2, fluent_decel, right"
+          "fade, 1, 2, fluent_decel"
+          "border, 1, 1, easeOutCirc"
         ];
       };
 

@@ -8,7 +8,6 @@
   font-size: 13px;
   min-height: 0;
   color: #ebdbb2;
-  transition: color 120ms ease, background 120ms ease;
 }
 
 window#waybar {
@@ -86,6 +85,7 @@ window#waybar {
   letter-spacing: 0.1px;
   border: 0;
   box-shadow: none;
+  transition: color 80ms ease;
 }
 
 #workspaces button:hover {
@@ -95,6 +95,7 @@ window#waybar {
 #workspaces button.active {
   color: #d65d0e;
   border-bottom: 2px solid #d65d0e;
+  transition: color 80ms ease, border-bottom 80ms ease;
 }
 
 #workspaces button.urgent {
