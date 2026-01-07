@@ -78,18 +78,21 @@
 
   # Services configuration
   services = {
-    # Avahi network discovery (local network discovery - fixed)
+    # Avahi network discovery (local network discovery )
     avahi = {
       enable = true;
       nssmdns4 = true;
       publish = {
         enable = true;
         addresses = true;
-        workstation = true;
+        workstation = false; # Don't publish workstation info (privacy fix)
         userServices = true;
       };
-      # Allow on all interfaces for proper network discovery
-      # allowInterfaces = [ "lo" ]; # REMOVED: This was causing network instability
+      # Restrict to physical interfaces only (prevents exposure on public WiFi/VPN)
+      allowInterfaces = [
+        "enp*"
+        "wlp*"
+      ];
     };
 
     # System monitoring - prometheus removed due to service failures
