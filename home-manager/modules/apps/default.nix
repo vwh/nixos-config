@@ -2,7 +2,6 @@
 
 {
   imports = [
-    ./warp
     ./glance.nix
     ./obs.nix
     ./spicetify.nix
