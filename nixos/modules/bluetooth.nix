@@ -24,6 +24,19 @@
     hardware.bluetooth = {
       enable = true;
       inherit (config.mySystem.bluetooth) powerOnBoot;
+
+      # Security and privacy settings
+      settings = {
+        General = {
+          DiscoverableTimeout = 30; # Limit discoverability window (seconds)
+          PairableTimeout = 30; # Limit pairing window (seconds)
+          FastConnectable = false; # Disable for power/security
+          Experimental = false; # Disable experimental features
+        };
+        Policy = {
+          AutoEnable = false; # Don't auto-enable adapter (privacy)
+        };
+      };
     };
 
     # Enable Blueman Bluetooth manager service
