@@ -173,7 +173,7 @@ in
       "$mainMod, A, pin," # Pin window (always on top)
 
       # Web browser shortcuts
-      "$mainMod, B, exec, brave" # Launch Brave browser
+      "$mainMod, B, exec, browser-personal" # Launch Brave browser with Mullvad VPN protection
 
       # Utility shortcuts
       "$mainMod, E, exec, bemoji -cn" # Emoji picker

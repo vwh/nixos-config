@@ -28,7 +28,7 @@
       # Variable definitions for keybindings and commands
       "$mainMod" = "SUPER"; # Main modifier key (Windows/Cmd key)
       "$terminal" = "alacritty"; # Default terminal emulator
-      "$browser" = "brave"; # Default web browser
+      "$browser" = "browser-personal"; # Default web browser with Mullvad VPN protection
       "$editor" = "code"; # Default code editor
       "$fileManager" = "nautilus"; # Default file manager
       "$menu" = "wofi"; # Application launcher menu

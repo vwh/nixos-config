@@ -29,7 +29,8 @@ _:
       executable = true;
       text = ''
         #!/usr/bin/env bash
-        # Personal browser with Brave
+        # Personal browser with Brave + Mullvad VPN protection
+        # Uses background monitoring to survive VPN network changes
         set -euo pipefail
 
         if ! command -v brave &>/dev/null; then
@@ -37,11 +38,90 @@ _:
           exit 1
         fi
 
+        if ! command -v mullvad &>/dev/null; then
+          echo "Error: mullvad is not installed" >&2
+          exit 1
+        fi
+
         PROFILE_DIR="$HOME/.brave-personal"
         mkdir -p "$PROFILE_DIR"
         chmod 700 "$PROFILE_DIR"
 
-        exec brave --user-data-dir="$PROFILE_DIR" 2>/dev/null
+        # PID file for monitoring process
+        PID_FILE="/tmp/brave-mullvad-monitor-$USER.pid"
+
+        # Cleanup function
+        cleanup() {
+          if [ -f "$PID_FILE" ]; then
+            MONITOR_PID=$(cat "$PID_FILE" 2>/dev/null || echo "")
+            if [ -n "$MONITOR_PID" ] && kill -0 "$MONITOR_PID" 2>/dev/null; then
+              kill "$MONITOR_PID" 2>/dev/null || true
+            fi
+            rm -f "$PID_FILE"
+          fi
+          echo "Monitor stopped"
+        }
+
+        # Trap signals for cleanup
+        trap cleanup EXIT INT TERM
+
+        # Connect to random Mullvad relay if disconnected
+        if ! mullvad status 2>/dev/null | grep -q "^Connected"; then
+          echo "Mullvad is disconnected. Connecting to random relay..."
+          mullvad relay set location any >/dev/null 2>&1
+          mullvad connect --wait >/dev/null 2>&1
+          if mullvad status 2>/dev/null | grep -q "^Connected"; then
+            echo "Connected to Mullvad VPN"
+          else
+            echo "Failed to connect to Mullvad VPN" >&2
+            exit 1
+          fi
+        else
+          echo "Mullvad VPN is already connected"
+        fi
+
+        # Start browser
+        echo "Starting Brave browser with Mullvad protection..."
+        brave --user-data-dir="$PROFILE_DIR" 2>/dev/null &
+        BRAVE_PID=$!
+
+        # Give browser time to start
+        sleep 2
+
+        if ! kill -0 $BRAVE_PID 2>/dev/null; then
+          echo "Error: Failed to start Brave browser" >&2
+          exit 1
+        fi
+
+        # Kill browser by killing all processes using the profile directory
+        kill_browser() {
+          pkill -f "brave.*$PROFILE_DIR" 2>/dev/null || true
+          pkill -f "brave-wrapped.*$PROFILE_DIR" 2>/dev/null || true
+        }
+
+        # Start background monitoring process (survives VPN connection changes)
+        (
+          while kill -0 $BRAVE_PID 2>/dev/null; do
+            if ! mullvad status 2>/dev/null | grep -q "^Connected"; then
+              echo ""
+              echo "WARNING: Mullvad VPN disconnected!"
+              echo "Closing browser for your protection..."
+              kill_browser
+              break
+            fi
+            sleep 2
+          done
+          echo "Monitor: VPN disconnected, browser killed"
+        ) &
+        MONITOR_PID=$!
+        echo $MONITOR_PID > "$PID_FILE"
+
+        # Wait for browser to exit
+        echo "Browser running (PID: $BRAVE_PID). Monitoring Mullvad (PID: $MONITOR_PID)..."
+        echo "Press Ctrl+C to stop monitoring."
+        wait $BRAVE_PID 2>/dev/null || true
+
+        echo "Browser exited"
       '';
     };
 
