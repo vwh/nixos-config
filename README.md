@@ -12,7 +12,7 @@ This repository contains my personal NixOS system configurations, managed with N
 git clone git@github.com:vwh/nixos-config.git ~/System
 cd ~/System
 
-# Apply configuration (runs full pipeline: modules check, lint, format, nh os switch, home-manager switch)
+# Apply configuration (runs full pipeline: modules check, lint, dead code check, format, flake check, nh os switch, home-manager switch)
 just all
 ```
 
@@ -94,11 +94,13 @@ just secrets-add github_token ghp_your_token_here
 | Command | Purpose |
 |---------|---------|
 | `just` | List all available commands |
-| `just all` | **Run full pipeline**: modules check, lint, format, nh os switch, home-manager switch |
+| `just all` | **Run full pipeline**: modules, lint, dead code, format, flake check, nixos, home |
 | `just nixos` | Rebuild and switch NixOS configuration using **nh** (modern Nix helper) |
 | `just home` | Apply Home Manager configuration using **nh** (safe, user-level only) |
-| `just format` | Format all `.nix` files with `nixfmt` |
+| `just format` | Format all `.nix` files with `nixfmt-tree` (fast directory-wide formatting) |
 | `just lint` | Lint all `.nix` files with `statix` + bash shellcheck |
+| `just dead` | Scan for unused code in `.nix` files with `deadnix` |
+| `just check` | Run `nix flake check --no-build` to validate flake schema and syntax |
 | `just modules` | Check for missing module imports (**critical before commits**) |
 | `just update` | Update all flake inputs |
 | `just clean` | Clean old generations and optimize Nix store using **nh** |
@@ -179,13 +181,19 @@ just modules
 # 3. Format files
 just format
 
-# 4. Lint files
+# 4. Scan for dead code
+just dead
+
+# 5. Lint files
 just lint
 
-# 5. Test changes (user-level first)
+# 6. Validate flake
+just check
+
+# 7. Test changes (user-level first)
 just home
 
-# 6. Apply system changes
+# 8. Apply system changes
 just nixos
 ```
 

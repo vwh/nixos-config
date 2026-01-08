@@ -10,22 +10,35 @@ _default:
 # Format all .nix files
 format:
     @echo -e "\n➤ Formatting Nix files"
-    @nix run nixpkgs#time -- -f "⏱ Completed in %E" fd -e nix -X nixfmt --strict
+    @nix fmt
     @echo "✔ Formatting passed!"
 
 # Lint all .nix files and bash scripts
 lint:
     @echo -e "\n➤ Linting Nix files…"
-    @nix run nixpkgs#time -- -f "⏱ Completed in %E" nix run nixpkgs#statix -- check --ignore '.git/**'
+    @\time -f "⏱ Completed in %E" nix run nixpkgs#statix -- check --ignore '.git/**'
     @echo "✔ Nix linting passed!"
+    @{{JUST}} dead
     @echo -e "\n➤ Checking Bash scripts…"
-    @nix run nixpkgs#time -- -f "⏱ Completed in %E" find . -name "*.sh" -not -path "./.git/*" -exec nix run nixpkgs#shellcheck -- {} +
+    @\time -f "⏱ Completed in %E" find . -name "*.sh" -not -path "./.git/*" -exec nix run nixpkgs#shellcheck -- {} +
     @echo "✔ ShellCheck passed!"
+
+# Scan for unused code in .nix files
+dead:
+    @echo -e "\n➤ Checking for dead Nix code…"
+    @\time -f "⏱ Completed in %E" nix run nixpkgs#deadnix -- --fail .
+    @echo "✔ Deadnix check passed!"
+
+# Run nix flake check
+check:
+    @echo -e "\n➤ Running nix flake check…"
+    @\time -f "⏱ Completed in %E" nix flake check --no-build
+    @echo "✔ Flake check passed!"
 
 # Check all missing imports
 modules:
     @echo -e "\n➤ Checking modules"
-    @nix run nixpkgs#time -- -f "⏱ Completed in %E" bash ./scripts/build/modules-check.sh
+    @\time -f "⏱ Completed in %E" bash ./scripts/build/modules-check.sh
 
 # Switch Home-Manager generation
 home:
@@ -43,6 +56,7 @@ all:
     {{JUST}} modules
     {{JUST}} lint
     {{JUST}} format
+    {{JUST}} check
     {{JUST}} nixos
     {{JUST}} home
     @echo -e "✔ All done!"

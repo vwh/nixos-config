@@ -156,5 +156,8 @@
           };
         }
       ) { } hosts;
+
+      # Formatter for 'nix fmt'
+      formatter.${system} = pkgs.nixfmt-tree;
     };
 }
