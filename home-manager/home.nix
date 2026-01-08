@@ -1,7 +1,6 @@
 # Main Home Manager configuration file.
 
 {
-  inputs,
   homeStateVersion,
   user,
   pkgs,

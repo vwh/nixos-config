@@ -44,7 +44,6 @@
   # Flake outputs - what this flake provides to the outside world
   outputs =
     {
-      self,
       nixpkgs,
       nixpkgs-stable,
       home-manager,

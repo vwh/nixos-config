@@ -1,6 +1,6 @@
 # Bat (cat clone) configuration.
 
-{ pkgsStable, ... }:
+_:
 
 {
   programs.bat = {

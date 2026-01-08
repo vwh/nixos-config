@@ -12,7 +12,6 @@
 
   outputs =
     {
-      self,
       nixpkgs,
       utils,
       deno2nix,

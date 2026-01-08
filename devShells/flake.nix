@@ -4,7 +4,7 @@
   description = "A collection of flake templates";
 
   outputs =
-    { self, nixpkgs }:
+    { nixpkgs }:
 
     let
       system = "x86_64-linux";

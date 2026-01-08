@@ -2,7 +2,7 @@
 # This module configures shell integrations, direnv, and essential Nix development tools
 # for an improved development workflow.
 
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   # Direnv integration for automatic environment loading

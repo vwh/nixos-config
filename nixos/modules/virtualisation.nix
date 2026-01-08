@@ -1,7 +1,6 @@
 # Virtualisation (Docker, libvirt) configuration.
 
 {
-  pkgs,
   pkgsStable,
   user,
   ...

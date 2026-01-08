@@ -1,6 +1,6 @@
 # LSP Servers configuration for OpenCode development experience
 
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 {
   home.packages = with pkgs; [
     # High Priority (Python packages handled in python.nix)

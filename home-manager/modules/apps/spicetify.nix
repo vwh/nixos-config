@@ -3,7 +3,6 @@
 {
   pkgs,
   config,
-  lib,
   inputs,
   ...
 }:

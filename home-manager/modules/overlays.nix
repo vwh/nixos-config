@@ -1,15 +1,10 @@
 # Global overlays configuration
 
-{
-  pkgs,
-  lib,
-  config,
-  ...
-}:
+_:
 
 {
   nixpkgs.overlays = [
-    (final: prev: {
+    (_final: _prev: {
       # Custom packages removed - using official packages from nixpkgs instead
     })
   ];
