@@ -6,7 +6,6 @@
 [
   # === Integrated Development Environments ===
   pkgs.vscode # Visual Studio Code editor (use latest)
-  pkgs.zed-editor # Zed editor
   pkgsStable.sqlitebrowser # SQLite database browser GUI
 
   # === API Development and Testing ===
