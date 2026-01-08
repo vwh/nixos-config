@@ -2,16 +2,7 @@
 # This configuration defines the laptop setup with power management,
 # hardware-specific configurations, and mobile-optimized settings.
 
-{
-  inputs,
-  pkgs,
-  stateVersion,
-  hostname,
-  user,
-  gitConfig,
-  pkgsStable,
-  ...
-}:
+{ stateVersion, hostname, ... }:
 
 {
   # Import all configuration modules in order of precedence

@@ -2,12 +2,7 @@
 # This module configures NVIDIA Optimus (hybrid graphics) for ThinkPad laptops,
 # enabling proper switching between integrated Intel and dedicated NVIDIA GPUs.
 
-{
-  hardware,
-  lib,
-  host,
-  ...
-}:
+_:
 
 {
   # Hardware configuration for NVIDIA graphics on ThinkPad
@@ -20,9 +15,10 @@
 
     # NVIDIA Optimus (PRIME) configuration for hybrid graphics
     prime = {
-      # PCI bus IDs for graphics devices (from host config)
-      # These values are hardware-specific and should be verified with lspci | grep -i vga
-      inherit (host) intelBusId nvidiaBusId;
+      # PCI bus IDs for graphics devices (ThinkPad-specific)
+      # Verified with: lspci | grep -i vga
+      intelBusId = "PCI:0:2:0";
+      nvidiaBusId = "PCI:2:0:0";
 
       # Enable offloading to dedicated GPU when needed
       offload = {

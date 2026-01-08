@@ -2,16 +2,7 @@
 # This configuration defines the desktop workstation setup with gaming capabilities,
 # hardware-specific configurations, and system-wide settings.
 
-{
-  inputs,
-  pkgs,
-  stateVersion,
-  hostname,
-  user,
-  gitConfig,
-  pkgsStable,
-  ...
-}:
+{ stateVersion, hostname, ... }:
 
 {
   # Import all configuration modules in order of precedence
@@ -61,6 +52,9 @@
       enable = true;
     };
   };
+
+  # Host-specific Avahi configuration (desktop with ethernet)
+  services.avahi.allowInterfaces = [ "eno1" ];
 
   # System-wide packages (empty - packages managed via Home Manager)
   environment.systemPackages = [ ];
