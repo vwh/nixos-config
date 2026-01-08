@@ -1,161 +1,164 @@
-# AGENTS.md - Agent Guidelines for NixOS Configuration
+# NixOS Configuration Knowledge Base
 
-This repository contains NixOS system configurations managed with Flakes.
+**Generated:** 2026-01-08
+**Mode:** Update (existing AGENTS.md preserved)
 
----
+## OVERVIEW
+NixOS Flake-based system + home-manager configs for 2 hosts (pc, thinkpad). Hyprland WM, Gruvbox theme, AI dev tools, SOPS secrets.
 
-## Build, Lint, and Format Commands
+## STRUCTURE
+```
+./
+├── hosts/              # Per-host NixOS configs (pc, thinkpad)
+│   ├── <host>/configuration.nix    # Host entry point
+│   ├── <host>/hardware-configuration.nix  # Auto-generated
+│   └── <host>/modules/             # Host-specific modules
+├── nixos/modules/      # System modules (36 files)
+├── home-manager/        # User environment
+│   ├── modules/         # HM modules (40 files)
+│   └── packages/       # Package categories (12 chunks)
+├── devShells/          # Language templates (7 flakes)
+├── scripts/            # Utility scripts
+│   ├── ai/             # AI assistants (ask, help, commit)
+│   └── build/          # modules-check.sh validation
+└── flake.nix          # Factory pattern: makeSystem/makeHomeConfig
+```
 
-**Core Commands** (run with `just`):
-| Command | Purpose |
-|---------|---------|
-| `just format` | Format all `.nix` files with `nixfmt --strict` |
-| `just lint` | Lint Nix files (`statix`) + Bash scripts (`shellcheck`) |
-| `just modules` | Check for missing module imports (**critical before commits**) |
-| `just home` | Apply Home Manager config (safe user-level testing) |
-| `just nixos` | Rebuild NixOS system with `nh os switch` |
-| `just all` | Full pipeline: modules → lint → format → nixos → home |
-| `just update` | Update all flake inputs |
-| `just clean` | Clean artifacts & optimize Nix store |
+## WHERE TO LOOK
+| Task | Location | Notes |
+|-------|-----------|-------|
+| System settings | `nixos/modules/` | Audio, networking, gaming, security, etc. |
+| User apps/configs | `home-manager/modules/` | Terminal, languages, hyprland, apps |
+| Add system package | `nixos/modules/<topic>.nix` | Follow mySystem namespace pattern |
+| Add user package | `home-manager/packages/<category>.nix` | Categories: applications, cli, development, etc. |
+| New host | `hosts/<new>/` + update flake.nix hosts list | Copy hardware-config |
+| Host-specific tweaks | `hosts/<host>/modules/` | Thinkpad: nvidia, tlp, boot |
+| AI tools | `scripts/ai/` | ask.sh, help.sh, commit.sh |
+| Module validation | `scripts/build/modules-check.sh` | Runs via `just modules` |
 
-**Secret Management** (SOPS):
-| Command | Purpose |
-|---------|---------|
-| `just sops-edit` | Edit secrets (auto encrypt/decrypt via VS Code) |
-| `just sops-view` | View decrypted secrets (read-only) |
-| `just secrets-add key value` | Add single secret |
-| `just sops-setup` | Initialize SOPS age key |
+## CONVENTIONS (Project-Specific)
 
-**Pre-commit Workflow:**
+### mySystem Namespace Pattern
+Custom options for modular feature toggles:
+```nix
+mySystem.gaming.{enable,enableGamescope}
+mySystem.sandboxing.{enable,enableUserNamespaces,enableWrappedBinaries}
+mySystem.flatpak.enable
+mySystem.bluetooth.{enable,powerOnBoot}
+mySystem.mullvadVpn.enable
+mySystem.tor.enable
+mySystem.dnscryptProxy.enable
+mySystem.macchanger.enable
+```
+
+### Factory Pattern (flake.nix)
+`makeSystem` + `foldl'` generates configs for all hosts from single `hosts` list. SpecialArgs: `inputs`, `stateVersion`, `hostname`, `user`, `gitConfig`, `pkgsStable`.
+
+### Package Aggregation (HM)
+`home-manager/packages/default.nix` uses `builtins.concatLists (map (f: import f) chunks)` pattern for 12 package categories.
+
+### Inherit for Parameter Passing
+`{ user, ... }: { inherit user; }` - never use `user = user;`
+
+### Module Structure
+System modules: `nixos/modules/<feature>.nix` → imported in `default.nix`
+HM modules: `home-manager/modules/<category>/default.nix` → imports submodules
+
+### Module Validation
+`just modules` runs `scripts/build/modules-check.sh` - validates all `.nix` files in directories with `default.nix` are imported. **Critical before commits.**
+
+### nh (Nix Helper)
+Replaces `nixos-rebuild`: `nh os switch .`, `nh home switch`. `NH_FLAKE` env var set to `/home/yazan/System`.
+
+## ANTI-PATTERNS (This Project)
+
+### Forbidden Patterns
+- **Never** enable both PulseAudio and PipeWire (assertion enforces this)
+- **Never** use wildcard WiFi interfaces (`wlp*`) in Avahi - use specific names only
+- **Never** run multiple power management daemons (TLP conflicts with power-profiles-daemon, thermald, auto-cpufreq)
+- **Never** use nouveau when proprietary NVIDIA enabled (blacklisted)
+- **Never** use NixOS channels with flakes (channel disabled)
+- **Never** use broken packages (allowBroken = false in flake.nix)
+
+### Critical Battery Settings (ThinkPad)
+Charging thresholds: START_CHARGE_THRESH_BAT0 = 75, STOP_CHARGE_THRESH_BAT0 = 80 (battery longevity).
+NVIDIA finegrained power management: 30-50% battery savings.
+
+### Service Conflicts
+- Firejail librewolf/tor-browser profiles: Disabled (NixOS path incompatibility)
+- Prometheus node exporter: Removed (service failures)
+- Custom package overlays: Removed (use official packages instead)
+
+### Disabled Features
+- `home-manager/modules/hyprland/hypridle.nix`: Auto-suspend commented out (37-min timeout)
+- `nixos/modules/stability.nix`: Prometheus monitoring removed
+
+## COMMANDS
+
+### Development Workflow
 ```bash
-just modules   # Validate module structure
-just lint      # Check code quality
-just format    # Format Nix files
+just modules   # Validate module imports (CRITICAL)
+just lint      # statix + shellcheck
+just dead      # deadnix unused code scan
+just format    # nixfmt-tree (optimized)
+just check     # nix flake check --no-build
+just home      # Test user-level changes (safe)
+just nixos     # Apply system changes
+just all       # Full pipeline: modules → lint → dead → format → check → nixos → home
 ```
 
-**Important Notes:**
-- No traditional unit tests - this is a system config repo
-- Module validation (`just modules`) is the primary test mechanism
-- Use `nix eval .#nixosConfigurations.<hostname>.config.system.build.toplevel` to test config eval
-- `nh` (Nix Helper) replaces `nixos-rebuild`
-- Docker commands must run in `bash` (not `zsh`)
-- LSP: `nixd` or `nil` for Nix language server
-
----
-
-## Code Style Guidelines
-
-### Nix Code Style
-
-**Core Principles:**
-- Use `inherit` for parameter passing: `{ user, ... }: { inherit user; }`
-- Combine related attributes in attribute sets
-- Use `lib.mkEnableOption` for boolean options
-- Use `lib.mkOption` with `lib.types.*` for other types
-
-**Import Pattern:**
-- Auto-generated: `./hardware-configuration.nix`
-- Host-specific: `./local-packages.nix`, `./modules/`
-- Shared: `../../nixos/modules/`
-
-**Module Pattern (mySystem namespace):**
-```nix
-{
-  config, lib, ...
-}:
-{
-  options.mySystem.featureName = {
-    enable = lib.mkEnableOption "feature description";
-  };
-  config = lib.mkIf config.mySystem.featureName.enable { };
-}
+### Maintenance
+```bash
+just update    # Update all flake inputs
+just clean     # Clean Nix store (nh clean all --keep 1)
 ```
 
-**Formatting:**
-- Formatter: `nixfmt --strict` (RFC 166), 2-space indent, ~80-100 char lines, header comments
-
-### Naming Conventions
-
-- **Variables/Parameters:** `camelCase` (`hostname`, `stateVersion`, `gitConfig`)
-- **Options:** `camelCase` with dot notation (`mySystem.gaming.enable`)
-- **Files:** `kebab-case` (`gaming.nix`, `security.nix`, `modules-check.sh`)
-- **Functions/Scripts:** `kebab-case` (`ai-ask`, `ai-help`, `extract()`, `mkcd()`)
-- **Constants:** `SCREAMING_SNAKE_CASE` (Bash scripts only)
-
-### Bash Script Style
-
-**Required Header:** `#!/usr/bin/env bash` + `set -euo pipefail`
-**Pattern:** Color constants, function-based architecture, guard clauses, loading animations
-
-### Error Handling in Nix
-
-```nix
-# For assertions that must pass
-config.assertions = [
-  {
-    assertion = condition;
-    message = "Error message if condition is false";
-  }
-];
-
-# For optional validation with warnings
-warnings = lib.optional (deprecatedOption != null) "Option 'deprecatedOption' is deprecated";
+### Secrets (SOPS)
+```bash
+just sops-edit      # Edit in VS Code (auto encrypt/decrypt)
+just sops-view      # View decrypted
+just secrets-add key value
 ```
 
-### Module Organization
+## NOTES
 
-**System Modules** (`nixos/modules/`): Single responsibility, import through `default.nix`, always run `just modules` before committing
+### Testing Strategy
+1. `just home` first (safe, user-level)
+2. `just nixos` only when ready (system rebuild)
+3. No traditional unit tests - module validation is primary test
 
-**Home Manager Modules** (`home-manager/modules/`): Grouped by function (`apps/`, `terminal/`, `languages/`, `hyprland/`), package aggregation through `home-manager/packages/`
+### Docker Commands
+Must run in `bash` (not `zsh`) due to password configuration.
 
-### Custom mySystem Options
+### Two Package Sets
+- `pkgs`: Unstable (nixos-unstable)
+- `pkgsStable`: Stable (nixos-25.11)
+- Use stable for important tools, unstable for applications
 
-`mySystem.gaming.{enable,enableGamescope}` | Gaming (Steam, Lutris, Wine, Gamescope)
-`mySystem.sandboxing.enable` | App sandboxing (Firejail, bubblewrap)
-`mySystem.flatpak.enable` | Flatpak with Flathub
-`mySystem.bluetooth.{enable,powerOnBoot}` | Bluetooth services
-`mySystem.mullvadVpn.enable` | Mullvad VPN
-`mySystem.tor.enable` | Tor network services
-`mySystem.dnscryptProxy.enable` | DNSCrypt-Proxy
-`mySystem.macchanger.enable` | MAC address randomization
+### devShells Usage
+Templates in `devShells/flake.nix` - init with `nix flake init -t "github:vwh/nixos-config/main?dir=devShells#<name>"`
 
----
+### Theme Assets
+Custom themes in `themes/` (gruvbox, oxide.zsh-theme, wallpaper). Stylix applies Gruvbox system-wide.
 
-## Architecture Patterns
+### Hardware-Specific Modules
+- Thinkpad only: `nvidia.nix` (Optimus), `tlp.nix` (power), `boot.nix` (bootloader + kernel params)
+- PC only: `power.nix` (power-profiles-daemon)
 
-**Factory Pattern** (flake.nix):
-```nix
-makeSystem = { hostname, stateVersion }:
-  nixpkgs.lib.nixosSystem {
-    inherit system;
-    specialArgs = { inherit inputs stateVersion hostname user gitConfig pkgsStable; };
-    modules = [ ./hosts/${hostname}/configuration.nix ];
-  };
-```
+### Module Import Validation
+`scripts/build/modules-check.sh` catches missing imports and broken file references. Run `just modules` before every commit.
 
-**Package Aggregation**:
-```nix
-{ pkgs, pkgsStable }:
-let chunks = [ ./custom/prayer.nix ./applications.nix ./cli.nix ];
-in builtins.concatLists (map (f: import f { inherit pkgs pkgsStable; }) chunks)
-```
+### Git Signing
+Commits signed with GPG key `0x5478BB36AC504E64` (gitConfig defined in flake.nix).
 
----
+### Service Ports
+- Qdrant: 6333 (vector search)
+- Glance: 8080 (dashboard)
+- CUPS: 631 (printing)
+- Tor: 9050 (system), 9150 (Tor Browser)
 
-## Critical Rules
+### GPU Temperature Thresholds
+WARNING: 70°C, CRITICAL: 85°C (scripts/waybar/gpu-temp.sh)
 
-1. **Always run `just modules` before committing** - validates module structure
-2. **Use `inherit` for parameter passing** - no exceptions
-3. **Never suppress type errors** - no `as any`, `@ts-ignore`, etc.
-4. **Never commit secrets** - use SOPS for secret management
-5. **Combine related attributes** - don't scatter them
-6. **Add descriptive header comments** to all new files
-7. **Test with `just home` first** before `just nixos`
-
----
-
-## Resources
-
-[NixOS Options](https://search.nixos.org/options) | [Home Manager Options](https://nix-community.github.io/home-manager/options.html)
-[NixOS Manual](https://nixos.org/manual/) | [Hyprland Wiki](https://hyprland.org/)
-LSP: `nixd` or `nil`
+### Cleanup Services (systemd timers)
+Downloads: 30+ days old, screenshots: 14+ days, telegram-desktop: 60+ days, docker: monthly full prune. npm/bun/pip/go caches: weekly/monthly.

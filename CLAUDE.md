@@ -22,7 +22,7 @@ For immediate setup on a new machine:
 # Clone and apply configuration
 git clone git@github.com:vwh/nixos-config.git ~/System
 cd ~/System
-just all  # Runs full pipeline: modules check, lint, format, nh os switch, home-manager switch
+just all  # Runs full pipeline: modules, lint, dead code, format, check, nixos, home
 ```
 
 The `just` command runner provides all essential development tasks - run `just` to see all available commands.
@@ -33,11 +33,13 @@ The `just` command runner provides all essential development tasks - run `just` 
 
 ```bash
 just lint           # Lint all .nix files with statix + bash shellcheck
-just format         # Format all .nix files with nixfmt
+just dead           # Scan for unused code in .nix files with deadnix
+just format         # Format all .nix files with nixfmt-tree (optimized)
+just check          # Run nix flake check --no-build (fast validation)
 just modules        # Check for missing module imports (critical before commits)
 just home           # Apply Home Manager configuration using nh (safe, user-level only)
 just nixos          # Rebuild and switch NixOS system using nh (full system rebuild)
-just all            # Run full pipeline: modules check, lint, format, nh os switch, home-manager switch
+just all            # Run full pipeline: modules, lint, dead, format, check, nixos, home
 just update         # Update all flake inputs
 just clean          # Clean up old generations and optimize store using nh
 ```
@@ -47,7 +49,7 @@ just clean          # Clean up old generations and optimize store using nh
 **Development Workflow:**
 1. **Make changes** to `.nix` files in appropriate locations
 2. **Check imports**: `just modules` (validates module structure)
-3. **Code quality**: `just lint && just format`
+3. **Code quality**: `just dead && just lint && just format && just check`
 4. **User testing**: `just home` (safe, applies user-level changes only)
 5. **System testing**: `just nixos` (full system rebuild when ready)
 
@@ -530,7 +532,7 @@ home-manager switch --rollback  # Home configuration rollback
 ## Important Notes
 
 - This is a personal system configuration with specific hardware (`pc` desktop, `thinkpad` laptop) and user (`yazan`) setups
-- **Critical workflow**: `just modules && just lint && just format` before any commit
+- **Critical workflow**: `just modules && just dead && just lint && just format && just check` before any commit
 - **Always test changes with `just home` before running `just nixos`** - user-level changes are safer to test
 - **Use `nh` (Nix Helper) for all Nix operations** - it replaces direct `nixos-rebuild` and `home-manager` commands
 - Module import validation (`just modules`) prevents broken configurations
