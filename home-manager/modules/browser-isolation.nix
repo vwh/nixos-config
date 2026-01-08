@@ -1,7 +1,7 @@
 # Browser isolation with multiple profiles for different contexts.
 # Provides isolated browser profiles for work, personal, and Tor browsing.
 
-{ pkgs, ... }:
+_:
 
 {
   home.file = {
@@ -10,6 +10,12 @@
       text = ''
         #!/usr/bin/env bash
         # Work browser profile - isolated from personal browsing
+        set -euo pipefail
+
+        if ! command -v librewolf &>/dev/null; then
+          echo "Error: librewolf is not installed" >&2
+          exit 1
+        fi
 
         PROFILE_DIR="$HOME/.librewolf-work"
         mkdir -p "$PROFILE_DIR"
@@ -24,6 +30,12 @@
       text = ''
         #!/usr/bin/env bash
         # Personal browser with Brave
+        set -euo pipefail
+
+        if ! command -v brave &>/dev/null; then
+          echo "Error: brave is not installed" >&2
+          exit 1
+        fi
 
         PROFILE_DIR="$HOME/.brave-personal"
         mkdir -p "$PROFILE_DIR"

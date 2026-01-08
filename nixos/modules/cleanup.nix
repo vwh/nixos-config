@@ -104,11 +104,27 @@
       };
 
       "cleanup-docker" = {
-        description = "Clean up Docker system";
+        description = "Clean up Docker system (only when no containers running)";
         serviceConfig = {
           Type = "oneshot";
           User = "root";
-          ExecStart = "${pkgs.docker}/bin/docker system prune -a --volumes -f";
+          ExecStart = pkgs.writeShellScript "safe-docker-cleanup" ''
+            #!${pkgs.bash}/bin/bash
+            # Safety check: only clean if Docker is running and no containers active
+            if ! ${pkgs.docker}/bin/docker info &>/dev/null; then
+              echo "Docker daemon not running, skipping cleanup"
+              exit 0
+            fi
+
+            running=$(${pkgs.docker}/bin/docker ps -q 2>/dev/null | wc -l)
+            if [ "$running" -eq 0 ]; then
+              echo "No containers running, proceeding with cleanup..."
+              ${pkgs.docker}/bin/docker system prune --all --volumes --force
+              echo "Docker cleanup completed"
+            else
+              echo "Skipping cleanup: $running container(s) currently running"
+            fi
+          '';
         };
       };
     };
