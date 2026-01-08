@@ -32,7 +32,8 @@
 
   services.gpg-agent = lib.mkIf (!pkgsStable.stdenv.isDarwin) {
     enable = true;
-    defaultCacheTtl = 86400;
+    defaultCacheTtl = 3600;
+    maxCacheTtl = 14400;
     enableSshSupport = true;
     pinentry.package = pkgsStable.pinentry-gnome3;
   };
