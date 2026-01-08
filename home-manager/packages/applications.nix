@@ -28,7 +28,7 @@
   (pkgs.bottles.override { removeWarningPopup = true; }) # Run Windows applications on Linux
 
   # === Music and Media ===
-  pkgs.youtube-music # YouTube Music desktop client
+  pkgs.pear-desktop # YouTube Music desktop client (formerly youtube-music)
 
   # === Desktop Theming ===
   pkgsStable.gruvbox-gtk-theme # Gruvbox color scheme for GTK applications
