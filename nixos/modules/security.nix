@@ -89,12 +89,10 @@
         userServices = false; # Disable for privacy
       };
 
-      # Restrict to specific trusted LAN interface only
-      # Prevents exposure on public WiFi, VPN tunnels, etc.
-      allowInterfaces = [
-        "eno1" # Specific LAN interface
-        # DO NOT include wlp* - use specific WiFi interface names only if needed
-      ];
+      # NOTE: allowInterfaces is configured per-host in hosts/<hostname>/configuration.nix
+      # to avoid hardcoding interface names that differ between machines.
+      # Example: mySystem.avahi.allowedInterfaces = [ "eno1" ]; # for desktop
+      #          mySystem.avahi.allowedInterfaces = [ "wlp0s20f3" ]; # for laptop
 
       # Don't expose on Docker, container, or bridge networks
       denyInterfaces = [
@@ -103,6 +101,7 @@
         "br-*" # Don't expose on bridge networks
         "virbr*" # Don't expose on libvirt networks
         "tun*" # Don't expose on VPN tunnels
+        "wl*" # Don't expose on WiFi interfaces by default (privacy on public networks)
       ];
     };
 

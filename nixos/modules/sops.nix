@@ -20,6 +20,6 @@
 
   sops.secrets.zai_api_key = {
     owner = user; # Allow user to read the secret
-    mode = "0440"; # Readable by owner and group
+    mode = "0400"; # Readable by owner only (more secure)
   };
 }

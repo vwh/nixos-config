@@ -23,7 +23,7 @@
         AutomapHostsSuffixes = [
           ".onion"
           ".exit"
-          ".noconnnect"
+          ".noconnect"
         ];
 
         # Only use exit nodes in safe jurisdictions
