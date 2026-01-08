@@ -1,0 +1,30 @@
+# Serena editor
+.serena/
+
+# Claude Code
+.claude/
+
+# Nix build results
+result
+result-*
+
+# Direnv
+.direnv/
+.envrc
+
+# Sisyphus (Nix garbage collection)
+.sisyphus/
+
+# Result files
+*.log
+
+# Decrypted secrets (never commit these)
+secrets/*-decrypted.yaml
+secrets/*.yaml.!backup
+!secrets/.gitkeep
+
+# Temporary files
+*~
+*.swp
+*.swo
+.#*
