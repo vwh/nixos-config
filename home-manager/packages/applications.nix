@@ -3,40 +3,38 @@
 
 { pkgs, pkgsStable }:
 
-with pkgs;
-with pkgsStable;
 [
   # === Web Browsers ===
-  brave # Privacy-focused web browser
-  firefox # Mozilla Firefox web browser
+  pkgs.brave # Privacy-focused web browser (use latest)
+  pkgs.firefox # Mozilla Firefox web browser
 
   # === Communication and Collaboration ===
-  element-desktop # Matrix protocol client for Element
-  vesktop # Enhanced Discord client
-  telegram-desktop # Telegram messaging application
-  slack # Slack team communication platform
-  teams-for-linux # Microsoft Teams for Linux
-  remmina # Remote desktop client
+  pkgs.element-desktop # Matrix protocol client for Element
+  pkgs.vesktop # Enhanced Discord client
+  pkgs.telegram-desktop # Telegram messaging application
+  pkgsStable.slack # Slack team communication platform
+  pkgsStable.teams-for-linux # Microsoft Teams for Linux
+  pkgsStable.remmina # Remote desktop client
 
   # === Productivity and Knowledge Management ===
-  anki-bin # Spaced repetition flashcard system
-  obsidian # Knowledge base and note-taking application
-  libreoffice-qt6-fresh # Full office suite with Qt6 interface
+  pkgsStable.anki-bin # Spaced repetition flashcard system
+  pkgs.obsidian # Knowledge base and note-taking application
+  pkgsStable.libreoffice-qt6-fresh # Full office suite with Qt6 interface
 
   # === AI and Development Tools ===
-  antigravity-fhs # AI-powered agentic IDE
+  pkgs.antigravity-fhs # AI-powered agentic IDE
 
   # === Gaming and Compatibility ===
-  (bottles.override { removeWarningPopup = true; }) # Run Windows applications on Linux
+  (pkgs.bottles.override { removeWarningPopup = true; }) # Run Windows applications on Linux
 
   # === Music and Media ===
-  youtube-music # YouTube Music desktop client
+  pkgs.youtube-music # YouTube Music desktop client
 
   # === Desktop Theming ===
-  gruvbox-gtk-theme # Gruvbox color scheme for GTK applications
-  gruvbox-kvantum # Gruvbox theme for Qt applications
-  gnome-themes-extra # Additional GTK themes and base themes
+  pkgsStable.gruvbox-gtk-theme # Gruvbox color scheme for GTK applications
+  pkgsStable.gruvbox-kvantum # Gruvbox theme for Qt applications
+  pkgsStable.gnome-themes-extra # Additional GTK themes and base themes
 
   # === VPN Services ===
-  protonvpn-gui # ProtonVPN graphical client
+  pkgs.protonvpn-gui # ProtonVPN graphical client
 ]
