@@ -26,41 +26,41 @@
     ".local/bin/browser-work-tor" = {
       executable = true;
       text = ''
-                #!/usr/bin/env bash
-                # LibreWolf routed through Tor SOCKS proxy with persistent profile
+        #!/usr/bin/env bash
+        # LibreWolf routed through Tor SOCKS proxy with persistent profile
 
-                PROFILE_DIR="$HOME/.librewolf-work-tor"
-                mkdir -p "$PROFILE_DIR"
-                chmod 700 "$PROFILE_DIR"
+        PROFILE_DIR="$HOME/.librewolf-work-tor"
+        mkdir -p "$PROFILE_DIR"
+        chmod 700 "$PROFILE_DIR"
 
-                # Function to check if port is open using bash built-in
-                check_port() {
-                  local host=$1
-                  local port=$2
-                  timeout 1 bash -c "cat < /dev/null > /dev/tcp/$host/$port" 2>/dev/null
-                }
+        # Function to check if port is open using bash built-in
+        check_port() {
+          local host=$1
+          local port=$2
+          timeout 1 bash -c "cat < /dev/null > /dev/tcp/$host/$port" 2>/dev/null
+        }
 
-                # Check if Tor is available (try common ports)
-                TOR_PORT=""
-                if check_port 127.0.0.1 9150; then
-                  TOR_PORT="9150"  # Tor Browser's port
-                elif check_port 127.0.0.1 9050; then
-                  TOR_PORT="9050"  # System Tor port
-                else
-                  echo "Error: Tor SOCKS proxy not found on ports 9050 or 9150"
-                  echo ""
-                  echo "Please start Tor Browser or enable the Tor service:"
-                  echo "  sudo systemctl enable --now tor.service"
-                  echo ""
-                  echo "Then run browser-work-tor again."
-                  exit 1
-                fi
+        # Check if Tor is available (try common ports)
+        TOR_PORT=""
+        if check_port 127.0.0.1 9150; then
+          TOR_PORT="9150"  # Tor Browser's port
+        elif check_port 127.0.0.1 9050; then
+          TOR_PORT="9050"  # System Tor port
+        else
+          echo "Error: Tor SOCKS proxy not found on ports 9050 or 9150"
+          echo ""
+          echo "Please start Tor Browser or enable the Tor service:"
+          echo "  sudo systemctl enable --now tor.service"
+          echo ""
+          echo "Then run browser-work-tor again."
+          exit 1
+        fi
 
-                echo "Routing LibreWolf through Tor SOCKS proxy (127.0.0.1:$TOR_PORT)..."
+        echo "Routing LibreWolf through Tor SOCKS proxy (127.0.0.1:$TOR_PORT)..."
 
-                # Create user.js with Tor proxy settings (only if not exists)
-                if [ ! -f "$PROFILE_DIR/user.js" ]; then
-                  cat > "$PROFILE_DIR/user.js" <<EOF
+        # Create user.js with Tor proxy settings (only if not exists)
+        if [ ! -f "$PROFILE_DIR/user.js" ]; then
+        cat > "$PROFILE_DIR/user.js" <<EOF
         // Tor SOCKS5 Proxy Configuration
         user_pref("network.proxy.type", 1);
         user_pref("network.proxy.socks", "127.0.0.1");
