@@ -3,7 +3,7 @@ set -euo pipefail
 
 # Get network connection info for Waybar
 
-if ! command -v nmcli &> /dev/null; then
+if ! command -v nmcli &>/dev/null; then
     echo "N/A"
     exit 0
 fi
